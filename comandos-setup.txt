@@ -1,0 +1,30 @@
+# Instalar dependências necessárias
+npm install framer-motion react-intersection-observer class-variance-authority
+
+# Se você estiver usando yarn
+# yarn add framer-motion react-intersection-observer class-variance-authority
+
+# Iniciar o servidor de desenvolvimento
+npm run dev
+
+# Se você estiver usando yarn
+# yarn dev
+
+# Comandos para resolver problemas comuns
+
+# Limpar cache do Next.js
+npm run dev -- --clear-cache
+
+# Reinstalar node_modules (se necessário)
+rm -rf node_modules
+npm install
+
+# Verificar se há erros de TypeScript
+npx tsc --noEmit
+
+# Verificar se há erros de lint
+npx eslint .
+
+# Verificar se há erros de formatação
+npx prettier --check .
+
