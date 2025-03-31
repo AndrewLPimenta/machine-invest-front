@@ -45,7 +45,7 @@ export function EnhancedHeader() {
           <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
             <Link href="/" className="mr-6 flex items-center space-x-2 text-primary transition-colors duration-300">
               <Image
-                src="/images/machine-logo.png"
+                src="/machine-logo.png"
                 alt="Machine Invest Logo"
                 width={36}
                 height={36}

@@ -132,7 +132,7 @@ export function EnhancedFooter() {
           <div className="col-span-1 lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/images/machine-logo.png"
+                src="/machine-logo.png"
                 alt="Machine Invest Logo"
                 width={40}
                 height={40}

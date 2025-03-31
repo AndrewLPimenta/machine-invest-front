@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Machine Invest | Investimentos Inteligentes",
   description: "Plataforma de investimentos com foco em criptomoedas e ativos digitais",
   icons: {
-    icon: "/images/machine-logo.png",
+    icon: "/public/machine-logo.png",
   },
     generator: 'v0.dev'
 }

@@ -9,6 +9,7 @@ import { Shield, TrendingUp, Clock, DollarSign } from "lucide-react"
 export default function RendaFixaPage() {
   return (
     <PageLayout>
+      
       <Section>
         <SectionHeading
           title="Renda Fixa"

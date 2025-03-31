@@ -62,7 +62,7 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <Image
-                  src="/images/machine-logo.png"
+                src="/machine-logo.png"
                   alt="Machine Invest Logo"
                   width={36}
                   height={36}

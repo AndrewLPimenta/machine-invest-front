@@ -97,26 +97,10 @@ export function CtaSection() {
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="ghost" className="p-0 h-auto" onClick={handleDownloadClick}>
-                    <Image
-                      src="/images/app-store-badge.png"
-                      alt="App Store"
-                      width={120}
-                      height={40}
-                      className="h-7 sm:h-8 w-auto"
-                    />
-                  </Button>
+                  
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="ghost" className="p-0 h-auto" onClick={handleDownloadClick}>
-                    <Image
-                      src="/images/google-play-badge.png"
-                      alt="Google Play"
-                      width={120}
-                      height={40}
-                      className="h-7 sm:h-8 w-auto"
-                    />
-                  </Button>
+                 
                 </motion.div>
               </div>
             </motion.div>

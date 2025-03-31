@@ -29,10 +29,7 @@ export default function LoginPage() {
     setError("")
 
     try {
-      // Simular um atraso de rede
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      // Simular validação
+      // Validar os campos
       if (!email || !password) {
         throw new Error("Por favor, preencha todos os campos.")
       }
@@ -41,9 +38,25 @@ export default function LoginPage() {
         throw new Error("A senha deve ter pelo menos 6 caracteres.")
       }
 
-      // Simular login
-      await login(email, password)
-      router.push("/")
+      // Fazer a requisição de login
+      const response = await axios.post("/api/login", {
+        email,
+        password,
+      })
+
+      // Verificar se a resposta foi bem-sucedida
+      if (response.status === 200) {
+        // Obter o token de autenticação
+        const token = response.data.token
+
+        // Armazenar o token no localStorage
+        localStorage.setItem("token", token)
+
+        // Redirecionar para a página principal
+        router.push("/")
+      } else {
+        throw new Error("Erro ao fazer login.")
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Ocorreu um erro ao fazer login.")
     } finally {
