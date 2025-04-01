@@ -24,8 +24,8 @@ const cryptos = [
     price: 245876.32,
     change: 2.45,
     marketCap: "4.7T",
-    volume: "127.8B",
-    image: "/placeholder.svg?height=64&width=64",
+    volume: "127.9B",
+    image: "https://cryptologos.cc/logos/bitcoin-btc-logo.svg",
   },
   {
     name: "Ethereum",
@@ -34,7 +34,7 @@ const cryptos = [
     change: -1.23,
     marketCap: "1.5T",
     volume: "58.3B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
   },
   {
     name: "Binance Coin",
@@ -43,7 +43,7 @@ const cryptos = [
     change: 0.87,
     marketCap: "287.6B",
     volume: "12.4B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/binance-coin-bnb-logo.svg",
   },
   {
     name: "Solana",
@@ -52,7 +52,7 @@ const cryptos = [
     change: 5.67,
     marketCap: "187.2B",
     volume: "9.8B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/solana-sol-logo.svg",
   },
   {
     name: "Cardano",
@@ -61,7 +61,7 @@ const cryptos = [
     change: -0.45,
     marketCap: "98.7B",
     volume: "4.3B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/cardano-ada-logo.svg",
   },
   {
     name: "XRP",
@@ -70,7 +70,7 @@ const cryptos = [
     change: 1.34,
     marketCap: "154.3B",
     volume: "7.6B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=040",
   },
   {
     name: "Dogecoin",
@@ -79,7 +79,7 @@ const cryptos = [
     change: 3.21,
     marketCap: "68.5B",
     volume: "3.2B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/dogecoin-doge-logo.svg",
   },
   {
     name: "Polkadot",
@@ -88,7 +88,7 @@ const cryptos = [
     change: -0.78,
     marketCap: "32.1B",
     volume: "1.8B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/polkadot-new-dot-logo.svg?v=040",
   },
   {
     name: "Avalanche",
@@ -97,7 +97,7 @@ const cryptos = [
     change: 4.56,
     marketCap: "28.7B",
     volume: "1.5B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/avalanche-avax-logo.svg",
   },
   {
     name: "Chainlink",
@@ -106,7 +106,7 @@ const cryptos = [
     change: 1.23,
     marketCap: "12.3B",
     volume: "0.9B",
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/chainlink-link-logo.svg",
   },
 ]
 
@@ -386,9 +386,8 @@ export default function CriptoPage() {
                               </div>
                             </div>
                             <div
-                              className={`flex items-center space-x-1 rounded-full px-2 py-1 text-xs font-medium ${
-                                crypto.change > 0 ? "bg-green-500/10 text-green-500" : "bg-red-500/10 text-red-500"
-                              }`}
+                              className={`flex items-center space-x-1 rounded-full px-2 py-1 text-xs font-medium ${crypto.change > 0 ? "bg-green-500/10 text-green-500" : "bg-red-500/10 text-red-500"
+                                }`}
                             >
                               {crypto.change > 0 ? (
                                 <ChevronUp className="h-3 w-3" />

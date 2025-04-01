@@ -81,27 +81,33 @@ export default function SobrePage() {
 
   const team = [
     {
-      name: "Carlos Mendes",
+      name: "Andrew Pimenta",
       role: "CEO & Co-fundador",
       bio: "Ex-executivo do mercado financeiro com mais de 15 anos de experiência em bancos de investimento.",
       image: "/placeholder.svg?height=300&width=300",
     },
     {
-      name: "Ana Oliveira",
-      role: "CTO & Co-fundadora",
-      bio: "Engenheira de software com passagens por grandes empresas de tecnologia e especialista em blockchain.",
+      name: "Gabriel Amiti",
+      role: "CTO & Co-fundador",
+      bio: "Engenheiro de software com passagens por grandes empresas de tecnologia e especialista em blockchain.",
       image: "/placeholder.svg?height=300&width=300",
     },
     {
-      name: "Roberto Santos",
+      name: "Alisson Alves",
       role: "CFO",
       bio: "Especialista em finanças com MBA em Harvard e experiência em gestão de ativos internacionais.",
       image: "/placeholder.svg?height=300&width=300",
     },
     {
-      name: "Juliana Costa",
+      name: "Kevvyn Alves",
       role: "COO",
       bio: "Especialista em operações com passagem por grandes fintechs e foco em experiência do cliente.",
+      image: "/placeholder.svg?height=300&width=300",
+    },
+    {
+      name: "Pedro Teixeira",
+      role: "COO",
+      bio: "Operador de UX/UI Design com mestrado em experiência do usuário e experiência em design de produto.",
       image: "/placeholder.svg?height=300&width=300",
     },
   ]

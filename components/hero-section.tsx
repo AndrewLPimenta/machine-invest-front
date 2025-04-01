@@ -56,7 +56,7 @@ export function HeroSection() {
               <EnhancedButton
                 size="lg"
                 variant="gradient"
-                href="#download"
+                href="/download"
                 id="download"
                 className="text-sm md:text-base"
               >
@@ -83,7 +83,7 @@ export function HeroSection() {
                 transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
               >
                 <AnimatedImage
-                src="/public/machine-logo.png"
+                src="/machine-logo.png"
                   alt="Machine Invest Logo"
                   width={80}
                   height={80}

@@ -18,7 +18,7 @@ import { EnhancedCryptoChart } from "@/components/enhanced-crypto-chart"
 
 
 const cryptos = [
-  {
+{
     name: "Bitcoin",
     symbol: "BTC",
     price: 245876.32,
@@ -381,9 +381,8 @@ export default function CriptoPage() {
                             </div>
                           </div>
                           <div
-                            className={`flex items-center space-x-1 rounded-full px-2 py-1 text-xs font-medium ${
-                              crypto.change > 0 ? "bg-green-500/10 text-green-500" : "bg-red-500/10 text-red-500"
-                            }`}
+                            className={`flex items-center space-x-1 rounded-full px-2 py-1 text-xs font-medium ${crypto.change > 0 ? "bg-green-500/10 text-green-500" : "bg-red-500/10 text-red-500"
+                              }`}
                           >
                             {crypto.change > 0 ? (
                               <ChevronUp className="h-3 w-3" />
