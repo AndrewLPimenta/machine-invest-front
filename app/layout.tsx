@@ -9,17 +9,17 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Machine Invest | Investimentos Inteligentes",
-  description: "Plataforma de investimentos com foco em criptomoedas e ativos digitais",
+  description: "Investimento, com foco em criptomoedas e ativos digitais",
   icons: {
-    icon: "/public/machine-logo.png",
+    icon: "/machine-logo.png", 
   },
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className="overflow-x-hidden">
-      <body className={`${inter.className} overflow-x-hidden`}>
+      <body className={`${inter.className} overflow-x-hidden`} suppressHydrationWarning={true}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
@@ -27,7 +27,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
-
-
-
-import './globals.css'
