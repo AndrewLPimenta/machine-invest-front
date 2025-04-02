@@ -43,7 +43,7 @@ export function CtaSection() {
               transition={{ duration: 0.7 }}
             >
               <motion.div
-                className="relative h-auto max-h-[350px] sm:max-h-[400px] w-full max-w-[180px] sm:max-w-[200px] overflow-hidden rounded-xl bg-gradient-to-br from-primary/20 via-primary/10 to-background p-1 shadow-xl"
+                className="relative h-auto max-h-[350px] sm:max-h-[400px] w-full max-w-[180px] sm:max-w-[200px] overflow-hidden rounded-xl "
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.5 }}
@@ -53,7 +53,7 @@ export function CtaSection() {
                 }}
               >
                 <AnimatedImage
-                  src="/images/app-screenshot.png"
+                  src="/banner-app-1.png"
                   alt="Machine Invest App Screenshot"
                   width={200}
                   height={400}

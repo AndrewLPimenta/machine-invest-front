@@ -74,34 +74,36 @@ export function HeroSection() {
             transition={{ duration: 0.7, delay: 0.3 }}
           >
             {/* Ajustado o tamanho do container do telefone para evitar overflow */}
-            <div className="relative h-[490px] w-[300px] sm:h-[350px] sm:w-[250px] md:h-[500px] md:w-[480px] rounded-xl bg-gradient-to-br from-primary/20 via-primary/10 to-background p-1 shadow-xl">
-              <div className="absolute inset-00 bg-background/30 backdrop-blur-0" />
-              <motion.div
-                className="flex justify-center pt-6"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
-              >
-                <AnimatedImage
-                src="/banner-home-1-phone.png"
-                  alt="Machine Invest Logo"
-                  width={300}
-                  height={500}
-                  className="h-81 w-100 sm:h-200 sm:w-200 mb-8"
-                  animation="zoom"
-                  delay={0.9}
-                />
-              </motion.div>
-              <motion.div
-                className="absolute bottom-4 left-4 right-4 rounded-lg bg-black/60 p-3 backdrop-blur-sm"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.5 }}
-              >
-                <p className="text-xs sm:text-sm font-medium text-white">Machine Invest App</p>
-                <p className="text-xs text-white/70">Disponível para iOS e Android</p>
-              </motion.div>
-            </div>
+
+            <div className="absolute inset-00 bg-background/30 backdrop-blur-0" />
+<motion.div
+  className="flex items-center justify-center w-full h-[500px] sm:h-[600px] relative overflow-visible"
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
+>
+  <AnimatedImage
+    src="/banner-home-1-phone.png"
+    alt="Machine Invest Logo"
+    width={300}
+    height={500}
+    className="h-full w-auto object-contain"
+    animation="zoom"
+    delay={0.9}
+  />
+</motion.div>
+
+
+            <motion.div
+              className="absolute bottom-2 left-2 right-4 rounded-lg bg-black/60 p-3 backdrop-blur-sm"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.5 }}
+            >
+              <p className="text-xs sm:text-sm font-medium text-white">Machine Invest App</p>
+              <p className="text-xs text-white/70">Disponível para iOS e Android</p>
+            </motion.div>
+
             {/* Reduzido o tamanho dos efeitos de blur e contido dentro do componente */}
             <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-primary/30 blur-xl opacity-70" />
             <div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-primary/20 blur-xl opacity-70" />

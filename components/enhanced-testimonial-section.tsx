@@ -101,11 +101,11 @@ export function EnhancedTestimonialSection() {
   ]
 
   const partners = [
-    { name: "TechCrunch", logo: "/placeholder.svg?height=40&width=120" },
-    { name: "Forbes", logo: "/placeholder.svg?height=40&width=120" },
-    { name: "Business Insider", logo: "/placeholder.svg?height=40&width=120" },
-    { name: "Bloomberg", logo: "/placeholder.svg?height=40&width=120" },
-    { name: "CNBC", logo: "/placeholder.svg?height=40&width=120" },
+    { name: "TechCrunch", logo: "/xp.png" },
+    { name: "Forbes", logo: "/c6.png" },
+    { name: "Business Insider", logo: "/binance.png" },
+    { name: "Bloomberg", logo: "/bb.png" },
+    { name: "CNBC", logo: "/nubank.png" },
   ]
 
   const itemsPerPage = 3
