@@ -74,8 +74,8 @@ export function HeroSection() {
             transition={{ duration: 0.7, delay: 0.3 }}
           >
             {/* Ajustado o tamanho do container do telefone para evitar overflow */}
-            <div className="relative h-[280px] w-[220px] sm:h-[350px] sm:w-[250px] md:h-[400px] md:w-[280px] rounded-xl bg-gradient-to-br from-primary/20 via-primary/10 to-background p-1 shadow-xl">
-              <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+            <div className="relative h-[490px] w-[300px] sm:h-[350px] sm:w-[250px] md:h-[500px] md:w-[480px] rounded-xl bg-gradient-to-br from-primary/20 via-primary/10 to-background p-1 shadow-xl">
+              <div className="absolute inset-00 bg-background/30 backdrop-blur-0" />
               <motion.div
                 className="flex justify-center pt-6"
                 initial={{ opacity: 0, y: -20 }}
@@ -83,13 +83,13 @@ export function HeroSection() {
                 transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
               >
                 <AnimatedImage
-                src="/machine-logo.png"
+                src="/banner-home-1-phone.png"
                   alt="Machine Invest Logo"
-                  width={80}
-                  height={80}
-                  className="h-16 w-16 sm:h-20 sm:w-20 mb-4"
+                  width={300}
+                  height={500}
+                  className="h-81 w-100 sm:h-200 sm:w-200 mb-8"
                   animation="zoom"
-                  delay={0.8}
+                  delay={0.9}
                 />
               </motion.div>
               <motion.div
