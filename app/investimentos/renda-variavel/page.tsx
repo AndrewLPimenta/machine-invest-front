@@ -1,3 +1,4 @@
+"use client"
 import { PageLayout } from "@/components/page-layout"
 import { Section } from "@/components/section"
 import { SectionHeading } from "@/components/section-heading"
@@ -5,8 +6,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { TrendingUp, BarChart, PieChart, DollarSign, Clock, AlertTriangle } from "lucide-react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+
+
 
 export default function RendaVariavelPage() {
+
+  const router = useRouter(); 
+
   return (
     <PageLayout>
       <Section>
@@ -14,6 +21,7 @@ export default function RendaVariavelPage() {
           title="Renda Variável"
           description="Potencialize seus ganhos com investimentos de maior retorno."
           centered
+            
         />
 
         <div className="mt-12 grid gap-8 md:grid-cols-2">
@@ -51,8 +59,11 @@ export default function RendaVariavelPage() {
                   <p className="text-sm text-muted-foreground">Construa patrimônio com o tempo</p>
                 </div>
               </div>
+
             </div>
-            <Button className="w-fit">Começar a investir</Button>
+            <Button className="w-fit" onClick={() => router.push("/login")}>
+             Começar a investir
+            </Button>
           </div>
           <div className="flex items-center justify-center">
             <Image

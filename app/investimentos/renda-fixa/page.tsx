@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import { PageLayout } from "@/components/page-layout"
 import { Section } from "@/components/section"
 import { SectionHeading } from "@/components/section-heading"
@@ -6,10 +9,34 @@ import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Shield, TrendingUp, Clock, DollarSign } from "lucide-react"
 
+
 export default function RendaFixaPage() {
+  const [valorInicial, setValorInicial] = useState<number>(0)
+  const [prazo, setPrazo] = useState<number>(0)
+  const [tipo, setTipo] = useState("cdb") // valor inicial = "cdb"
+  const [resultado, setResultado] = useState<{
+    bruto: number
+    rendimento: number
+    liquido: number
+  } | null>(null)
+
+  const calcular = () => {
+    const taxa = tipo === "cdb" ? 0.011 :
+                 tipo === "selic" ? 0.010 :
+                 tipo === "lci" ? 0.009 : 0.01
+  
+    const bruto = valorInicial * Math.pow(1 + taxa, prazo)
+    const rendimento = bruto - valorInicial
+    const isentoIR = tipo === "lci"
+    const ir = isentoIR ? 0 : rendimento * 0.15
+    const liquido = bruto - ir
+  
+    setResultado({ bruto, rendimento, liquido })
+  }
+  
+
   return (
     <PageLayout>
-      
       <Section>
         <SectionHeading
           title="Renda Fixa"
@@ -55,6 +82,7 @@ export default function RendaFixaPage() {
             </div>
             <Button className="w-fit">Começar a investir</Button>
           </div>
+
           <Card>
             <CardHeader>
               <CardTitle>Simulador de Renda Fixa</CardTitle>
@@ -64,35 +92,55 @@ export default function RendaFixaPage() {
               <div className="space-y-4">
                 <div>
                   <label className="text-sm font-medium">Valor inicial (R$)</label>
-                  <input type="number" className="w-full mt-1 p-2 border rounded-md" placeholder="1000" />
+                  <input
+                    type="number"
+                    className="w-full mt-1 p-2 border rounded-md"
+                    placeholder="1000"
+                    onChange={(e) => setValorInicial(parseFloat(e.target.value))}
+                  />
                 </div>
                 <div>
                   <label className="text-sm font-medium">Prazo (meses)</label>
-                  <input type="number" className="w-full mt-1 p-2 border rounded-md" placeholder="12" />
+                  <input
+                    type="number"
+                    className="w-full mt-1 p-2 border rounded-md"
+                    placeholder="12"
+                    onChange={(e) => setPrazo(parseInt(e.target.value))}
+                  />
                 </div>
                 <div>
                   <label className="text-sm font-medium">Tipo de investimento</label>
-                  <select className="w-full mt-1 p-2 border rounded-md">
-                    <option>CDB (110% CDI)</option>
-                    <option>Tesouro Selic</option>
-                    <option>LCI/LCA (90% CDI)</option>
+                  <select
+                        value={tipo}
+                        onChange={(e) => setTipo(e.target.value)}
+                        className="w-full mt-1 p-2 border rounded-md">
+                        <option value="cdb">CDB (110% CDI)</option>
+                        <option value="selic">Tesouro Selic</option>
+                       <option value="lci">LCI/LCA (90% CDI)</option>
                   </select>
-                </div>
-                <Button className="w-full">Calcular</Button>
-                <div className="p-4 bg-muted rounded-lg">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm">Valor bruto:</span>
-                    <span className="font-medium">R$ 1.110,00</span>
                   </div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm">Rendimento:</span>
-                    <span className="font-medium">R$ 110,00 (11%)</span>
+
+                <Button className="w-full" onClick={calcular}>Calcular</Button>
+
+                {resultado && (
+                  <div className="p-4 bg-muted rounded-lg">
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm">Valor bruto:</span>
+                      <span className="font-medium">R$ {resultado.bruto.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm">Rendimento:</span>
+                      <span className="font-medium">
+                        R$ {resultado.rendimento.toFixed(2)} (
+                        {((resultado.rendimento / valorInicial) * 100).toFixed(1)}%)
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm">Valor líquido:</span>
+                      <span className="font-medium">R$ {resultado.liquido.toFixed(2)}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Valor líquido:</span>
-                    <span className="font-medium">R$ 1.088,00</span>
-                  </div>
-                </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -204,4 +252,3 @@ export default function RendaFixaPage() {
     </PageLayout>
   )
 }
-

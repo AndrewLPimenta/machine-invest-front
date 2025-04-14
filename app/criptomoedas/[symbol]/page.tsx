@@ -29,7 +29,6 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-// Dados simulados para diferentes criptomoedas
 const cryptoData = {
   btc: {
     name: "Bitcoin",
@@ -40,7 +39,7 @@ const cryptoData = {
     volume: "127.8B",
     high24h: 248000.5,
     low24h: 242500.75,
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/bitcoin-btc-logo.svg",
     description:
       "Bitcoin é a primeira criptomoeda descentralizada do mundo, criada em 2009 por uma pessoa (ou grupo) usando o pseudônimo Satoshi Nakamoto. Funciona sem uma autoridade central ou banco, e o gerenciamento de transações e a emissão de bitcoins são realizados coletivamente pela rede.",
     website: "https://bitcoin.org",
@@ -58,7 +57,7 @@ const cryptoData = {
     volume: "58.3B",
     high24h: 12800.25,
     low24h: 12350.5,
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
     description:
       "Ethereum é uma plataforma descentralizada que permite a criação de contratos inteligentes e aplicativos descentralizados (dApps) sem interferência de terceiros, tempo de inatividade, fraude ou controle. Ethereum é não apenas uma plataforma, mas também uma linguagem de programação (Turing completa) que ajuda os desenvolvedores a criar e publicar aplicativos distribuídos.",
     website: "https://ethereum.org",
@@ -76,7 +75,7 @@ const cryptoData = {
     volume: "9.8B",
     high24h: 550.75,
     low24h: 520.3,
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/solana-sol-logo.svg",
     description:
       "Solana é uma blockchain de alto desempenho que suporta contratos inteligentes e criação de aplicativos descentralizados. Ela usa um mecanismo de consenso inovador chamado Proof of History (PoH) em combinação com Proof of Stake (PoS), permitindo processamento rápido de transações e baixas taxas.",
     website: "https://solana.com",
@@ -94,7 +93,7 @@ const cryptoData = {
     volume: "12.4B",
     high24h: 1890.25,
     low24h: 1850.5,
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/binance-coin-bnb-logo.svg",
     description:
       "Binance Coin (BNB) é a criptomoeda nativa da exchange Binance e da Binance Smart Chain. Inicialmente criada como um token utilitário para descontos em taxas de negociação na Binance, o BNB expandiu seu uso para diversos casos, incluindo pagamentos por taxas na Binance Smart Chain, participação em vendas de tokens e muito mais.",
     website: "https://binance.com",
@@ -112,7 +111,7 @@ const cryptoData = {
     volume: "4.3B",
     high24h: 2.95,
     low24h: 2.82,
-    image: "/placeholder.svg?height=64&width=64",
+    image: "https://cryptologos.cc/logos/cardano-ada-logo.svg",
     description:
       "Cardano é uma plataforma blockchain de código aberto que visa fornecer uma infraestrutura mais equilibrada e sustentável para sistemas financeiros. É a primeira blockchain baseada em evidências científicas, desenvolvida através de metodologias orientadas por pesquisa acadêmica revisada por pares.",
     website: "https://cardano.org",
@@ -130,7 +129,7 @@ const cryptoData = {
     volume: "7.6B",
     high24h: 3.3,
     low24h: 3.15,
-    image: "/placeholder.svg?height=64&width=64",
+    image: "",
     description:
       "XRP é a criptomoeda nativa da Ripple, uma tecnologia que atua como um sistema de liquidação bruta em tempo real, uma rede de câmbio e um sistema de remessa. XRP foi criado com o objetivo de ser uma forma mais rápida, menos custosa e mais escalável de ativos digitais para pagamentos transfronteiriços.",
     website: "https://ripple.com",
@@ -139,9 +138,26 @@ const cryptoData = {
     maxSupply: "100.000.000.000",
     circulatingSupply: "46.312.443.615",
   },
+  pol: {
+    name: "Polkadot",
+    symbol: "XRP",
+    price: 32.45,
+    change: -0.78,
+    marketCap: "154.3B",
+    volume: "7.6B",
+    high24h: 3.1,
+    low24h: 1.14,
+    image: "https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=040",
+    description:
+      "XRP é a criptomoeda nativa da Ripple, uma tecnologia que atua como um sistema de liquidação bruta em tempo real, uma rede de câmbio e um sistema de remessa. XRP foi criado com o objetivo de ser uma forma mais rápida, menos custosa e mais escalável de ativos digitais para pagamentos transfronteiriços.",
+    website: "https://ripple.com",
+    explorer: "https://xrpscan.com",
+    whitepaper: "https://ripple.com/files/ripple_consensus_whitepaper.pdf",
+    maxSupply: "100.000.000.000",
+    circulatingSupply: "56.552.913.789",
+  },
 }
 
-// Dados de mercados e pares de negociação
 const tradingPairs = [
   { pair: "BTC/BRL", price: 245876.32, change: 2.45, volume: "1.2B", exchange: "Binance" },
   { pair: "BTC/USDT", price: 49876.54, change: 2.35, volume: "5.7B", exchange: "Binance" },
@@ -150,7 +166,6 @@ const tradingPairs = [
   { pair: "BTC/BRL", price: 245850.75, change: 2.42, volume: "0.5B", exchange: "NovaDAX" },
 ]
 
-// Notícias simuladas
 const news = [
   {
     title: "Bitcoin atinge nova máxima histórica após aprovação de ETF",

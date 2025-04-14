@@ -424,7 +424,7 @@ export default function CriptoPage() {
                         </CardContent>
                         <CardFooter>
                           <Button variant="outline" className="w-full" asChild>
-                            <Link href={`/criptomoedas/${crypto.symbol.toLowerCase()}`}>
+                            <Link href={`/criptomoedas/${crypto.name.toLowerCase()}`}>
                               Ver Detalhes <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
                           </Button>
