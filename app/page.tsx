@@ -131,7 +131,7 @@ export default function Home() {
         <div className="mt-8 text-center">
           <Button asChild>
             <Link href="/criptomoedas">
-              Explorar Mais Análises <ArrowRight className="ml-2 h-4 w-4" />
+              Descubra Mais Análises <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
