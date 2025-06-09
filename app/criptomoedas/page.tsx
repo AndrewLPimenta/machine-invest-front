@@ -198,43 +198,45 @@ export default function CriptoPage() {
 
   return (
     <SiteLayout>
-      <Section>
+      <Section className="py-12">
         <ResponsiveContainer>
-          <SectionHeading
-            title="Criptomoedas em Destaque"
-            description="Acompanhe as principais criptomoedas do mercado e suas variações em tempo real."
-            centered
-          />
+          <div className="max-w-3xl mx-auto text-center">
+            <SectionHeading
+              title="Criptomoedas em Destaque"
+              description="Acompanhe as principais criptomoedas do mercado e suas variações em tempo real."
+              centered
+            />
 
-          <div className="mt-8 flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="relative w-full md:w-auto md:min-w-[300px]">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Buscar criptomoedas..."
-                className="pl-10"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/criptomoedas/comparar">Comparar Criptomoedas</Link>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/criptomoedas/converter">Conversor</Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link href="/download">
-                  Negociar Agora <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+            <div className="mt-8 flex flex-col gap-4 items-center justify-center">
+              <div className="relative w-full max-w-md">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Buscar criptomoedas..."
+                  className="pl-10"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-wrap gap-2 justify-center">
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/criptomoedas/comparar">Comparar Criptomoedas</Link>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/criptomoedas/converter">Conversor</Link>
+                </Button>
+                <Button size="sm" asChild>
+                  <Link href="/download">
+                    Negociar Agora <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-12">
             <Tabs defaultValue="tabela" className="w-full">
-              <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 mb-8">
+              <TabsList className="w-full max-w-xs mx-auto grid grid-cols-2 mb-8">
                 <TabsTrigger value="tabela">Tabela</TabsTrigger>
                 <TabsTrigger value="cards">Cards</TabsTrigger>
               </TabsList>
@@ -361,7 +363,7 @@ export default function CriptoPage() {
 
               <TabsContent value="cards" className="space-y-4">
                 <motion.div
-                  className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+                  className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                   variants={container}
                   initial="hidden"
                   animate="show"
@@ -369,25 +371,56 @@ export default function CriptoPage() {
                 >
                   {filteredCryptos.map((crypto, index) => (
                     <motion.div key={index} variants={item}>
-                      <Card className="overflow-hidden transition-all hover:shadow-lg">
-                        <CardHeader className="pb-2">
+                      <Card className="overflow-hidden transition-all duration-300 hover:shadow-md border border-border/50">
+                        <CardHeader className="pb-2 pt-4 px-4">
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-4">
+                            <Link
+                              href={`/criptomoedas/${crypto.symbol.toLowerCase()}`}
+                              className="flex items-center gap-3 group"
+                            >
                               <Image
                                 src={crypto.image || "/placeholder.svg"}
                                 alt={crypto.name}
-                                width={40}
-                                height={40}
+                                width={36}
+                                height={36}
                                 className="rounded-full"
                               />
                               <div>
-                                <CardTitle>{crypto.name}</CardTitle>
-                                <CardDescription>{crypto.symbol}</CardDescription>
+                                <CardTitle className="text-base group-hover:text-primary transition-colors">
+                                  {crypto.name}
+                                </CardTitle>
+                                <CardDescription className="text-xs">{crypto.symbol}</CardDescription>
                               </div>
+                            </Link>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                toggleFavorite(crypto.symbol)
+                              }}
+                            >
+                              <Star
+                                className={`h-4 w-4 ${
+                                  favorites.includes(crypto.symbol)
+                                    ? "fill-yellow-400 text-yellow-400"
+                                    : "text-muted-foreground"
+                                }`}
+                              />
+                            </Button>
+                          </div>
+                        </CardHeader>
+
+                        <CardContent className="px-4 pb-2 pt-0">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="font-medium">
+                              R$ {crypto.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
                             </div>
                             <div
-                              className={`flex items-center space-x-1 rounded-full px-2 py-1 text-xs font-medium ${crypto.change > 0 ? "bg-green-500/10 text-green-500" : "bg-red-500/10 text-red-500"
-                                }`}
+                              className={`flex items-center space-x-1 rounded-full px-2 py-0.5 text-xs font-medium ${
+                                crypto.change > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                              }`}
                             >
                               {crypto.change > 0 ? (
                                 <ChevronUp className="h-3 w-3" />
@@ -397,35 +430,26 @@ export default function CriptoPage() {
                               <span>{Math.abs(crypto.change)}%</span>
                             </div>
                           </div>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="mt-2 space-y-2">
-                            <div className="flex justify-between text-sm">
-                              <span className="text-muted-foreground">Preço</span>
-                              <span className="font-medium">R$ {crypto.price.toLocaleString("pt-BR")}</span>
-                            </div>
-                            <div className="flex justify-between text-sm">
-                              <span className="text-muted-foreground">Cap. de Mercado</span>
-                              <span className="font-medium">R$ {crypto.marketCap}</span>
-                            </div>
-                            <div className="flex justify-between text-sm">
-                              <span className="text-muted-foreground">Volume (24h)</span>
-                              <span className="font-medium">R$ {crypto.volume}</span>
-                            </div>
-                          </div>
-                          <div className="mt-4 h-[100px]">
-                            <EnhancedCryptoChart
+
+                          {/* Gráfico Simplificado */}
+                          <div className="h-[30px] -mx-4 -mb-2">
+                            {/* <EnhancedCryptoChart
                               symbol={crypto.symbol}
                               name={crypto.name}
                               currentPrice={crypto.price}
                               change={crypto.change}
-                            />
+                              simplified={true}
+                            /> */}
                           </div>
                         </CardContent>
-                        <CardFooter>
-                          <Button variant="outline" className="w-full" asChild>
-                            <Link href={`/criptomoedas/${crypto.name.toLowerCase()}`}>
-                              Ver Detalhes <ArrowRight className="ml-2 h-4 w-4" />
+
+                        <CardFooter className="px-4 py-3 flex justify-between border-t border-border/50 bg-muted/10">
+                          <div className="text-xs text-muted-foreground">
+                            <span>Cap: R$ {crypto.marketCap}</span>
+                          </div>
+                          <Button size="sm" variant="ghost" className="h-7 px-2 text-xs" asChild>
+                            <Link href={`/criptomoedas/${crypto.symbol.toLowerCase()}`}>
+                              Detalhes <ArrowRight className="ml-1 h-3 w-3" />
                             </Link>
                           </Button>
                         </CardFooter>
@@ -439,8 +463,7 @@ export default function CriptoPage() {
 
           <div className="mt-16 text-center">
             <Button size="lg" asChild>
-              <Link  href="/download"
-                id="download">
+              <Link href="/download" id="download">
                 Baixar App para Acesso Completo <ArrowDownToLine className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -450,4 +473,3 @@ export default function CriptoPage() {
     </SiteLayout>
   )
 }
-
