@@ -286,7 +286,8 @@ export default function ContatoPage() {
           </motion.div>
           <div className="mt-16 text-center">
             <Button size="lg" asChild>
-              <Link href="/#download">
+              <Link  href="/download"
+                id="download">
                 Baixar App para Suporte Direto <ArrowDownToLine className="ml-2 h-4 w-4" />
               </Link>
             </Button>

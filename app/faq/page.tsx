@@ -233,7 +233,8 @@ export default function FaqPage() {
                   </Link>
                 </Button>
                 <Button variant="outline" className="flex-1" asChild>
-                  <Link href="/#download">
+                  <Link  href="/download"
+                id="download">
                     Baixar Aplicativo <ArrowDownToLine className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

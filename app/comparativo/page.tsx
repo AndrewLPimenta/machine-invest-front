@@ -225,7 +225,8 @@ export default function ComparativoPage() {
                 <Link href="/cadastro">Abra sua conta grátis</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/#download">
+                <Link href="/download"
+                id="download">
                   <ArrowDownToLine className="mr-2 h-4 w-4" />
                   Baixar Aplicativo
                 </Link>

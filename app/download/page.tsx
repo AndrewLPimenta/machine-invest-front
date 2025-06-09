@@ -124,7 +124,7 @@ export default function DownloadPage() {
                 <div className="relative w-64 h-[500px] md:w-72 md:h-[580px] rounded-[40px] border-8 border-gray-800 dark:border-gray-700 overflow-hidden shadow-xl">
                   <div className="absolute top-0 w-32 h-6 bg-gray-800 dark:bg-gray-700 left-1/2 -translate-x-1/2 rounded-b-lg"></div>
                   <Image
-                    src="/placeholder.svg?height=580&width=300"
+                    src="baixeoapp.jpg"
                     alt="Machine Invest App"
                     width={300}
                     height={580}

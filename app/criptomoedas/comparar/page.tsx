@@ -525,7 +525,8 @@ export default function CompararPage() {
 
               <div className="text-center">
                 <Button size="lg" asChild>
-                  <Link href="/#download">
+                  <Link href="/download"
+                id="download">
                     Baixar App para Análises Avançadas <ArrowDownToLine className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

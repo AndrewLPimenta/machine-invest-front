@@ -434,7 +434,8 @@ export default function CriptoPage() {
 
         <div className="mt-16 text-center">
           <Button size="lg" asChild>
-            <Link href="/#download">
+            <Link  href="/download"
+                id="download">
               Baixar App para Acesso Completo <ArrowDownToLine className="ml-2 h-4 w-4" />
             </Link>
           </Button>

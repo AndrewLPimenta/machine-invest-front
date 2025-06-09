@@ -462,7 +462,8 @@ export default function SimulacaoPage() {
               </CardContent>
               <CardFooter>
                 <Button asChild className="w-full">
-                  <Link href="/#download">
+                  <Link  href="/download"
+                id="download">
                     Baixar App para Simulações Personalizadas <ArrowDownToLine className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

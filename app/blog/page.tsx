@@ -233,7 +233,8 @@ export default function BlogPage() {
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full" asChild>
-                    <Link href="/download">Baixar Agora</Link>
+                    <Link  href="/download"
+                id="download">Baixar Agora</Link>
                   </Button>
                 </CardContent>
               </Card>
