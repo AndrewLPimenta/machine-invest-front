@@ -173,8 +173,9 @@ export default function BlogPage() {
                       </CardContent>
                       <CardFooter>
                         <Button variant="outline" size="sm" className="w-full" asChild>
-                          <Link href={`/blog/${post.slug}`}>
-                            Ler Artigo <ArrowRight className="ml-2 h-4 w-4" />
+                          <Link href="/download"
+                            id="download">
+                            Saiba Mais <ArrowRight className="ml-2 h-4 w-4" />
                           </Link>
                         </Button>
                       </CardFooter>
@@ -183,8 +184,16 @@ export default function BlogPage() {
                 ))}
               </motion.div>
               <div className="mt-8 flex justify-center">
+                <Button variant="outline" size="sm"className="mt-8 flex justify-center" asChild>
+                          <Link href="/download"
+                            id="download">
+                            Ver todos os Artigos <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                </div>
+              {/* <div className="mt-8 flex justify-center">
                 <Button variant="outline">Carregar Mais Artigos</Button>
-              </div>
+              </div> */}
             </motion.div>
             <motion.div
               className="w-full md:w-1/4"
@@ -233,8 +242,8 @@ export default function BlogPage() {
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full" asChild>
-                    <Link  href="/download"
-                id="download">Baixar Agora</Link>
+                    <Link href="/download"
+                      id="download">Baixar Agora</Link>
                   </Button>
                 </CardContent>
               </Card>
