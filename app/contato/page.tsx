@@ -16,6 +16,7 @@ import { SiteLayout } from "@/components/site-layout"
 import { Section } from "@/components/section"
 import { ResponsiveContainer } from "@/components/responsive-container"
 
+
 export default function ContatoPage() {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -43,7 +44,7 @@ export default function ContatoPage() {
       address: "Av. Paulista, 1000, Bela Vista",
       phone: "+55 (11) 3000-0000",
       email: "contato.sp@machineinvest.com.br",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/4.jpg",
     },
     {
       city: "Rio de Janeiro",

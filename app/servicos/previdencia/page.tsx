@@ -56,7 +56,7 @@ export default function PrevidenciaPage() {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="/placeholder.svg?height=400&width=500"
+              src="/previdencia-privada.jpg"
               alt="Previdência Privada"
               width={500}
               height={400}

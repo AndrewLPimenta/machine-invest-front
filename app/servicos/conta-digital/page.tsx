@@ -57,7 +57,7 @@ export default function ContaDigitalPage() {
           <div className="flex items-center justify-center">
             <div className="relative h-[400px] w-[300px]">
               <Image
-                src="/placeholder.svg?height=800&width=600"
+                src="/machine-logo.png"
                 alt="Aplicativo da Conta Digital"
                 fill
                 className="object-contain"

@@ -23,7 +23,7 @@ export default function BlogPage() {
       title: "Como começar a investir em criptomoedas em 2025",
       excerpt:
         "Um guia completo para iniciantes que desejam entrar no mundo das criptomoedas de forma segura e inteligente.",
-      image: "/placeholder.svg?height=200&width=400",
+      image: "/como-investir.jpg",
       date: "15 de março de 2025",
       readTime: "8 min de leitura",
       category: "Criptomoedas",
@@ -33,7 +33,7 @@ export default function BlogPage() {
       title: "Os melhores investimentos de renda fixa para 2025",
       excerpt:
         "Descubra quais são as melhores opções de renda fixa para diversificar sua carteira e garantir rendimentos seguros.",
-      image: "/placeholder.svg?height=200&width=400",
+      image: "/melhor-investimentos.jpg",
       date: "10 de março de 2025",
       readTime: "6 min de leitura",
       category: "Renda Fixa",
@@ -43,7 +43,7 @@ export default function BlogPage() {
       title: "Inteligência Artificial e o futuro dos investimentos",
       excerpt:
         "Como a IA está transformando o mercado financeiro e quais são as oportunidades para investidores atentos às novas tecnologias.",
-      image: "/placeholder.svg?height=200&width=400",
+      image: "/ia-futuro.jpg",
       date: "5 de março de 2025",
       readTime: "10 min de leitura",
       category: "Tecnologia",
@@ -53,7 +53,7 @@ export default function BlogPage() {
       title: "Diversificação de carteira: por que é importante?",
       excerpt:
         "Entenda por que diversificar seus investimentos é uma estratégia essencial para reduzir riscos e maximizar retornos.",
-      image: "/placeholder.svg?height=200&width=400",
+      image: "/diver-carteira.jpg",
       date: "28 de fevereiro de 2025",
       readTime: "7 min de leitura",
       category: "Estratégias",
@@ -63,7 +63,7 @@ export default function BlogPage() {
       title: "Bitcoin vs. Ethereum: qual é a melhor opção para investir?",
       excerpt:
         "Uma análise comparativa entre as duas principais criptomoedas do mercado e suas perspectivas para o futuro.",
-      image: "/placeholder.svg?height=200&width=400",
+      image: "/btc-eth.jpg",
       date: "20 de fevereiro de 2025",
       readTime: "9 min de leitura",
       category: "Criptomoedas",
@@ -73,7 +73,7 @@ export default function BlogPage() {
       title: "Como planejar sua aposentadoria com investimentos inteligentes",
       excerpt:
         "Estratégias e dicas para construir um patrimônio sólido e garantir uma aposentadoria tranquila e confortável.",
-      image: "/placeholder.svg?height=200&width=400",
+      image: "/aposentadoria.jpg",
       date: "15 de fevereiro de 2025",
       readTime: "8 min de leitura",
       category: "Planejamento",
