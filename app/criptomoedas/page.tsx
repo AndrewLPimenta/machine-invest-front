@@ -238,8 +238,8 @@ export default function CriptoPage() {
           <div className="mt-12">
             <Tabs defaultValue="tabela" className="w-full">
               <TabsList className="w-full max-w-xs mx-auto grid grid-cols-2 mb-8">
-                <TabsTrigger value="tabela">Tabela</TabsTrigger>
-                <TabsTrigger value="cards">Cards</TabsTrigger>
+                <TabsTrigger value="tabela">Mostrar em Tabela</TabsTrigger>
+                <TabsTrigger value="cards">Mostrar em Cards</TabsTrigger>
               </TabsList>
 
               <TabsContent value="tabela" className="space-y-4">
