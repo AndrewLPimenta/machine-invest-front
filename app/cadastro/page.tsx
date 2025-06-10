@@ -15,6 +15,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Checkbox } from "@/components/ui/checkbox"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function CadastroPage() {
   const [name, setName] = useState("")
@@ -26,6 +28,8 @@ export default function CadastroPage() {
   const [error, setError] = useState("")
   const { register } = useAuth()
   const router = useRouter()
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -97,27 +101,42 @@ export default function CadastroPage() {
                       required
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Senha</Label>
-                    <Input
+                  <div className="space-y-2 relative">
+                  <Label htmlFor="password">Senha</Label>
+                      <Input
                       id="password"
-                      type="password"
+                      type={showPassword ? 'text' : 'password'}
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirmar senha</Label>
-                    <Input
+                      />
+                      <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                       className="absolute right-3 top-9 text-gray-500"
+                       >
+                      <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                      </button>
+                      </div>
+
+                      <div className="space-y-2 relative mt-4">
+                      <Label htmlFor="confirmPassword">Confirmar senha</Label>
+                      <Input
                       id="confirmPassword"
-                      type="password"
+                     type={showConfirmPassword ? 'text' : 'password'}
                       placeholder="••••••••"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       required
-                    />
+                      />
+                      <button
+                      type="button"
+                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                     className="absolute right-3 top-9 text-gray-500"
+                   >
+                    <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                  </button>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Checkbox

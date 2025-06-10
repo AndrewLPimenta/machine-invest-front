@@ -39,7 +39,7 @@ const cryptoData = {
     volume: "127.8B",
     high24h: 248000.5,
     low24h: 242500.75,
-    image: "https://cryptologos.cc/logos/bitcoin-btc-logo.svg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png",
     description:
       "Bitcoin é a primeira criptomoeda descentralizada do mundo, criada em 2009 por uma pessoa (ou grupo) usando o pseudônimo Satoshi Nakamoto. Funciona sem uma autoridade central ou banco, e o gerenciamento de transações e a emissão de bitcoins são realizados coletivamente pela rede.",
     website: "https://bitcoin.org",
@@ -57,7 +57,7 @@ const cryptoData = {
     volume: "58.3B",
     high24h: 12800.25,
     low24h: 12350.5,
-    image: "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/120px-Ethereum_logo_2014.svg.png",
     description:
       "Ethereum é uma plataforma descentralizada que permite a criação de contratos inteligentes e aplicativos descentralizados (dApps) sem interferência de terceiros, tempo de inatividade, fraude ou controle. Ethereum é não apenas uma plataforma, mas também uma linguagem de programação (Turing completa) que ajuda os desenvolvedores a criar e publicar aplicativos distribuídos.",
     website: "https://ethereum.org",
@@ -75,7 +75,7 @@ const cryptoData = {
     volume: "9.8B",
     high24h: 550.75,
     low24h: 520.3,
-    image: "https://cryptologos.cc/logos/solana-sol-logo.svg",
+    image: "https://avatars.githubusercontent.com/u/58729655?s=200&v=4",
     description:
       "Solana é uma blockchain de alto desempenho que suporta contratos inteligentes e criação de aplicativos descentralizados. Ela usa um mecanismo de consenso inovador chamado Proof of History (PoH) em combinação com Proof of Stake (PoS), permitindo processamento rápido de transações e baixas taxas.",
     website: "https://solana.com",
@@ -93,7 +93,7 @@ const cryptoData = {
     volume: "12.4B",
     high24h: 1890.25,
     low24h: 1850.5,
-    image: "https://cryptologos.cc/logos/binance-coin-bnb-logo.svg",
+    image: "https://logospng.org/download/binance-coin/logo-binance-coin-2048.png",
     description:
       "Binance Coin (BNB) é a criptomoeda nativa da exchange Binance e da Binance Smart Chain. Inicialmente criada como um token utilitário para descontos em taxas de negociação na Binance, o BNB expandiu seu uso para diversos casos, incluindo pagamentos por taxas na Binance Smart Chain, participação em vendas de tokens e muito mais.",
     website: "https://binance.com",
@@ -111,7 +111,7 @@ const cryptoData = {
     volume: "4.3B",
     high24h: 2.95,
     low24h: 2.82,
-    image: "https://cryptologos.cc/logos/cardano-ada-logo.svg",
+    image: "https://s3.coinmarketcap.com/static-gravity/image/4aec70f6f1254e4f89650cc68ae49f3c.png",
     description:
       "Cardano é uma plataforma blockchain de código aberto que visa fornecer uma infraestrutura mais equilibrada e sustentável para sistemas financeiros. É a primeira blockchain baseada em evidências científicas, desenvolvida através de metodologias orientadas por pesquisa acadêmica revisada por pares.",
     website: "https://cardano.org",
@@ -129,7 +129,7 @@ const cryptoData = {
     volume: "7.6B",
     high24h: 3.3,
     low24h: 3.15,
-    image: "",
+    image: "https://brandlogos.net/wp-content/uploads/2021/12/ripple-brandlogo.net_.png",
     description:
       "XRP é a criptomoeda nativa da Ripple, uma tecnologia que atua como um sistema de liquidação bruta em tempo real, uma rede de câmbio e um sistema de remessa. XRP foi criado com o objetivo de ser uma forma mais rápida, menos custosa e mais escalável de ativos digitais para pagamentos transfronteiriços.",
     website: "https://ripple.com",
@@ -147,7 +147,7 @@ const cryptoData = {
     volume: "7.6B",
     high24h: 3.1,
     low24h: 1.14,
-    image: "https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=040",
+    image: "https://krypto.businessinsider.com.pl/wp-content/uploads/2023/06/dot.png",
     description:
       "XRP é a criptomoeda nativa da Ripple, uma tecnologia que atua como um sistema de liquidação bruta em tempo real, uma rede de câmbio e um sistema de remessa. XRP foi criado com o objetivo de ser uma forma mais rápida, menos custosa e mais escalável de ativos digitais para pagamentos transfronteiriços.",
     website: "https://ripple.com",

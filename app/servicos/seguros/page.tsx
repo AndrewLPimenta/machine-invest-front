@@ -66,7 +66,7 @@ export default function SegurosPage() {
                 </div>
                 <div className="flex items-center justify-center">
                   <Image
-                    src="/placeholder.svg?height=400&width=500"
+                    src="https://www.mobills.com.br/blog/wp-content/uploads/2024/05/imagem-destaque-melhor-seguro-de-vida-mobills-1.jpg"
                     alt="Seguro de Vida"
                     width={500}
                     height={400}
@@ -107,7 +107,7 @@ export default function SegurosPage() {
                 </div>
                 <div className="flex items-center justify-center">
                   <Image
-                    src="/placeholder.svg?height=400&width=500"
+                    src="https://www.tecsegcorretora.com.br/painel/img_noticias/b67a9088b1f29ecd6f5ec6253363b148.jpg"
                     alt="Seguro Residencial"
                     width={500}
                     height={400}
@@ -147,7 +147,7 @@ export default function SegurosPage() {
                 </div>
                 <div className="flex items-center justify-center">
                   <Image
-                    src="/placeholder.svg?height=400&width=500"
+                    src="https://www.seguroauto.org/wp-content/uploads/2019/06/seguro-auto-75.jpg"
                     alt="Seguro Auto"
                     width={500}
                     height={400}
@@ -188,7 +188,7 @@ export default function SegurosPage() {
                 </div>
                 <div className="flex items-center justify-center">
                   <Image
-                    src="/placeholder.svg?height=400&width=500"
+                    src="https://viajarpraonde.com.br/wp-content/uploads/2023/03/TESTE-FAIXA-1000-%C3%97-1000-px-1000-%C3%97-500-px-1000-%C3%97-1000-px-1000-%C3%97-600-px-1000-%C3%97-1000-px-1000-%C3%97-600-px-1000-%C3%97-700-px-1000-%C3%97-700-px-4-5.jpg"
                     alt="Seguro Viagem"
                     width={500}
                     height={400}

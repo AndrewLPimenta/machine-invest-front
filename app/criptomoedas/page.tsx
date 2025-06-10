@@ -25,7 +25,7 @@ const cryptos = [
     change: 2.45,
     marketCap: "4.7T",
     volume: "127.9B",
-    image: "https://cryptologos.cc/logos/bitcoin-btc-logo.svg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png",
   },
   {
     name: "Ethereum",
@@ -34,7 +34,7 @@ const cryptos = [
     change: -1.23,
     marketCap: "1.5T",
     volume: "58.3B",
-    image: "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/120px-Ethereum_logo_2014.svg.png",
   },
   {
     name: "Binance Coin",
@@ -43,7 +43,7 @@ const cryptos = [
     change: 0.87,
     marketCap: "287.6B",
     volume: "12.4B",
-    image: "https://cryptologos.cc/logos/binance-coin-bnb-logo.svg",
+    image: "https://logospng.org/download/binance-coin/logo-binance-coin-2048.png",
   },
   {
     name: "Solana",
@@ -52,7 +52,7 @@ const cryptos = [
     change: 5.67,
     marketCap: "187.2B",
     volume: "9.8B",
-    image: "https://cryptologos.cc/logos/solana-sol-logo.svg",
+    image: "https://avatars.githubusercontent.com/u/58729655?s=200&v=4",
   },
   {
     name: "Cardano",
@@ -61,7 +61,7 @@ const cryptos = [
     change: -0.45,
     marketCap: "98.7B",
     volume: "4.3B",
-    image: "https://cryptologos.cc/logos/cardano-ada-logo.svg",
+    image: "https://s3.coinmarketcap.com/static-gravity/image/4aec70f6f1254e4f89650cc68ae49f3c.png",
   },
   {
     name: "XRP",
@@ -70,7 +70,7 @@ const cryptos = [
     change: 1.34,
     marketCap: "154.3B",
     volume: "7.6B",
-    image: "https://cryptologos.cc/logos/xrp-xrp-logo.svg?v=040",
+    image: "https://brandlogos.net/wp-content/uploads/2021/12/ripple-brandlogo.net_.png",
   },
   {
     name: "Dogecoin",
@@ -79,7 +79,8 @@ const cryptos = [
     change: 3.21,
     marketCap: "68.5B",
     volume: "3.2B",
-    image: "https://cryptologos.cc/logos/dogecoin-doge-logo.svg",
+    image: "https://upload.wikimedia.org/wikipedia/pt/d/d0/Dogecoin_Logo.png",
+
   },
   {
     name: "Polkadot",
@@ -88,7 +89,7 @@ const cryptos = [
     change: -0.78,
     marketCap: "32.1B",
     volume: "1.8B",
-    image: "https://cryptologos.cc/logos/polkadot-new-dot-logo.svg?v=040",
+    image: "https://krypto.businessinsider.com.pl/wp-content/uploads/2023/06/dot.png",
   },
   {
     name: "Avalanche",
@@ -97,7 +98,7 @@ const cryptos = [
     change: 4.56,
     marketCap: "28.7B",
     volume: "1.5B",
-    image: "https://cryptologos.cc/logos/avalanche-avax-logo.svg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Avalanche_logo_without_text-1.png",
   },
   {
     name: "Chainlink",
@@ -106,7 +107,7 @@ const cryptos = [
     change: 1.23,
     marketCap: "12.3B",
     volume: "0.9B",
-    image: "https://cryptologos.cc/logos/chainlink-link-logo.svg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Chainlink_Logo.png",
   },
 ]
 

@@ -92,7 +92,7 @@ export default function SegurancaPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Tabs defaultValue="protecao" className="w-full">
-              <TabsList className="w-full max-w-md mx-auto grid grid-cols-3 mb-8">
+              <TabsList className="flex overflow-x-auto gap-2 px-2 mb-8 max-w-full scrollbar-hide">
                 <TabsTrigger value="protecao">Proteção de Dados</TabsTrigger>
                 <TabsTrigger value="investimentos">Segurança dos Investimentos</TabsTrigger>
                 <TabsTrigger value="dicas">Dicas de Segurança</TabsTrigger>
@@ -131,7 +131,7 @@ export default function SegurancaPage() {
                   </div>
                   <div className="relative h-[300px] rounded-lg overflow-hidden">
                     <Image
-                      src="/placeholder.svg?height=300&width=500"
+                      src="https://www.meupositivo.com.br/panoramapositivo/wp-content/uploads/2022/12/post_thumbnail-4e47d568f29c40dfd7092b2d44a01245.jpeg"
                       alt="Segurança de dados"
                       fill
                       className="object-cover"
@@ -224,7 +224,7 @@ export default function SegurancaPage() {
                   </div>
                   <div className="relative h-[300px] rounded-lg overflow-hidden">
                     <Image
-                      src="/placeholder.svg?height=300&width=500"
+                      src="https://k3investimentos.com.br/storage/2024/11/Seguranca-nos-investimentos-Como-proteger-seu-patrimonio-K3-Investimentos.jpg"
                       alt="Segurança de investimentos"
                       fill
                       className="object-cover"
@@ -242,21 +242,45 @@ export default function SegurancaPage() {
                   </CardHeader>
                   <CardContent className="grid gap-4 md:grid-cols-4">
                     <div className="flex flex-col items-center text-center p-4 border rounded-lg">
-                      <div className="h-12 w-12 mb-2 bg-muted rounded-full"></div>
-                      <h4 className="font-medium">BitGo</h4>
+                    <div className="h-12 w-12 mb-2 bg-muted rounded-full flex items-center justify-center">
+                    <img
+                    src="https://z.cash/wp-content/uploads/2023/04/bitgo-shield.png"
+                    alt="BitGo"
+                      className="h-6 w-6 object-contain"
+                    />
                     </div>
+                  <h4 className="font-medium">BitGo</h4>
+                  </div>
                     <div className="flex flex-col items-center text-center p-4 border rounded-lg">
-                      <div className="h-12 w-12 mb-2 bg-muted rounded-full"></div>
-                      <h4 className="font-medium">Fireblocks</h4>
+                    <div className="h-12 w-12 mb-2 bg-muted rounded-full flex items-center justify-center">
+                    <img
+                    src="https://avatars.githubusercontent.com/u/40918269?s=200&v=4"
+                    alt="Fireblocks"
+                      className="h-6 w-6 object-contain"
+                    />
                     </div>
+                  <h4 className="font-medium">Fireblocks</h4>
+                  </div>
                     <div className="flex flex-col items-center text-center p-4 border rounded-lg">
-                      <div className="h-12 w-12 mb-2 bg-muted rounded-full"></div>
-                      <h4 className="font-medium">Ledger Vault</h4>
+                    <div className="h-12 w-12 mb-2 bg-muted rounded-full flex items-center justify-center">
+                    <img
+                    src="https://avatars.githubusercontent.com/u/9784193?s=280&v=4"
+                    alt="Ledger Vault"
+                      className="h-6 w-6 object-contain"
+                    />
                     </div>
+                  <h4 className="font-medium">Ledger Vault</h4>
+                  </div>
                     <div className="flex flex-col items-center text-center p-4 border rounded-lg">
-                      <div className="h-12 w-12 mb-2 bg-muted rounded-full"></div>
-                      <h4 className="font-medium">Coinbase Custody</h4>
+                    <div className="h-12 w-12 mb-2 bg-muted rounded-full flex items-center justify-center">
+                    <img
+                    src=""
+                    alt="Coinbase Custody"
+                      className="h-6 w-6 object-contain"
+                    />
                     </div>
+                  <h4 className="font-medium">Coinbase Custody</h4>
+                  </div>
                   </CardContent>
                 </Card>
               </TabsContent>
