@@ -56,7 +56,7 @@ export default function CarreirasPage() {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="/placeholder.svg?height=400&width=500"
+              src="https://imgs.jusbr.com/publications/images/f63a24655b7d125fd93ffc659d2871c6"
               alt="Equipe Machine Invest"
               width={500}
               height={400}
