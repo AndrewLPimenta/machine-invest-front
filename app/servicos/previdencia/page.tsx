@@ -1,3 +1,5 @@
+"use client"
+
 import { PageLayout } from "@/components/page-layout"
 import { Section } from "@/components/section"
 import { SectionHeading } from "@/components/section-heading"
@@ -5,8 +7,57 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Clock, CheckCircle, Percent } from "lucide-react"
 import Image from "next/image"
+import { useState, useMemo } from "react"
+
+type PlanType = 'PGBL' | 'VGBL'
+type TaxRegime = 'Progressivo' | 'Regressivo'
 
 export default function PrevidenciaPage() {
+  const [currentAge, setCurrentAge] = useState<number>(35)
+  const [retirementAge, setRetirementAge] = useState<number>(65)
+  const [monthlyContribution, setMonthlyContribution] = useState<number>(500)
+  const [annualReturn, setAnnualReturn] = useState<number>(8)
+  const [planType, setPlanType] = useState<PlanType>('PGBL')
+  const [taxRegime, setTaxRegime] = useState<TaxRegime>('Progressivo')
+
+  const { accumulatedValue, estimatedIncome } = useMemo(() => {
+    const years = retirementAge - currentAge
+    const months = years * 12
+    const monthlyRate = Math.pow(1 + annualReturn / 100, 1 / 12) - 1
+    
+    // Fórmula de valor futuro de uma série de pagamentos
+    let futureValue = monthlyContribution * 
+      (Math.pow(1 + monthlyRate, months) - 1) / 
+      monthlyRate
+    
+    // Ajustes baseados no tipo de plano e regime tributário
+    if (planType === 'PGBL' && taxRegime === 'Progressivo') {
+      futureValue *= 0.85 // Simulação de imposto progressivo
+    } else if (planType === 'VGBL' && taxRegime === 'Regressivo') {
+      futureValue *= 0.92 // Simulação de imposto regressivo
+    }
+    
+    // Renda mensal estimada (4% do valor acumulado por ano / 12 meses)
+    const monthlyIncome = futureValue * 0.04 / 12
+    
+    return {
+      accumulatedValue: futureValue,
+      estimatedIncome: monthlyIncome
+    }
+  }, [currentAge, retirementAge, monthlyContribution, annualReturn, planType, taxRegime])
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value)
+  }
+
+  const handleSimulation = () => {
+    // Aqui você pode adicionar lógica para enviar os dados ou salvar a simulação
+    // alert(`Simulação realizada com sucesso!\nValor acumulado: ${formatCurrency(accumulatedValue)}`)
+  }
+
   return (
     <PageLayout>
       <Section>
@@ -164,51 +215,88 @@ export default function PrevidenciaPage() {
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm font-medium">Idade atual</label>
-                    <input type="number" className="w-full mt-1 p-2 border rounded-md" placeholder="35" />
+                    <input 
+                      type="number" 
+                      className="w-full mt-1 p-2 border rounded-md" 
+                      value={currentAge}
+                      onChange={(e) => setCurrentAge(Number(e.target.value))}
+                      min={18}
+                      max={70}
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium">Idade de aposentadoria</label>
-                    <input type="number" className="w-full mt-1 p-2 border rounded-md" placeholder="65" />
+                    <input 
+                      type="number" 
+                      className="w-full mt-1 p-2 border rounded-md" 
+                      value={retirementAge}
+                      onChange={(e) => setRetirementAge(Number(e.target.value))}
+                      min={currentAge + 1}
+                      max={85}
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium">Contribuição mensal (R$)</label>
-                    <input type="number" className="w-full mt-1 p-2 border rounded-md" placeholder="500" />
+                    <input 
+                      type="number" 
+                      className="w-full mt-1 p-2 border rounded-md" 
+                      value={monthlyContribution}
+                      onChange={(e) => setMonthlyContribution(Number(e.target.value))}
+                      min={100}
+                      step={100}
+                    />
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div>
                     <label className="text-sm font-medium">Rentabilidade anual estimada (%)</label>
-                    <input type="number" className="w-full mt-1 p-2 border rounded-md" placeholder="8" />
+                    <input 
+                      type="number" 
+                      className="w-full mt-1 p-2 border rounded-md" 
+                      value={annualReturn}
+                      onChange={(e) => setAnnualReturn(Number(e.target.value))}
+                      min={0}
+                      max={20}
+                      step={0.5}
+                    />
                   </div>
                   <div>
                     <label className="text-sm font-medium">Tipo de plano</label>
-                    <select className="w-full mt-1 p-2 border rounded-md">
-                      <option>PGBL</option>
-                      <option>VGBL</option>
+                    <select 
+                      className="w-full mt-1 p-2 border rounded-md"
+                      value={planType}
+                      onChange={(e) => setPlanType(e.target.value as PlanType)}
+                    >
+                      <option value="PGBL">PGBL</option>
+                      <option value="VGBL">VGBL</option>
                     </select>
                   </div>
                   <div>
                     <label className="text-sm font-medium">Regime de tributação</label>
-                    <select className="w-full mt-1 p-2 border rounded-md">
-                      <option>Progressivo</option>
-                      <option>Regressivo</option>
+                    <select 
+                      className="w-full mt-1 p-2 border rounded-md"
+                      value={taxRegime}
+                      onChange={(e) => setTaxRegime(e.target.value as TaxRegime)}
+                    >
+                      <option value="Progressivo">Progressivo</option>
+                      <option value="Regressivo">Regressivo</option>
                     </select>
                   </div>
                 </div>
               </div>
               <div className="mt-6">
-                <Button className="w-full">Calcular</Button>
+                <Button className="w-full" onClick={handleSimulation}>Calcular</Button>
               </div>
               <div className="mt-6 p-4 bg-muted rounded-lg">
                 <h3 className="font-medium mb-2">Resultado da simulação:</h3>
                 <div className="grid gap-2 md:grid-cols-2">
                   <div>
                     <p className="text-sm text-muted-foreground">Valor acumulado:</p>
-                    <p className="font-bold">R$ 750.000,00</p>
+                    <p className="font-bold">{formatCurrency(accumulatedValue)}</p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Renda mensal estimada:</p>
-                    <p className="font-bold">R$ 3.750,00</p>
+                    <p className="font-bold">{formatCurrency(estimatedIncome)}</p>
                   </div>
                 </div>
               </div>
@@ -219,4 +307,3 @@ export default function PrevidenciaPage() {
     </PageLayout>
   )
 }
-

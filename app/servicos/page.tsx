@@ -113,7 +113,7 @@ export default function ServicosPage() {
                   <motion.div variants={item}>
                     <div className="relative h-full overflow-hidden rounded-lg">
                       <Image
-                        src="/placeholder.svg?height=600&width=800"
+                        src="/machine-logo.png"
                         alt="Conta Digital Machine"
                         width={800}
                         height={600}
@@ -405,7 +405,7 @@ export default function ServicosPage() {
                   <motion.div variants={item}>
                     <div className="relative h-full overflow-hidden rounded-lg">
                       <Image
-                        src="/placeholder.svg?height=600&width=800"
+                        src="https://ostenseguros.com.br/wp-content/uploads/2023/08/previdncia-privada-corporativa-osten-seguros.png"
                         alt="Previdência Privada"
                         width={800}
                         height={600}
