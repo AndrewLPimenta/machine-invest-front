@@ -121,6 +121,24 @@ const cryptos = [
     algorithm: "RPCA",
     website: "https://ripple.com",
   },
+  {
+    name: "Doge",
+    symbol: "Doge",
+    price: 3.21,
+    change: 1.34,
+    marketCap: "154.3B",
+    volume: "7.6B",
+    high24h: 3.3,
+    low24h: 3.15,
+    image: "https://brandlogos.net/wp-content/uploads/2021/12/ripple-brandlogo.net_.png",
+    description:
+      "",
+    allTimeHigh: 5.5,
+    allTimeLow: 0.003,
+    launchDate: "01/01/2013",
+    algorithm: "RPCA",
+    website: "https://ripple.com",
+  },
 ]
 
 export default function CompararPage() {

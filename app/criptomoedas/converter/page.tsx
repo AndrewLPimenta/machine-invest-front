@@ -82,6 +82,15 @@ const cryptos = [
     image: "https://upload.wikimedia.org/wikipedia/pt/d/d0/Dogecoin_Logo.png",
   },
   {
+    name: "Chainlink",
+    symbol: "LINK",
+    price: 25.67,
+    change: 1.23,
+    marketCap: "12.3B",
+    volume: "0.9B",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Chainlink_Logo.png",
+  },
+  {
     name: "Polkadot",
     symbol: "DOT",
     price: 32.45,
@@ -99,15 +108,8 @@ const cryptos = [
     volume: "1.5B",
     image: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Avalanche_logo_without_text-1.png",
   },
-  {
-    name: "Chainlink",
-    symbol: "LINK",
-    price: 25.67,
-    change: 1.23,
-    marketCap: "12.3B",
-    volume: "0.9B",
-    image: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Chainlink_Logo.png",
-  },
+  
+  
 ]
 
 export default function CriptoPage() {

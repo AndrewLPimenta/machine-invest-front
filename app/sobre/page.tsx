@@ -83,32 +83,32 @@ export default function SobrePage() {
     {
       name: "Andrew Pimenta",
       role: "CEO & Co-fundador",
-      bio: "Ex-executivo do mercado financeiro com mais de 15 anos de experiência em bancos de investimento.",
-      image: "/placeholder.svg?height=300&width=300",
+      bio: "Front-End",
+      image: "https://media-gig4-1.cdn.whatsapp.net/v/t61.24694-24/461058361_3827116340842688_8151525124417538585_n.jpg?ccb=11-4&oh=01_Q5Aa1wE_fO51xb7CloE2CrUoeinw01dfgugg5ARM7fRua27zsg&oe=6855AC0A&_nc_sid=5e03e0&_nc_cat=100",
     },
     {
       name: "Gabriel Amiti",
-      role: "CTO & Co-fundador",
-      bio: "Engenheiro de software com passagens por grandes empresas de tecnologia e especialista em blockchain.",
-      image: "/placeholder.svg?height=300&width=300",
+      role: "COO",
+      bio: "Design",
+      image: "https://media-gig4-2.cdn.whatsapp.net/v/t61.24694-24/484572383_1414192096602040_6788945405665217376_n.jpg?ccb=11-4&oh=01_Q5Aa1wEm6emi8VRryRi6uZgTdjOpTdEvR3V43NBNWKea-NAi2g&oe=6855A42D&_nc_sid=5e03e0&_nc_cat=104",
     },
     {
       name: "Alisson Alves",
       role: "CFO",
-      bio: "Especialista em finanças com MBA em Harvard e experiência em gestão de ativos internacionais.",
-      image: "/placeholder.svg?height=300&width=300",
+      bio: "Design",
+      image: "https://media-gru2-1.cdn.whatsapp.net/v/t61.24694-24/491844148_1014612217441850_5864558471067628073_n.jpg?ccb=11-4&oh=01_Q5Aa1wFs_FaT_qNcOtrdN8NKyywM2hE51QzMT2WhNTFE6MDchg&oe=6855EE13&_nc_sid=5e03e0&_nc_cat=104",
     },
     {
       name: "Kevvyn Alves",
-      role: "COO",
-      bio: "Especialista em operações com passagem por grandes fintechs e foco em experiência do cliente.",
-      image: "/placeholder.svg?height=300&width=300",
+      role: "CTO & Co-fundador",
+      bio: "Front-End",
+      image: "https://media-gig4-1.cdn.whatsapp.net/v/t61.24694-24/473403593_494791260093113_6306886407737024776_n.jpg?ccb=11-4&oh=01_Q5Aa1wGEuB6em-r12eG11hRdawWXMCEKITTi0s_A92QrBGiScA&oe=68561049&_nc_sid=5e03e0&_nc_cat=103",
     },
     {
       name: "Pedro Teixeira",
-      role: "COO",
-      bio: "Operador de UX/UI Design com mestrado em experiência do usuário e experiência em design de produto.",
-      image: "/placeholder.svg?height=300&width=300",
+      role: "CTO & Co-fundador",
+      bio: "Front-End",
+      image: "https://media-gig4-1.cdn.whatsapp.net/v/t61.24694-24/491840962_4199937216995980_1706799340449286598_n.jpg?ccb=11-4&oh=01_Q5Aa1wGDbnp8S2yEx8ylN2Ph4HYlezHdO_t__wSzc8ZIR1jPfA&oe=68561264&_nc_sid=5e03e0&_nc_cat=106",
     },
   ]
 
@@ -153,25 +153,25 @@ export default function SobrePage() {
       year: "2024",
       title: "Melhor Fintech do Ano",
       organization: "Prêmio Fintech Brasil",
-      image: "/placeholder.svg?height=100&width=100",
+      image: "https://img.freepik.com/fotos-premium/um-trofeu-com-as-palavras-trofeu_997657-32122.jpg",
     },
     {
       year: "2023",
       title: "Aplicativo Financeiro Mais Inovador",
       organization: "Tech Innovation Awards",
-      image: "/placeholder.svg?height=100&width=100",
+      image: "https://www.proteste.org.br/-/media/proteste/images/home/eletronicos/celular/apps-inovadores.jpg?rev=66007ff6-e213-430e-ba14-19be4b541744&hash=D10E0AD3B02211E4D6E8F3A961263291",
     },
     {
       year: "2023",
       title: "Top 10 Startups para Ficar de Olho",
       organization: "Forbes Brasil",
-      image: "/placeholder.svg?height=100&width=100",
+      image: "https://www.totvs.com/wp-content/uploads/2024/09/startups-exemplos.jpg",
     },
     {
       year: "2022",
       title: "Melhor Experiência do Usuário",
       organization: "UX Design Awards",
-      image: "/placeholder.svg?height=100&width=100",
+      image: "https://faiston.com/wp-content/uploads/2024/01/Artigos-Faiston-JAN-UX-724x407.jpg",
     },
   ]
 
@@ -295,7 +295,7 @@ export default function SobrePage() {
                   </div>
                   <div className="mt-8 relative overflow-hidden rounded-lg">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src="https://www.ceara.gov.br/wp-content/uploads/2022/11/unnamed-3-4.jpg"
                       alt="Cultura Machine Invest"
                       width={600}
                       height={400}
@@ -497,7 +497,7 @@ export default function SobrePage() {
                           <div className="flex items-start gap-4">
                             <div className="flex-shrink-0">
                               <Image
-                                src="/placeholder.svg?height=60&width=60"
+                                src="https://c7fc8402.delivery.rocketcdn.me/wp-content/uploads/2023/12/mercado-digital.jpg"
                                 alt="Forbes"
                                 width={60}
                                 height={60}
@@ -524,7 +524,7 @@ export default function SobrePage() {
                           <div className="flex items-start gap-4">
                             <div className="flex-shrink-0">
                               <Image
-                                src="/placeholder.svg?height=60&width=60"
+                                src="https://media.licdn.com/dms/image/v2/D4D12AQGN_yg9yFl4Vw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1688336062432?e=2147483647&v=beta&t=5oGyiRGuT2RwWjNz4jtlkqt0bh1IVf_AJLiSvrWh0lA"
                                 alt="Exame"
                                 width={60}
                                 height={60}
@@ -551,7 +551,7 @@ export default function SobrePage() {
                           <div className="flex items-start gap-4">
                             <div className="flex-shrink-0">
                               <Image
-                                src="/placeholder.svg?height=60&width=60"
+                                src="https://admin.ecommercebrasil.com.br/wp-content/uploads/2023/03/51-marketing-internacional.jpg.webp"
                                 alt="Valor Econômico"
                                 width={60}
                                 height={60}
@@ -560,7 +560,7 @@ export default function SobrePage() {
                             </div>
                             <div>
                               <h4 className="font-bold">
-                                "Machine Invest atinge marca de 1 milhão de usuários e prepara expansão internacional"
+                                "Machine Invest  atinge marca de 1 milhão de usuários e prepara expansão internacional"
                               </h4>
                               <p className="text-sm text-muted-foreground">Valor Econômico • Novembro 2023</p>
                               <Link
@@ -575,25 +575,7 @@ export default function SobrePage() {
                       </Card>
                     </div>
                   </div>
-                  <div className="mt-8">
-                    <h3 className="text-2xl font-bold mb-4">Parceiros e Certificações</h3>
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
-                          {Array.from({ length: 6 }).map((_, index) => (
-                            <div key={index} className="flex items-center justify-center p-2">
-                              <Image
-                                src="/placeholder.svg?height=60&width=60"
-                                alt={`Parceiro ${index + 1}`}
-                                width={60}
-                                height={60}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
+                 
                 </motion.div>
               </motion.div>
             </TabsContent>

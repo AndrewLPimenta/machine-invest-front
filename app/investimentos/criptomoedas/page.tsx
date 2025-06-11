@@ -59,7 +59,7 @@ export default function CriptomoedasInvestPage() {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="/placeholder.svg?height=400&width=500"
+              src="https://media.seudinheiro.com/uploads/2022/10/investimento-do-futuro-lucro-dinheiro-CAPA-SD.jpg"
               alt="Criptomoedas"
               width={500}
               height={400}
@@ -111,7 +111,7 @@ export default function CriptomoedasInvestPage() {
                       className="h-6 w-6 text-blue-500"
                       viewBox="0 0 24 24"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png"
                     >
                       <path d="M12 4L4 12L12 20L20 12L12 4Z" fill="currentColor" />
                     </svg>
@@ -150,7 +150,7 @@ export default function CriptomoedasInvestPage() {
                       className="h-6 w-6 text-green-500"
                       viewBox="0 0 24 24"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/120px-Ethereum_logo_2014.svg.png"
                     >
                       <circle cx="12" cy="12" r="8" fill="currentColor" />
                     </svg>

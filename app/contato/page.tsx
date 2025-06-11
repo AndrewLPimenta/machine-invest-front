@@ -44,21 +44,21 @@ export default function ContatoPage() {
       address: "Av. Paulista, 1000, Bela Vista",
       phone: "+55 (11) 3000-0000",
       email: "contato.sp@machineinvest.com.br",
-      image: "/4.jpg",
+      image: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Vista_da_Avenida_Paulista_-_Sesc_Avenida_Paulista_por_Rodrigo_Tetsuo_Argenton_%281%29.jpg",
     },
     {
       city: "Rio de Janeiro",
       address: "Av. Rio Branco, 500, Centro",
       phone: "+55 (21) 3000-0000",
       email: "contato.rj@machineinvest.com.br",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "https://lancamentosrj.com/wp-content/uploads/2025/01/Ipanema-Almar-7.webp",
     },
     {
       city: "Belo Horizonte",
       address: "Av. do Contorno, 200, Funcionários",
       phone: "+55 (31) 3000-0000",
       email: "contato.bh@machineinvest.com.br",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "https://aem-all.accor.com/content/dam/all/hubs/americas/latam/generic-images/all-magazine/o-que-fazer-em-belo-horizonte-8-destinos-incriveis-guia-2024-2.jpg",
     },
   ]
 
