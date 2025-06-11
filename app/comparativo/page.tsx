@@ -106,7 +106,7 @@ export default function ComparativoPage() {
       <Section className="pt-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <SectionHeading
-            title="Machine Invest vs <span class='text-primary'>Bancos Tradicionais</span>"
+            title="Machine Invest"
             description="Compare e descubra por que a Machine Invest é a escolha inteligente para seus investimentos e serviços financeiros."
             centered
           />

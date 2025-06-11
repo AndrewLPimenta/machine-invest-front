@@ -103,7 +103,11 @@ export default function RendaVariavelPage() {
                     <span className="text-sm">Acima de 5 anos</span>
                   </div>
                 </div>
-                <Button className="w-full">Investir em Ações</Button>
+                
+                <Button className="w-full">
+                  Investir em Ações
+                  </Button>
+
               </CardContent>
             </Card>
             <Card>

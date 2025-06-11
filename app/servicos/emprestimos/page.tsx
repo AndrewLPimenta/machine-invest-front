@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Calculator, Clock, CheckCircle, DollarSign, Percent, Shield } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Slider } from "@/components/ui/slider"
+import { useState, useMemo } from "react"
+
 
 export default function EmprestimosPage() {
   return (
@@ -107,6 +109,9 @@ export default function EmprestimosPage() {
                   </CardContent>
                 </Card>
               </div>
+
+
+              
             </TabsContent>
             <TabsContent value="consignado">
               <div className="text-center py-12">

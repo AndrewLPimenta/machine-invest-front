@@ -83,7 +83,7 @@ export function HeroSection() {
   transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
 >
   <AnimatedImage
-    src="/banner-home-1-phone.png"
+    src="/img-fundo.png"
     alt="Machine Invest Logo"
     width={300}
     height={500}
