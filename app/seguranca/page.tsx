@@ -274,7 +274,7 @@ export default function SegurancaPage() {
                     <div className="flex flex-col items-center text-center p-4 border rounded-lg">
                     <div className="h-12 w-12 mb-2 bg-muted rounded-full flex items-center justify-center">
                     <img
-                    src=""
+                    src="https://cdn.discordapp.com/attachments/1271858955836067953/1382159196883255456/coinbase.png?ex=684a238f&is=6848d20f&hm=d7cffa1a4d7075e77b6e7478d6c0beeeacab37c01cc7a7a845da62c0c027f663&"
                     alt="Coinbase Custody"
                       className="h-6 w-6 object-contain"
                     />
