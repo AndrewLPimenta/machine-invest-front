@@ -96,7 +96,7 @@ export default function SobrePage() {
       name: "Alisson Alves",
       role: "CFO",
       bio: "Design",
-      image: "https://media-gru2-1.cdn.whatsapp.net/v/t61.24694-24/491844148_1014612217441850_5864558471067628073_n.jpg?ccb=11-4&oh=01_Q5Aa1wFs_FaT_qNcOtrdN8NKyywM2hE51QzMT2WhNTFE6MDchg&oe=6855EE13&_nc_sid=5e03e0&_nc_cat=104",
+      image: "/alisson-foto.jpeg",
     },
     {
       name: "Kevvyn Alves",

@@ -83,7 +83,7 @@ export function HeroSection() {
   transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
 >
   <AnimatedImage
-    src="/foto-inicial.png"
+    src="/machine-home-nova.png"
     alt="Machine Invest Logo"
     width={300}
     height={500}
@@ -92,8 +92,6 @@ export function HeroSection() {
     delay={0.9}
   />
 </motion.div>
-
-
             <motion.div
               className="absolute bottom-2 left-2 right-4 rounded-lg bg-black/60 p-3 backdrop-blur-sm"
               initial={{ opacity: 0, y: 20 }}
