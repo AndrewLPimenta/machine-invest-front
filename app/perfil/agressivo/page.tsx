@@ -1,20 +1,43 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { AuthRedirect } from "@/components/auth-redirect"
-import { BarChart3, TrendingUp, DollarSign, PieChart, Target, Calendar, AlertTriangle, CheckCircle, Flame, Zap } from "lucide-react"
+import { EnhancedCryptoChart } from "@/components/enhanced-crypto-chart"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  BarChart3,
+  TrendingUp,
+  DollarSign,
+  PieChart,
+  Target,
+  AlertTriangle,
+  Flame,
+  Zap,
+  ArrowUpRight,
+  ArrowDownRight,
+  Eye,
+  Star,
+  Globe,
+  Briefcase,
+  Activity,
+  Coins,
+  TrendingDown,
+} from "lucide-react"
 
-// ================= AnimatedCounter =================
 export interface AnimatedCounterProps {
   end: number
   duration?: number
+  prefix?: string
+  suffix?: string
 }
 
-export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ end, duration = 1000 }) => {
+export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ end, duration = 1000, prefix = "", suffix = "" }) => {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
@@ -33,230 +56,642 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ end, duration 
     return () => clearInterval(handle)
   }, [end, duration])
 
-  const formatValue = (value: number) => value.toFixed(0)
-  return <span>{formatValue(count)}</span>
+  const formatValue = (value: number) => {
+    if (value >= 1000000) {
+      return (value / 1000000).toFixed(1) + "M"
+    } else if (value >= 1000) {
+      return (value / 1000).toFixed(1) + "K"
+    }
+    return value.toFixed(0)
+  }
+
+  return (
+    <span>
+      {prefix}
+      {formatValue(count)}
+      {suffix}
+    </span>
+  )
 }
 
-// ================= Dados =================
-const aggressiveProducts = [
-  { name: "Ações Individuais", risk: "Alto", return: "22.50%", liquidity: "Diária", minValue: "R$ 100,00", description: "Investimento direto em ações de empresas listadas" },
-  { name: "Fundos de Ações Growth", risk: "Alto", return: "25.80%", liquidity: "D+1", minValue: "R$ 500,00", description: "Fundos focados em empresas com alto potencial de crescimento" },
-  { name: "ETFs Internacionais", risk: "Alto", return: "18.30%", liquidity: "Diária", minValue: "R$ 200,00", description: "Fundos que replicam índices internacionais" },
-  { name: "Criptomoedas", risk: "Muito Alto", return: "45.20%", liquidity: "24/7", minValue: "R$ 50,00", description: "Moedas digitais com alta volatilidade" },
-  { name: "Fundos Multimercado Agressivos", risk: "Alto", return: "28.90%", liquidity: "D+30", minValue: "R$ 1.000,00", description: "Fundos com estratégias arrojadas e uso de derivativos" },
-  { name: "Startups e Venture Capital", risk: "Muito Alto", return: "35.00%", liquidity: "Baixíssima", minValue: "R$ 10.000,00", description: "Investimento em empresas em estágio inicial" },
+// ================= Dados Aprimorados =================
+const cryptoData = [
+  {
+    symbol: "BTC",
+    name: "Bitcoin",
+    price: 285000,
+    change: 5.2,
+  },
+  {
+    symbol: "ETH",
+    name: "Ethereum",
+    price: 12543.87,
+    change: -1.23,
+  },
+  {
+    symbol: "SOL",
+    name: "Solana",
+    price: 543.21,
+    change: 8.67,
+  },
+  {
+    symbol: "ADA",
+    name: "Cardano",
+    price: 2.87,
+    change: -0.45,
+  },
+]
+
+const marketOpportunities = [
+  {
+    name: "NVDA34 (NVIDIA)",
+    sector: "Tecnologia",
+    potential: "+45%",
+    risk: "Alto",
+    timeframe: "6-12 meses",
+    reason: "Boom da IA e demanda por GPUs",
+    currentPrice: "R$ 89,50",
+    targetPrice: "R$ 130,00",
+    volume: "R$ 2.3B",
+    marketCap: "R$ 89.5B",
+  },
+  {
+    name: "BOVA11 (Ibovespa ETF)",
+    sector: "Diversificado",
+    potential: "+28%",
+    risk: "Médio-Alto",
+    timeframe: "12-18 meses",
+    reason: "Recuperação econômica brasileira",
+    currentPrice: "R$ 112,30",
+    targetPrice: "R$ 144,00",
+    volume: "R$ 890M",
+    marketCap: "R$ 12.1B",
+  },
+  {
+    name: "Bitcoin (BTC)",
+    sector: "Cripto",
+    potential: "+65%",
+    risk: "Muito Alto",
+    timeframe: "3-9 meses",
+    reason: "Aprovação de ETFs e halving",
+    currentPrice: "R$ 285.000",
+    targetPrice: "R$ 470.000",
+    volume: "R$ 127.9B",
+    marketCap: "R$ 4.7T",
+  },
+  {
+    name: "VALE3 (Vale)",
+    sector: "Mineração",
+    potential: "+35%",
+    risk: "Alto",
+    timeframe: "9-15 meses",
+    reason: "Demanda chinesa por minério",
+    currentPrice: "R$ 68,90",
+    targetPrice: "R$ 93,00",
+    volume: "R$ 1.2B",
+    marketCap: "R$ 287.6B",
+  },
 ]
 
 const portfolioAllocation = [
-  { category: "Ações Nacionais", percentage: 40 },
-  { category: "Ações Internacionais", percentage: 25 },
-  { category: "Fundos Agressivos", percentage: 20 },
-  { category: "Criptomoedas", percentage: 10 },
-  { category: "Reserva de Emergência", percentage: 5 },
+  { category: "Ações Growth Tech", percentage: 35, color: "bg-chart-1" },
+  { category: "Ações Value Brasil", percentage: 25, color: "bg-chart-2" },
+  { category: "ETFs Internacionais", percentage: 20, color: "bg-chart-3" },
+  { category: "Criptomoedas", percentage: 15, color: "bg-chart-4" },
+  { category: "Reserva Tática", percentage: 5, color: "bg-chart-5" },
+]
+
+const performanceMetrics = [
+  { label: "Rentabilidade 12M", value: 32.8, suffix: "%", trend: "up" },
+  { label: "Patrimônio Total", value: 2.4, suffix: "M", prefix: "R$ ", trend: "up" },
+  { label: "Sharpe Ratio", value: 1.85, suffix: "", trend: "up" },
+  { label: "Volatilidade", value: 18.2, suffix: "%", trend: "neutral" },
 ]
 
 // ================= Página =================
 export default function ArrojadoPage() {
   return (
     <AuthRedirect>
-      <div className="space-y-4 sm:space-y-6">
-        {/* Header */}
-        <div className="text-center space-y-2 sm:space-y-4">
-          <div className="flex items-center justify-center gap-2 sm:gap-3">
-            <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Perfil Arrojado</h1>
+      <div className="min-h-screen bg-background">
+        <div className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/95 to-secondary/20 text-primary-foreground">
+          <div className="absolute inset-0 bg-[url('/abstract-financial-pattern.png')] opacity-10"></div>
+          <div className="relative px-4 py-16 lg:py-24">
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center space-y-8">
+                <div className="flex items-center justify-center gap-4">
+                  <div className="p-4 bg-secondary/20 rounded-2xl backdrop-blur-sm">
+                    <Flame className="h-10 w-10 text-secondary" />
+                  </div>
+                  <div className="text-left">
+                    <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">Perfil Arrojado</h1>
+                    <p className="text-xl text-primary-foreground/80 mt-2">Alto Risco, Alto Retorno</p>
+                  </div>
+                </div>
+
+                <p className="text-xl lg:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed">
+                  Maximize seus ganhos com estratégias agressivas e oportunidades de alto potencial no mercado atual
+                </p>
+
+                <div className="flex flex-wrap justify-center gap-4 pt-6">
+                  <Badge variant="secondary" className="px-6 py-3 text-base font-medium">
+                    <TrendingUp className="h-5 w-5 mr-2" />
+                    Alto Crescimento
+                  </Badge>
+                  <Badge variant="secondary" className="px-6 py-3 text-base font-medium">
+                    <Globe className="h-5 w-5 mr-2" />
+                    Diversificação Global
+                  </Badge>
+                  <Badge variant="secondary" className="px-6 py-3 text-base font-medium">
+                    <Activity className="h-5 w-5 mr-2" />
+                    Gestão Ativa
+                  </Badge>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+                {performanceMetrics.map((metric, index) => (
+                  <Card
+                    key={index}
+                    className="bg-card/95 backdrop-blur border-border/50 hover:shadow-lg transition-all duration-300"
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <p className="text-sm font-medium text-muted-foreground">{metric.label}</p>
+                        {metric.trend === "up" && <ArrowUpRight className="h-5 w-5 text-chart-2" />}
+                        {metric.trend === "down" && <ArrowDownRight className="h-5 w-5 text-destructive" />}
+                      </div>
+                      <p className="text-3xl lg:text-4xl font-bold text-foreground">
+                        <AnimatedCounter end={metric.value} prefix={metric.prefix} suffix={metric.suffix} />
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
           </div>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
-            Estratégias agressivas focadas em máximo crescimento patrimonial, com alta tolerância ao risco e horizonte de longo prazo.
-          </p>
         </div>
 
-        {/* Características do Perfil */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <Target className="h-5 w-5" />
-              Características do Investidor Arrojado
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              {[
-                { icon: <Flame className="h-4 w-4 text-red-600" />, text: "Alta tolerância ao risco", bg: "bg-red-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-orange-600" />, text: "Busca máximo retorno", bg: "bg-orange-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-purple-600" />, text: "Horizonte longo prazo", bg: "bg-purple-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-yellow-600" />, text: "Aceita volatilidade", bg: "bg-yellow-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-green-600" />, text: "Conhecimento avançado", bg: "bg-green-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-blue-600" />, text: "Diversificação global", bg: "bg-blue-50" },
-              ].map((item, i) => (
-                <div key={i} className={`flex items-center gap-2 p-3 rounded-lg ${item.bg}`}>
-                  {item.icon}
-                  <span className="text-xs sm:text-sm">{item.text}</span>
+        <div className="max-w-7xl mx-auto px-4 py-12 space-y-12">
+          <Card className="border-l-4 border-l-chart-1 shadow-lg">
+            <CardHeader className="pb-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-3 text-3xl font-bold">
+                    <Coins className="h-8 w-8 text-chart-1" />
+                    Criptomoedas em Tempo Real
+                  </CardTitle>
+                  <CardDescription className="text-lg mt-3">
+                    Monitore suas posições em cripto com análise técnica avançada
+                  </CardDescription>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                <Badge variant="outline" className="px-4 py-2 text-sm font-medium">
+                  <Activity className="h-4 w-4 mr-2" />
+                  Ao vivo
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <Tabs defaultValue="charts" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 mb-6">
+                  <TabsTrigger value="charts">Gráficos Avançados</TabsTrigger>
+                  <TabsTrigger value="overview">Visão Geral</TabsTrigger>
+                </TabsList>
 
-        {/* Alocação de Portfólio */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <PieChart className="h-5 w-5" />
-              Alocação Recomendada de Portfólio
-            </CardTitle>
-            <CardDescription>Distribuição ideal para o perfil arrojado</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {portfolioAllocation.map((item, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">{item.category}</span>
-                    <span className="text-sm font-bold">
-                      <AnimatedCounter end={item.percentage} />%
-                    </span>
+                <TabsContent value="charts" className="space-y-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {cryptoData.map((crypto, index) => (
+                      <EnhancedCryptoChart
+                        key={index}
+                        symbol={crypto.symbol}
+                        name={crypto.name}
+                        currentPrice={crypto.price}
+                        change={crypto.change}
+                      />
+                    ))}
                   </div>
-                  <Progress value={item.percentage} className="h-2" />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                </TabsContent>
 
-        {/* Produtos Recomendados */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <TrendingUp className="h-5 w-5" />
-              Produtos Recomendados
-            </CardTitle>
-            <CardDescription>Investimentos ideais para o perfil arrojado</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {aggressiveProducts.map((product, index) => (
-                <Card key={index} className="border-l-4 border-l-red-500">
-                  <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-base sm:text-lg">{product.name}</CardTitle>
-                      <Badge
-                        variant={product.risk === "Muito Alto" ? "destructive" : "secondary"}
-                        className="text-xs"
-                      >
-                        {product.risk}
-                      </Badge>
-                    </div>
-                    <CardDescription className="text-xs sm:text-sm">{product.description}</CardDescription>
+                <TabsContent value="overview" className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {cryptoData.map((crypto, index) => (
+                      <Card key={index} className="hover:shadow-md transition-shadow">
+                        <CardContent className="p-4">
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="font-semibold">{crypto.symbol}</h3>
+                            <Badge variant={crypto.change > 0 ? "default" : "destructive"} className="text-xs">
+                              {crypto.change > 0 ? (
+                                <TrendingUp className="h-3 w-3 mr-1" />
+                              ) : (
+                                <TrendingDown className="h-3 w-3 mr-1" />
+                              )}
+                              {Math.abs(crypto.change)}%
+                            </Badge>
+                          </div>
+                          <p className="text-lg font-bold">
+                            R$ {crypto.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                          </p>
+                          <p className="text-sm text-muted-foreground">{crypto.name}</p>
+                          <div className="mt-3">
+                            <EnhancedCryptoChart
+                              symbol={crypto.symbol}
+                              name={crypto.name}
+                              currentPrice={crypto.price}
+                              change={crypto.change}
+                              simplified={true}
+                            />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
+
+          <Card className="border-l-4 border-l-primary shadow-lg">
+            <CardHeader className="pb-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-3 text-3xl font-bold">
+                    <Activity className="h-8 w-8 text-primary" />
+                    Controle de Investimentos
+                  </CardTitle>
+                  <CardDescription className="text-lg mt-3">
+                    Registre e monitore seus aportes com precisão profissional
+                  </CardDescription>
+                </div>
+                <Button className="bg-primary hover:bg-primary/90" size="lg">
+                  <DollarSign className="h-5 w-5 mr-2" />
+                  Adicionar Investimento
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Investment Form */}
+                <Card className="lg:col-span-1 bg-gradient-to-br from-card to-muted/50">
+                  <CardHeader>
+                    <CardTitle className="text-xl">Registrar Novo Aporte</CardTitle>
+                    <CardDescription>Adicione seus investimentos realizados</CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm">
-                      <div>
-                        <p className="text-muted-foreground">Rentabilidade</p>
-                        <p className="font-semibold text-green-600">{product.return} a.a.</p>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Ativo/Produto</label>
+                      <select className="w-full p-3 border rounded-lg bg-background">
+                        <option>NVDA34 (NVIDIA)</option>
+                        <option>BOVA11 (Ibovespa ETF)</option>
+                        <option>Bitcoin (BTC)</option>
+                        <option>VALE3 (Vale)</option>
+                        <option>Tesouro IPCA+ 2035</option>
+                        <option>Outro...</option>
+                      </select>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Valor (R$)</label>
+                        <input
+                          type="number"
+                          placeholder="5.000"
+                          className="w-full p-3 border rounded-lg bg-background"
+                        />
                       </div>
-                      <div>
-                        <p className="text-muted-foreground">Liquidez</p>
-                        <p className="font-semibold">{product.liquidity}</p>
-                      </div>
-                      <div className="col-span-2">
-                        <p className="text-muted-foreground">Valor Mínimo</p>
-                        <p className="font-semibold">{product.minValue}</p>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Data</label>
+                        <input type="date" className="w-full p-3 border rounded-lg bg-background" />
                       </div>
                     </div>
-                    <Button className="w-full mt-4" size="sm" variant="destructive">
-                      Simular Investimento
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Estratégia</label>
+                      <select className="w-full p-3 border rounded-lg bg-background">
+                        <option>Posição de Crescimento</option>
+                        <option>Hedge Cambial</option>
+                        <option>Diversificação Global</option>
+                        <option>Oportunidade Tática</option>
+                      </select>
+                    </div>
+                    <Button className="w-full bg-secondary hover:bg-secondary/90" size="lg">
+                      Registrar Investimento
                     </Button>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Simulador Rápido */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <DollarSign className="h-5 w-5" />
-              Simulador Arrojado
-            </CardTitle>
-            <CardDescription>Veja o potencial de crescimento com estratégia agressiva</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-              <div className="p-4 bg-red-50 rounded-lg">
-                <p className="text-xs sm:text-sm text-muted-foreground">Investimento</p>
-                <p className="text-lg sm:text-xl font-bold text-red-600">R$ 10.000</p>
+                {/* Recent Investments */}
+                <Card className="lg:col-span-2">
+                  <CardHeader>
+                    <CardTitle className="text-xl">Investimentos Recentes</CardTitle>
+                    <CardDescription>Seus últimos aportes e performance</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {[
+                        {
+                          asset: "NVDA34",
+                          amount: "R$ 8.500",
+                          date: "Hoje",
+                          performance: "+2.8%",
+                          color: "text-chart-2",
+                        },
+                        {
+                          asset: "Bitcoin",
+                          amount: "R$ 12.000",
+                          date: "Ontem",
+                          performance: "+5.2%",
+                          color: "text-chart-2",
+                        },
+                        {
+                          asset: "BOVA11",
+                          amount: "R$ 6.000",
+                          date: "2 dias",
+                          performance: "-1.1%",
+                          color: "text-destructive",
+                        },
+                        {
+                          asset: "VALE3",
+                          amount: "R$ 4.500",
+                          date: "3 dias",
+                          performance: "+3.7%",
+                          color: "text-chart-2",
+                        },
+                      ].map((investment, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-4 bg-muted rounded-xl hover:shadow-md transition-shadow"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="p-2 bg-primary/10 rounded-lg">
+                              <TrendingUp className="h-5 w-5 text-primary" />
+                            </div>
+                            <div>
+                              <p className="font-semibold text-lg">{investment.asset}</p>
+                              <p className="text-sm text-muted-foreground">{investment.date}</p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="font-bold text-lg">{investment.amount}</p>
+                            <p className={`text-sm font-medium ${investment.color}`}>{investment.performance}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <Button variant="outline" className="w-full mt-6 bg-transparent">
+                      Ver Histórico Completo
+                    </Button>
+                  </CardContent>
+                </Card>
               </div>
-              <div className="p-4 bg-purple-50 rounded-lg">
-                <p className="text-xs sm:text-sm text-muted-foreground">Prazo</p>
-                <p className="text-lg sm:text-xl font-bold text-purple-600">36 meses</p>
-              </div>
-              <div className="p-4 bg-orange-50 rounded-lg">
-                <p className="text-xs sm:text-sm text-muted-foreground">Rentabilidade</p>
-                <p className="text-lg sm:text-xl font-bold text-orange-600">25,80% a.a.</p>
-              </div>
-              <div className="p-4 bg-yellow-50 rounded-lg">
-                <p className="text-xs sm:text-sm text-muted-foreground">Valor Final</p>
-                <p className="text-lg sm:text-xl font-bold text-yellow-600">
-                  R$ <AnimatedCounter end={19953} />
-                </p>
-              </div>
-            </div>
-            <Button className="w-full mt-4" variant="destructive">
-              Fazer Simulação Detalhada
-            </Button>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        {/* Dicas e Alertas */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <AlertTriangle className="h-5 w-5" />
-              Dicas para o Investidor Arrojado
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {[
-                {
-                  icon: <Flame className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />,
-                  title: "Nunca invista tudo em um só ativo",
-                  description: "Mesmo sendo arrojado, diversifique para reduzir riscos específicos",
-                  bg: "bg-red-50 border border-red-200",
-                },
-                {
-                  icon: <Calendar className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />,
-                  title: "Pense em décadas, não em meses",
-                  description: "Investimentos arrojados precisam de tempo para compensar a volatilidade",
-                  bg: "bg-orange-50",
-                },
-                {
-                  icon: <TrendingUp className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />,
-                  title: "Estude constantemente",
-                  description: "Mantenha-se atualizado sobre mercados, empresas e tendências globais",
-                  bg: "bg-purple-50",
-                },
-                {
-                  icon: <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />,
-                  title: "Prepare-se psicologicamente",
-                  description: "Volatilidade alta significa perdas temporárias significativas",
-                  bg: "bg-yellow-50 border border-yellow-200",
-                },
-              ].map((item, i) => (
-                <div key={i} className={`flex gap-3 p-3 rounded-lg ${item.bg}`}>
-                  {item.icon}
-                  <div>
-                    <p className="font-medium text-sm">{item.title}</p>
-                    <p className="text-xs text-muted-foreground">{item.description}</p>
+          <Card className="border-l-4 border-l-secondary shadow-lg">
+            <CardHeader className="pb-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-3 text-3xl font-bold">
+                    <Eye className="h-8 w-8 text-secondary" />
+                    Oportunidades em Destaque
+                  </CardTitle>
+                  <CardDescription className="text-lg mt-3">
+                    Ativos com maior potencial de valorização baseado em análise técnica e fundamentalista
+                  </CardDescription>
+                </div>
+                <Badge variant="secondary" className="px-4 py-2 text-sm font-medium">
+                  <Star className="h-4 w-4 mr-2" />
+                  Atualizado hoje
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {marketOpportunities.map((opportunity, index) => (
+                  <Card
+                    key={index}
+                    className="relative overflow-hidden group hover:shadow-xl transition-all duration-300 border-2 hover:border-secondary/50"
+                  >
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-secondary/20 to-transparent rounded-bl-full"></div>
+                    <CardHeader className="pb-4">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <CardTitle className="text-xl font-bold">{opportunity.name}</CardTitle>
+                          <p className="text-base text-muted-foreground mt-1">{opportunity.sector}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-3xl font-bold text-chart-2">{opportunity.potential}</div>
+                          <Badge
+                            variant={opportunity.risk === "Muito Alto" ? "destructive" : "secondary"}
+                            className="text-sm mt-1"
+                          >
+                            {opportunity.risk}
+                          </Badge>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="grid grid-cols-2 gap-6 text-base">
+                        <div>
+                          <p className="text-muted-foreground font-medium">Preço Atual</p>
+                          <p className="font-bold text-lg">{opportunity.currentPrice}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground font-medium">Meta</p>
+                          <p className="font-bold text-lg text-chart-2">{opportunity.targetPrice}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground font-medium">Volume 24h</p>
+                          <p className="font-bold text-lg">{opportunity.volume}</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground font-medium">Market Cap</p>
+                          <p className="font-bold text-lg">{opportunity.marketCap}</p>
+                        </div>
+                        <div className="col-span-2">
+                          <p className="text-muted-foreground font-medium">Prazo Estimado</p>
+                          <p className="font-bold text-lg">{opportunity.timeframe}</p>
+                        </div>
+                      </div>
+                      <div className="p-4 bg-muted rounded-xl">
+                        <p className="text-base font-semibold mb-2">Tese de Investimento:</p>
+                        <p className="text-base text-muted-foreground">{opportunity.reason}</p>
+                      </div>
+                      <Button
+                        className="w-full group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors text-base py-3"
+                        size="lg"
+                      >
+                        <Briefcase className="h-5 w-5 mr-2" />
+                        Analisar Oportunidade
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3 text-xl">
+                  <PieChart className="h-6 w-6 text-secondary" />
+                  Alocação Estratégica
+                </CardTitle>
+                <CardDescription>Distribuição otimizada para máximo crescimento com gestão de risco</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {portfolioAllocation.map((item, index) => (
+                  <div key={index} className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-4 h-4 rounded-full ${item.color}`}></div>
+                        <span className="font-medium">{item.category}</span>
+                      </div>
+                      <span className="text-lg font-bold">
+                        <AnimatedCounter end={item.percentage} suffix="%" />
+                      </span>
+                    </div>
+                    <Progress value={item.percentage} className="h-3" />
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-card to-muted/50">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3 text-xl">
+                  <BarChart3 className="h-6 w-6 text-secondary" />
+                  Simulador Avançado
+                </CardTitle>
+                <CardDescription>Projeção baseada em performance histórica e cenários de mercado</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 bg-background rounded-lg border">
+                    <p className="text-sm text-muted-foreground">Investimento Inicial</p>
+                    <p className="text-2xl font-bold text-primary">R$ 50.000</p>
+                  </div>
+                  <div className="p-4 bg-background rounded-lg border">
+                    <p className="text-sm text-muted-foreground">Prazo</p>
+                    <p className="text-2xl font-bold text-secondary">5 anos</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center p-4 bg-chart-2/10 rounded-lg border border-chart-2/20">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Cenário Otimista</p>
+                      <p className="text-sm text-chart-2">35% a.a.</p>
+                    </div>
+                    <p className="text-xl font-bold text-chart-2">
+                      R$ <AnimatedCounter end={224} suffix="K" />
+                    </p>
+                  </div>
+
+                  <div className="flex justify-between items-center p-4 bg-chart-3/10 rounded-lg border border-chart-3/20">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Cenário Realista</p>
+                      <p className="text-sm text-chart-3">25% a.a.</p>
+                    </div>
+                    <p className="text-xl font-bold text-chart-3">
+                      R$ <AnimatedCounter end={152} suffix="K" />
+                    </p>
+                  </div>
+
+                  <div className="flex justify-between items-center p-4 bg-chart-4/10 rounded-lg border border-chart-4/20">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Cenário Conservador</p>
+                      <p className="text-sm text-chart-4">15% a.a.</p>
+                    </div>
+                    <p className="text-xl font-bold text-chart-4">
+                      R$ <AnimatedCounter end={100} suffix="K" />
+                    </p>
+                  </div>
+                </div>
+
+                <Button className="w-full bg-secondary hover:bg-secondary/90" size="lg">
+                  <Target className="h-4 w-4 mr-2" />
+                  Criar Estratégia Personalizada
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-3 text-xl">
+                <Zap className="h-6 w-6 text-secondary" />
+                Insights para Maximizar Ganhos
+              </CardTitle>
+              <CardDescription>
+                Estratégias avançadas baseadas nas melhores oportunidades do mercado atual
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  {
+                    icon: <TrendingUp className="h-6 w-6 text-chart-2" />,
+                    title: "Aproveite a Correção do Mercado",
+                    description:
+                      "Ibovespa em -8% no mês. Oportunidade para posições em VALE3, PETR4 e bancos com desconto.",
+                    action: "Ver Ações em Desconto",
+                    urgency: "high",
+                  },
+                  {
+                    icon: <Globe className="h-6 w-6 text-chart-1" />,
+                    title: "Diversifique em Tech Global",
+                    description: "NVDA34 e MSFT34 com potencial de 40%+ com boom da IA. Considere aumentar exposição.",
+                    action: "Analisar ETFs Tech",
+                    urgency: "medium",
+                  },
+                  {
+                    icon: <DollarSign className="h-6 w-6 text-chart-3" />,
+                    title: "Rebalanceamento Tático",
+                    description: "Reduza posição em REITs (-12% YTD) e aumente em commodities (+18% YTD).",
+                    action: "Simular Rebalanceamento",
+                    urgency: "medium",
+                  },
+                  {
+                    icon: <AlertTriangle className="h-6 w-6 text-chart-4" />,
+                    title: "Hedge Cambial Recomendado",
+                    description: "Dólar em R$ 5,20. Considere hedge com USIM5 ou posições em IVVB11.",
+                    action: "Configurar Hedge",
+                    urgency: "high",
+                  },
+                ].map((insight, i) => (
+                  <Card
+                    key={i}
+                    className={`relative overflow-hidden group hover:shadow-lg transition-all duration-300 ${
+                      insight.urgency === "high" ? "border-l-4 border-l-chart-4" : "border-l-4 border-l-chart-2"
+                    }`}
+                  >
+                    <CardHeader className="pb-3">
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 bg-muted rounded-lg">{insight.icon}</div>
+                        <div className="flex-1">
+                          <CardTitle className="text-lg">{insight.title}</CardTitle>
+                          <p className="text-sm text-muted-foreground mt-1">{insight.description}</p>
+                        </div>
+                        {insight.urgency === "high" && (
+                          <Badge variant="destructive" className="text-xs">
+                            Urgente
+                          </Badge>
+                        )}
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <Button
+                        variant="outline"
+                        className="w-full group-hover:bg-secondary group-hover:text-secondary-foreground group-hover:border-secondary transition-colors bg-transparent"
+                      >
+                        {insight.action}
+                        <ArrowUpRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </AuthRedirect>
   )

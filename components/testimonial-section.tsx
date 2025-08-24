@@ -53,55 +53,91 @@ export function TestimonialSection() {
 
   return (
     <div className="w-full overflow-hidden">
-      <section className="py-10 sm:py-12 md:py-16 bg-muted/30" ref={ref}>
-        <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
-              O que nossos <span className="text-primary">clientes</span> dizem
-            </h2>
-            <p className="mx-auto mt-2 sm:mt-3 max-w-[700px] text-sm sm:text-base text-muted-foreground">
-              Descubra como a Machine Invest tem ajudado investidores a alcançar seus objetivos financeiros.
-            </p>
-          </motion.div>
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-12"
-            variants={container}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-          >
-            {testimonials.map((testimonial, index) => (
-              <motion.div key={index} variants={item}>
-                <Card className="h-full">
-                  <CardContent className="pt-4 sm:pt-6">
-                    <div className="flex mb-3 sm:mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 fill-primary text-primary" />
-                      ))}
-                    </div>
-                    <p className="text-sm sm:text-base md:text-lg">{testimonial.content}</p>
-                  </CardContent>
-                  <CardFooter>
-                    <div className="flex items-center space-x-3 sm:space-x-4">
-                      <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
-                        <AvatarFallback className="text-xs sm:text-sm">{testimonial.avatar}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="text-xs sm:text-sm font-medium">{testimonial.author}</p>
-                        <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+<section className="py-10 sm:py-12 md:py-16 bg-muted/30" ref={ref}>
+  <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
+    <motion.div
+      className="text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+        O que nossos <span className="text-primary">clientes</span> dizem
+      </h2>
+      <p className="mx-auto mt-2 sm:mt-3 max-w-[700px] text-sm sm:text-base text-muted-foreground">
+        Desde quem está começando até investidores experientes, todos encontram na Machine Invest uma forma mais simples de lidar com o dinheiro.
+      </p>
+    </motion.div>
+
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-12"
+      variants={container}
+      initial="hidden"
+      animate={inView ? "show" : "hidden"}
+    >
+      {[
+        {
+          content:
+            "Sempre tive receio de investir porque achava muito complicado. A Machine Invest me mostrou passo a passo como funciona e agora consigo aplicar sem medo.",
+          author: "Mariana A.",
+          role: "Iniciante em investimentos",
+          avatar: "MA",
+        },
+        {
+          content:
+            "Já acompanhava minhas aplicações em planilhas, mas era trabalhoso. Aqui consigo visualizar tudo em um só lugar, de forma organizada e prática.",
+          author: "Rafael P.",
+          role: "Investidor intermediário",
+          avatar: "RP",
+        },
+        {
+          content:
+            "Invisto há anos, mas a Machine Invest virou meu painel central. Tenho análises rápidas, comparo ativos e ganho tempo para focar na estratégia.",
+          author: "Lucas T.",
+          role: "Trader avançado",
+          avatar: "LT",
+        },
+      ].map((testimonial, index) => (
+        <motion.div key={index} variants={item}>
+          <Card className="h-full">
+            <CardContent className="pt-4 sm:pt-6">
+              <div className="flex mb-3 sm:mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 fill-primary text-primary"
+                  />
+                ))}
+              </div>
+              <p className="text-sm sm:text-base md:text-lg">
+                {testimonial.content}
+              </p>
+            </CardContent>
+            <CardFooter>
+              <div className="flex items-center space-x-3 sm:space-x-4">
+                <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
+                  <AvatarFallback className="text-xs sm:text-sm">
+                    {testimonial.avatar}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-xs sm:text-sm font-medium">
+                    {testimonial.author}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {testimonial.role}
+                  </p>
+                </div>
+              </div>
+            </CardFooter>
+          </Card>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</section>
+
+
     </div>
   )
 }

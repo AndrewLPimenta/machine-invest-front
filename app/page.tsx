@@ -32,119 +32,263 @@ export default function Home() {
       <HeroSection />
       <FeatureSection />
 
-      {/* Seção de Gráficos e Análises */}
       <Section background="muted">
         <SectionHeading
-          title="Análises e Insights em Tempo Real"
-          description="Acompanhe o mercado financeiro e tome decisões baseadas em dados atualizados e análises precisas."
+          title="Alocação Recomendada por Perfil"
+          description="Descubra a distribuição ideal de investimentos baseada no seu perfil de risco e objetivos financeiros."
           centered
         />
 
         <div className="mt-16">
-          <ResponsiveGrid cols={{ default: 1, md: 2 }}>
+          <ResponsiveGrid cols={{ default: 1, lg: 2 }}>
             <Suspense fallback={<ChartSkeleton />}>
               <EnhancedPerformanceChart
-                title="Alocação Recomendada"
-                description="Distribuição ideal de ativos para um perfil moderado"
+                title="Distribuição Inteligente de Ativos"
+                description="Veja como diferentes perfis de investidor devem alocar seus recursos para maximizar retornos"
                 data={performanceData}
               />
             </Suspense>
-            <Suspense fallback={<ChartSkeleton />}>
-              <EnhancedCryptoChart symbol="BTC" name="Bitcoin" currentPrice={245876.32} change={2.45} />
-            </Suspense>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Recomendações por Perfil</CardTitle>
+                <CardDescription>
+                  Entenda qual alocação é ideal para cada tipo de investidor e como isso pode acelerar sua prosperidade.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <div className="h-3 w-3 rounded-full bg-green-500" />
+                    <h4 className="font-medium">Conservador</h4>
+                  </div>
+                  <p className="text-sm text-muted-foreground ml-5">
+                    60% Renda Fixa, 25% Fundos, 15% Reserva de Emergência. Foco em preservar capital e crescimento
+                    estável.
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <div className="h-3 w-3 rounded-full bg-cyan-500" />
+                    <h4 className="font-medium">Moderado</h4>
+                  </div>
+                  <p className="text-sm text-muted-foreground ml-5">
+                    40% Renda Fixa, 35% Ações, 20% Fundos, 5% Alternativos. Equilibrio entre segurança e crescimento.
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <div className="h-3 w-3 rounded-full bg-purple-500" />
+                    <h4 className="font-medium">Arrojado</h4>
+                  </div>
+                  <p className="text-sm text-muted-foreground ml-5">
+                    20% Renda Fixa, 50% Ações, 20% Criptomoedas, 10% Investimentos Alternativos. Máximo potencial de
+                    crescimento.
+                  </p>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full" asChild>
+                  <Link href="/formulario">
+                    Descobrir Meu Perfil <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
           </ResponsiveGrid>
         </div>
+      </Section>
+      <Card>
+        <CardHeader className="text-center">
+          <CardTitle>O que posso aprender?</CardTitle>
+          <CardDescription>
+            Domine suas finanças em cada etapa da jornada: aprenda os fundamentos, descubra novas
+            estratégias e acompanhe onde estão seus investimentoss em um só lugar.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveGrid cols={{ default: 1, md: 3 }}>
+            <div className="text-center space-y-2">
+              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <LineChart className="h-6 w-6 text-primary" />
+              </div>
+              <h4 className="font-medium">Cresça com Conhecimento</h4>
+              <p className="text-sm text-muted-foreground">
+                        Do básico ao avançado: conteúdo prático para investir com confiança em qualquer nível.
+              </p>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <Shield className="h-6 w-6 text-primary" />
+              </div>
+              <h4 className="font-medium">Segurança e Estratégia</h4>
+              <p className="text-sm text-muted-foreground">
+                Aprenda a proteger seu patrimônio, reduzir ou amenizar riscos e aproveitar as melhores oportunidades.
+              </p>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <DollarSign className="h-6 w-6 text-primary" />
+              </div>
+              <h4 className="font-medium">Controle em Suas Mãos</h4>
+              <p className="text-sm text-muted-foreground">
+                 Tenha uma visão clara e organizada de onde está o seu dinheiro — tudo em um só lugar.
+              </p>
+            </div>
+          </ResponsiveGrid>
+        </CardContent>
+        <CardFooter className="justify-center">
+          <Button asChild>
+            <Link href="/login">
+              Começar Agora <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </CardFooter>
+      </Card>
+      <Section>
+        <SectionHeading
+          title="Notícias que Impactam seus Investimentos"
+          description="Fique atualizado com as principais notícias do mercado financeiro e aprenda como aplicá-las em sua estratégia de investimentos."
+          centered
+        />
 
-        <div className="mt-8">
-          <ResponsiveGrid cols={{ default: 1, md: 2 }}>
-            <Suspense fallback={<ChartSkeleton />}>
-              <EnhancedCryptoChart symbol="ETH" name="Ethereum" currentPrice={12543.87} change={-1.23} />
-            </Suspense>
+        <div className="mt-16">
+          <ResponsiveGrid cols={{ default: 1, md: 2, lg: 3 }}>
             <Suspense fallback={<CardSkeleton />}>
               <Card>
                 <CardHeader>
-                  <CardTitle>Notícias do Mercado</CardTitle>
-                  <CardDescription>Últimas atualizações do mundo financeiro</CardDescription>
+                  <CardTitle className="text-lg">Banco Central mantém a Selic em 10,5%</CardTitle>
+                  <CardDescription>
+                    Entenda como essa decisão impacta diferentes investimentos e aprenda a ajustar sua estratégia para
+                    maximizar seus ganhos.
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="font-medium">Banco Central anuncia nova taxa de juros</h3>
-                    <p className="text-sm text-muted-foreground">
-                      O Banco Central decidiu manter a taxa Selic em 10,5% ao ano, em linha com as expectativas do
-                      mercado.
-                    </p>
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>Há 2 horas</span>
-                      <Link href="/blog" className="text-primary hover:underline">
-                        Ler mais
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="font-medium">Bitcoin atinge nova máxima histórica</h3>
-                    <p className="text-sm text-muted-foreground">
-                      A principal criptomoeda do mercado superou os US$ 80.000 pela primeira vez, impulsionada por forte
-                      demanda institucional.
-                    </p>
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>Há 5 horas</span>
-                      <Link href="/blog" className="text-primary hover:underline">
-                        Ler mais
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="font-medium">Mercado de ações reage positivamente a dados econômicos</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Principais índices sobem após divulgação de dados de emprego melhores que o esperado, sinalizando
-                      recuperação econômica.
-                    </p>
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>Há 8 horas</span>
-                      <Link href="/blog" className="text-primary hover:underline">
-                        Ler mais
-                      </Link>
-                    </div>
+                <CardContent>
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>Há 2 horas</span>
+                    <Link href="/blog" className="text-primary hover:underline">
+                      Leia mais
+                    </Link>
                   </div>
                 </CardContent>
-                <CardFooter>
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link href="/blog">
-                      Ver Todas as Notícias <ArrowRight className="ml-2 h-4 w-4" />
+              </Card>
+            </Suspense>
+
+            <Suspense fallback={<CardSkeleton />}>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Mercado de ações reage a dados econômicos</CardTitle>
+                  <CardDescription>
+                    Aprenda a interpretar movimentos do mercado e descubra oportunidades para acelerar seu crescimento
+                    financeiro.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>Há 5 horas</span>
+                    <Link href="/blog" className="text-primary hover:underline">
+                      Leia mais
                     </Link>
-                  </Button>
-                </CardFooter>
+                  </div>
+                </CardContent>
+              </Card>
+            </Suspense>
+
+            <Suspense fallback={<CardSkeleton />}>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Dólar em alta: como proteger seu patrimônio</CardTitle>
+                  <CardDescription>
+                    Descubra estratégias inteligentes para proteger e fazer seu dinheiro crescer mesmo em cenários de
+                    volatilidade.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>Há 8 horas</span>
+                    <Link href="/blog" className="text-primary hover:underline">
+                      Leia mais
+                    </Link>
+                  </div>
+                </CardContent>
               </Card>
             </Suspense>
           </ResponsiveGrid>
         </div>
 
+        <div className="mt-8 text-center">
+          <Button variant="outline" asChild>
+            <Link href="/blog">
+              Ver Todas as Notícias <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </Section>
+      <Section>
         <div className="mt-8">
           <Suspense fallback={<ChartSkeleton />}>
             <MarketVolumeChart
-              title="Volume de Negociação do Mercado"
-              description="Acompanhe o volume de negociação do mercado financeiro"
+              title="Domine a Arte de Interpretar Gráficos"
+              description="Aprenda a ler tendências, volumes e movimentos do mercado para tomar decisões que podem transformar sua vida financeira."
             />
           </Suspense>
         </div>
 
         <div className="mt-8 text-center">
           <Button asChild>
-            <Link href="/criptomoedas">
-              Descubra Mais Análises <ArrowRight className="ml-2 h-4 w-4" />
+            <Link href="/educacao">
+              Aprender Análise Técnica <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
       </Section>
+      <Section background="muted">
+        <SectionHeading
+          title="Investimentos Modernos: O Futuro do Dinheiro"
+          description="Explore o mundo das criptomoedas e ativos digitais. Aprenda como diversificar sua carteira com investimentos do futuro."
+          centered
+          highlightedWord="Futuro"
+        />
+
+        <div className="mt-16">
+          <ResponsiveGrid cols={{ default: 1, lg: 2 }}>
+            <Suspense fallback={<ChartSkeleton />}>
+              <EnhancedCryptoChart
+                symbol="BTC"
+                name="Bitcoin"
+                currentPrice={245876.32}
+                change={2.45}
+                description="A primeira e maior criptomoeda do mundo. Descubra como o Bitcoin pode fazer parte da sua estratégia de crescimento patrimonial."
+              />
+            </Suspense>
+            <Suspense fallback={<ChartSkeleton />}>
+              <EnhancedCryptoChart
+                symbol="ETH"
+                name="Ethereum"
+                currentPrice={12543.87}
+                change={-1.23}
+                description="A plataforma que revolucionou contratos inteligentes. Entenda como o Ethereum pode potencializar seus investimentos."
+              />
+            </Suspense>
+          </ResponsiveGrid>
+        </div>
+
+        <div className="mt-12">
+
+        </div>
+      </Section>
+
+
 
       <EnhancedTestimonialSection />
       <SimulationSection />
 
-      {/* Seção de Comparativo */}
       <Section background="muted">
         <SectionHeading
-          title="Por que escolher a Machine Invest?"
-          description="Compare e veja por que somos a escolha inteligente para seus investimentos."
+          title="Transforme sua Vida Financeira com a Machine Invest"
+          description="Descubra como nossas dicas e insights podem ser o diferencial que você precisa para prosperar financeiramente."
           centered
           highlightedWord="Machine Invest"
         />
@@ -156,29 +300,30 @@ export default function Home() {
                 <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
                   <DollarSign className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle>Taxas Reduzidas</CardTitle>
+                <CardTitle>Educação Financeira Gratuita</CardTitle>
                 <CardDescription>
-                  Economize com nossas taxas significativamente menores que os bancos tradicionais.
+                  Receba conhecimento valioso e estratégias personalizadas para acelerar seu crescimento patrimonial,
+                  sem custos.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Taxa de Manutenção</span>
-                  <span className="font-medium text-green-500">R$ 0,00</span>
+                  <span className="text-sm text-muted-foreground">Cadastro e Acesso</span>
+                  <span className="font-medium text-green-500">Gratuito</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Taxa de Transferência</span>
-                  <span className="font-medium text-green-500">R$ 0,00</span>
+                  <span className="text-sm text-muted-foreground">Dicas Personalizadas</span>
+                  <span className="font-medium text-green-500">Gratuito</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Taxa de Administração</span>
-                  <span className="font-medium text-green-500">0,5% a.a.</span>
+                  <span className="text-sm text-muted-foreground">Atualizações Constantes</span>
+                  <span className="font-medium text-green-500">Gratuito</span>
                 </div>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full" asChild>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
                   <Link href="/comparativo">
-                    Ver Comparativo Completo <ArrowRight className="ml-2 h-4 w-4" />
+                    Começar Agora <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </CardFooter>
@@ -189,29 +334,28 @@ export default function Home() {
                 <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
                   <Shield className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle>Segurança Garantida</CardTitle>
-                <CardDescription>Seus dados e investimentos protegidos com a mais alta tecnologia.</CardDescription>
+                <CardTitle>Confiança e Segurança Total</CardTitle>
+                <CardDescription>
+                  Informações verificadas por especialistas e dados protegidos com tecnologia de ponta para sua
+                  tranquilidade.
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Criptografia de ponta a ponta</span>
+                  <span>Proteção máxima dos seus dados</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Autenticação de dois fatores</span>
+                  <span>Conteúdo validado por especialistas</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Monitoramento 24/7 contra fraudes</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Regulamentado pelo Banco Central</span>
+                  <span>Transparência em todas as recomendações</span>
                 </div>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full" asChild>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
                   <Link href="/seguranca">
                     Saiba Mais <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -224,27 +368,30 @@ export default function Home() {
                 <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
                   <LineChart className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle>Rendimentos Superiores</CardTitle>
-                <CardDescription>Maximize seus ganhos com nossas opções de investimento otimizadas.</CardDescription>
+                <CardTitle>Acelere sua Prosperidade</CardTitle>
+                <CardDescription>
+                  Aprenda estratégias comprovadas e tome decisões inteligentes que podem multiplicar seu patrimônio ao
+                  longo do tempo.
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Renda Fixa</span>
-                  <span className="font-medium text-green-500">Até 12% a.a.</span>
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Análises detalhadas do mercado em tempo real</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Renda Variável</span>
-                  <span className="font-medium text-green-500">Até 18% a.a.</span>
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Comparativos que revelam as melhores oportunidades</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Criptomoedas</span>
-                  <span className="font-medium text-green-500">Potencial ilimitado</span>
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Estratégias para diferentes perfis de risco</span>
                 </div>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full" asChild>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
                   <Link href="/simulacao">
-                    Simular Rendimentos <ArrowRight className="ml-2 h-4 w-4" />
+                    Simular Crescimento <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </CardFooter>
@@ -255,7 +402,7 @@ export default function Home() {
         <div className="mt-8 text-center">
           <Button asChild>
             <Link href="/comparativo">
-              Ver Comparativo Completo <ArrowRight className="ml-2 h-4 w-4" />
+              Descobrir Todo o Potencial <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
@@ -265,4 +412,3 @@ export default function Home() {
     </PageLayout>
   )
 }
-

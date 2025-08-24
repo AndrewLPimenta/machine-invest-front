@@ -23,7 +23,10 @@ interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
   isLoading: boolean
-  login: (email: string, password: string) => Promise<{ success: boolean; message: string; user?: User; perfil?: string; respondeu?: boolean }>
+  login: (
+    email: string,
+    password: string,
+  ) => Promise<{ success: boolean; message: string; user?: User; perfil?: string; respondeu?: boolean }>
   register: (name: string, email: string, password: string) => Promise<{ success: boolean; message: string }>
   logout: () => Promise<void>
   updateUser: (user: User) => void
@@ -80,12 +83,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(userData)
 
       setIsLoading(false)
-      return { 
-        success: true, 
+      return {
+        success: true,
         message: data.message,
         user: userData,
         perfil: data.data.perfil,
-        respondeu: data.data.respondeu
+        respondeu: data.data.respondeu,
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error)
@@ -140,9 +143,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (user?.token) {
         await fetch("http://localhost:3001/api/auth/logout", {
           method: "POST",
-          headers: { 
+          headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${user.token}`
+            Authorization: `Bearer ${user.token}`,
           },
         }).catch(() => {
           // Ignora erros de logout no backend

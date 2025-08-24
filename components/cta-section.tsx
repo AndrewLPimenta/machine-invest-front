@@ -75,11 +75,10 @@ export function CtaSection() {
             >
               <div className="space-y-2 sm:space-y-3">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
-                  Baixe agora o <span className="text-primary">aplicativo</span> e comece a investir
+                  Baixe agora nosso aplicativo <span className="text-primary">aplicativo</span>
                 </h2>
                 <p className="max-w-[600px] text-sm sm:text-base text-muted-foreground">
-                  Tenha acesso a todas as funcionalidades da Machine Invest diretamente no seu smartphone. Simule
-                  investimentos, acompanhe criptomoedas e gerencie seus produtos financeiros em qualquer lugar.
+                  Tenha acesso a todas as funcionalidades da Machine Invest no seu smartphone. Receba dicas financeiras personalizadas, acompanhe tendências do mercado e gerencie seus investimentos de forma prática, onde quer que esteja.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -97,10 +96,10 @@ export function CtaSection() {
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  
+
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                 
+
                 </motion.div>
               </div>
             </motion.div>

@@ -80,15 +80,7 @@ export function EnhancedHeader() {
           <div className="flex items-center gap-3 sm:gap-4">
             {isAuthenticated ? (
               <div className="flex items-center gap-2">
-                <EnhancedButton
-                  onClick={handleLogout}
-                  variant="outline"
-                  size="sm"
-                  className="hidden sm:flex text-sm border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
-                >
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Sair
-                </EnhancedButton>
+                
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

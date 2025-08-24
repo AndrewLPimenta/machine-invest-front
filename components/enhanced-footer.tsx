@@ -9,7 +9,7 @@ export function EnhancedFooter() {
 
   const footerLinks = [
     {
-      title: "Produtos",
+      title: "Em alta",
       links: [
         { label: "Criptomoedas", href: "/criptomoedas" },
         { label: "Simulação", href: "/simulacao" },
@@ -18,7 +18,7 @@ export function EnhancedFooter() {
       ],
     },
     {
-      title: "Empresa",
+      title: "Quem somos?",
       links: [
         { label: "Sobre nós", href: "/sobre" },
         { label: "Blog", href: "/blog" },
@@ -27,7 +27,7 @@ export function EnhancedFooter() {
       ],
     },
     {
-      title: "Legal",
+      title: "Setor Jurídico",
       links: [
         { label: "Termos de Uso", href: "/termos" },
         { label: "Privacidade", href: "/privacidade" },
@@ -141,7 +141,7 @@ export function EnhancedFooter() {
               <span className="font-bold">Machine Invest</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
-              Plataforma de simulação de investimentos e empréstimos com foco em criptomoedas e produtos financeiros.
+              A escolha número 1 de quem busca soluções financeiras inteligentes.
             </p>
             <div className="mt-4 flex space-x-4">
               {socialLinks.map((link, index) => (

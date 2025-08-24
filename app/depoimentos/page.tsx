@@ -8,127 +8,67 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function DepoimentosPage() {
   const testimonials = [
-    {
-      content:
-        "A Machine Invest revolucionou minha forma de investir. As simulações são precisas e me ajudaram a tomar decisões mais inteligentes. Em apenas 6 meses, consegui aumentar meu patrimônio em 15%. O suporte ao cliente é excepcional, sempre respondendo minhas dúvidas com rapidez e clareza.",
-      author: "Carlos Silva",
-      role: "Investidor há 5 anos",
-      avatar: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyZmlsfGVufDB8fDB8fHww",
-      company: "Engenheiro de Software",
-      rating: 5,
-      category: "investimentos",
-    },
-    {
-      content:
-        "Nunca foi tão fácil acompanhar meus investimentos em criptomoedas. A interface é intuitiva e as análises são completas. O suporte ao cliente é excepcional, sempre respondendo minhas dúvidas rapidamente. A ferramenta de comparação entre diferentes criptomoedas me ajuda a tomar decisões mais informadas.",
-      author: "Ana Oliveira",
-      role: "Trader de criptomoedas",
-      avatar: "https://i.pinimg.com/736x/23/0a/d1/230ad184ef4e827065ae22c0c6c3001b.jpg",
-      company: "Analista de Dados",
-      rating: 5,
-      category: "criptomoedas",
-    },
-    {
-      content:
-        "O aplicativo da Machine Invest é simplesmente incrível. Consigo simular diferentes cenários e tomar decisões com mais segurança. A ferramenta de comparação com bancos tradicionais me mostrou quanto eu estava perdendo em taxas. Agora tenho muito mais controle sobre meus investimentos.",
-      author: "Roberto Santos",
-      role: "Empresário",
-      avatar: "https://tiarajuestudio.com/wp-content/uploads/2023/10/Bruno-Domingues-9-1638x2048.webp",
-      company: "CEO da TechSolutions",
-      rating: 5,
-      category: "aplicativo",
-    },
-    {
-      content:
-        "Comecei a investir há apenas 3 meses e já estou vendo resultados. A educação financeira disponibilizada pela Machine Invest foi fundamental para eu entender o mercado e fazer escolhas acertadas. Os tutoriais e artigos do blog são excelentes para iniciantes como eu.",
-      author: "Juliana Costa",
-      role: "Investidora iniciante",
-      avatar: "https://i.pinimg.com/736x/aa/02/2d/aa022d516ab78c8c21ee93247b308053.jpg",
-      company: "Médica",
-      rating: 4,
-      category: "educacao",
-    },
-    {
-      content:
-        "A diversificação de carteira sugerida pela Machine Invest me ajudou a reduzir riscos e aumentar retornos. O dashboard personalizado me permite acompanhar tudo em um só lugar, de forma clara e objetiva. A plataforma é completa e atende todas as minhas necessidades como investidor experiente.",
-      author: "Fernando Mendes",
-      role: "Investidor experiente",
-      avatar: "https://i.pinimg.com/736x/d7/cd/f2/d7cdf2b5bc8451e4658caf587a80c837.jpg",
-      company: "Professor Universitário",
-      rating: 5,
-      category: "investimentos",
-    },
-    {
-      content:
-        "Migrei todos os meus investimentos para a Machine Invest após comparar as taxas e rendimentos. A diferença é impressionante! Em um ano, economizei mais de R$ 3.000 só em taxas administrativas. Além disso, a rentabilidade dos investimentos sugeridos pela plataforma superou minhas expectativas.",
-      author: "Patrícia Almeida",
-      role: "Contadora",
-      avatar: "https://media.licdn.com/dms/image/v2/C4D03AQF2hxQJHYNe5Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1543415240870?e=2147483647&v=beta&t=pjwDq0Q203-Z2J9V-zk83hFjRjT6owco6UEq7anTJv0",
-      company: "Consultora Financeira",
-      rating: 5,
-      category: "investimentos",
-    },
-    {
-      content:
-        "A conta digital da Machine Invest é excelente! Sem taxas de manutenção e com rendimento automático do saldo. O cartão de crédito sem anuidade e com cashback em criptomoedas é um diferencial que não encontrei em nenhum outro banco digital.",
-      author: "Marcelo Souza",
-      role: "Cliente há 1 ano",
-      avatar: "https://i.pinimg.com/736x/fd/fc/ef/fdfcefc24e58a4e3ed4dd6099d530353.jpg",
-      company: "Designer Gráfico",
-      rating: 5,
-      category: "servicos",
-    },
-    {
-      content:
-        "O processo de obtenção de empréstimo foi rápido e sem burocracia. A taxa de juros oferecida foi muito menor que a dos bancos tradicionais. Consegui financiar a reforma da minha casa com condições excelentes. Recomendo a todos!",
-      author: "Luciana Ferreira",
-      role: "Cliente de empréstimo",
-      avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcKjKeYOqgXhno--BsuC1IcbAGM_TSIqFT9kQs6dp85cYqAaqdN89o2HZ1JO37TRwOWZo&usqp=CAU",
-      company: "Professora",
-      rating: 5,
-      category: "servicos",
-    },
-    {
-      content:
-        "A Machine Invest transformou minha relação com criptomoedas. Antes eu tinha medo de investir nesse mercado, mas com as análises detalhadas e o acompanhamento em tempo real, me sinto seguro para diversificar minha carteira incluindo ativos digitais.",
-      author: "Ricardo Oliveira",
-      role: "Investidor em criptomoedas",
-      avatar: "https://cdn.alboompro.com/5e9f78bee716a10001d859c6_64d6357e65fb5a000150f62d/medium/retrato-gregory-henrique-167-editar.jpg?v=1",
-      company: "Advogado",
-      rating: 4,
-      category: "criptomoedas",
-    },
-    {
-      content:
-        "O aplicativo é muito intuitivo e fácil de usar. Consigo fazer tudo pelo celular, desde investimentos até pagamentos do dia a dia. A função de análise de gastos me ajudou a organizar melhor minhas finanças pessoais.",
-      author: "Camila Santos",
-      role: "Usuária do aplicativo",
-      avatar: "https://i.pinimg.com/736x/b2/44/51/b24451bde4b88d8d2481010d390fe48d.jpg",
-      company: "Arquiteta",
-      rating: 5,
-      category: "aplicativo",
-    },
-    {
-      content:
-        "Os conteúdos educacionais da Machine Invest são excelentes. Aprendi muito sobre investimentos através dos webinars e artigos disponibilizados gratuitamente. É uma plataforma que se preocupa em educar seus usuários, não apenas vender produtos.",
-      author: "Paulo Mendes",
-      role: "Estudante de Economia",
-      avatar: "https://st.depositphotos.com/1032561/1364/i/450/depositphotos_13647537-stock-photo-close-up-portrait-of-a.jpg",
-      company: "Universidade Federal",
-      rating: 5,
-      category: "educacao",
-    },
-    {
-      content:
-        "A segurança da plataforma é impressionante. Com autenticação de dois fatores e notificações de login, me sinto tranquilo em relação aos meus investimentos. Além disso, o suporte técnico é rápido e eficiente quando preciso de ajuda.",
-      author: "Renata Lima",
-      role: "Especialista em TI",
-      avatar: "https://png.pngtree.com/thumb_back/fw800/background/20240702/pngtree-updating-her-professional-business-profile-image_15843407.jpg",
-      company: "Consultora de Segurança Digital",
-      rating: 5,
-      category: "seguranca",
-    },
-  ]
+  {
+    content:
+      "Sou estudante de Administração e sempre tive interesse em investir, mas não sabia por onde começar. Com os conteúdos educativos e as simulações da Machine Invest, finalmente consegui dar meus primeiros passos com segurança.",
+    author: "Lucas Martins",
+    role: "Estudante Universitário",
+    avatar: "https://i.pinimg.com/736x/88/ce/bd/88cebd9a8f29b8b30c36f2d8cdb0f1a1.jpg",
+    company: "Universidade Estadual",
+    rating: 5,
+    category: "educacao",
+  },
+  {
+    content:
+      "Sempre cuidei das finanças da minha casa, mas tinha dificuldade em organizar tudo. A Machine Invest me ajudou a visualizar meus gastos e investimentos de forma simples. Agora consigo planejar melhor o futuro da minha família.",
+    author: "Maria Fernandes",
+    role: "Dona de Casa",
+    avatar: "https://i.pinimg.com/736x/ed/73/7c/ed737c1633f2293f02a75d4f0b7989f1.jpg",
+    company: "Família Fernandes",
+    rating: 5,
+    category: "financas_pessoais",
+  },
+  {
+    content:
+      "Como servidor público, sempre busquei estabilidade. A Machine Invest me mostrou formas seguras de diversificar minha renda e aumentar meus ganhos sem abrir mão da segurança. Hoje tenho uma carteira equilibrada e mais tranquilidade.",
+    author: "André Souza",
+    role: "Servidor Público Concursado",
+    avatar: "https://i.pinimg.com/736x/33/12/43/331243947bdc37dc43781e351743b65d.jpg",
+    company: "Tribunal Regional",
+    rating: 5,
+    category: "investimentos",
+  },
+  {
+    content:
+      "Sou pai de duas crianças e sempre me preocupei com a educação delas. Com a Machine Invest, consegui planejar um fundo de longo prazo para garantir os estudos da minha família. Me sinto muito mais seguro com o futuro deles.",
+    author: "Ricardo Lima",
+    role: "Pai de Família",
+    avatar: "https://i.pinimg.com/736x/6a/b8/4f/6ab84f6d92e58e74f19d8a3e1a5e0e07.jpg",
+    company: "Setor Comercial",
+    rating: 5,
+    category: "planejamento_familiar",
+  },
+  {
+    content:
+      "Tenho 65 anos e nunca pensei que aprenderia sobre investimentos nessa idade. A plataforma é simples, clara e me ajudou a organizar minha aposentadoria. Agora acompanho meus rendimentos sem depender de ninguém.",
+    author: "João Batista",
+    role: "Aposentado",
+    avatar: "https://i.pinimg.com/736x/0a/f8/3d/0af83d5f8f8f728ef8ad21e0a6a99b69.jpg",
+    company: "Aposentado do INSS",
+    rating: 5,
+    category: "aposentadoria",
+  },
+  {
+    content:
+      "Como empresário, preciso ter tudo sob controle. A Machine Invest centraliza todos os meus investimentos em um só painel, me dando clareza e agilidade para tomar decisões rápidas. É uma ferramenta essencial no meu dia a dia.",
+    author: "Marcelo Andrade",
+    role: "Empresário",
+    avatar: "https://i.pinimg.com/736x/6b/4d/09/6b4d09c29b6ad8a7619cb5a4c17f51b1.jpg",
+    company: "Fundador da AndradeTech",
+    rating: 5,
+    category: "investimentos",
+  }
+]
 
   return (
     <PageLayout>

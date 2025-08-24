@@ -33,10 +33,10 @@ export function SimulationSection() {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
-              Simule seus <span className="text-primary">investimentos</span>
+              Entenda o poder dos <span className="text-primary">investimentos</span>
             </h2>
             <p className="mx-auto mt-2 sm:mt-3 max-w-[700px] text-sm sm:text-base text-muted-foreground">
-              Calcule o potencial de rendimento dos seus investimentos com nossa ferramenta de simulação.
+              Veja como diferentes valores e períodos podem impactar seus rendimentos futuros.
             </p>
           </motion.div>
           <motion.div
@@ -175,7 +175,7 @@ export function SimulationSection() {
               </CardContent>
               <CardFooter>
                 <EnhancedButton variant="gradient" className="w-full text-xs sm:text-sm" href="/simulacao">
-                  Simulação Completa <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  Saiba mais <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                 </EnhancedButton>
               </CardFooter>
             </Card>
