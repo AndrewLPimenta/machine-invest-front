@@ -1,27 +1,34 @@
 import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { EnhancedHeader } from "@/components/enhanced-header"
+import { EnhancedFooter } from "@/components/enhanced-footer"
+import { ScrollToTop } from "@/components/scroll-to-top"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import { AuthProvider } from "@/contexts/auth-context"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Machine Invest | Investimentos Inteligentes",
-  description: "Investimento, com foco em criptomoedas e ativos digitais",
+  title: "Machine Invest | Perfil Conservador",
+  description: "Perfil de investidor conservador com estratégias seguras e baixo risco",
   icons: {
     icon: "/machine-logo.png", 
   },
   generator: "v0.dev",
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function PerfilLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className="overflow-x-hidden">
       <body className={`${inter.className} overflow-x-hidden`} suppressHydrationWarning={true}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AuthProvider>{children}</AuthProvider>
+          <div className="flex min-h-screen flex-col">
+            <EnhancedHeader />
+            <main className="flex-1">{children}</main>
+            <EnhancedFooter />
+            <ScrollToTop />
+          </div>
         </ThemeProvider>
       </body>
     </html>

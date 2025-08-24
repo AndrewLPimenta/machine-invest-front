@@ -18,7 +18,9 @@ import {
   CheckCircle,
   Flame,
 } from "lucide-react"
-import { PageLayout } from "@/components/page-layout"
+
+import { AuthRedirect } from "@/components/auth-redirect"
+
 
 // ================= AnimatedCounter =================
 export interface AnimatedCounterProps {
@@ -118,229 +120,229 @@ const portfolioAllocation = [
 // ================= Página =================
 export default function ArrojadoPage() {
   return (
-    <PageLayout>
-    <div className="space-y-4 sm:space-y-6">
-      {/* Header */}
-      <ScrollAnimation>
-        <div className="text-center space-y-2 sm:space-y-4">
-          <div className="flex items-center justify-center gap-2 sm:gap-3">
-            <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Perfil Arrojado</h1>
+    <AuthRedirect>
+      <div className="space-y-4 sm:space-y-6">
+        {/* Header */}
+        <ScrollAnimation>
+          <div className="text-center space-y-2 sm:space-y-4">
+            <div className="flex items-center justify-center gap-2 sm:gap-3">
+              <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-red-600" />
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Perfil Arrojado</h1>
+            </div>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
+              Estratégias agressivas focadas em máximo crescimento patrimonial, com alta tolerância ao risco e horizonte
+              de longo prazo.
+            </p>
           </div>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
-            Estratégias agressivas focadas em máximo crescimento patrimonial, com alta tolerância ao risco e horizonte
-            de longo prazo.
-          </p>
-        </div>
-      </ScrollAnimation>
+        </ScrollAnimation>
 
-      {/* Características do Perfil */}
-      <ScrollAnimation>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <Target className="h-5 w-5" />
-              Características do Investidor Arrojado
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              {[
-                { icon: <Flame className="h-4 w-4 text-red-600" />, text: "Alta tolerância ao risco", bg: "bg-red-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-orange-600" />, text: "Busca máximo retorno", bg: "bg-orange-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-purple-600" />, text: "Horizonte longo prazo", bg: "bg-purple-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-yellow-600" />, text: "Aceita volatilidade", bg: "bg-yellow-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-green-600" />, text: "Conhecimento avançado", bg: "bg-green-50" },
-                { icon: <CheckCircle className="h-4 w-4 text-blue-600" />, text: "Diversificação global", bg: "bg-blue-50" },
-              ].map((item, i) => (
-                <div key={i} className={`flex items-center gap-2 p-3 rounded-lg ${item.bg}`}>
-                  {item.icon}
-                  <span className="text-xs sm:text-sm">{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </ScrollAnimation>
-
-      {/* Alocação de Portfólio */}
-      <ScrollAnimation>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <PieChart className="h-5 w-5" />
-              Alocação Recomendada de Portfólio
-            </CardTitle>
-            <CardDescription>Distribuição ideal para o perfil arrojado</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {portfolioAllocation.map((item, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">{item.category}</span>
-                    <span className="text-sm font-bold">
-                      <AnimatedCounter end={item.percentage} />%
-                    </span>
+        {/* Características do Perfil */}
+        <ScrollAnimation>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                <Target className="h-5 w-5" />
+                Características do Investidor Arrojado
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                {[
+                  { icon: <Flame className="h-4 w-4 text-red-600" />, text: "Alta tolerância ao risco", bg: "bg-red-50" },
+                  { icon: <CheckCircle className="h-4 w-4 text-orange-600" />, text: "Busca máximo retorno", bg: "bg-orange-50" },
+                  { icon: <CheckCircle className="h-4 w-4 text-purple-600" />, text: "Horizonte longo prazo", bg: "bg-purple-50" },
+                  { icon: <CheckCircle className="h-4 w-4 text-yellow-600" />, text: "Aceita volatilidade", bg: "bg-yellow-50" },
+                  { icon: <CheckCircle className="h-4 w-4 text-green-600" />, text: "Conhecimento avançado", bg: "bg-green-50" },
+                  { icon: <CheckCircle className="h-4 w-4 text-blue-600" />, text: "Diversificação global", bg: "bg-blue-50" },
+                ].map((item, i) => (
+                  <div key={i} className={`flex items-center gap-2 p-3 rounded-lg ${item.bg}`}>
+                    {item.icon}
+                    <span className="text-xs sm:text-sm">{item.text}</span>
                   </div>
-                  <Progress value={item.percentage} className="h-2" />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </ScrollAnimation>
-
-      {/* Produtos Recomendados */}
-      <ScrollAnimation>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <TrendingUp className="h-5 w-5" />
-              Produtos Recomendados
-            </CardTitle>
-            <CardDescription>Investimentos ideais para o perfil arrojado</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <StaggerAnimation>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {aggressiveProducts.map((product, index) => (
-                  <Card key={index} className="border-l-4 border-l-red-500">
-                    <CardHeader className="pb-3">
-                      <div className="flex justify-between items-start">
-                        <CardTitle className="text-base sm:text-lg">{product.name}</CardTitle>
-                        <Badge
-                          variant={product.risk === "Muito Alto" ? "destructive" : "secondary"}
-                          className="text-xs"
-                        >
-                          {product.risk}
-                        </Badge>
-                      </div>
-                      <CardDescription className="text-xs sm:text-sm">{product.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm">
-                        <div>
-                          <p className="text-muted-foreground">Rentabilidade</p>
-                          <p className="font-semibold text-green-600">{product.return} a.a.</p>
-                        </div>
-                        <div>
-                          <p className="text-muted-foreground">Liquidez</p>
-                          <p className="font-semibold">{product.liquidity}</p>
-                        </div>
-                        <div className="col-span-2">
-                          <p className="text-muted-foreground">Valor Mínimo</p>
-                          <p className="font-semibold">{product.minValue}</p>
-                        </div>
-                      </div>
-                      <Button className="w-full mt-4" size="sm" variant="destructive">
-                        Simular Investimento
-                      </Button>
-                    </CardContent>
-                  </Card>
                 ))}
               </div>
-            </StaggerAnimation>
-          </CardContent>
-        </Card>
-      </ScrollAnimation>
+            </CardContent>
+          </Card>
+        </ScrollAnimation>
 
-      {/* Simulador Rápido */}
-      <ScrollAnimation>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <DollarSign className="h-5 w-5" />
-              Simulador Arrojado
-            </CardTitle>
-            <CardDescription>Veja o potencial de crescimento com estratégia agressiva</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-              <div className="p-4 bg-red-50 rounded-lg">
-                <p className="text-xs sm:text-sm text-muted-foreground">Investimento</p>
-                <p className="text-lg sm:text-xl font-bold text-red-600">R$ 10.000</p>
-              </div>
-              <div className="p-4 bg-purple-50 rounded-lg">
-                <p className="text-xs sm:text-sm text-muted-foreground">Prazo</p>
-                <p className="text-lg sm:text-xl font-bold text-purple-600">36 meses</p>
-              </div>
-              <div className="p-4 bg-orange-50 rounded-lg">
-                <p className="text-xs sm:text-sm text-muted-foreground">Rentabilidade</p>
-                <p className="text-lg sm:text-xl font-bold text-orange-600">25,80% a.a.</p>
-              </div>
-              <div className="p-4 bg-yellow-50 rounded-lg">
-                <p className="text-xs sm:text-sm text-muted-foreground">Valor Final</p>
-                <p className="text-lg sm:text-xl font-bold text-yellow-600">
-                  R$ <AnimatedCounter end={19953} />
-                </p>
-              </div>
-            </div>
-            <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-              <div className="flex items-center gap-2">
-                <AlertTriangle className="h-4 w-4 text-yellow-600" />
-                <p className="text-xs font-medium text-yellow-800">
-                  Atenção: Rentabilidades passadas não garantem resultados futuros
-                </p>
-              </div>
-            </div>
-            <Button className="w-full mt-4" variant="destructive">
-              Fazer Simulação Detalhada
-            </Button>
-          </CardContent>
-        </Card>
-      </ScrollAnimation>
-
-      {/* Dicas e Alertas */}
-      <ScrollAnimation>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-              <AlertTriangle className="h-5 w-5" />
-              Dicas para o Investidor Arrojado
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {[
-                {
-                  icon: <Flame className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />,
-                  title: "Nunca invista tudo em um só ativo",
-                  description: "Mesmo sendo arrojado, diversifique para reduzir riscos específicos",
-                  bg: "bg-red-50 border border-red-200",
-                },
-                {
-                  icon: <Calendar className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />,
-                  title: "Pense em décadas, não em meses",
-                  description: "Investimentos arrojados precisam de tempo para compensar a volatilidade",
-                  bg: "bg-orange-50",
-                },
-                {
-                  icon: <TrendingUp className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />,
-                  title: "Estude constantemente",
-                  description: "Mantenha-se atualizado sobre mercados, empresas e tendências globais",
-                  bg: "bg-purple-50",
-                },
-                {
-                  icon: <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />,
-                  title: "Prepare-se psicologicamente",
-                  description: "Volatilidade alta significa perdas temporárias significativas",
-                  bg: "bg-yellow-50 border border-yellow-200",
-                },
-              ].map((item, i) => (
-                <div key={i} className={`flex gap-3 p-3 rounded-lg ${item.bg}`}>
-                  {item.icon}
-                  <div>
-                    <p className="font-medium text-sm">{item.title}</p>
-                    <p className="text-xs text-muted-foreground">{item.description}</p>
+        {/* Alocação de Portfólio */}
+        <ScrollAnimation>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                <PieChart className="h-5 w-5" />
+                Alocação Recomendada de Portfólio
+              </CardTitle>
+              <CardDescription>Distribuição ideal para o perfil arrojado</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {portfolioAllocation.map((item, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium">{item.category}</span>
+                      <span className="text-sm font-bold">
+                        <AnimatedCounter end={item.percentage} />%
+                      </span>
+                    </div>
+                    <Progress value={item.percentage} className="h-2" />
                   </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </ScrollAnimation>
+
+        {/* Produtos Recomendados */}
+        <ScrollAnimation>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                <TrendingUp className="h-5 w-5" />
+                Produtos Recomendados
+              </CardTitle>
+              <CardDescription>Investimentos ideais para o perfil arrojado</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <StaggerAnimation>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {aggressiveProducts.map((product, index) => (
+                    <Card key={index} className="border-l-4 border-l-red-500">
+                      <CardHeader className="pb-3">
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-base sm:text-lg">{product.name}</CardTitle>
+                          <Badge
+                            variant={product.risk === "Muito Alto" ? "destructive" : "secondary"}
+                            className="text-xs"
+                          >
+                            {product.risk}
+                          </Badge>
+                        </div>
+                        <CardDescription className="text-xs sm:text-sm">{product.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm">
+                          <div>
+                            <p className="text-muted-foreground">Rentabilidade</p>
+                            <p className="font-semibold text-green-600">{product.return} a.a.</p>
+                          </div>
+                          <div>
+                            <p className="text-muted-foreground">Liquidez</p>
+                            <p className="font-semibold">{product.liquidity}</p>
+                          </div>
+                          <div className="col-span-2">
+                            <p className="text-muted-foreground">Valor Mínimo</p>
+                            <p className="font-semibold">{product.minValue}</p>
+                          </div>
+                        </div>
+                        <Button className="w-full mt-4" size="sm" variant="destructive">
+                          Simular Investimento
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </ScrollAnimation>
-    </div>
-    </PageLayout>
+              </StaggerAnimation>
+            </CardContent>
+          </Card>
+        </ScrollAnimation>
+
+        {/* Simulador Rápido */}
+        <ScrollAnimation>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                <DollarSign className="h-5 w-5" />
+                Simulador Arrojado
+              </CardTitle>
+              <CardDescription>Veja o potencial de crescimento com estratégia agressiva</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                <div className="p-4 bg-red-50 rounded-lg">
+                  <p className="text-xs sm:text-sm text-muted-foreground">Investimento</p>
+                  <p className="text-lg sm:text-xl font-bold text-red-600">R$ 10.000</p>
+                </div>
+                <div className="p-4 bg-purple-50 rounded-lg">
+                  <p className="text-xs sm:text-sm text-muted-foreground">Prazo</p>
+                  <p className="text-lg sm:text-xl font-bold text-purple-600">36 meses</p>
+                </div>
+                <div className="p-4 bg-orange-50 rounded-lg">
+                  <p className="text-xs sm:text-sm text-muted-foreground">Rentabilidade</p>
+                  <p className="text-lg sm:text-xl font-bold text-orange-600">25,80% a.a.</p>
+                </div>
+                <div className="p-4 bg-yellow-50 rounded-lg">
+                  <p className="text-xs sm:text-sm text-muted-foreground">Valor Final</p>
+                  <p className="text-lg sm:text-xl font-bold text-yellow-600">
+                    R$ <AnimatedCounter end={19953} />
+                  </p>
+                </div>
+              </div>
+              <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                  <p className="text-xs font-medium text-yellow-800">
+                    Atenção: Rentabilidades passadas não garantem resultados futuros
+                  </p>
+                </div>
+              </div>
+              <Button className="w-full mt-4" variant="destructive">
+                Fazer Simulação Detalhada
+              </Button>
+            </CardContent>
+          </Card>
+        </ScrollAnimation>
+
+        {/* Dicas e Alertas */}
+        <ScrollAnimation>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                <AlertTriangle className="h-5 w-5" />
+                Dicas para o Investidor Arrojado
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {[
+                  {
+                    icon: <Flame className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />,
+                    title: "Nunca invista tudo em um só ativo",
+                    description: "Mesmo sendo arrojado, diversifique para reduzir riscos específicos",
+                    bg: "bg-red-50 border border-red-200",
+                  },
+                  {
+                    icon: <Calendar className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />,
+                    title: "Pense em décadas, não em meses",
+                    description: "Investimentos arrojados precisam de tempo para compensar a volatilidade",
+                    bg: "bg-orange-50",
+                  },
+                  {
+                    icon: <TrendingUp className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />,
+                    title: "Estude constantemente",
+                    description: "Mantenha-se atualizado sobre mercados, empresas e tendências globais",
+                    bg: "bg-purple-50",
+                  },
+                  {
+                    icon: <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />,
+                    title: "Prepare-se psicologicamente",
+                    description: "Volatilidade alta significa perdas temporárias significativas",
+                    bg: "bg-yellow-50 border border-yellow-200",
+                  },
+                ].map((item, i) => (
+                  <div key={i} className={`flex gap-3 p-3 rounded-lg ${item.bg}`}>
+                    {item.icon}
+                    <div>
+                      <p className="font-medium text-sm">{item.title}</p>
+                      <p className="text-xs text-muted-foreground">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </ScrollAnimation>
+      </div>
+    </AuthRedirect>
   )
 }

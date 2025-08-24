@@ -80,7 +80,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(userData)
 
       setIsLoading(false)
-      return { success: true, message: data.message }
+      return { 
+        success: true, 
+        message: data.message,
+        user: userData,
+        perfil: data.data.perfil,
+        respondeu: data.data.respondeu
+      }
     } catch (error) {
       console.error("Erro ao fazer login:", error)
       setIsLoading(false)
@@ -128,9 +134,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  const logout = () => {
-    localStorage.removeItem("user")
-    setUser(null)
+  const logout = async () => {
+    try {
+      // Se tiver token, tenta invalidar no backend
+      if (user?.token) {
+        await fetch("http://localhost:3001/api/auth/logout", {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${user.token}`
+          },
+        }).catch(() => {
+          // Ignora erros de logout no backend
+          console.log("Erro ao fazer logout no backend, mas continuando...")
+        })
+      }
+    } catch (error) {
+      // Ignora erros de logout no backend
+      console.log("Erro ao fazer logout no backend, mas continuando...")
+    } finally {
+      // Sempre limpa o estado local
+      localStorage.removeItem("user")
+      setUser(null)
+    }
   }
 
   // Atualiza usuário completo, incluindo resultados e perfil

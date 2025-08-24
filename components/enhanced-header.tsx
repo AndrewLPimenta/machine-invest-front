@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Menu, User, LogOut, ArrowDownToLine } from "lucide-react"
+import { Menu, User, LogOut, ArrowDownToLine, Settings, BarChart3 } from "lucide-react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { useAuth } from "@/contexts/auth-context"
@@ -45,6 +45,12 @@ export function EnhancedHeader() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const handleLogout = () => {
+    logout()
+    // Redireciona para a página inicial após logout
+    window.location.href = "/"
+  }
+
   return (
     <header
       className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-colors duration-300 ${
@@ -78,36 +84,62 @@ export function EnhancedHeader() {
           {/* Ações do Usuário */}
           <div className="flex items-center gap-3 sm:gap-4">
             {isAuthenticated ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <motion.button
-                    className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full flex items-center justify-center bg-primary/10"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <User className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                  </motion.button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 sm:w-64">
-                  <DropdownMenuLabel className="text-sm sm:text-base">Minha Conta</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-sm sm:text-base">
-                    <User className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    Olá, {user?.name || "Usuário"}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-sm sm:text-base">
-                    <Link href="/download" className="flex items-center w-full">
-                      <ArrowDownToLine className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                      Download do App
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={logout} className="text-sm sm:text-base">
-                    <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    Sair
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <div className="flex items-center gap-2">
+                {/* Botão de Logout visível */}
+                <EnhancedButton
+                  onClick={handleLogout}
+                  variant="outline"
+                  size="sm"
+                  className="hidden sm:flex text-sm border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300"
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sair
+                </EnhancedButton>
+                
+                {/* Menu do usuário */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <motion.button
+                      className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <User className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                    </motion.button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56 sm:w-64">
+                    <DropdownMenuLabel className="text-sm sm:text-base">Minha Conta</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="text-sm sm:text-base">
+                      <User className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      Olá, {user?.name || "Usuário"}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-sm sm:text-base">
+                      <Link href="/download" className="flex items-center w-full">
+                        <ArrowDownToLine className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                        Download do App
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-sm sm:text-base">
+                      <Link href="/perfil" className="flex items-center w-full">
+                        <BarChart3 className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                        Meu Perfil
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="text-sm sm:text-base">
+                      <Link href="/configuracoes" className="flex items-center w-full">
+                        <Settings className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                        Configurações
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleLogout} className="text-sm sm:text-base text-red-600 focus:text-red-600">
+                      <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      Sair da Conta
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             ) : (
               <EnhancedButton asChild variant="gradient" size="default" className="hidden sm:flex text-sm sm:text-base">
                 <Link href="/login">Login</Link>
