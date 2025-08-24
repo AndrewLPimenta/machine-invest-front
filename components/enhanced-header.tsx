@@ -1,11 +1,25 @@
 "use client"
 
 import Link from "next/link"
-import { ModeToggle } from "@/components/mode-toggle"
-import { Menu, User, LogOut, ArrowDownToLine, Settings, BarChart3 } from "lucide-react"
-import { useState, useEffect } from "react"
 import Image from "next/image"
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { ModeToggle } from "@/components/mode-toggle"
+import { EnhancedButton } from "@/components/enhanced-button"
+import { EnhancedMainNav } from "@/components/enhanced-main-nav"
+import { EnhancedMobileMenu } from "@/components/enhanced-mobile-menu"
+import { ResponsiveContainer } from "./responsive-container"
 import { useAuth } from "@/contexts/auth-context"
+
+import {
+  Menu,
+  User,
+  LogOut,
+  ArrowDownToLine,
+  Settings,
+  BarChart3,
+} from "lucide-react"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,39 +28,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ResponsiveContainer } from "./responsive-container"
-import { EnhancedMobileMenu } from "@/components/enhanced-mobile-menu"
-import { EnhancedButton } from "@/components/enhanced-button"
-import { motion } from "framer-motion"
-import { EnhancedMainNav } from "@/components/enhanced-main-nav"
-
-// Props tipadas para MainNav e MobileMenu
-interface EnhancedMainNavProps {
-  isAuthenticated: boolean
-  user: { name: string } | null
-}
-
-interface EnhancedMobileMenuProps {
-  isOpen: boolean
-  setIsOpen: (open: boolean) => void
-  isAuthenticated: boolean
-  user: { name: string } | null
-}
 
 export function EnhancedHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { isAuthenticated, user, logout } = useAuth()
 
-  // Detecta scroll
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await logout()
     // Redireciona para a página inicial após logout
     window.location.href = "/"
   }
@@ -85,7 +80,6 @@ export function EnhancedHeader() {
           <div className="flex items-center gap-3 sm:gap-4">
             {isAuthenticated ? (
               <div className="flex items-center gap-2">
-                {/* Botão de Logout visível */}
                 <EnhancedButton
                   onClick={handleLogout}
                   variant="outline"
@@ -95,8 +89,7 @@ export function EnhancedHeader() {
                   <LogOut className="mr-2 h-4 w-4" />
                   Sair
                 </EnhancedButton>
-                
-                {/* Menu do usuário */}
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <motion.button
@@ -133,7 +126,10 @@ export function EnhancedHeader() {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleLogout} className="text-sm sm:text-base text-red-600 focus:text-red-600">
+                    <DropdownMenuItem
+                      onClick={handleLogout}
+                      className="text-sm sm:text-base text-red-600 focus:text-red-600"
+                    >
                       <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                       Sair da Conta
                     </DropdownMenuItem>
@@ -141,15 +137,13 @@ export function EnhancedHeader() {
                 </DropdownMenu>
               </div>
             ) : (
-              <EnhancedButton asChild variant="gradient" size="default" className="hidden sm:flex text-sm sm:text-base">
-                <Link href="/login">Login</Link>
+              <EnhancedButton variant="gradient" size="default" className="hidden sm:flex text-sm sm:text-base" href="/login">
+                Login
               </EnhancedButton>
             )}
 
-            {/* Toggle de Tema */}
             <ModeToggle />
 
-            {/* Menu Mobile */}
             <motion.button
               className="md:hidden flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-md border border-input bg-background"
               onClick={() => setIsMobileMenuOpen(true)}

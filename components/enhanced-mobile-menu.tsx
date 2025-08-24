@@ -131,15 +131,14 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
                   className="w-full text-sm sm:text-base"
                   variant="gradient"
                   href="/download"
-                  onClick={() => setIsOpen(false)}
                 >
                   Download App <ArrowDownToLine className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </EnhancedButton>
                 <EnhancedButton
                   variant="outline"
                   className="w-full text-sm sm:text-base"
-                  onClick={() => {
-                    logout()
+                  onClick={async () => {
+                    await logout()
                     setIsOpen(false)
                   }}
                 >
@@ -153,7 +152,6 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
                   className="w-full text-sm sm:text-base"
                   variant="gradient"
                   href="/login"
-                  onClick={() => setIsOpen(false)}
                 >
                   Login
                 </EnhancedButton>
@@ -161,7 +159,6 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
                   variant="outline"
                   className="w-full text-sm sm:text-base"
                   href="/cadastro"
-                  onClick={() => setIsOpen(false)}
                 >
                   Cadastre-se
                 </EnhancedButton>

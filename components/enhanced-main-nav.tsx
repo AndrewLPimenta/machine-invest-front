@@ -204,3 +204,5 @@ const EnhancedListItem = React.forwardRef<React.ElementRef<"a">, React.Component
   }
 )
 EnhancedListItem.displayName = "EnhancedListItem"
+
+export { EnhancedListItem }
