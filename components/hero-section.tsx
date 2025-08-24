@@ -35,7 +35,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                Invista com <span className="text-primary">inteligência</span>, simule com precisão
+                Saiba como e onde <span className="text-primary">Investir</span>, fique por dentro do mercado.
               </motion.h1>
               <motion.p
                 className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-[90%] md:max-w-[600px]"

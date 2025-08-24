@@ -2,14 +2,23 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 
-// Tipo para o usuário
-interface User {
-  id: string
-  name: string
-  email: string
+// Interfaces
+interface Resultado {
+  idPerfil: 1 | 2 | 3
+  pontuacao: number
+  percentual: number
+  dataClassificacao: string
 }
 
-// Tipo para o contexto de autenticação
+interface User {
+  id: number
+  name: string
+  email: string
+  resultados?: Resultado[]
+  perfil?: "conservador" | "moderado" | "arrojado"
+  token?: string
+}
+
 interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
@@ -17,26 +26,24 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<{ success: boolean; message: string }>
   register: (name: string, email: string, password: string) => Promise<{ success: boolean; message: string }>
   logout: () => void
+  updateUser: (user: User) => void
 }
 
-// Criação do contexto
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-// Hook personalizado para usar o contexto
 export function useAuth() {
   const context = useContext(AuthContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useAuth deve ser usado dentro de um AuthProvider")
   }
   return context
 }
 
-// Provedor do contexto
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  // Verificar se o usuário está autenticado ao carregar a página
+  // Carrega usuário do localStorage ao iniciar
   useEffect(() => {
     const storedUser = localStorage.getItem("user")
     if (storedUser) {
@@ -45,40 +52,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false)
   }, [])
 
-  // Função de login
   const login = async (email: string, password: string) => {
     setIsLoading(true)
     try {
-      // Simular uma requisição de login
-      // TODO: Substituir por uma requisição real para o servidor
-      // const response = await fetch('https://seu-servidor-api.com/auth/login', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email, password })
-      // });
-      // const data = await response.json();
+      const response = await fetch("http://localhost:3001/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha: password }),
+      })
 
-      // Simulação de resposta
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const data = await response.json()
 
-      // Simulação de validação
-      if (email === "demo@machineinvest.com" && password === "senha123") {
-        const userData = {
-          id: "1",
-          name: "Usuário Demo",
-          email: email,
-        }
-
-        // Salvar usuário no localStorage
-        localStorage.setItem("user", JSON.stringify(userData))
-        setUser(userData)
-
+      if (!response.ok) {
         setIsLoading(false)
-        return { success: true, message: "Login realizado com sucesso!" }
-      } else {
-        setIsLoading(false)
-        return { success: false, message: "Email ou senha incorretos." }
+        return { success: false, message: data.message || "Email ou senha incorretos." }
       }
+
+      const userData: User = {
+        id: data.data.user.id,
+        name: data.data.user.nome,
+        email: data.data.user.email,
+        perfil: data.data.perfil as "conservador" | "moderado" | "arrojado" | undefined,
+        token: data.data.token,
+      }
+
+      localStorage.setItem("user", JSON.stringify(userData))
+      setUser(userData)
+
+      setIsLoading(false)
+      return { success: true, message: data.message }
     } catch (error) {
       console.error("Erro ao fazer login:", error)
       setIsLoading(false)
@@ -86,40 +88,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  // Função de registro
   const register = async (name: string, email: string, password: string) => {
     setIsLoading(true)
     try {
-      // Simular uma requisição de registro
-      // TODO: Substituir por uma requisição real para o servidor
-      // const response = await fetch('https://seu-servidor-api.com/auth/register', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ name, email, password })
-      // });
-      // const data = await response.json();
+      const response = await fetch("http://localhost:3001/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: name,
+          email,
+          senha: password,
+          confirmarSenha: password,
+        }),
+      })
 
-      // Simulação de resposta
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      const data = await response.json()
 
-      // Simulação de validação
-      if (email === "demo@machineinvest.com") {
+      if (!response.ok) {
         setIsLoading(false)
-        return { success: false, message: "Este email já está em uso." }
-      } else {
-        const userData = {
-          id: Math.random().toString(36).substr(2, 9),
-          name: name,
-          email: email,
-        }
-
-        // Salvar usuário no localStorage
-        localStorage.setItem("user", JSON.stringify(userData))
-        setUser(userData)
-
-        setIsLoading(false)
-        return { success: true, message: "Cadastro realizado com sucesso!" }
+        return { success: false, message: data.message || "Erro no cadastro" }
       }
+
+      const userData: User = {
+        id: data.userId,
+        name,
+        email,
+        resultados: [],
+        token: data.token,
+      }
+
+      localStorage.setItem("user", JSON.stringify(userData))
+      setUser(userData)
+      setIsLoading(false)
+      return { success: true, message: data.message }
     } catch (error) {
       console.error("Erro ao fazer cadastro:", error)
       setIsLoading(false)
@@ -127,22 +128,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  // Função de logout
   const logout = () => {
     localStorage.removeItem("user")
     setUser(null)
   }
 
-  // Valor do contexto
-  const value = {
+  // Atualiza usuário completo, incluindo resultados e perfil
+  const updateUser = (updatedUser: User) => {
+    setUser(updatedUser)
+    localStorage.setItem("user", JSON.stringify(updatedUser))
+  }
+
+  const value: AuthContextType = {
     user,
     isAuthenticated: !!user,
     isLoading,
     login,
     register,
     logout,
+    updateUser,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
-

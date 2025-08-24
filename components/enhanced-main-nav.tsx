@@ -18,8 +18,11 @@ export function EnhancedMainNav() {
   return (
     <NavigationMenu className="max-w-full">
       <NavigationMenuList className="flex-wrap gap-1 sm:gap-2">
+        {/* Investimentos */}
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+          <NavigationMenuTrigger
+            className="bg-transparent hover:bg-transparent focus:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto"
+          >
             <motion.span
               className="relative"
               whileHover={{ color: "hsl(var(--primary))" }}
@@ -36,7 +39,7 @@ export function EnhancedMainNav() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <motion.ul
-              className="grid gap-3 p-4 w-[280px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
+              className="grid gap-3 p-4 w-[240px] xs:w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2 }}
@@ -44,18 +47,25 @@ export function EnhancedMainNav() {
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <motion.a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-4 md:p-6 no-underline outline-none focus:shadow-md"
                     href="/simulacao"
-                    whileHover={{ scale: 1.02 }}
+                    ref={null}
+                    className={cn(
+                      "flex h-full w-full select-none flex-col justify-end rounded-md p-4 md:p-6 no-underline outline-none focus:shadow-md",
+                      "bg-gradient-to-b from-[var(--muted)/50] to-[var(--muted)] text-[var(--foreground)]",
+                    )}
+                    whileHover={{ scale: 1.02, backgroundColor: "var(--accent)" }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <div className="mb-2 mt-4 text-base md:text-lg lg:text-xl font-medium">Simulação Personalizada</div>
-                    <p className="text-sm md:text-base leading-tight text-muted-foreground">
+                    <div className="mb-2 mt-4 text-base md:text-lg lg:text-xl font-medium">
+                      Simulação Personalizada
+                    </div>
+                    <p className="text-sm md:text-base leading-tight text-[var(--muted-foreground)]">
                       Calcule seus rendimentos e compare diferentes opções de investimento.
                     </p>
                   </motion.a>
                 </NavigationMenuLink>
               </li>
+
               <EnhancedListItem href="/investimentos/renda-fixa" title="Renda Fixa">
                 CDBs, LCIs, LCAs e Tesouro Direto
               </EnhancedListItem>
@@ -68,8 +78,12 @@ export function EnhancedMainNav() {
             </motion.ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+
+        {/* Serviços */}
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+          <NavigationMenuTrigger
+            className="bg-transparent hover:bg-transparent focus:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto"
+          >
             <motion.span
               className="relative"
               whileHover={{ color: "hsl(var(--primary))" }}
@@ -86,7 +100,7 @@ export function EnhancedMainNav() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <motion.ul
-              className="grid gap-3 p-4 w-[280px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
+              className="grid gap-3 p-4 w-[240px] xs:w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2 }}
@@ -106,10 +120,15 @@ export function EnhancedMainNav() {
             </motion.ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+
+        {/* Criptomoedas */}
         <NavigationMenuItem>
           <Link href="/criptomoedas" legacyBehavior passHref>
             <NavigationMenuLink
-              className={cn(navigationMenuTriggerStyle(), "text-sm sm:text-base md:text-lg px-3 py-2 h-auto")}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                "text-sm sm:text-base md:text-lg px-3 py-2 h-auto"
+              )}
             >
               <motion.span
                 className="relative"
@@ -127,10 +146,15 @@ export function EnhancedMainNav() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
+
+        {/* Blog */}
         <NavigationMenuItem>
           <Link href="/blog" legacyBehavior passHref>
             <NavigationMenuLink
-              className={cn(navigationMenuTriggerStyle(), "text-sm sm:text-base md:text-lg px-3 py-2 h-auto")}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                "text-sm sm:text-base md:text-lg px-3 py-2 h-auto"
+              )}
             >
               <motion.span
                 className="relative"
@@ -161,20 +185,22 @@ const EnhancedListItem = React.forwardRef<React.ElementRef<"a">, React.Component
           <motion.a
             ref={ref}
             className={cn(
-              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-              className,
+              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
+              "bg-[var(--card)] text-[var(--foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)] dark:hover:bg-[var(--accent-dark)] dark:hover:text-[var(--accent-foreground-dark)]",
+              className
             )}
-            whileHover={{ scale: 1.02, backgroundColor: "hsl(var(--accent))" }}
+            whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             {...props}
           >
             <div className="text-sm sm:text-base font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-xs sm:text-sm leading-snug text-muted-foreground">{children}</p>
+            <p className="line-clamp-2 text-xs sm:text-sm leading-snug text-[var(--muted-foreground)]">
+              {children}
+            </p>
           </motion.a>
         </NavigationMenuLink>
       </li>
     )
-  },
+  }
 )
 EnhancedListItem.displayName = "EnhancedListItem"
-
