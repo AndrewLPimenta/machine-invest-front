@@ -179,7 +179,7 @@ export default function ArrojadoPage() {
             <div className="max-w-7xl mx-auto">
               <div className="text-center space-y-8">
                 <div className="flex items-center justify-center gap-4">
-                  <div className="p-4 bg-secondary/20 rounded-2xl backdrop-blur-sm">
+                  <div className="p-4 -secobgndary/20 rounded-2xl backdrop-blur-sm">
                     <Flame className="h-10 w-10 text-secondary" />
                   </div>
                   <div className="text-left">
