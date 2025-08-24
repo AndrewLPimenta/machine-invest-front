@@ -32,6 +32,7 @@ export default function CadastroPage() {
     setError("")
 
     try {
+      // Validações front-end
       if (!name || !email || !password || !confirmPassword) {
         throw new Error("Por favor, preencha todos os campos.")
       }
@@ -44,6 +45,7 @@ export default function CadastroPage() {
         throw new Error("As senhas não coincidem.")
       }
 
+      // Requisição para backend
       const response = await axios.post("http://localhost:3001/api/auth/register", {
         nome: name,
         email,
@@ -53,13 +55,17 @@ export default function CadastroPage() {
 
       const data = response.data
 
-      // Aceita 201 ou 200 do backend
-      if ((response.status === 201 || response.status === 200) && data.userId) {
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("userId", data.userId)
+      // Padroniza o acesso aos dados
+      const userId = data?.userId || data?.data?.userId
+      const token = data?.token || data?.data?.token
 
-        // Redirecionamento direto para o formulário
-        window.location.href = `/formulario?usuario=${data.userId}&form=1`
+      if ((response.status === 201 || response.status === 200) && userId && token) {
+        // Salva token e userId no localStorage
+        localStorage.setItem("token", token)
+        localStorage.setItem("userId", String(userId))
+
+        // Redireciona para o formulário
+        router.push(`/formulario?usuario=${userId}&form=1`)
       } else {
         throw new Error(data.message || "Erro ao cadastrar")
       }

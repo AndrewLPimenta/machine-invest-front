@@ -83,7 +83,7 @@ const audienceGroups = [
   {
     title: "Estudantes",
     icon: GraduationCap,
-    color: "bg-blue-50 border-blue-200",
+    color: "bg-50 border-200",
     iconColor: "text-blue-600",
     tips: [
       "Comece com R$ 50 por mês - é menos que um lanche por semana!",
@@ -94,7 +94,7 @@ const audienceGroups = [
   {
     title: "Concursados",
     icon: Briefcase,
-    color: "bg-green-50 border-green-200",
+    color: "bg-50 border-200",
     iconColor: "text-green-600",
     tips: [
       "Você tem estabilidade - use isso a seu favor!",
@@ -105,7 +105,7 @@ const audienceGroups = [
   {
     title: "Área da Saúde",
     icon: Heart,
-    color: "bg-red-50 border-red-200",
+    color: "bg-50 border-200",
     iconColor: "text-red-600",
     tips: [
       "Horários irregulares? Automatize seus investimentos!",
@@ -119,7 +119,7 @@ export default function IniciantePage() {
   return (
     <AuthRedirect>
       <div className="min-h-screen bg-background">
-        <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 text-white">
+        <div className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/95 to-secondary/20 text-primary-foreground">
           <div className="absolute inset-0 bg-[url('/abstract-financial-pattern.png')] opacity-10"></div>
           <div className="relative px-4 py-16 lg:py-24">
             <div className="max-w-7xl mx-auto">
@@ -141,19 +141,19 @@ export default function IniciantePage() {
                 <div className="flex flex-wrap justify-center gap-4 pt-6">
                   <Badge
                     variant="secondary"
-                    className="px-6 py-3 text-base font-medium bg-white/20 text-white border-white/30"
+                    className="px-6 py-3 text-base font-medium text-white border-white/30"
                   >
                     ✨ Sem Jargões
                   </Badge>
                   <Badge
                     variant="secondary"
-                    className="px-6 py-3 text-base font-medium bg-white/20 text-white border-white/30"
+                    className="px-6 py-3 text-base font-medium  text-white border-white/30"
                   >
                     🎯 Exemplos Práticos
                   </Badge>
                   <Badge
                     variant="secondary"
-                    className="px-6 py-3 text-base font-medium bg-white/20 text-white border-white/30"
+                    className="px-6 py-3 text-base font-medium text-white border-white/30"
                   >
                     💡 Passo a Passo
                   </Badge>
@@ -164,9 +164,9 @@ export default function IniciantePage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-12">
-          <Card className="border-l-4 border-l-blue-500 shadow-lg">
+          <Card className="border-l-4 shadow-lg">
             <CardHeader className="pb-6">
-              <CardTitle className="flex items-center gap-3 text-3xl font-bold text-blue-800">
+              <CardTitle className="flex items-center gap-3 text-3xl font-bold">
                 <Calculator className="h-8 w-8" />
                 Onde Você Está Investindo
               </CardTitle>
@@ -177,20 +177,20 @@ export default function IniciantePage() {
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Simple Investment Form */}
-                <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200">
+                <Card className="bg-gradient-to-br border-2 ">
                   <CardHeader>
-                    <CardTitle className="text-xl text-blue-800">✨ Adicionar Investimento</CardTitle>
+                    <CardTitle className="text-xl">✨ Adicionar Investimento</CardTitle>
                     <CardDescription>Registre onde você colocou seu dinheiro hoje</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Onde você investiu?</label>
-                      <select className="w-full p-3 border-2 border-blue-200 rounded-lg bg-white text-base">
-                        <option>💰 Poupança</option>
-                        <option>🏛️ Tesouro Direto</option>
-                        <option>🏦 CDB do meu banco</option>
-                        <option>📊 Fundo de Renda Fixa</option>
-                        <option>❓ Outro (vou aprender mais)</option>
+                      <select className="w-full p-3 border-2 rounded-lg text-base">
+                        <option className="w-full border-2 border-blue-200 hover:bg-blue-50 bg-transparent">💰 Poupança</option>
+                        <option className="w-full border-2 border-blue-200 hover:bg-blue-50 bg-transparent">🏛️ Tesouro Direto</option>
+                        <option className="w-full border-2 border-blue-200 hover:bg-blue-50 bg-transparent">🏦 CDB do meu banco</option>
+                        <option className="w-full border-2 border-blue-200 hover:bg-blue-50 bg-transparent">📊 Fundo de Renda Fixa</option>
+                        <option className="w-full border-2 border-blue-200 hover:bg-blue-50 bg-transparent">❓ Outro (vou aprender mais)</option>
                       </select>
                     </div>
                     <div className="space-y-2">
@@ -198,39 +198,38 @@ export default function IniciantePage() {
                       <input
                         type="number"
                         placeholder="100"
-                        className="w-full p-3 border-2 border-blue-200 rounded-lg bg-white text-base"
+                        className="w-full p-3 border-2 rounded-lg text-base"
                       />
-                      <p className="text-xs text-blue-600">💡 Qualquer valor está ótimo para começar!</p>
+                      <p className="text-xs ">💡 Qualquer valor está ótimo para começar!</p>
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Quando?</label>
                       <input
                         type="date"
-                        className="w-full p-3 border-2 border-blue-200 rounded-lg bg-white text-base"
+                        className="w-full p-3 border-2 border-200 rounded-lg text-base"
                       />
                     </div>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-base py-3" size="lg">
+                    <Button className="w-full bg-gradient-to-r from-primary via-primary/95 to-secondary/20  py-3" size="lg">
                       🎉 Registrar Meu Investimento
                     </Button>
                   </CardContent>
                 </Card>
 
                 {/* Simple Investment Summary */}
-                <Card className="border-2 border-green-200">
+                <Card className="border-2 border-2">
                   <CardHeader>
-                    <CardTitle className="text-xl text-green-800">📈 Seu Progresso</CardTitle>
+                    <CardTitle className="text-xl text--800 ">📈 Seu Progresso</CardTitle>
                     <CardDescription>Veja como você está indo!</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-6">
-                      <div className="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border-2 border-green-200">
-                        <p className="text-sm text-green-700 mb-2">💪 Total que você já investiu</p>
-                        <p className="text-4xl font-bold text-green-800">R$ 450</p>
-                        <p className="text-sm text-green-600 mt-2">Parabéns! Você está no caminho certo!</p>
+                      <div className="text-center p-6 bg-gradient-to-br to-green-100 rounded-xl border-2 border-200">
+                        <p className="text-sm text-700 mb-2">Total que você já investiu</p>
+                        <p className="text-4xl font-bold text-800">R$ 450</p>
+                        <p className="text-sm text-600 mt-2">Parabéns! Você está no caminho certo!</p>
                       </div>
-
                       <div className="space-y-4">
-                        <h4 className="font-semibold text-gray-800">📊 Onde está seu dinheiro:</h4>
+                        <h4 className="font-semibold text-800">📊 Onde está seu dinheiro:</h4>
                         {[
                           { name: "💰 Poupança", amount: "R$ 200", percentage: 44, color: "bg-blue-400" },
                           { name: "🏛️ Tesouro Direto", amount: "R$ 150", percentage: 33, color: "bg-green-400" },
@@ -246,15 +245,15 @@ export default function IniciantePage() {
                         ))}
                       </div>
 
-                      <div className="p-4 bg-yellow-50 rounded-lg border-2 border-yellow-200">
-                        <p className="text-sm text-yellow-800">
+                      <div className="p-4 bg-50 rounded-lg border-2 border-200">
+                        <p className="text-sm text-800">
                           🎯 <strong>Meta do mês:</strong> Investir mais R$ 50. Você está quase lá!
                         </p>
                       </div>
 
                       <Button
                         variant="outline"
-                        className="w-full border-2 border-blue-200 hover:bg-blue-50 bg-transparent"
+                        className="w-full border-2 border00 hover:bg-blue-50 bg-transparent"
                       >
                         📱 Ver Meu Histórico
                       </Button>
@@ -263,8 +262,8 @@ export default function IniciantePage() {
                 </Card>
               </div>
 
-              <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl border-2 border-blue-200">
-                <h4 className="font-bold text-lg text-gray-800 mb-3">🌟 Dicas para Acompanhar seus Investimentos:</h4>
+              <div className="mt-8 p-6 bg-gradient-to-r rounded-xl border-2 border-200">
+                <h4 className="font-bold text-lg mb-3">🌟 Dicas para Acompanhar seus Investimentos:</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex gap-3">
                     <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
@@ -286,10 +285,9 @@ export default function IniciantePage() {
               </div>
             </CardContent>
           </Card>
-
-          <Card className="border-l-4 border-l-blue-500 shadow-lg">
+          <Card className="border-l-4 border-l-500 shadow-lg">
             <CardHeader className="pb-6">
-              <CardTitle className="flex items-center gap-3 text-3xl font-bold text-blue-800">
+              <CardTitle className="flex items-center gap-3 text-3xl font-bold text-800">
                 <Play className="h-8 w-8" />
                 Área de Vídeos Educativos
               </CardTitle>
@@ -299,7 +297,7 @@ export default function IniciantePage() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <Card className="border-2 border-blue-200 hover:border-blue-400 transition-all duration-300 hover:shadow-lg">
+                <Card className="border-2 border-200 hover:border-blue-400 transition-all duration-300 hover:shadow-lg">
                   <CardContent className="p-6">
                     <div className="aspect-video bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center mb-4 border-2 border-dashed border-blue-300">
                       <div className="text-center">
@@ -314,7 +312,7 @@ export default function IniciantePage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-2 border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg">
+                <Card className="border-2 border-200 hover:border-green-400 transition-all duration-300 hover:shadow-lg">
                   <CardContent className="p-6">
                     <div className="aspect-video bg-gradient-to-br from-green-50 to-green-100 rounded-xl flex items-center justify-center mb-4 border-2 border-dashed border-green-300">
                       <div className="text-center">
@@ -334,42 +332,42 @@ export default function IniciantePage() {
 
           <Card className="shadow-lg">
             <CardHeader className="pb-6">
-              <CardTitle className="flex items-center gap-3 text-3xl font-bold">
-                <Target className="h-8 w-8 text-blue-600" />O que Você Vai Aprender Aqui
+              <CardTitle className="flex items-center gap-3 text-3xl font-bold ">
+                <Target className="h-8 w-8 text-blue-600 " />O que Você Vai Aprender Aqui
               </CardTitle>
               <CardDescription className="text-lg mt-3">
                 Tudo que você precisa saber para começar a investir com segurança
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-foreground-600">
                 {[
                   {
                     icon: CheckCircle,
                     color: "text-blue-600",
                     text: "Diferença entre poupar e investir",
-                    bg: "bg-blue-50",
+                    
                   },
                   {
                     icon: CheckCircle,
                     color: "text-green-600",
                     text: "Como começar com pouco dinheiro",
-                    bg: "bg-green-50",
+                    
                   },
                   {
                     icon: CheckCircle,
                     color: "text-purple-600",
                     text: "Montar sua reserva de emergência",
-                    bg: "bg-purple-50",
+                    
                   },
                   {
                     icon: CheckCircle,
                     color: "text-orange-600",
                     text: "Investimentos básicos e seguros",
-                    bg: "bg-orange-50",
+                    
                   },
-                  { icon: CheckCircle, color: "text-red-600", text: "Evitar dívidas e juros altos", bg: "bg-red-50" },
-                  { icon: CheckCircle, color: "text-indigo-600", text: "Ver seu dinheiro crescer", bg: "bg-indigo-50" },
+                  { icon: CheckCircle, color: "text-red-600", text: "Evitar dívidas e juros altos",},
+                  { icon: CheckCircle, color: "text-indigo-600", text: "Ver seu dinheiro crescer",},
                 ].map((item, index) => (
                   <div
                     key={index}
@@ -442,8 +440,8 @@ export default function IniciantePage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                <p className="text-sm text-yellow-800">
+              <div className="mt-4 p-3 bg-50 rounded-lg border border-200">
+                <p className="text-sm text-800">
                   💡 <strong>Lembre-se:</strong> Estes são apenas números de exemplo! O importante é começar, mesmo que
                   seja com R$ 50 por mês.
                 </p>
@@ -462,7 +460,7 @@ export default function IniciantePage() {
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {beginnerProducts.map((product, index) => (
-                  <Card key={index} className="border-l-4 border-l-green-500">
+                  <Card key={index} className="p-4 bg-gradient-to-br from-50 to-100 rounded-lg border border-200">
                     <CardHeader className="pb-3">
                       <div className="flex justify-between items-start">
                         <CardTitle className="text-base sm:text-lg">{product.name}</CardTitle>
@@ -492,7 +490,7 @@ export default function IniciantePage() {
                           <p className="font-semibold">{product.minValue}</p>
                         </div>
                       </div>
-                      <Button className="w-full mt-4" size="sm">
+                      <Button className=" bg-gradient-to-r from-primary via-primary/95 to-secondary/20  w-full mt-4" size="sm">
                         Ver Como Funciona
                       </Button>
                     </CardContent>
@@ -512,8 +510,8 @@ export default function IniciantePage() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
-                  <h3 className="font-semibold text-blue-800 mb-3">Guardando R$ 100/mês</h3>
+                <div className="p-4 bg-gradient-to-br from-50 to-100 rounded-lg border border-200">
+                  <h3 className="font-semibold text-800 mb-3">Guardando R$ 100/mês</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Em 1 ano:</span>
@@ -529,8 +527,8 @@ export default function IniciantePage() {
                     </div>
                   </div>
                 </div>
-                <div className="p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border border-green-200">
-                  <h3 className="font-semibold text-green-800 mb-3">Guardando R$ 500/mês</h3>
+                <div className="p-4 bg-gradient-to-br from-50 to-100 rounded-lg border border-200">
+                  <h3 className="font-semibold text-800 mb-3">Guardando R$ 500/mês</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Em 1 ano:</span>
@@ -546,8 +544,8 @@ export default function IniciantePage() {
                     </div>
                   </div>
                 </div>
-                <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border border-purple-200">
-                  <h3 className="font-semibold text-purple-800 mb-3">Guardando R$ 1.000/mês</h3>
+                <div className="p-4 bg-gradient-to-br from-50 to-100 rounded-lg border border-200">
+                  <h3 className="font-semibold text-800 mb-3">Guardando R$ 1.000/mês</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>Em 1 ano:</span>
@@ -564,8 +562,8 @@ export default function IniciantePage() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
-                <p className="text-sm text-green-800">
+              <div className="mt-4 p-3 bg-50 rounded-lg border border-200">
+                <p className="text-sm text-800">
                   🎉 <strong>Incrível, né?</strong> Estes cálculos consideram 12% ao ano. Na poupança, você teria bem
                   menos!
                 </p>
@@ -582,7 +580,7 @@ export default function IniciantePage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <div className="flex gap-3 p-3 bg-blue-50 rounded-lg">
+                <div className="flex gap-3 p-3 bg-50 border border-200 rounded-lg">
                   <AlertCircle className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-sm">Primeiro quite suas dívidas</p>
@@ -591,7 +589,7 @@ export default function IniciantePage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-3 p-3 bg-green-50 rounded-lg">
+                <div className="flex gap-3 p-3 bg-50 border border-200 rounded-lg">
                   <Calendar className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-sm">Monte sua reserva de emergência primeiro</p>
@@ -600,7 +598,7 @@ export default function IniciantePage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-3 p-3 bg-purple-50 rounded-lg">
+                <div className="flex gap-3 p-3 bg-50 border border-200 rounded-lg">
                   <TrendingUp className="h-5 w-5 text-purple-600 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-sm">Comece pequeno, mas comece!</p>
@@ -609,7 +607,7 @@ export default function IniciantePage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-3 p-3 bg-orange-50 rounded-lg">
+                <div className="flex gap-3 p-3 bg-50 border border-200 rounded-lg">
                   <DollarSign className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-sm">Automatize seus investimentos</p>
@@ -622,16 +620,16 @@ export default function IniciantePage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
+          <Card className="bg-gradient-to-r from-50 to-50 border-200">
             <CardContent className="pt-6">
               <div className="text-center space-y-4">
-                <h2 className="text-xl font-bold text-gray-800">Você Consegue! 🚀</h2>
+                <h2 className="text-xl font-bold text-800">Você Consegue! 🚀</h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
                   Investir é um processo de construção de longo prazo. Não tenha medo de errar - o importante é começar
                   e aprender no caminho. Cada R$ 1 investido hoje é um passo em direção à sua independência financeira!
                 </p>
-                <Button size="lg" className="bg-green-600 hover:bg-green-700">
-                  Quero Começar Agora!
+                <Button size="lg" className="bg-foreground-600 border border-2 hover:bg-700 text-10">
+                  Próximos Passos
                 </Button>
               </div>
             </CardContent>

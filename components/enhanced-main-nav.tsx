@@ -25,7 +25,7 @@ export function EnhancedMainNav() {
           >
             <motion.span
               className="relative"
-              whileHover={{ color: "hsl(var(--primary))" }}
+              whileHover={{ color: "var(--primary)" }}
               transition={{ duration: 0.2 }}
             >
               Investimentos
@@ -48,18 +48,21 @@ export function EnhancedMainNav() {
                 <NavigationMenuLink asChild>
                   <motion.a
                     href="/simulacao"
-                    ref={null}
                     className={cn(
                       "flex h-full w-full select-none flex-col justify-end rounded-md p-4 md:p-6 no-underline outline-none focus:shadow-md",
-                      "bg-gradient-to-b from-[var(--muted)/50] to-[var(--muted)] text-[var(--foreground)]",
+                      "bg-[var(--card)] text-[var(--foreground)] dark:bg-[var(--card-dark)] dark:text-[var(--foreground-dark)]"
                     )}
-                    whileHover={{ scale: 1.02, backgroundColor: "var(--accent)" }}
+                    whileHover={{
+                      scale: 1.02,
+                      backgroundColor: "var(--accent)",
+                      color: "var(--accent-foreground)",
+                    }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <div className="mb-2 mt-4 text-base md:text-lg lg:text-xl font-medium">
                       Simulação Personalizada
                     </div>
-                    <p className="text-sm md:text-base leading-tight text-[var(--muted-foreground)]">
+                    <p className="text-sm md:text-base leading-tight text-[var(--muted-foreground)] dark:text-[var(--muted-foreground-dark)]">
                       Calcule seus rendimentos e compare diferentes opções de investimento.
                     </p>
                   </motion.a>
@@ -86,7 +89,7 @@ export function EnhancedMainNav() {
           >
             <motion.span
               className="relative"
-              whileHover={{ color: "hsl(var(--primary))" }}
+              whileHover={{ color: "var(--primary)" }}
               transition={{ duration: 0.2 }}
             >
               Serviços
@@ -132,7 +135,7 @@ export function EnhancedMainNav() {
             >
               <motion.span
                 className="relative"
-                whileHover={{ color: "hsl(var(--primary))" }}
+                whileHover={{ color: "var(--primary)" }}
                 transition={{ duration: 0.2 }}
               >
                 Criptomoedas
@@ -158,7 +161,7 @@ export function EnhancedMainNav() {
             >
               <motion.span
                 className="relative"
-                whileHover={{ color: "hsl(var(--primary))" }}
+                whileHover={{ color: "var(--primary)" }}
                 transition={{ duration: 0.2 }}
               >
                 Blog
@@ -186,7 +189,8 @@ const EnhancedListItem = React.forwardRef<React.ElementRef<"a">, React.Component
             ref={ref}
             className={cn(
               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
-              "bg-[var(--card)] text-[var(--foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)] dark:hover:bg-[var(--accent-dark)] dark:hover:text-[var(--accent-foreground-dark)]",
+              "bg-[var(--card)] text-[var(--foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]",
+              "dark:bg-[var(--card-dark)] dark:text-[var(--foreground-dark)] dark:hover:bg-[var(--accent-dark)] dark:hover:text-[var(--accent-foreground-dark)]",
               className
             )}
             whileHover={{ scale: 1.02 }}
@@ -194,7 +198,7 @@ const EnhancedListItem = React.forwardRef<React.ElementRef<"a">, React.Component
             {...props}
           >
             <div className="text-sm sm:text-base font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-xs sm:text-sm leading-snug text-[var(--muted-foreground)]">
+            <p className="line-clamp-2 text-xs sm:text-sm leading-snug text-[var(--muted-foreground)] dark:text-[var(--muted-foreground-dark)]">
               {children}
             </p>
           </motion.a>

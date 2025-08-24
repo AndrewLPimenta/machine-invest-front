@@ -309,7 +309,7 @@ export default function ArrojadoPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-l-4 border-l-primary shadow-lg">
+          <Card className="border-l-4 border- shadow-lg">
             <CardHeader className="pb-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -321,7 +321,7 @@ export default function ArrojadoPage() {
                     Registre e monitore seus aportes com precisão profissional
                   </CardDescription>
                 </div>
-                <Button className="bg-primary hover:bg-primary/90" size="lg">
+                <Button className="bg-gradient-to-r from-primary via-primary/95 to-secondary/90" size="lg">
                   <DollarSign className="h-5 w-5 mr-2" />
                   Adicionar Investimento
                 </Button>
@@ -606,7 +606,7 @@ export default function ArrojadoPage() {
                   </div>
                 </div>
 
-                <Button className="w-full bg-secondary hover:bg-secondary/90" size="lg">
+                <Button className="w-full group-hover:bg-secondary group-hover:text-secondary-foreground transition-colors text-base py-3" size="lg">
                   <Target className="h-4 w-4 mr-2" />
                   Criar Estratégia Personalizada
                 </Button>

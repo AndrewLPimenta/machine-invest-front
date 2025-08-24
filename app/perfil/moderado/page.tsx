@@ -109,22 +109,22 @@ export default function ModeradoPage() {
   return (
     <AuthRedirect>
       <div className="min-h-screen bg-background">
-        <div className="relative overflow-hidden bg-gradient-to-r from-green-600 via-green-500 to-emerald-500 text-white">
+        <div className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/95 to-secondary/20 text-primary-foreground">
           <div className="absolute inset-0 bg-[url('/abstract-financial-pattern.png')] opacity-10"></div>
           <div className="relative px-4 py-16 lg:py-24">
             <div className="max-w-7xl mx-auto">
               <div className="text-center space-y-8">
                 <div className="flex items-center justify-center gap-4">
-                  <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-sm">
-                    <BarChart3 className="h-10 w-10 text-white" />
+                  <div className="p-4 bg-/20 rounded-2xl backdrop-blur-sm">
+                    <BarChart3 className="h-10 w-10" />
                   </div>
                   <div className="text-left">
                     <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">Perfil Moderado</h1>
-                    <p className="text-xl text-white/80 mt-2">Equilibrando Segurança e Crescimento</p>
+                    <p className="text-xl mt-2">Equilibrando Segurança e Crescimento</p>
                   </div>
                 </div>
 
-                <p className="text-xl lg:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+                <p className="text-xl lg:text-2xl max-w-4xl mx-auto leading-relaxed">
                   Você já não é iniciante e busca organização, diversificação e crescimento profissional dos seus
                   investimentos
                 </p>
@@ -132,61 +132,61 @@ export default function ModeradoPage() {
                 <div className="flex flex-wrap justify-center gap-4 pt-6">
                   <Badge
                     variant="secondary"
-                    className="px-6 py-3 text-base font-medium bg-white/20 text-white border-white/30"
+                    className="px-6 py-3 text-base font-medium  border-white/30"
                   >
-                    <Shield className="h-5 w-5 mr-2" />
+                    <Shield className="h-5 w-5 mr-2 text-primary" />
                     Proteção
                   </Badge>
                   <Badge
                     variant="secondary"
-                    className="px-6 py-3 text-base font-medium bg-white/20 text-white border-white/30"
+                    className="px-6 py-3 text-base font-medium  border-white/30"
                   >
-                    <TrendingUp className="h-5 w-5 mr-2" />
+                    <TrendingUp className="h-5 w-5 mr-2 text-primary" />
                     Crescimento
                   </Badge>
                   <Badge
                     variant="secondary"
-                    className="px-6 py-3 text-base font-medium bg-white/20 text-white border-white/30"
+                    className="px-6 py-3 text-base font-medium border-white/30"
                   >
-                    <Target className="h-5 w-5 mr-2" />
+                    <Target className="h-5 w-5 mr-2 text-primary" />
                     Estratégia
                   </Badge>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-                <Card className="bg-white/95 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Card className="backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
                   <CardContent className="p-6 text-center">
                     <div className="flex items-center justify-center gap-3 mb-3">
-                      <Shield className="h-6 w-6 text-blue-600" />
-                      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wide">PROTEÇÃO</span>
+                      <Shield className="h-6 w-6 text-primary" />
+                      <span className="text-sm font-semibold text-600 uppercase tracking-wide">PROTEÇÃO</span>
                     </div>
-                    <p className="text-4xl font-bold text-gray-900 mb-2">40-60%</p>
-                    <p className="text-base text-gray-600">em renda fixa segura</p>
+                    <p className="text-4xl font-bold text-900 mb-2">40-60%</p>
+                    <p className="text-base text-600">em renda fixa segura</p>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white/95 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Card className=" backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
                   <CardContent className="p-6 text-center">
                     <div className="flex items-center justify-center gap-3 mb-3">
-                      <TrendingUp className="h-6 w-6 text-green-600" />
-                      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wide">CRESCIMENTO</span>
+                      <TrendingUp className="h-6 w-6 text-primary" />
+                      <span className="text-sm font-semibold text-600 uppercase tracking-wide">CRESCIMENTO</span>
                     </div>
-                    <p className="text-4xl font-bold text-gray-900 mb-2">
+                    <p className="text-4xl font-bold text-900 mb-2">
                       <AnimatedCounter end={16} suffix="%" />
                     </p>
-                    <p className="text-base text-gray-600">retorno anual esperado</p>
+                    <p className="text-base text-600">retorno anual esperado</p>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white/95 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Card className=" backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
                   <CardContent className="p-6 text-center">
                     <div className="flex items-center justify-center gap-3 mb-3">
-                      <Target className="h-6 w-6 text-purple-600" />
-                      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wide">PRAZO</span>
+                      <Target className="h-6 w-6 text-primary" />
+                      <span className="text-sm font-semibold text-600 uppercase tracking-wide">PRAZO</span>
                     </div>
-                    <p className="text-4xl font-bold text-gray-900 mb-2">2-5 anos</p>
-                    <p className="text-base text-gray-600">horizonte ideal</p>
+                    <p className="text-4xl font-bold text-900 mb-2">2-5 anos</p>
+                    <p className="text-base text-600">horizonte ideal</p>
                   </CardContent>
                 </Card>
               </div>
@@ -195,19 +195,19 @@ export default function ModeradoPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-12">
-          <Card className="border-l-4 border-l-green-500 shadow-lg">
+          <Card className="border-l-4 border-l--500 shadow-lg">
             <CardHeader className="pb-6">
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="flex items-center gap-3 text-3xl font-bold">
-                    <Target className="h-8 w-8 text-green-600" />
+                    <Target className="h-8 w-8 text-primary" />
                     Acompanhe seus Investimentos
                   </CardTitle>
                   <CardDescription className="text-lg mt-3">
                     Registre onde você está investindo e veja sua carteira crescer
                   </CardDescription>
                 </div>
-                <Button className="bg-green-600 hover:bg-green-700" size="lg">
+                <Button className="bg-primary hover:bg-primary-100" size="lg">
                   <DollarSign className="h-5 w-5 mr-2" />
                   Novo Investimento
                 </Button>
@@ -216,15 +216,15 @@ export default function ModeradoPage() {
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Investment Form */}
-                <Card className="bg-gradient-to-br from-green-50 to-emerald-50">
+                <Card className="bg--to-br ">
                   <CardHeader>
-                    <CardTitle className="text-xl text-green-800">Registrar Investimento</CardTitle>
+                    <CardTitle className="text-xl text-primary">Registrar Investimento</CardTitle>
                     <CardDescription>Adicione seus aportes mensais ou pontuais</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Tipo de Investimento</label>
-                      <select className="w-full p-3 border rounded-lg bg-white">
+                      <select className="w-full p-3 border rounded-lg bg-">
                         <option>Tesouro IPCA+ 2035</option>
                         <option>CDB Banco Inter</option>
                         <option>Fundo Multimercado XP</option>
@@ -236,23 +236,23 @@ export default function ModeradoPage() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <label className="text-sm font-medium">Valor (R$)</label>
-                        <input type="number" placeholder="1.000" className="w-full p-3 border rounded-lg bg-white" />
+                        <input type="number" placeholder="1.000" className="w-full p-3 border rounded-lg bg-" />
                       </div>
                       <div className="space-y-2">
                         <label className="text-sm font-medium">Data</label>
-                        <input type="date" className="w-full p-3 border rounded-lg bg-white" />
+                        <input type="date" className="w-full p-3 border rounded-lg bg-" />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Categoria</label>
-                      <select className="w-full p-3 border rounded-lg bg-white">
+                      <select className="w-full p-3 border rounded-lg bg-">
                         <option>Renda Fixa</option>
                         <option>Fundos Multimercado</option>
                         <option>Ações e ETFs</option>
                         <option>Fundos Imobiliários</option>
                       </select>
                     </div>
-                    <Button className="w-full bg-green-600 hover:bg-green-700" size="lg">
+                    <Button className="w-full bg-primary hover:text-primary-100" size="lg">
                       Adicionar à Carteira
                     </Button>
                   </CardContent>
@@ -267,13 +267,13 @@ export default function ModeradoPage() {
                   <CardContent>
                     <div className="space-y-6">
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="p-4 bg-green-50 rounded-xl text-center">
-                          <p className="text-sm text-gray-600">Total Investido</p>
-                          <p className="text-2xl font-bold text-green-600">R$ 3.200</p>
+                        <div className="p-4 bg-50 rounded-xl text-center">
+                          <p className="text-sm text-primary">Total Investido</p>
+                          <p className="text-2xl font-bold text-primary">R$ 3.200</p>
                         </div>
-                        <div className="p-4 bg-blue-50 rounded-xl text-center">
-                          <p className="text-sm text-gray-600">Este Mês</p>
-                          <p className="text-2xl font-bold text-blue-600">R$ 800</p>
+                        <div className="p-4 bg-50 rounded-xl text-center">
+                          <p className="text-sm text-600">Este Mês</p>
+                          <p className="text-2xl font-bold text-600">R$ 800</p>
                         </div>
                       </div>
 
@@ -305,7 +305,7 @@ export default function ModeradoPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-l-4 border-l-green-500 shadow-lg">
+          <Card className="border-l-4 border-l--500 shadow-lg">
             <CardHeader className="pb-6">
               <CardTitle className="flex items-center gap-3 text-3xl font-bold">
                 <Target className="h-8 w-8 text-green-600" />O que define o investidor moderado
@@ -321,52 +321,52 @@ export default function ModeradoPage() {
                     icon: CheckCircle,
                     color: "text-blue-600",
                     text: "Busca equilíbrio entre risco e retorno",
-                    bg: "bg-blue-50",
+                    bg: "bg--50",
                   },
                   {
                     icon: CheckCircle,
                     color: "text-green-600",
                     text: "Aceita volatilidade moderada",
-                    bg: "bg-green-50",
+                    bg: "bg--50",
                   },
                   {
                     icon: CheckCircle,
                     color: "text-purple-600",
                     text: "Valoriza diversificação estratégica",
-                    bg: "bg-purple-50",
+                    bg: "bg--50",
                   },
                   {
                     icon: CheckCircle,
                     color: "text-orange-600",
                     text: "Foco no médio e longo prazo",
-                    bg: "bg-orange-50",
+                    bg: "bg--50",
                   },
                   {
                     icon: CheckCircle,
                     color: "text-red-600",
                     text: "Quer profissionalizar investimentos",
-                    bg: "bg-red-50",
+                    bg: "bg--50",
                   },
                   {
                     icon: CheckCircle,
                     color: "text-indigo-600",
                     text: "Busca crescimento consistente",
-                    bg: "bg-indigo-50",
+                    bg: "bg--50",
                   },
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className={`flex items-center gap-4 p-6 ${item.bg} rounded-xl border-2 border-transparent hover:border-gray-200 transition-all duration-300`}
+                    className={`flex items-center gap-4 p-6 ${item.bg} rounded-xl border-2 border-transparent hover:border-200 transition-all duration-300`}
                   >
                     <item.icon className={`h-6 w-6 ${item.color}`} />
-                    <span className="text-base font-medium text-gray-700">{item.text}</span>
+                    <span className="text-base font-medium text-700">{item.text}</span>
                   </div>
                 ))}
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className="bg-/80 backdrop-blur-sm border-0 shadow-xl">
             <CardHeader className="pb-6">
               <CardTitle className="flex items-center gap-3 text-2xl">
                 <PieChart className="h-6 w-6 text-green-600" />
@@ -382,10 +382,10 @@ export default function ModeradoPage() {
                   <div key={index} className="space-y-3">
                     <div className="flex justify-between items-center">
                       <div>
-                        <span className="text-lg font-semibold text-gray-900">{item.category}</span>
-                        <p className="text-sm text-gray-600">{item.description}</p>
+                        <span className="text-lg font-semibold text-900">{item.category}</span>
+                        <p className="text-sm text-600">{item.description}</p>
                       </div>
-                      <span className="text-2xl font-bold text-gray-900">
+                      <span className="text-2xl font-bold text-900">
                         <AnimatedCounter end={item.percentage} suffix="%" />
                       </span>
                     </div>
@@ -394,9 +394,9 @@ export default function ModeradoPage() {
                 ))}
               </div>
 
-              <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl">
-                <h4 className="font-semibold text-gray-900 mb-2">💡 Estratégia de Diversificação</h4>
-                <p className="text-sm text-gray-700">
+              <div className="mt-8 p-6 bg--to-r from-50 to-50 rounded-xl">
+                <h4 className="font-semibold text-primary mb-2">💡 Estratégia de Diversificação</h4>
+                <p className="text-sm text-700">
                   Esta alocação permite que você tenha <strong>estabilidade</strong> com renda fixa,
                   <strong> crescimento</strong> com ações e ETFs, e <strong>renda passiva</strong> com FIIs. Rebalanceie
                   a cada 6-12 meses para manter as proporções ideais.
@@ -405,10 +405,10 @@ export default function ModeradoPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className=" backdrop-blur-sm border-0 shadow-xl">
             <CardHeader className="pb-6">
               <CardTitle className="flex items-center gap-3 text-2xl">
-                <TrendingUp className="h-6 w-6 text-green-600" />
+                <TrendingUp className="h-6 w-6 text-primary" />
                 Produtos Ideais para Seu Perfil
               </CardTitle>
               <CardDescription className="text-base">
@@ -418,7 +418,7 @@ export default function ModeradoPage() {
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {moderateProducts.map((product, index) => (
-                  <Card key={index} className="border-l-4 border-l-green-500 hover:shadow-lg transition-shadow">
+                  <Card key={index} className="border-l-primary-500 hover:shadow-lg transition-shadow">
                     <CardHeader className="pb-3">
                       <div className="flex justify-between items-start">
                         <div>
@@ -448,7 +448,7 @@ export default function ModeradoPage() {
                       <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                         <div>
                           <p className="text-gray-600">Rentabilidade</p>
-                          <p className="font-bold text-green-600 text-base">{product.return}</p>
+                          <p className="font-bold text-primary text-base">{product.return}</p>
                         </div>
                         <div>
                           <p className="text-gray-600">Liquidez</p>
@@ -459,7 +459,7 @@ export default function ModeradoPage() {
                           <p className="font-semibold text-lg">{product.minValue}</p>
                         </div>
                       </div>
-                      <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
+                      <Button className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary">
                         Simular Investimento
                       </Button>
                     </CardContent>
@@ -469,10 +469,10 @@ export default function ModeradoPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className=" backdrop-blur-sm border-0 shadow-xl">
             <CardHeader className="pb-6">
               <CardTitle className="flex items-center gap-3 text-2xl">
-                <DollarSign className="h-6 w-6 text-green-600" />
+                <DollarSign className="h-6 w-6 text-primary" />
                 Simulador: Carteira Moderada vs Poupança
               </CardTitle>
               <CardDescription className="text-base">
@@ -483,26 +483,26 @@ export default function ModeradoPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Carteira Moderada */}
                 <div className="space-y-4">
-                  <h4 className="text-lg font-semibold text-green-600 flex items-center gap-2">
+                  <h4 className="text-lg font-semibold text-primary flex items-center gap-2">
                     <TrendingUp className="h-5 w-5" />
                     Carteira Moderada
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-green-50 rounded-xl text-center">
+                    <div className="p-4 border border-primary/100  rounded-xl text-center">
                       <p className="text-sm text-gray-600">Investimento Inicial</p>
-                      <p className="text-xl font-bold text-green-600">R$ 10.000</p>
+                      <p className="text-xl font-bold text-primary">R$ 10.000</p>
                     </div>
-                    <div className="p-4 bg-green-50 rounded-xl text-center">
+                    <div className="p-4 border border-primary/100  rounded-xl text-center">
                       <p className="text-sm text-gray-600">Aporte Mensal</p>
-                      <p className="text-xl font-bold text-green-600">R$ 500</p>
+                      <p className="text-xl font-bold text-primary">R$ 500</p>
                     </div>
-                    <div className="p-4 bg-green-50 rounded-xl text-center">
+                    <div className="p-4 border border-primary/100 rounded-xl text-center">
                       <p className="text-sm text-gray-600">Rentabilidade</p>
-                      <p className="text-xl font-bold text-green-600">16% a.a.</p>
+                      <p className="text-xl font-bold text-primary">16% a.a.</p>
                     </div>
-                    <div className="p-4 bg-green-100 rounded-xl text-center">
+                    <div className="p-4 border border-primary/100 rounded-xl text-center">
                       <p className="text-sm text-gray-600">Em 3 anos</p>
-                      <p className="text-xl font-bold text-green-700">
+                      <p className="text-xl font-bold text-primary">
                         R$ <AnimatedCounter end={35420} />
                       </p>
                     </div>
@@ -516,19 +516,19 @@ export default function ModeradoPage() {
                     Poupança Tradicional
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-red-50 rounded-xl text-center">
+                    <div className="p-4 p-4 border border-primary/12 rounded-xl text-center">
                       <p className="text-sm text-gray-600">Investimento Inicial</p>
                       <p className="text-xl font-bold text-red-600">R$ 10.000</p>
                     </div>
-                    <div className="p-4 bg-red-50 rounded-xl text-center">
+                    <div className="p-4 p-4 border border-primary/12  rounded-xl text-center">
                       <p className="text-sm text-gray-600">Aporte Mensal</p>
                       <p className="text-xl font-bold text-red-600">R$ 500</p>
                     </div>
-                    <div className="p-4 bg-red-50 rounded-xl text-center">
+                    <div className="p-4 p-4 border border-primary/12  rounded-xl text-center">
                       <p className="text-sm text-gray-600">Rentabilidade</p>
                       <p className="text-xl font-bold text-red-600">6.2% a.a.</p>
                     </div>
-                    <div className="p-4 bg-red-100 rounded-xl text-center">
+                    <div className="p-4 p-4 border border-primary/12 rounded-xl text-center">
                       <p className="text-sm text-gray-600">Em 3 anos</p>
                       <p className="text-xl font-bold text-red-700">
                         R$ <AnimatedCounter end={30180} />
@@ -537,23 +537,10 @@ export default function ModeradoPage() {
                   </div>
                 </div>
               </div>
-
-              <div className="mt-8 p-6 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl text-white text-center">
-                <h4 className="text-xl font-bold mb-2">💰 Diferença: R$ 5.240 a mais!</h4>
-                <p className="text-green-100">
-                  Com uma carteira moderada bem estruturada, você pode ter <strong>17% mais dinheiro</strong> em 3 anos
-                </p>
-                <Button className="mt-4 bg-white text-green-600 hover:bg-gray-100">
-                  Fazer Simulação Personalizada
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+                 <Card className="backdrop-blur-sm border-0 shadow-xl">
             <CardHeader className="pb-6">
               <CardTitle className="flex items-center gap-3 text-2xl">
-                <Zap className="h-6 w-6 text-green-600" />
+                <Zap className="h-6 w-6 text-primary" />
                 Estratégias para Profissionalizar seus Investimentos
               </CardTitle>
               <CardDescription className="text-base">
@@ -562,68 +549,62 @@ export default function ModeradoPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                <div className="flex gap-4 p-6 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl">
-                  <BarChart3 className="h-8 w-8 text-blue-600 mt-1 flex-shrink-0" />
+                <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
+                  <BarChart3 className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-bold text-lg text-blue-900 mb-2">1. Construa uma Base Sólida</h4>
-                    <p className="text-blue-800 mb-3">
+                    <h4 className="font-bold text-lg text-primary mb-2">1. Construa uma Base Sólida</h4>
+                    <p className="text-primary/80 mb-3">
                       Comece com 40-50% em renda fixa (Tesouro IPCA+, CDBs) para ter estabilidade. Isso é sua âncora
                       contra volatilidade.
                     </p>
-                    <div className="bg-blue-200 p-3 rounded-lg">
-                      <p className="text-sm text-blue-900">
-                        <strong>Ação prática:</strong> Invista primeiro em Tesouro IPCA+ 2035 para proteger contra
-                        inflação
+                    <div className=" p-3 rounded-lg">
+                      <p className="text-sm text-primary">
+                        <strong>Ação prática:</strong> Invista primeiro em Tesouro IPCA+ 2035 para proteger contra inflação
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex gap-4 p-6 bg-gradient-to-r from-green-50 to-green-100 rounded-xl">
-                  <PieChart className="h-8 w-8 text-green-600 mt-1 flex-shrink-0" />
+                <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
+                  <PieChart className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-bold text-lg text-green-900 mb-2">2. Diversifique com Inteligência</h4>
-                    <p className="text-green-800 mb-3">
-                      Não coloque todos os ovos na mesma cesta. Combine diferentes classes: fundos multimercado, ETFs
-                      internacionais, FIIs e algumas ações.
+                    <h4 className="font-bold text-lg text-primary mb-2">2. Diversifique com Inteligência</h4>
+                    <p className="text-primary/80 mb-3">
+                      Não coloque todos os ovos na mesma cesta. Combine diferentes classes: fundos multimercado, ETFs internacionais, FIIs e algumas ações.
                     </p>
-                    <div className="bg-green-200 p-3 rounded-lg">
-                      <p className="text-sm text-green-900">
-                        <strong>Ação prática:</strong> Use ETFs como IVVB11 para ter exposição internacional com baixo
-                        custo
+                    <div className=" p-3 rounded-lg">
+                      <p className="text-sm text-primary">
+                        <strong>Ação prática:</strong> Use ETFs como IVVB11 para ter exposição internacional com baixo custo
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex gap-4 p-6 bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl">
-                  <Calendar className="h-8 w-8 text-purple-600 mt-1 flex-shrink-0" />
+                <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
+                  <Calendar className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-bold text-lg text-purple-900 mb-2">3. Rebalanceie Regularmente</h4>
-                    <p className="text-purple-800 mb-3">
-                      A cada 6-12 meses, ajuste sua carteira para manter as proporções ideais. Venda o que subiu muito e
-                      compre o que está em desconto.
+                    <h4 className="font-bold text-lg text-primary mb-2">3. Rebalanceie Regularmente</h4>
+                    <p className="text-primary/80 mb-3">
+                      A cada 6-12 meses, ajuste sua carteira para manter as proporções ideais. Venda o que subiu muito e compre o que está em desconto.
                     </p>
-                    <div className="bg-purple-200 p-3 rounded-lg">
-                      <p className="text-sm text-purple-900">
+                    <div className="p-3 rounded-lg">
+                      <p className="text-sm text-primary">
                         <strong>Ação prática:</strong> Configure lembretes trimestrais para revisar sua alocação
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex gap-4 p-6 bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl">
-                  <TrendingUp className="h-8 w-8 text-orange-600 mt-1 flex-shrink-0" />
+                <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
+                  <TrendingUp className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-bold text-lg text-orange-900 mb-2">4. Pense no Longo Prazo</h4>
-                    <p className="text-orange-800 mb-3">
-                      Investimentos moderados brilham no médio e longo prazo (2-5 anos). Não se desespere com
-                      volatilidade de curto prazo.
+                    <h4 className="font-bold text-lg text-primary mb-2">4. Pense no Longo Prazo</h4>
+                    <p className="text-primary/80 mb-3">
+                      Investimentos moderados brilham no médio e longo prazo (2-5 anos). Não se desespere com volatilidade de curto prazo.
                     </p>
-                    <div className="bg-orange-200 p-3 rounded-lg">
-                      <p className="text-sm text-orange-900">
-                        <strong>Ação prática:</strong> Defina objetivos claros (casa, aposentadoria) com prazos
-                        específicos
+                    <div className="p-3 rounded-lg">
+                      <p className="text-sm text-primary">
+                        <strong>Ação prática:</strong> Defina objetivos claros (casa, aposentadoria) com prazos específicos
                       </p>
                     </div>
                   </div>
@@ -631,6 +612,20 @@ export default function ModeradoPage() {
               </div>
             </CardContent>
           </Card>
+              <div className="mt-8 p-6  rounded-xl text-white text-center">
+                <h4 className="text-xl font-bold mb-2">Começe a usar!</h4>
+                <p className="text-primary/70">
+                  Com uma carteira moderada bem estruturada, você pode ter <strong>mais liberdade</strong> em menos tempo.
+                </p>
+                <Button className="mt-4   hover:bg-primary/90">
+                  Próximos Passos
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+         
+
         </div>
       </div>
     </AuthRedirect>
