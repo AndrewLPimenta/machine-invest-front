@@ -16,6 +16,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { EnhancedCryptoChart } from "@/components/enhanced-crypto-chart"
 import { SiteLayout } from "@/components/site-layout"
 import { ResponsiveContainer } from "@/components/responsive-container"
+import FloatingPaths from "@/components/background-paths"
 
 const cryptos = [
   {
@@ -199,11 +200,14 @@ export default function CriptoPage() {
 
   return (
     <SiteLayout>
+      <  FloatingPaths />
       <Section className="py-12">
+         
         <ResponsiveContainer>
+         
           <div className="max-w-3xl mx-auto text-center">
             <SectionHeading
-              title="Criptomoedas em Destaque"
+              title="Principais nomes do mercado"
               description="Acompanhe as principais criptomoedas do mercado e suas variações em tempo real."
               centered
             />

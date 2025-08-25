@@ -18,6 +18,7 @@ import { SectionHeading } from "@/components/section-heading"
 import { ResponsiveGrid } from "@/components/responsive-grid"
 import { Suspense } from "react"
 import { CardSkeleton, ChartSkeleton } from "@/components/loading-skeleton"
+import HeroGeometric from "@/components/hero-geometric"
 
 export default function Home() {
   const performanceData = [
@@ -29,6 +30,7 @@ export default function Home() {
 
   return (
     <PageLayout>
+      <HeroGeometric />
       <HeroSection />
       <FeatureSection />
 
