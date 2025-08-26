@@ -1,6 +1,5 @@
 'use client'
 
-import type React from 'react'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
@@ -32,10 +31,12 @@ interface Resultado {
 }
 
 interface User {
-  id: number
+  id: number // obrigatório
   name?: string
   email?: string
   resultados?: Resultado[]
+  perfil?: "conservador" | "moderado" | "arrojado"
+  token?: string
 }
 
 export default function FormularioPage() {
@@ -53,12 +54,15 @@ export default function FormularioPage() {
 
     const carregarFormulario = async () => {
       try {
-        // Redireciona se já tiver resultado
         if (user.resultados?.length) {
           const perfilId = user.resultados[0]?.idPerfil
           if (perfilId) {
             const rota =
-              perfilId === 1 ? '/perfil/conservador' : perfilId === 2 ? '/perfil/moderado' : '/perfil/agressivo'
+              perfilId === 1
+                ? '/perfil/conservador'
+                : perfilId === 2
+                ? '/perfil/moderado'
+                : '/perfil/agressivo'
             router.push(rota)
             return
           }
@@ -99,6 +103,12 @@ export default function FormularioPage() {
     e.preventDefault()
     setSubmitting(true)
 
+    if (!user?.id) {
+      alert('Usuário não autenticado.')
+      setSubmitting(false)
+      return
+    }
+
     if (Object.keys(respostas).length !== perguntas.length) {
       alert('Você precisa responder todas as perguntas antes de enviar.')
       setSubmitting(false)
@@ -106,30 +116,28 @@ export default function FormularioPage() {
     }
 
     try {
-      // Envia respostas
       await axios.post('http://localhost:3001/api/respostas', {
-        idUsuario: user?.id,
+        idUsuario: user.id,
         respostas: Object.entries(respostas).map(([idPergunta, idOpcao]) => ({
           idPergunta: Number(idPergunta),
           idOpcao: Number(idOpcao),
         })),
       })
 
-      // Calcula perfil e recebe idPerfil diretamente
       const resCalculo = await axios.post('http://localhost:3001/api/resultado/calcular', {
-        idUsuario: user?.id,
+        idUsuario: user.id,
       })
       const perfilId: 1 | 2 | 3 | null = resCalculo.data?.perfilId ?? null
       if (!perfilId) throw new Error('Não foi possível determinar o perfil.')
 
-      // Atualiza usuário local
+      // ✅ Garantindo que id existe
       const usuarioAtualizado: User = {
         ...user,
+        id: user.id,
         resultados: [{ idPerfil: perfilId }],
       }
       updateUser(usuarioAtualizado)
 
-      // Redireciona para a página do perfil
       const rota =
         perfilId === 1 ? '/perfil/conservador' : perfilId === 2 ? '/perfil/moderado' : '/perfil/agressivo'
       router.push(rota)
@@ -140,6 +148,8 @@ export default function FormularioPage() {
       setSubmitting(false)
     }
   }
+
+  if (!user) return null // evita renderizar antes do auth
 
   return (
     <AuthRedirect>
