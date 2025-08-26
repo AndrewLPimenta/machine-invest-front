@@ -4,9 +4,7 @@ import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-
+import { Eye, EyeOff } from "lucide-react"
 import { SiteLayout } from "@/components/site-layout"
 import { Section } from "@/components/section"
 import { ResponsiveContainer } from "@/components/responsive-container"
@@ -39,7 +37,6 @@ export default function LoginPage() {
       const result = await login(email, password)
 
       if (result.success && result.user) {
-        // Redirecionamento condicional baseado no perfil
         if (!result.respondeu) {
           router.push(`/formulario?usuario=${result.user.id}`)
         } else if (result.perfil) {
@@ -66,7 +63,7 @@ export default function LoginPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Card className="w-full">
+            <Card className="w-full shadow-md">
               <CardHeader className="space-y-1">
                 <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>
                 <CardDescription className="text-center">
@@ -113,10 +110,14 @@ export default function LoginPage() {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                         aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                       >
-                        <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                        {showPassword ? (
+                          <EyeOff className="w-5 h-5" />
+                        ) : (
+                          <Eye className="w-5 h-5" />
+                        )}
                       </button>
                     </div>
                   </div>
