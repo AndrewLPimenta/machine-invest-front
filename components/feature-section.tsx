@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { DollarSign, LineChart, Shield, TrendingUp } from "lucide-react"
+import { DollarSign, LineChart, Shield, TrendingUp, User, Heart, Settings } from "lucide-react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 
@@ -38,13 +38,13 @@ export function FeatureSection() {
   const features = [
     {
       icon: <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />,
-      title: "Simulações Precisas",
-      description: "Calcule rendimentos e compare diferentes opções de investimento com precisão.",
+      title: "Dicas Precisas",
+      description: "Receba dicas e insights que podem ser o diferencial que traga sua liberdade financeira.",
     },
     {
       icon: <DollarSign className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />,
-      title: "Criptomoedas",
-      description: "Acesse as principais criptomoedas do mercado e acompanhe em tempo real.",
+      title: "Controle de Gastos",
+      description: "Crie um orcamento personalizado para acompanhar seus lucros e despesas.",
     },
     {
       icon: <Shield className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />,
@@ -55,6 +55,16 @@ export function FeatureSection() {
       icon: <LineChart className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />,
       title: "Análises Avançadas",
       description: "Gráficos e análises detalhadas para tomar as melhores decisões financeiras.",
+    },
+    {
+      icon: <User className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />,
+      title: "Para Todos os Perfis",
+      description: "Atendemos a todos os tipos de investidores, do iniciante ao experiente.",
+    },
+    {
+      icon: <Settings className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />,
+      title: "Personalização",
+      description: "Ajuste o seu orçamentoe investimentos de acordo com suas necessidades e objetivos.",
     },
   ]
 
@@ -72,7 +82,7 @@ export function FeatureSection() {
               Por que escolher a <span className="text-primary">Machine Invest</span>?
             </h2>
             <p className="mx-auto mt-2 sm:mt-3 max-w-[700px] text-sm sm:text-base text-muted-foreground">
-              Descubra os diferenciais que fazem da Machine Invest a plataforma ideal para seus investimentos.
+              Descubra os diferenciais que fazem da Machine Invest a plataforma ideal para sua gestão financeira e investimentos.
             </p>
           </motion.div>
           <motion.div

@@ -14,7 +14,7 @@ import { useState } from "react"
 import { PageLayout } from "@/components/page-layout"
 import { Section } from "@/components/section"
 import { SectionHeading } from "@/components/section-heading"
-
+import Checkmark from '@/components/currency-transfer'
 export default function SimulacaoPage() {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -47,7 +47,10 @@ export default function SimulacaoPage() {
 
   return (
     <PageLayout>
+    
+     < Checkmark />
       <Section>
+         
       <motion.div
               className="text-center"
               initial={{ opacity: 0, y: 20 }}

@@ -5,10 +5,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Wallet, CreditCard, Smartphone, Shield, Clock, Zap } from "lucide-react"
 import Image from "next/image"
-
+import { WavyBackground } from "@/components/wavy-background"
 export default function ContaDigitalPage() {
   return (
     <PageLayout>
+      <WavyBackground className="max-w-4xl mx-auto pb-40">
+      <p className="text-2xl md:text-4xl lg:text-7xl font-bold inter-var text-center">
+        O melhor pra você.
+      </p>
+      <p className="text-base md:text-lg mt-4  font-normal inter-var text-center">
+        Veja o que proporcionamos pra cada perfil de investidor.
+      </p>
+    </WavyBackground>
       <Section>
         <SectionHeading
           title="Conta Digital"

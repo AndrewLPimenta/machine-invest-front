@@ -119,6 +119,12 @@ importers:
       date-fns:
         specifier: 3.0.0
         version: 3.0.0
+      dotted:
+        specifier: ^0.1.1
+        version: 0.1.1(lodash@4.17.21)
+      dotted-map:
+        specifier: ^2.2.3
+        version: 2.2.3
       embla-carousel-react:
         specifier: 8.5.1
         version: 8.5.1(react@18.3.1)
@@ -131,6 +137,9 @@ importers:
       lucide-react:
         specifier: ^0.454.0
         version: 0.454.0(react@18.3.1)
+      map:
+        specifier: ^1.0.1
+        version: 1.0.1
       next:
         specifier: 15.2.4
         version: 15.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -158,6 +167,9 @@ importers:
       recharts:
         specifier: latest
         version: 2.15.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      simplex-noise:
+        specifier: ^4.0.3
+        version: 4.0.3
       sonner:
         specifier: ^1.7.1
         version: 1.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1083,6 +1095,15 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1'
 
+  '@turf/boolean-point-in-polygon@6.5.0':
+    resolution: {integrity: sha512-DtSuVFB26SI+hj0SjrvXowGTUCHlgevPAIsukssW6BG5MlNSBQAo70wpICBNJL6RjukXg8d2eXaAWuD/CqL00A==}
+
+  '@turf/helpers@6.5.0':
+    resolution: {integrity: sha512-VbI1dV5bLFzohYYdgqwikdMVpe7pJ9X3E+dlr425wa2/sMJqYDhTO++ec38/pcPvPE6oD9WEEeU3Xu3gza+VPw==}
+
+  '@turf/invariant@6.5.0':
+    resolution: {integrity: sha512-Wv8PRNCtPD31UVbdJE/KVAWKe7l6US+lJItRR/HOEW3eh+U/JwRCSUl/KZ7bmjM/C+zLNoreM2TU6OoLACs4eg==}
+
   '@types/d3-array@3.2.1':
     resolution: {integrity: sha512-Y2Jn2idRrLzUfAKV2LyRImR+y4oa2AntrgID95SHJxuMUrkNXmanDSed71sRNZysveJVt1hLLemQZIady0FpEg==}
 
@@ -1325,6 +1346,14 @@ packages:
   dom-helpers@5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
 
+  dotted-map@2.2.3:
+    resolution: {integrity: sha512-8hyOOHHLLVCcCisM3yb9hqp+3bJ7TSMcr1SfrUw8Wxp5UMqih35jIvUyagweCooJbz/EH1nC9GGuPysh7+YlAg==}
+
+  dotted@0.1.1:
+    resolution: {integrity: sha512-N23fpcivS+QPnGKcoiBPQcj5rCn4yvXO4bLt0JHGjhFCspyyIvemFtNn6Nk6Aen+D/4xDAo82OosAH96ejsy7A==}
+    peerDependencies:
+      lodash: 2.x
+
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
@@ -1555,6 +1584,9 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
 
+  map@1.0.1:
+    resolution: {integrity: sha512-fK8tGmhZ+vGpl1a2fOwGBRtVfVulcNj54SWAAL7O8eaJoEjlqm3jFo+C8RQm4piXIHi+BNhqn00EdP5H8gS4bw==}
+
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
@@ -1562,6 +1594,9 @@ packages:
   merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
+
+  mgrs@1.0.0:
+    resolution: {integrity: sha512-awNbTOqCxK1DBGjalK3xqWIstBZgN6fxsMSiXLs9/spqWkF2pAhb2rrYCFSsr1/tT7PhcDGjZndG8SWYn0byYA==}
 
   micromatch@4.0.8:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
@@ -1721,6 +1756,9 @@ packages:
     resolution: {integrity: sha512-QSa9EBe+uwlGTFmHsPKokv3B/oEMQZxfqW0QqNCyhpa6mB1afzulwn8hihglqAb2pOw+BJgNlmXQ8la2VeHB7w==}
     engines: {node: ^10 || ^12 || >=14}
 
+  proj4@2.19.10:
+    resolution: {integrity: sha512-uL6/C6kA8+ncJAEDmUeV8PmNJcTlRLDZZa4/87CzRpb8My4p+Ame4LhC4G3H/77z2icVqcu3nNL9h5buSdnY+g==}
+
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
 
@@ -1870,6 +1908,9 @@ packages:
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
 
+  simplex-noise@4.0.3:
+    resolution: {integrity: sha512-qSE2I4AngLQG7BXqoZj51jokT4WUXe8mOBrvfOXpci8+6Yu44+/dD5zqDpOx3Ux792eamTd2lLcI8jqFntk/lg==}
+
   sonner@1.7.4:
     resolution: {integrity: sha512-DIS8z4PfJRbIyfVFDVnK9rO3eYDtse4Omcm6bt0oEr5/jtLgysmjuBl1frJ9E/EQZrFmKx2A8m/s5s9CRXIzhw==}
     peerDependencies:
@@ -2010,6 +2051,9 @@ packages:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
     hasBin: true
+
+  wkt-parser@1.5.2:
+    resolution: {integrity: sha512-1ZUiV1FTwSiSrgWzV9KXJuOF2BVW91KY/mau04BhnmgOdroRQea7Q0s5TVqwGLm0D2tZwObd/tBYXW49sSxp3Q==}
 
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
@@ -2910,6 +2954,17 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.17
 
+  '@turf/boolean-point-in-polygon@6.5.0':
+    dependencies:
+      '@turf/helpers': 6.5.0
+      '@turf/invariant': 6.5.0
+
+  '@turf/helpers@6.5.0': {}
+
+  '@turf/invariant@6.5.0':
+    dependencies:
+      '@turf/helpers': 6.5.0
+
   '@types/d3-array@3.2.1': {}
 
   '@types/d3-color@3.1.3': {}
@@ -3148,6 +3203,15 @@ snapshots:
       '@babel/runtime': 7.27.6
       csstype: 3.1.3
 
+  dotted-map@2.2.3:
+    dependencies:
+      '@turf/boolean-point-in-polygon': 6.5.0
+      proj4: 2.19.10
+
+  dotted@0.1.1(lodash@4.17.21):
+    dependencies:
+      lodash: 4.17.21
+
   dunder-proto@1.0.1:
     dependencies:
       call-bind-apply-helpers: 1.0.2
@@ -3354,9 +3418,13 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  map@1.0.1: {}
+
   math-intrinsics@1.1.0: {}
 
   merge2@1.4.1: {}
+
+  mgrs@1.0.0: {}
 
   micromatch@4.0.8:
     dependencies:
@@ -3495,6 +3563,11 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  proj4@2.19.10:
+    dependencies:
+      mgrs: 1.0.0
+      wkt-parser: 1.5.2
 
   prop-types@15.8.1:
     dependencies:
@@ -3668,6 +3741,8 @@ snapshots:
       is-arrayish: 0.3.2
     optional: true
 
+  simplex-noise@4.0.3: {}
+
   sonner@1.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -3825,6 +3900,8 @@ snapshots:
   which@2.0.2:
     dependencies:
       isexe: 2.0.0
+
+  wkt-parser@1.5.2: {}
 
   wrap-ansi@7.0.0:
     dependencies:

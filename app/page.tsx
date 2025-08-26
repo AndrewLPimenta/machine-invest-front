@@ -19,7 +19,8 @@ import { ResponsiveGrid } from "@/components/responsive-grid"
 import { Suspense } from "react"
 import { CardSkeleton, ChartSkeleton } from "@/components/loading-skeleton"
 import HeroGeometric from "@/components/hero-geometric"
-
+import { WorldMap } from "@/components/ui/world-map";
+import { motion } from "framer-motion";
 export default function Home() {
   const performanceData = [
     { label: "Renda Fixa", value: 40, color: "#10b981" },
@@ -31,13 +32,204 @@ export default function Home() {
   return (
     <PageLayout>
       <HeroGeometric />
-      <HeroSection />
-      <FeatureSection />
+      {/* <HeroSection />  */}
+    <FeatureSection />
+
+     <Section background="muted">
+        <SectionHeading
+          title="Te ajudamos a crescer financeiramente"
+          description="Receba dicas e insights que podem ser o diferencial que você precisa para prosperar."
+          centered
+          highlightedWord="Machine Invest"
+        />
+
+        <div className="mt-16">
+          <ResponsiveGrid cols={{ default: 1, sm: 2, lg: 3 }}>
+            <Card className="h-full">
+              <CardHeader>
+                <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
+                  <DollarSign className="h-10 w-10 text-primary" />
+                </div>
+                <CardTitle>Educação Financeira Gratuita</CardTitle>
+                <CardDescription>
+                  Receba conhecimento valioso e estratégias personalizadas para acelerar seu crescimento patrimonial,
+                  sem custos.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-sm text-muted-foreground">Cadastro e Acesso</span>
+                  <span className="font-medium text-green-500">Gratuito</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-muted-foreground">Dicas Personalizadas</span>
+                  <span className="font-medium text-green-500">Gratuito</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-muted-foreground">Atualizações Constantes</span>
+                  <span className="font-medium text-green-500">Gratuito</span>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <Link href="/comparativo">
+                    Começar Agora <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+
+            <Card className="h-full">
+              <CardHeader>
+                <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
+                  <Shield className="h-10 w-10 text-primary" />
+                </div>
+                <CardTitle>Confiança e Segurança Total</CardTitle>
+                <CardDescription>
+                  Informações verificadas por especialistas e dados protegidos com tecnologia de ponta para sua
+                  tranquilidade.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Proteção máxima dos seus dados</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Conteúdo validado por especialistas</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Transparência em todas as recomendações</span>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <Link href="/seguranca">
+                    Saiba Mais <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+
+            <Card className="h-full">
+              <CardHeader>
+                <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
+                  <LineChart className="h-10 w-10 text-primary" />
+                </div>
+                <CardTitle>Acelere sua Prosperidade</CardTitle>
+                <CardDescription>
+                  Aprenda estratégias comprovadas e tome decisões inteligentes que podem multiplicar seu patrimônio ao
+                  longo do tempo.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Análises detalhadas do mercado em tempo real</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Comparativos que revelam as melhores oportunidades</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
+                  <span>Estratégias para diferentes perfis de risco</span>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <Link href="/simulacao">
+                    Simular Crescimento <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          </ResponsiveGrid>
+        </div>
+
+        <div className="mt-8 text-center">
+          <Button asChild>
+            <Link href="/comparativo">
+              Descobrir Todo o Potencial <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </Section>
+
+
+
+      {/* World Map Section */}
+      <div className=" py-40 dark:bg-black bg-white w-full">
+      <div className="max-w-7xl mx-auto text-center">
+        <p className="font-bold text-xl md:text-4xl dark:text-white text-black">
+          Independência{" "}
+          <span className="text-neutral-400">
+            {"Geográfica".split("").map((word, idx) => (
+              <motion.span
+                key={idx}
+                className="inline-block"
+                initial={{ x: -10, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: idx * 0.04 }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </span>
+        </p>
+        <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
+          Esteja informado em qualquer lugar do mundo. Nossa plataforma conecta você às principais
+          notícias financeiras globais, ajudando-o a tomar decisões de investimento inteligentes e oportunas.
+        </p>
+      </div>
+
+            
+      
+      <WorldMap
+        dots={[
+          {
+            start: {
+              lat: 64.2008,
+              lng: -149.4937,
+            }, // Alaska (Fairbanks)
+            end: {
+              lat: 34.0522,
+              lng: -118.2437,
+            }, // Los Angeles
+          },
+          {
+            start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
+            end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+          },
+          {
+            start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+            end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
+          },
+          {
+            start: { lat: 51.5074, lng: -0.1278 }, // London
+            end: { lat: 28.6139, lng: 77.209 }, // New Delhi
+          },
+          {
+            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
+            end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
+          },
+          {
+            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
+            end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
+          },
+        ]}
+      />
+    </div>
+
+
+      
 
       <Section background="muted">
         <SectionHeading
-          title="Alocação Recomendada por Perfil"
-          description="Descubra a distribuição ideal de investimentos baseada no seu perfil de risco e objetivos financeiros."
+          title="Descubra seu Perfil de Investidor"
+          description="Entenda qual a distribuição ideal de investimentos baseada no seu perfil de risco e objetivos financeiros."
           centered
         />
 
@@ -101,8 +293,12 @@ export default function Home() {
             </Card>
           </ResponsiveGrid>
         </div>
+        
       </Section>
-      <Card>
+      <Section background="muted">
+
+        <Card>
+        
         <CardHeader className="text-center">
           <CardTitle>O que posso aprender?</CardTitle>
           <CardDescription>
@@ -149,6 +345,8 @@ export default function Home() {
           </Button>
         </CardFooter>
       </Card>
+      </Section>
+      
       <Section>
         <SectionHeading
           title="Notícias que Impactam seus Investimentos"
@@ -287,128 +485,7 @@ export default function Home() {
       <EnhancedTestimonialSection />
       <SimulationSection />
 
-      <Section background="muted">
-        <SectionHeading
-          title="Transforme sua Vida Financeira com a Machine Invest"
-          description="Descubra como nossas dicas e insights podem ser o diferencial que você precisa para prosperar financeiramente."
-          centered
-          highlightedWord="Machine Invest"
-        />
-
-        <div className="mt-16">
-          <ResponsiveGrid cols={{ default: 1, sm: 2, lg: 3 }}>
-            <Card className="h-full">
-              <CardHeader>
-                <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
-                  <DollarSign className="h-10 w-10 text-primary" />
-                </div>
-                <CardTitle>Educação Financeira Gratuita</CardTitle>
-                <CardDescription>
-                  Receba conhecimento valioso e estratégias personalizadas para acelerar seu crescimento patrimonial,
-                  sem custos.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Cadastro e Acesso</span>
-                  <span className="font-medium text-green-500">Gratuito</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Dicas Personalizadas</span>
-                  <span className="font-medium text-green-500">Gratuito</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-muted-foreground">Atualizações Constantes</span>
-                  <span className="font-medium text-green-500">Gratuito</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full bg-transparent" asChild>
-                  <Link href="/comparativo">
-                    Começar Agora <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-
-            <Card className="h-full">
-              <CardHeader>
-                <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
-                  <Shield className="h-10 w-10 text-primary" />
-                </div>
-                <CardTitle>Confiança e Segurança Total</CardTitle>
-                <CardDescription>
-                  Informações verificadas por especialistas e dados protegidos com tecnologia de ponta para sua
-                  tranquilidade.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start gap-2">
-                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Proteção máxima dos seus dados</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Conteúdo validado por especialistas</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Transparência em todas as recomendações</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full bg-transparent" asChild>
-                  <Link href="/seguranca">
-                    Saiba Mais <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-
-            <Card className="h-full">
-              <CardHeader>
-                <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
-                  <LineChart className="h-10 w-10 text-primary" />
-                </div>
-                <CardTitle>Acelere sua Prosperidade</CardTitle>
-                <CardDescription>
-                  Aprenda estratégias comprovadas e tome decisões inteligentes que podem multiplicar seu patrimônio ao
-                  longo do tempo.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start gap-2">
-                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Análises detalhadas do mercado em tempo real</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Comparativos que revelam as melhores oportunidades</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="h-2 w-2 rounded-full bg-primary mt-2" />
-                  <span>Estratégias para diferentes perfis de risco</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full bg-transparent" asChild>
-                  <Link href="/simulacao">
-                    Simular Crescimento <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          </ResponsiveGrid>
-        </div>
-
-        <div className="mt-8 text-center">
-          <Button asChild>
-            <Link href="/comparativo">
-              Descobrir Todo o Potencial <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </Section>
+     
 
       <CtaSection />
     </PageLayout>
