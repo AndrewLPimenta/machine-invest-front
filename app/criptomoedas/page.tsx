@@ -1,6 +1,6 @@
 "use client"
-
 import { Button } from "@/components/ui/button"
+import { useRef } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowDownToLine, ArrowRight, ChevronDown, ChevronUp, Search, Star } from "lucide-react"
@@ -17,6 +17,8 @@ import { EnhancedCryptoChart } from "@/components/enhanced-crypto-chart"
 import { SiteLayout } from "@/components/site-layout"
 import { ResponsiveContainer } from "@/components/responsive-container"
 import FloatingPaths from "@/components/background-paths"
+
+
 
 const cryptos = [
   {
@@ -113,6 +115,7 @@ const cryptos = [
 ]
 
 export default function CriptoPage() {
+  const sectionRef = useRef<HTMLDivElement | null>(null)
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -200,19 +203,21 @@ export default function CriptoPage() {
 
   return (
     <SiteLayout>
-      <  FloatingPaths />
+      <  FloatingPaths
+      title="Criptomoedas em Destaque"
+      targetRef={sectionRef}/>
       <Section className="py-12">
          
         <ResponsiveContainer>
          
-          <div className="max-w-3xl mx-auto text-center">
+          <div ref={sectionRef} className="max-w-3xl mx-auto text-center">
             <SectionHeading
               title="Principais nomes do mercado"
               description="Acompanhe as principais criptomoedas do mercado e suas variações em tempo real."
               centered
             />
 
-            <div className="mt-8 flex flex-col gap-4 items-center justify-center">
+            <div className="mt-8 flex flex-col gap-4 items-center justify-center" >
               <div className="relative w-full max-w-md">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -223,7 +228,7 @@ export default function CriptoPage() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
-              <div className="flex flex-wrap gap-2 justify-center">
+              <div  className="flex flex-wrap gap-2 justify-center" >
                 <Button variant="outline" size="sm" asChild>
                   <Link href="/criptomoedas/comparar">Comparar Criptomoedas</Link>
                 </Button>
@@ -239,7 +244,7 @@ export default function CriptoPage() {
             </div>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12" >
             <Tabs defaultValue="tabela" className="w-full">
               <TabsList className="w-full max-w-xs mx-auto grid grid-cols-2 mb-8">
                 <TabsTrigger value="tabela">Mostrar em Tabela</TabsTrigger>

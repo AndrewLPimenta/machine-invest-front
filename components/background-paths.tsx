@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowDown } from "lucide-react"
+import { RefObject } from "react"
 
 function FloatingPaths({ position }: { position: number }) {
   const paths = Array.from({ length: 36 }, (_, i) => ({
@@ -46,10 +47,16 @@ function FloatingPaths({ position }: { position: number }) {
 
 export default function BackgroundPaths({
   title = "Criptomoedas em Destaque",
+  targetRef,
 }: {
   title?: string
+  targetRef: RefObject<HTMLDivElement>
 }) {
   const words = title.split(" ")
+
+  const handleScroll = () => {
+    targetRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950">
@@ -90,8 +97,9 @@ export default function BackgroundPaths({
 
           <div className="inline-block group relative p-px rounded-2xl backdrop-blur-lg overflow-hidden">
             <Button
+              onClick={handleScroll}
               variant="ghost"
-              className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md bg-transparent border border-primary text-primary hover:bg-primary/10 transition-all duration-300 group-hover:-translate-y-0.5"
+              className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md bg-transparent text-primary hover:bg-primary/10 transition-all duration-300 group-hover:-translate-y-0.5"
             >
               <span className="opacity-90 group-hover:opacity-100 transition-opacity">
                 Arraste pra explorar
