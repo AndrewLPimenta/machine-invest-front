@@ -51,7 +51,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
             />
           </filter>
           <filter id="gooey-filter" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
             <feColorMatrix
               in="blur"
               mode="matrix"
@@ -66,16 +66,14 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       {/* Background Shaders */}
      <MeshGradient
         className="absolute inset-0 w-full h-full"
-        colors={["#000000", "#00f8f8", "#ffffff", "#224242ff", "#2a4242ff"]}
-        speed={0.3}
-        backgroundColor="transparent"
+        colors={["#000000ff", "#00f8f89c", "#020202ff", "#000", "#000000ff"]}
+        speed={0.4}
+      
       />
       <MeshGradient
         className="absolute inset-0 w-full h-full opacity-60"
-        colors={["#000000", "#000000ff", "#00f8f8", "#00f8f8"]}
-        speed={0.2}
-        wireframe="true"
-        backgroundColor="transparent"
+        colors={["#00f8f8", "#000", "#000000ff", "#000000ff"]}
+        speed={0.4}
       />
 
       {/* filhos centralizados */}
