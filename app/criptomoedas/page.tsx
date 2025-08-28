@@ -62,38 +62,38 @@ export default function CriptoPage() {
   const [moeda, setMoeda] = useState<"USD" | "BRL" | "EUR">("BRL")
 
   // Socket.IO para atualizações de preço
-  useEffect(() => {
-    const socket = io("http://localhost:3001")
+ useEffect(() => {
+  const socket = io("http://localhost:3001")
 
-    socket.on("precoAtualizado", (data: any) => {
-      setCryptos((prev) => {
-        const updated = [...prev]
-        const index = updated.findIndex((c) => c.symbol === data.symbol)
+  socket.on("precoAtualizado", (data: Partial<CryptoData>) => {
+    setCryptos((prev) => {
+      const updated = [...prev]
+      const index = updated.findIndex((c) => c.symbol === data.symbol)
 
-        if (index >= 0) {
-          const prevPrice = updated[index][moeda] ?? 0
-          const newPrice = data[moeda] ?? prevPrice
-          const change = prevPrice ? ((newPrice - prevPrice) / prevPrice) * 100 : 0
-          updated[index] = { ...updated[index], ...data, change }
-        } else {
-          updated.push({
-            name: data.symbol,
-            symbol: data.symbol,
-            image: logos[data.symbol] || "/placeholder.svg",
-            USD: data.USD ?? 0,
-            BRL: data.BRL ?? 0,
-            EUR: data.EUR ?? 0,
-            change: 0,
-            marketCap: data.marketCap ?? "0",
-            volume: data.volume ?? "0",
-          })
-        }
-        return updated
-      })
+      if (index >= 0) {
+        const prevPrice = updated[index][moeda] ?? 0
+        const newPrice = data[moeda] ?? prevPrice
+        const change = prevPrice ? ((newPrice - prevPrice) / prevPrice) * 100 : 0
+        updated[index] = { ...updated[index], ...data, change }
+      } else {
+        updated.push({
+          name: data.symbol!,
+          symbol: data.symbol!,
+          image: logos[data.symbol!] || "/placeholder.svg",
+          USD: data.USD ?? 0,
+          BRL: data.BRL ?? 0,
+          EUR: data.EUR ?? 0,
+          change: 0,
+          marketCap: data.marketCap ?? "0",
+          volume: data.volume ?? "0",
+        })
+      }
+      return updated
     })
+  })
 
-    return () => socket.disconnect()
-  }, [moeda])
+  return () => socket.disconnect()
+}, [])
 
   const filteredCryptos = cryptos
     .filter(
@@ -198,7 +198,7 @@ export default function CriptoPage() {
                       </div>
                       <div
                         className={`flex items-center space-x-1 rounded-full px-2 py-0.5 text-xs font-medium ${
-                          crypto.change > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                          crypto.change > 0 ? "bg-primary/10 text-primary" : "bg-primary-foreground/10 text-700"
                         }`}
                       >
                         {crypto.change > 0 ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
@@ -279,7 +279,7 @@ export default function CriptoPage() {
                     {moeda === "BRL" ? "R$ " : moeda === "USD" ? "$ " : "€ "}
                     {(crypto[moeda] ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
                   </TableCell>
-                  <TableCell className={`text-right ${crypto.change > 0 ? "text-green-600" : "text-red-600"}`}>
+                  <TableCell className={`text-right ${crypto.change > 0 ? "text-primary" : "text-600"}`}>
                     <div className="flex items-center justify-end gap-1">
                       {crypto.change > 0 ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                       {(Math.abs(crypto.change) < 1 

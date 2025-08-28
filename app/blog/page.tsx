@@ -1,5 +1,5 @@
 "use client"
-
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Calendar, Clock, Search } from "lucide-react"
@@ -12,11 +12,18 @@ import { SiteLayout } from "@/components/site-layout"
 import { Section } from "@/components/section"
 import { ResponsiveContainer } from "@/components/responsive-container"
 import { WorldMap } from "@/components/ui/world-map"
+import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+
 export default function BlogPage() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
+  const [counts, setCounts] = useState<number[]>([]);
+
+  useEffect(() => {
+    setCounts(categories.map(() => Math.floor(Math.random() * 20) + 1));
+  }, []);
 
   const blogPosts = [
     {
@@ -108,68 +115,40 @@ export default function BlogPage() {
 
   return (
     <SiteLayout>
-       {/* World Map Section */}
-      <div className=" py-40  w-full">
-      <div className="max-w-7xl mx-auto text-center">
-        <p className="font-bold text-xl md:text-4xl ">
-          Independência {" "}
-          <span className="text-neutral-400">
-            {"Geográfica".split("").map((word, idx) => (
-              <motion.span
-                key={idx}
-                className="inline-block"
-                initial={{ x: -10, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: idx * 0.04 }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>
-        </p>
-        <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
-          Esteja informado em qualquer lugar do mundo. Nossa plataforma conecta você às principais
-          notícias financeiras globais, ajudando-o a tomar decisões de investimento inteligentes e oportunas.
-        </p>
+      <div className="flex flex-col overflow-hidden pb-[100px] pt-[100px]">
+        <ContainerScroll
+          titleComponent={
+            <>
+              <h1 className="text-4xl font-semibold text-black dark:text-white">
+                Fique por dentro das <br />
+                <span className="text-neutral-400 text-4xl md:text-[6rem] font-bold mt-1 leading-none">
+              {"Notícias do Mercado".split(" ; ").map((word, idx) => (
+                <motion.span
+                  key={idx}
+                  className="inline-block"
+                  initial={{ x: -10, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: idx * 0.04 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </span>
+              </h1>
+            </>
+          }
+        >
+          <Image
+            src={`/`}
+            alt="fintech-ui"
+            height={720}
+            width={1400}
+            className="mx-auto rounded-2xl object-cover h-full object-left-top"
+            draggable={false}
+          />
+        </ContainerScroll>
       </div>
-
-            
       
-      <WorldMap
-        dots={[
-          {
-            start: {
-              lat: 64.2008,
-              lng: -149.4937,
-            }, // Alaska (Fairbanks)
-            end: {
-              lat: 34.0522,
-              lng: -118.2437,
-            }, // Los Angeles
-          },
-          {
-            start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
-            end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-          },
-          {
-            start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-            end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
-          },
-          {
-            start: { lat: 51.5074, lng: -0.1278 }, // London
-            end: { lat: 28.6139, lng: 77.209 }, // New Delhi
-          },
-          {
-            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-            end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
-          },
-          {
-            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-            end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
-          },
-        ]}
-      />
-    </div>
       <Section className="py-20">
         <ResponsiveContainer>
           <motion.div
@@ -179,11 +158,12 @@ export default function BlogPage() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              Blog & <span className="text-primary">Educação Financeira</span>
+              Esteja sempre<span className="text-primary"> Atualizado(a).</span>
             </h1>
-            <p className="mx-auto mt-4 max-w-[700px] text-muted-foreground md:text-xl">
-              Artigos, dicas e análises para ajudar você a tomar decisões financeiras mais inteligentes.
-            </p>
+            <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
+            Esteja informado em qualquer lugar do mundo. Nossa plataforma conecta você às principais
+            notícias financeiras globais, ajudando-o a tomar decisões de investimento inteligentes e oportunas.
+          </p>
           </motion.div>
           <div className="mt-8 flex flex-col gap-8 md:flex-row">
             <motion.div
@@ -246,13 +226,13 @@ export default function BlogPage() {
                 ))}
               </motion.div>
               <div className="mt-8 flex justify-center">
-                <Button variant="outline" size="sm"className="mt-8 flex justify-center" asChild>
-                          <Link href="/download"
-                            id="download">
-                            Ver todos os Artigos <ArrowRight className="ml-2 h-4 w-4" />
-                          </Link>
-                        </Button>
-                </div>
+                <Button variant="outline" size="sm" className="mt-8 flex justify-center" asChild>
+                  <Link href="/download"
+                    id="download">
+                    Ver todos os Artigos <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
               {/* <div className="mt-8 flex justify-center">
                 <Button variant="outline">Carregar Mais Artigos</Button>
               </div> */}
@@ -277,11 +257,12 @@ export default function BlogPage() {
                         >
                           <span>{category}</span>
                           <span className="rounded-full bg-muted px-2 py-0.5 text-xs">
-                            {Math.floor(Math.random() * 20) + 1}
+                            {counts[index] || 0} {/* mostra 0 até o client gerar */}
                           </span>
                         </Link>
                       </li>
                     ))}
+
                   </ul>
                 </CardContent>
               </Card>

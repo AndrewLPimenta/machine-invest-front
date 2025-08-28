@@ -15,6 +15,9 @@ import { PageLayout } from "@/components/page-layout"
 import { Section } from "@/components/section"
 import { SectionHeading } from "@/components/section-heading"
 import Checkmark from '@/components/currency-transfer'
+import { ResponsiveContainer } from "@/components/responsive-container"
+import HeroContent from "@/components/hero-content"
+import ShaderBackground from "@/components/shader-background"
 export default function SimulacaoPage() {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -47,9 +50,21 @@ export default function SimulacaoPage() {
 
   return (
     <PageLayout>
+     
+       <ShaderBackground>
+      
     
-     < Checkmark />
-      <Section>
+     <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              
+              < Checkmark />
+              
+            </motion.div>
+      
          
       <motion.div
               className="text-center"
@@ -57,13 +72,24 @@ export default function SimulacaoPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
+               
+            </motion.div>
+            </ShaderBackground>
+          <Section>
+              <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+             
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                Simulação de <span className="text-primary">Investimentos</span>
+                Tabela de <span className="text-primary">Investimentos</span>
               </h1>
               <p className="mx-auto mt-4 max-w-[700px] text-muted-foreground md:text-xl">
-                Calcule o potencial de rendimento dos seus investimentos e planeje seu futuro financeiro.
+                Veja como seus investimentos podem fazer o dinheiro trabalhar pra você.
               </p>
-            </motion.div>
+              </motion.div>
         <motion.div
           className="mt-16 grid gap-8 lg:grid-cols-3"
           initial={{ opacity: 0, y: 20 }}
@@ -71,6 +97,7 @@ export default function SimulacaoPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           ref={ref}
         >
+          
           <div className="lg:col-span-2">
             <Card>
               <CardHeader>
@@ -474,6 +501,7 @@ export default function SimulacaoPage() {
             </Card>
           </div>
           <div>
+            < ResponsiveContainer>
             <Card className="h-full">
               <CardHeader>
                 <CardTitle>Resumo do Investimento</CardTitle>
@@ -593,6 +621,9 @@ export default function SimulacaoPage() {
                 </Button>
               </CardFooter>
             </Card>
+            
+            </ResponsiveContainer>
+            
           </div>
         </motion.div>
       </Section>

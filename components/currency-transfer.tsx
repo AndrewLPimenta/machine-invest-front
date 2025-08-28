@@ -70,8 +70,8 @@ export function Checkmark({ size = 100, strokeWidth = 2, color = "currentColor",
 
 export default function CurrencyTransfer() {
   return (
-    <Card className="w-full max-w-sm mx-auto p-6 min-h-[300px] flex flex-col justify-center bg-zinc-900 dark:bg-white border-zinc-800 dark:border-zinc-200 backdrop-blur-sm">
-      <CardContent className="space-y-4 flex flex-col items-center justify-center">
+    <Card className="w-full max-w-sm mx-auto p-6 min-h-[300px] flex flex-col justify-center bg-white dark:bg-black border border-primary-800  backdrop-blur-sm">
+      <CardContent className="space-y-4 flex flex-col  items-center justify-center">
         <motion.div
           className="flex justify-center"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -88,7 +88,7 @@ export default function CurrencyTransfer() {
         >
           <div className="relative">
             <motion.div
-              className="absolute inset-0 blur-xl bg-emerald-500/10 dark:bg-emerald-500/20 rounded-full"
+              className="absolute inset-0 blur-xl bg-emerald-600/80 rounded-full"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
@@ -116,7 +116,7 @@ export default function CurrencyTransfer() {
           }}
         >
           <motion.h2
-            className="text-lg text-zinc-100 dark:text-zinc-900 tracking-tighter font-semibold uppercase"
+            className="text-lg tracking-tighter font-semibold uppercase"
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.4 }}
@@ -125,7 +125,7 @@ export default function CurrencyTransfer() {
           </motion.h2>
           <div className="flex items-center gap-4">
             <motion.div
-              className="flex-1 bg-zinc-800/50 dark:bg-zinc-50/50 rounded-xl p-3 border border-zinc-700/50 dark:border-zinc-200/50 backdrop-blur-md"
+              className="flex-1 bg--50/50 rounded-xl p-3 border border-primary-10  backdrop-blur-md"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
@@ -136,7 +136,7 @@ export default function CurrencyTransfer() {
             >
               <div className="flex flex-col items-start gap-2">
                 <div className="space-y-1.5">
-                  <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5">
+                  <span className="text-xs font-medium text-500 flex items-center gap-1.5">
                     <svg
                       className="w-3 h-3"
                       xmlns="http://www.w3.org/2000/svg"
@@ -147,24 +147,24 @@ export default function CurrencyTransfer() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <title>From</title>
+                      <title>Com Juros compostos</title>
                       <path d="M12 19V5M5 12l7-7 7 7" />
                     </svg>
-                    From
+                    Com Juros compostos
                   </span>
                   <div className="flex items-center gap-2.5 group transition-all">
-                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-zinc-900 dark:bg-white shadow-lg border border-zinc-700 dark:border-zinc-300 text-sm font-medium text-zinc-100 dark:text-zinc-900 group-hover:scale-105 transition-transform">
-                      $
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-900 bg-background border border-primary/20 text-primary font-medium  group-hover:scale-105 transition-transform">
+                      R$
                     </span>
-                    <span className="font-medium text-zinc-100 dark:text-zinc-900 tracking-tight">500.00 USD</span>
+                    <span className="font-medium text-primary tracking-tight">+53.083,89</span>
                   </div>
                 </div>
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-700 dark:via-zinc-300 to-transparent" />
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-primary  to-transparent" />
                 <div className="space-y-1.5">
-                  <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5">
+                  <span className="text-xs font-medium text-500 flex items-center gap-1.5">
                     <svg
                       className="w-3 h-3"
-                      xmlns="http://www.w3.org/2000/svg"
+                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -172,16 +172,16 @@ export default function CurrencyTransfer() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <title>To</title>
+                      <title>Sem Juros Compostos</title>
                       <path d="M12 5v14M5 12l7 7 7-7" />
                     </svg>
-                    To
+                    Sem Juros Compostos
                   </span>
                   <div className="flex items-center gap-2.5 group transition-all">
-                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-zinc-900 dark:bg-white shadow-lg border border-zinc-700 dark:border-zinc-300 text-sm font-medium text-zinc-100 dark:text-zinc-900 group-hover:scale-105 transition-transform">
-                      €
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-900 bg-background border border-primary/700 text-primary-700 font-medium  group-hover:scale-105 transition-transform">
+                      R$
                     </span>
-                    <span className="font-medium text-zinc-100 dark:text-zinc-900 tracking-tight">460.00 EUR</span>
+                    <span className="font-medium text-100 tracking-tight">+50.000,00</span>
                   </div>
                 </div>
               </div>
@@ -193,7 +193,7 @@ export default function CurrencyTransfer() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.4 }}
           >
-            Exchange Rate: 1 USD = 0.92 EUR
+            Rendimentos baseados em 0.5% ao mês durante 12 meses.
           </motion.div>
         </motion.div>
       </CardContent>
