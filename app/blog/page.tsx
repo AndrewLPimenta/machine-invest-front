@@ -139,7 +139,7 @@ export default function BlogPage() {
           }
         >
           <Image
-            src={`/`}
+            src={`/tela-print-dash.png`}
             alt="fintech-ui"
             height={720}
             width={1400}
