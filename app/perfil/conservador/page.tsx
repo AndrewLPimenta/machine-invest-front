@@ -7,9 +7,10 @@ import { Shield, TrendingUp, Target } from "lucide-react"
 import { AuthRedirect } from "@/components/auth-redirect"
 import { PageLayout } from "@/components/page-layout"
 import { InvestmentForm } from "@/components/investment-form"
+import { ExpenseForm } from "@/components/expense-form"
+import { ExpenseSummary } from "@/components/expense-summary"
 import { useFinanceService } from "@/service/investmentService"
 import { useInvestment } from "@/hooks/useInvestment"
-import { Button } from "@/components/ui/button"
 
 export default function ConservadorPage() {
   const financeService = useFinanceService()
@@ -21,17 +22,6 @@ export default function ConservadorPage() {
   const [investments, setInvestments] = useState<any[]>([])
   const [expenses, setExpenses] = useState<any[]>([])
   const [expenseCategories, setExpenseCategories] = useState<any[]>([])
-
-  const [newExpense, setNewExpense] = useState({
-    valor: "",
-    descricao: "",
-    dataGasto: new Date().toISOString().split("T")[0],
-    idCategoria: ""
-  })
-
-  // Estados para criar categoria nova
-  const [showCustomCategory, setShowCustomCategory] = useState(false)
-  const [customCategoryName, setCustomCategoryName] = useState("")
 
   useEffect(() => setMounted(true), [])
 
@@ -56,39 +46,7 @@ export default function ConservadorPage() {
   useEffect(() => { if (mounted) reloadData() }, [refreshKey, mounted])
 
   const handleInvestmentAdded = () => setRefreshKey(prev => prev + 1)
-
-  const handleExpenseAdded = async () => {
-    if (!newExpense.valor || !newExpense.descricao) return
-    const result = await fetchWithAuth(() =>
-      financeService.createExpense({
-        valor: parseFloat(newExpense.valor),
-        descricao: newExpense.descricao,
-        dataGasto: newExpense.dataGasto,
-        idCategoria: newExpense.idCategoria || null,
-      })
-    )
-    if (result) {
-      setNewExpense({
-        valor: "",
-        descricao: "",
-        dataGasto: new Date().toISOString().split("T")[0],
-        idCategoria: ""
-      })
-      setRefreshKey(prev => prev + 1)
-    }
-  }
-
-  const handleAddCustomCategory = async () => {
-    if (!customCategoryName.trim()) return
-    const result = await fetchWithAuth(() =>
-      financeService.createExpenseCategory({ nome: customCategoryName })
-    )
-    if (result) {
-      setCustomCategoryName("")
-      setShowCustomCategory(false)
-      setRefreshKey(prev => prev + 1)
-    }
-  }
+  const handleExpenseAdded = () => setRefreshKey(prev => prev + 1)
 
   if (!mounted) return (
     <PageLayout>
@@ -106,26 +64,25 @@ export default function ConservadorPage() {
 
         <div className="min-h-screen bg-background px-4 py-12">
           {/* Resumo Financeiro */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <Card className="bg-white/10 backdrop-blur border-0 shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 ">
+            <Card className="bg-background border border-primary/30 backdrop-blur shadow-xl">
               <CardContent className="text-center">
-                <Shield className="h-6 w-6 text-blue-300 mx-auto mb-2" />
-                <p className="text-sm font-semibold text-blue-200 uppercase">INVESTIMENTOS</p>
-                <p className="text-2xl font-bold text-white">{(summary?.totalInvestimentos ?? 0).toLocaleString("pt-BR")} R$</p>
+                <Shield className="h-6 w-6 text-primary mx-auto mb-2" />
+                <p className="text-sm font-semibold text-primary/60 uppercase">INVESTIMENTOS</p>
+                <p className="text-2xl font-bold">{(summary?.totalInvestimentos ?? 0).toLocaleString("pt-BR")} R$</p>
               </CardContent>
             </Card>
-            <Card className="bg-white/10 backdrop-blur border-0 shadow-xl">
+            
+            <ExpenseSummary 
+              expenses={expenses}
+              totalExpenses={summary?.totalGastos ?? 0}
+            />
+            
+            <Card className="bg-background border border-primary/30 backdrop-blur shadow-xl">
               <CardContent className="text-center">
-                <TrendingUp className="h-6 w-6 text-blue-300 mx-auto mb-2" />
-                <p className="text-sm font-semibold text-blue-200 uppercase">GASTOS</p>
-                <p className="text-2xl font-bold text-white">{(summary?.totalGastos ?? 0).toLocaleString("pt-BR")} R$</p>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/10 backdrop-blur border-0 shadow-xl">
-              <CardContent className="text-center">
-                <Target className="h-6 w-6 text-blue-300 mx-auto mb-2" />
-                <p className="text-sm font-semibold text-blue-200 uppercase">SALDO</p>
-                <p className="text-2xl font-bold text-white">{(summary?.saldo ?? 0).toLocaleString("pt-BR")} R$</p>
+                <Target className="h-6 w-6 text-primary mx-auto mb-2" />
+                <p className="text-sm font-semibold text-primary/60 uppercase">SALDO</p>
+                <p className="text-2xl font-bold">{(summary?.saldo ?? 0).toLocaleString("pt-BR")} R$</p>
               </CardContent>
             </Card>
           </div>
@@ -133,118 +90,19 @@ export default function ConservadorPage() {
           {/* Formulários */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             {/* Formulário Investimento */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Adicionar Investimento</CardTitle>
-                <CardDescription>Registre seus aportes</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <InvestmentForm
-                  onInvestmentAdded={handleInvestmentAdded}
-                  fetchWithAuth={fetchWithAuth}
-                  financeService={financeService}
-                />
-              </CardContent>
-            </Card>
+            <InvestmentForm
+              onInvestmentAdded={handleInvestmentAdded}
+              fetchWithAuth={fetchWithAuth}
+              financeService={financeService}
+            />
 
             {/* Formulário Gasto */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Adicionar Gasto</CardTitle>
-                <CardDescription>Registre suas despesas</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <label>Descrição</label>
-                  <input
-                    type="text"
-                    placeholder="Ex: Aluguel"
-                    value={newExpense.descricao}
-                    onChange={e => setNewExpense(prev => ({ ...prev, descricao: e.target.value }))}
-                    className="w-full p-3 border rounded-lg"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label>Valor (R$)</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    placeholder="1000,00"
-                    value={newExpense.valor}
-                    onChange={e => setNewExpense(prev => ({ ...prev, valor: e.target.value }))}
-                    className="w-full p-3 border rounded-lg"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label>Data</label>
-                  <input
-                    type="date"
-                    value={newExpense.dataGasto}
-                    onChange={e => setNewExpense(prev => ({ ...prev, dataGasto: e.target.value }))}
-                    className="w-full p-3 border rounded-lg"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <label>Categoria</label>
-                    <button
-                      type="button"
-                      onClick={() => setShowCustomCategory(!showCustomCategory)}
-                      className="text-sm text-blue-600 hover:underline"
-                    >
-                      Adicionar categoria
-                    </button>
-                  </div>
-
-                  {showCustomCategory ? (
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        placeholder="Nome da nova categoria"
-                        value={customCategoryName}
-                        onChange={e => setCustomCategoryName(e.target.value)}
-                        className="flex-1 p-3 border rounded-lg"
-                      />
-                      <button
-                        type="button"
-                        onClick={handleAddCustomCategory}
-                        className="px-4 py-3 bg-blue-600 text-white rounded-lg"
-                      >
-                        Adicionar
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setShowCustomCategory(false)}
-                        className="px-4 py-3 bg-gray-300 rounded-lg"
-                      >
-                        Cancelar
-                      </button>
-                    </div>
-                  ) : (
-                    <select
-                      value={newExpense.idCategoria}
-                      onChange={e => setNewExpense(prev => ({ ...prev, idCategoria: e.target.value }))}
-                      className="w-full p-3 border rounded-lg"
-                    >
-                      <option value="">Selecione uma categoria</option>
-                      {expenseCategories.map(cat => (
-                        <option key={cat.id} value={cat.id}>{cat.nome}</option>
-                      ))}
-                    </select>
-                  )}
-                </div>
-
-                <Button
-                  onClick={handleExpenseAdded}
-                  className="w-full bg-blue-600 hover:bg-blue-700"
-                >
-                  Adicionar Gasto
-                </Button>
-              </CardContent>
-            </Card>
+            <ExpenseForm
+              onExpenseAdded={handleExpenseAdded}
+              fetchWithAuth={fetchWithAuth}
+              financeService={financeService}
+              expenseCategories={expenseCategories}
+            />
           </div>
 
           {/* Listas de Investimentos e Gastos */}

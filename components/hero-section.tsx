@@ -1,5 +1,5 @@
 "use client"
-import { ArrowDownToLine, ArrowRight } from "lucide-react"
+import { ArrowDownToLine, ArrowRight, ArrowDown } from "lucide-react"
 import { motion } from "framer-motion"
 import { Section } from "@/components/section"
 import { ResponsiveContainer } from "@/components/responsive-container"
@@ -27,7 +27,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Revolucione seus investimentos
+                dashboard
               </motion.div>
               <motion.h1
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
@@ -35,7 +35,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                Saiba como e onde <span className="text-primary">Investir</span>, fique por dentro do mercado.
+                Olá,<span className="text-primary">Investidor</span>.
               </motion.h1>
               <motion.p
                 className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-[90%] md:max-w-[600px]"
@@ -43,8 +43,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Descubra o potencial dos seus investimentos com a Machine Invest. Simulações precisas, criptomoedas e
-                produtos financeiros em um só lugar.
+                Explora tudo o que a Machine Invest tem para oferecer. Gerencie seus investimentos, acompanhe seu progresso e alcance seus objetivos financeiros com facilidade.
               </motion.p>
             </div>
             <motion.div
@@ -60,10 +59,11 @@ export function HeroSection() {
                 id="download"
                 className="text-sm md:text-base"
               >
-                Baixar App <ArrowDownToLine className="ml-2 h-4 w-4" />
+                Baixar App 
+                {/* <ArrowDownToLine className="ml-2 h-4 w-4" /> */}
               </EnhancedButton>
-              <EnhancedButton variant="outline" size="lg" href="/simulacao" className="text-sm md:text-base">
-                Simular Agora <ArrowRight className="ml-2 h-4 w-4" />
+              <EnhancedButton variant="outline" size="lg" href="#" className="text-sm md:text-base">
+                Explorar  <ArrowDown className="ml-2 h-4 w-4" />
               </EnhancedButton>
             </motion.div>
           </motion.div>
@@ -83,11 +83,11 @@ export function HeroSection() {
   transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
 >
   <AnimatedImage
-    src="/machine-home-nova.png"
+    src="/machine-logo.png"
     alt="Machine Invest Logo"
-    width={300}
-    height={500}
-    className="h-full w-auto object-contain"
+    width={200}
+    height={200}
+    className="z-10 object-contain"
     animation="zoom"
     delay={0.9}
   />
