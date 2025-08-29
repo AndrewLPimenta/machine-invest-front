@@ -4,18 +4,40 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
-import { useInvestmentService } from "@/service/investmentService"
+import { useFinanceService } from "@/service/investmentService"
 import { useAuth } from "@/contexts/auth-context"
 import { RefreshCw, AlertCircle } from "lucide-react"
 
 export function InvestmentSummary() {
   const { user } = useAuth()
-  const { getFinancialSummary, getInvestments } = useInvestmentService()
+  const { getFinancialSummary, getInvestments } = useFinanceService()
 
   const [summary, setSummary] = useState<any>(null)
   const [investments, setInvestments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  const loadData = async () => {
+    if (!user?.token) return
+    try {
+      setLoading(true)
+      setError(null)
+
+      const [summaryResponse, investmentsResponse] = await Promise.all([
+        getFinancialSummary(),
+        getInvestments({ limit: 5 }),
+      ])
+
+      // Garante que sempre será um objeto e array
+      setSummary(summaryResponse?.data ?? {})
+      setInvestments(investmentsResponse?.data ?? [])
+    } catch (err: any) {
+      console.error("Erro ao carregar dados:", err)
+      setError(err?.message ?? "Erro ao carregar dados")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     if (user?.token) {
@@ -26,31 +48,6 @@ export function InvestmentSummary() {
     }
   }, [user])
 
-  const loadData = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-
-      const [summaryResponse, investmentsResponse] = await Promise.all([
-        getFinancialSummary(),
-        getInvestments({ limit: 5 }),
-      ])
-
-      setSummary(summaryResponse)
-      setInvestments(investmentsResponse)
-    } catch (err: any) {
-      console.error("Erro ao carregar dados:", err)
-      setError(err.message || "Erro ao carregar dados")
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleRetry = () => {
-    loadData()
-  }
-
-  // Se usuário não estiver logado
   if (!user) {
     return (
       <Card>
@@ -61,7 +58,6 @@ export function InvestmentSummary() {
     )
   }
 
-  // Se houver erro
   if (error) {
     return (
       <Card>
@@ -73,7 +69,7 @@ export function InvestmentSummary() {
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
             <p className="text-red-700 font-medium mb-2">Erro ao carregar dados</p>
             <p className="text-red-600 text-sm mb-4">{error}</p>
-            <Button onClick={handleRetry} variant="outline" size="sm">
+            <Button onClick={loadData} variant="outline" size="sm">
               <RefreshCw className="h-4 w-4 mr-2" />
               Tentar Novamente
             </Button>
@@ -83,7 +79,6 @@ export function InvestmentSummary() {
     )
   }
 
-  // Loading
   if (loading) {
     return (
       <Card>
@@ -97,7 +92,10 @@ export function InvestmentSummary() {
     )
   }
 
-  // Conteúdo principal
+  const totalInvestimentos = summary?.totalInvestimentos ?? 0
+  const saldo = summary?.saldo ?? 0
+  const investimentosPorTipo = summary?.investimentosPorTipo ?? []
+
   return (
     <Card>
       <CardHeader>
@@ -114,37 +112,38 @@ export function InvestmentSummary() {
           <div className="p-4 bg-blue-50 rounded-xl text-center">
             <p className="text-sm text-blue-600">Total Investido</p>
             <p className="text-2xl font-bold text-blue-600">
-              R$ {summary?.totalInvestimentos?.toFixed(2) || "0,00"}
+              R$ {totalInvestimentos.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
           </div>
           <div className="p-4 bg-green-50 rounded-xl text-center">
             <p className="text-sm text-green-600">Saldo Atual</p>
             <p className="text-2xl font-bold text-green-600">
-              R$ {summary?.saldo?.toFixed(2) || "0,00"}
+              R$ {saldo.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
           </div>
         </div>
 
         {/* Distribuição por tipo */}
-        {summary?.investimentosPorTipo?.length > 0 && (
+        {investimentosPorTipo.length > 0 && (
           <div className="space-y-4">
             <h4 className="font-semibold">Distribuição por Tipo</h4>
-            {summary.investimentosPorTipo.map((item: any, index: number) => (
-              <div key={index} className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">
-                    {item.idTipoInvestimento || "Sem tipo"}
-                  </span>
-                  <span className="text-sm font-bold">
-                    R$ {item._sum.valor?.toFixed(2) || "0,00"}
-                  </span>
+            {investimentosPorTipo.map((item: any, index: number) => {
+              const valor = item._sum?.valor ?? 0
+              const percentual = totalInvestimentos ? (valor / totalInvestimentos) * 100 : 0
+              return (
+                <div key={index} className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">
+                      {item.idTipoInvestimento ?? "Sem tipo"}
+                    </span>
+                    <span className="text-sm font-bold">
+                      R$ {valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </span>
+                  </div>
+                  <Progress value={percentual} className="h-2" />
                 </div>
-                <Progress
-                  value={(item._sum.valor / summary.totalInvestimentos) * 100}
-                  className="h-2"
-                />
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
 
@@ -164,7 +163,7 @@ export function InvestmentSummary() {
                   </p>
                 </div>
                 <p className="font-bold text-green-600">
-                  R$ {investment.valor.toFixed(2)}
+                  R$ {investment.valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
               </div>
             ))

@@ -1,8 +1,10 @@
 // hooks/useInvestment.ts
 import { useState, useCallback } from 'react';
-import { investmentService } from '@/service/investmentService';
 import { useAuth } from '@/contexts/auth-context';
 
+/**
+ * Hook genérico para fazer requisições autenticadas com controle de loading e erros.
+ */
 export const useInvestment = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +20,7 @@ export const useInvestment = () => {
 
     setLoading(true);
     setError(null);
-    
+
     try {
       const result = await fetchFunction();
       return result;
@@ -37,7 +39,3 @@ export const useInvestment = () => {
     isAuthenticated: !!user?.token
   };
 };
-
-// Uso no componente:
-// const { fetchWithAuth, loading, error } = useInvestment();
-// const investments = await fetchWithAuth(() => investmentService.getInvestments());

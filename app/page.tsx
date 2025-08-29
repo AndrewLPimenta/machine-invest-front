@@ -35,7 +35,7 @@ export default function Home() {
       {/* <HeroSection />  */}
     <FeatureSection />
 
-     <Section background="muted">
+     <Section>
         <SectionHeading
           title="Te ajudamos a crescer financeiramente"
           description="Receba dicas e insights que podem ser o diferencial que você precisa para prosperar."
@@ -157,7 +157,7 @@ export default function Home() {
           </Button>
         </div>
       </Section>
-      <Section background="muted">
+      <Section>
         <SectionHeading
           title="Descubra seu Perfil de Investidor"
           description="Entenda qual a distribuição ideal de investimentos baseada no seu perfil de risco e objetivos financeiros."
@@ -226,7 +226,7 @@ export default function Home() {
         </div>
         
       </Section>
-      <Section background="muted">
+      <Section>
 
         <Card>
         
@@ -375,7 +375,7 @@ export default function Home() {
           </Button>
         </div>
       </Section>
-      <Section background="muted">
+      <Section>
         <SectionHeading
           title="Investimentos Modernos: O Futuro do Dinheiro"
           description="Explore o mundo das criptomoedas e ativos digitais. Aprenda como diversificar sua carteira com investimentos do futuro."
@@ -391,7 +391,7 @@ export default function Home() {
                 name="Bitcoin"
                 currentPrice={245876.32}
                 change={2.45}
-                description="A primeira e maior criptomoeda do mundo. Descubra como o Bitcoin pode fazer parte da sua estratégia de crescimento patrimonial."
+               
               />
             </Suspense>
             <Suspense fallback={<ChartSkeleton />}>
@@ -400,7 +400,7 @@ export default function Home() {
                 name="Ethereum"
                 currentPrice={12543.87}
                 change={-1.23}
-                description="A plataforma que revolucionou contratos inteligentes. Entenda como o Ethereum pode potencializar seus investimentos."
+               
               />
             </Suspense>
           </ResponsiveGrid>
