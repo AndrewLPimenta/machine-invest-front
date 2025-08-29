@@ -297,7 +297,6 @@ export default function ArrojadoPage() {
                               name={crypto.name}
                               currentPrice={crypto.price}
                               change={crypto.change}
-                              simplified={true}
                             />
                           </div>
                         </CardContent>

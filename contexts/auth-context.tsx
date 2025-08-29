@@ -109,18 +109,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       })
 
       const data = await response.json()
+      console.log('Resposta do registro:', data); // Para debug
 
       if (!response.ok) {
         setIsLoading(false)
         return { success: false, message: data.message || "Erro no cadastro" }
       }
 
+      // CORREÇÃO: O registro retorna estrutura diferente do login
       const userData: User = {
-        id: data.userId,
+        id: data.userId, // ← data.userId (não data.data.userId)
         name,
         email,
         resultados: [],
-        token: data.token,
+        token: data.token, // ← data.token (não data.data.token)
       }
 
       localStorage.setItem("user", JSON.stringify(userData))
