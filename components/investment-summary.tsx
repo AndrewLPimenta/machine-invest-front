@@ -6,16 +6,21 @@ import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { useFinanceService } from "@/service/investmentService"
 import { useAuth } from "@/contexts/auth-context"
-import { RefreshCw, AlertCircle } from "lucide-react"
+import { RefreshCw, AlertCircle, Edit, Trash2 } from "lucide-react"
+import { useToast } from "@/components/ui/use-toast"
 
 export function InvestmentSummary() {
   const { user } = useAuth()
-  const { getFinancialSummary, getInvestments } = useFinanceService()
+  const { getFinancialSummary, getInvestments, updateInvestment, deleteInvestment } = useFinanceService()
+  const { toast } = useToast()
 
   const [summary, setSummary] = useState<any>(null)
   const [investments, setInvestments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  const [editingInvestment, setEditingInvestment] = useState<any>(null)
+  const [editValue, setEditValue] = useState<any>({ descricao: "", valor: 0 })
 
   const loadData = async () => {
     if (!user?.token) return
@@ -28,7 +33,6 @@ export function InvestmentSummary() {
         getInvestments({ limit: 5 }),
       ])
 
-      // Garante que sempre será um objeto e array
       setSummary(summaryResponse?.data ?? {})
       setInvestments(investmentsResponse?.data ?? [])
     } catch (err: any) {
@@ -47,6 +51,33 @@ export function InvestmentSummary() {
       setError("Usuário não autenticado")
     }
   }, [user])
+
+  const handleEditInvestment = (investment: any) => {
+    setEditingInvestment(investment)
+    setEditValue({ descricao: investment.descricao, valor: investment.valor })
+  }
+
+  const handleUpdateInvestment = async () => {
+    try {
+      await updateInvestment(editingInvestment.id, editValue)
+      toast({ title: "Investimento atualizado!" })
+      setEditingInvestment(null)
+      loadData()
+    } catch (err: any) {
+      toast({ title: "Erro", description: err.message, variant: "destructive" })
+    }
+  }
+
+  const handleDeleteInvestment = async (id: number) => {
+    if (!confirm("Deseja realmente excluir este investimento?")) return
+    try {
+      await deleteInvestment(id)
+      toast({ title: "Investimento excluído!" })
+      loadData()
+    } catch (err: any) {
+      toast({ title: "Erro", description: err.message, variant: "destructive" })
+    }
+  }
 
   if (!user) {
     return (
@@ -123,30 +154,6 @@ export function InvestmentSummary() {
           </div>
         </div>
 
-        {/* Distribuição por tipo */}
-        {investimentosPorTipo.length > 0 && (
-          <div className="space-y-4">
-            <h4 className="font-semibold">Distribuição por Tipo</h4>
-            {investimentosPorTipo.map((item: any, index: number) => {
-              const valor = item._sum?.valor ?? 0
-              const percentual = totalInvestimentos ? (valor / totalInvestimentos) * 100 : 0
-              return (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">
-                      {item.idTipoInvestimento ?? "Sem tipo"}
-                    </span>
-                    <span className="text-sm font-bold">
-                      R$ {valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </span>
-                  </div>
-                  <Progress value={percentual} className="h-2" />
-                </div>
-              )
-            })}
-          </div>
-        )}
-
         {/* Últimos investimentos */}
         <div className="space-y-3">
           <h4 className="font-semibold">Últimos Investimentos</h4>
@@ -156,15 +163,46 @@ export function InvestmentSummary() {
                 key={investment.id}
                 className="flex justify-between items-center p-3 border rounded-lg"
               >
-                <div>
-                  <p className="font-medium">{investment.descricao}</p>
-                  <p className="text-sm text-gray-500">
-                    {new Date(investment.dataInvestimento).toLocaleDateString("pt-BR")}
-                  </p>
+                <div className="flex-1">
+                  {editingInvestment?.id === investment.id ? (
+                    <div className="flex gap-2 items-center">
+                      <input
+                        type="text"
+                        value={editValue.descricao}
+                        onChange={(e) => setEditValue({ ...editValue, descricao: e.target.value })}
+                        className="border p-1 rounded flex-1"
+                      />
+                      <input
+                        type="number"
+                        value={editValue.valor}
+                        onChange={(e) => setEditValue({ ...editValue, valor: parseFloat(e.target.value) })}
+                        className="border p-1 rounded w-24"
+                      />
+                      <Button size="sm" onClick={handleUpdateInvestment}>Salvar</Button>
+                      <Button size="sm" variant="outline" onClick={() => setEditingInvestment(null)}>Cancelar</Button>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="font-medium">{investment.descricao.split(" - ")[0]}</p>
+                      {investment.descricao.includes(" - ") && (
+                        <p className="text-sm text-gray-500">{investment.descricao.split(" - ")[1]}</p>
+                      )}
+                    </>
+                  )}
                 </div>
-                <p className="font-bold text-green-600">
-                  R$ {investment.valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </p>
+                {editingInvestment?.id !== investment.id && (
+                  <div className="flex items-center gap-2">
+                    <p className="font-bold text-green-600 w-24 text-right">
+                      R$ {investment.valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </p>
+                    <Button size="sm" onClick={() => handleEditInvestment(investment)} variant="outline">
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button size="sm" onClick={() => handleDeleteInvestment(investment.id)} variant="destructive">
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )}
               </div>
             ))
           ) : (
