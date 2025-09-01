@@ -2,8 +2,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Shield, TrendingUp, Target } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Shield, Target } from "lucide-react"
 import { AuthRedirect } from "@/components/auth-redirect"
 import { PageLayout } from "@/components/page-layout"
 import { InvestmentForm } from "@/components/investment-form"
@@ -11,6 +11,7 @@ import { ExpenseForm } from "@/components/expense-form"
 import { ExpenseSummary } from "@/components/expense-summary"
 import { useFinanceService } from "@/service/investmentService"
 import { useInvestment } from "@/hooks/useInvestment"
+import { EnhancedPerformanceChart } from "@/components/enhanced-performance-chart"
 
 export default function ConservadorPage() {
   const financeService = useFinanceService()
@@ -48,6 +49,31 @@ export default function ConservadorPage() {
   const handleInvestmentAdded = () => setRefreshKey(prev => prev + 1)
   const handleExpenseAdded = () => setRefreshKey(prev => prev + 1)
 
+  const total =
+    (summary?.totalInvestimentos ?? 0) +
+    (summary?.totalGastos ?? 0) +
+    (summary?.saldo ?? 0)
+
+  const chartData = total > 0 ? [
+    {
+      label: "Investimentos",
+      value: Math.round(((summary?.totalInvestimentos ?? 0) / total) * 100),
+      color: "#3b82f6", // azul
+    },
+    {
+      label: "Gastos",
+      value: Math.round(((summary?.totalGastos ?? 0) / total) * 100),
+      color: "#ef4444", // vermelho
+    },
+    {
+      label: "Liquidez",
+      value: Math.round(((summary?.saldo ?? 0) / total) * 100),
+      color: "#22c55e", // verde
+    },
+  ] : []
+
+
+
   if (!mounted) return (
     <PageLayout>
       <AuthRedirect>
@@ -63,40 +89,52 @@ export default function ConservadorPage() {
         {authError && <p className="text-center text-red-500">{authError}</p>}
 
         <div className="min-h-screen bg-background px-4 py-12">
-          {/* Resumo Financeiro */}
+
+          {/* 🔹 Gráfico de Performance */}
+          <div className="mb-12">
+            <EnhancedPerformanceChart
+              title="Resumo da Carteira"
+              description="Distribuição entre investimentos, gastos e liquidez."
+              data={chartData}
+            />
+          </div>
+
+          {/* Resumo Financeiro em Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 ">
             <Card className="bg-background border border-primary/30 backdrop-blur shadow-xl">
               <CardContent className="text-center">
                 <Shield className="h-6 w-6 text-primary mx-auto mb-2" />
                 <p className="text-sm font-semibold text-primary/60 uppercase">INVESTIMENTOS</p>
-                <p className="text-2xl font-bold">{(summary?.totalInvestimentos ?? 0).toLocaleString("pt-BR")} R$</p>
+                <p className="text-2xl font-bold">
+                  {(summary?.totalInvestimentos ?? 0).toLocaleString("pt-BR")} R$
+                </p>
               </CardContent>
             </Card>
-            
-            <ExpenseSummary 
+
+            <ExpenseSummary
               expenses={expenses}
               totalExpenses={summary?.totalGastos ?? 0}
             />
-            
+
             <Card className="bg-background border border-primary/30 backdrop-blur shadow-xl">
               <CardContent className="text-center">
                 <Target className="h-6 w-6 text-primary mx-auto mb-2" />
-                <p className="text-sm font-semibold text-primary/60 uppercase">SALDO</p>
-                <p className="text-2xl font-bold">{(summary?.saldo ?? 0).toLocaleString("pt-BR")} R$</p>
+                <p className="text-sm font-semibold text-primary/60 uppercase">lIQUIDEZ</p>
+                <p className="text-2xl font-bold">
+                  {(summary?.saldo ?? 0).toLocaleString("pt-BR")} R$
+                </p>
               </CardContent>
             </Card>
           </div>
 
           {/* Formulários */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {/* Formulário Investimento */}
             <InvestmentForm
               onInvestmentAdded={handleInvestmentAdded}
               fetchWithAuth={fetchWithAuth}
               financeService={financeService}
             />
 
-            {/* Formulário Gasto */}
             <ExpenseForm
               onExpenseAdded={handleExpenseAdded}
               fetchWithAuth={fetchWithAuth}
