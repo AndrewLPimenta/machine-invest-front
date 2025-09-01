@@ -165,9 +165,9 @@ export function CadastroForm() {
         {/* IMAGEM LATERAL */}
         <div className="hidden md:block relative bg-muted">
           <img
-            src="/placeholder.svg"
+            src="/cadastro.png"
             alt="Imagem lateral"
-            className="absolute inset-0 w-full h-full object-cover dark:brightness-[0.2] dark:grayscale"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
       </CardContent>
