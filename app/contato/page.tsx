@@ -152,7 +152,7 @@ export default function ContatoPage() {
                         <SelectItem value="suporte">Suporte Técnico</SelectItem>
                         <SelectItem value="investimentos">Dúvidas sobre Investimentos</SelectItem>
                         <SelectItem value="conta">Conta Digital</SelectItem>
-                        <SelectItem value="emprestimos">Empréstimos</SelectItem>
+                        <SelectItem value="Machine IA">Machine IA</SelectItem>
                         <SelectItem value="outros">Outros</SelectItem>
                       </SelectContent>
                     </Select>

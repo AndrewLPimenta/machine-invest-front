@@ -6,7 +6,7 @@ const videos = [
     id: 'NMTmXh4855c',
     title: 'Introdução aos Investimentos',
     description: 'Conceitos básicos para quem está começando a investir',
-    duration: '15 min',
+    duration: '8 min',
   },
   {
     id: 'y2sBkIX72-g',
@@ -19,20 +19,20 @@ const videos = [
     id: 'kHJC3ioC-4o',
     title: 'CDB e Poupança',
     description: 'Comparando opções de renda fixa',
-    duration: '18 min',
+    duration: '17 min',
     
   },
   {
     id: 'lYAfnDorzo0',
     title: 'Fundos de Investimento',
     description: 'Entendendo fundos conservadores',
-    duration: '25 min',
+    duration: '4 min',
   },
   {
     id: 'in0XbfQEm2A',
     title: 'Planejamento Financeiro',
     description: 'Definindo metas e estratégias',
-    duration: '30 min',
+    duration: '17 min',
     
   },
 ]

@@ -18,24 +18,19 @@ import { useAuth } from "@/contexts/auth-context"
 export function EnhancedMainNav() {
   const { user, isAuthenticated } = useAuth()
 
+  // Funções para criar caminhos seguros
+  const getPerfilPath = () => (user ? (user.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user.id}`) : "/")
+  const getFinancasPath = () => (user ? (user.perfil ? `/perfil/${user.perfil.toLowerCase()}/financas` : `/perfil/${user.id}/financas`) : "/")
+
   // Links públicos
   const publicLinks = (
     <>
       {/* Investimentos */}
       <NavigationMenuItem>
         <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
-          <motion.span
-            className="relative"
-            whileHover={{ color: "var(--primary)" }}
-            transition={{ duration: 0.2 }}
-          >
+          <motion.span className="relative" whileHover={{ color: "var(--primary)" }} transition={{ duration: 0.2 }}>
             Investimentos
-            <motion.span
-              className="absolute -bottom-1 left-0 h-[2px] bg-primary"
-              initial={{ width: 0 }}
-              whileHover={{ width: "100%" }}
-              transition={{ duration: 0.2 }}
-            />
+            <motion.span className="absolute -bottom-1 left-0 h-[2px] bg-primary" initial={{ width: 0 }} whileHover={{ width: "100%" }} transition={{ duration: 0.2 }} />
           </motion.span>
         </NavigationMenuTrigger>
         <NavigationMenuContent>
@@ -53,16 +48,10 @@ export function EnhancedMainNav() {
                     "flex h-full w-full select-none flex-col justify-end rounded-md p-4 md:p-6 no-underline outline-none focus:shadow-md",
                     "bg-[var(--card)] text-[var(--foreground)] dark:bg-[var(--card-dark)] dark:text-[var(--foreground-dark)]"
                   )}
-                  whileHover={{
-                    scale: 1.02,
-                    backgroundColor: "var(--accent)",
-                    color: "var(--accent-foreground)",
-                  }}
+                  whileHover={{ scale: 1.02, backgroundColor: "var(--accent)", color: "var(--accent-foreground)" }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <div className="mb-2 mt-4 text-base md:text-lg lg:text-xl font-medium">
-                    Simulação Personalizada
-                  </div>
+                  <div className="mb-2 mt-4 text-base md:text-lg lg:text-xl font-medium">Simulação Personalizada</div>
                   <p className="text-sm md:text-base leading-tight text-[var(--muted-foreground)] dark:text-[var(--muted-foreground-dark)]">
                     Calcule seus rendimentos e compare diferentes opções de investimento.
                   </p>
@@ -70,15 +59,9 @@ export function EnhancedMainNav() {
               </NavigationMenuLink>
             </li>
 
-            <EnhancedListItem href="/investimentos/renda-fixa" title="Renda Fixa">
-              CDBs, LCIs, LCAs e Tesouro Direto
-            </EnhancedListItem>
-            <EnhancedListItem href="/investimentos/renda-variavel" title="Renda Variável">
-              Ações, ETFs e Fundos Imobiliários
-            </EnhancedListItem>
-            <EnhancedListItem href="/investimentos/criptomoedas" title="Criptomoedas">
-              Bitcoin, Ethereum e outras altcoins
-            </EnhancedListItem>
+            <EnhancedListItem href="/investimentos/renda-fixa" title="Renda Fixa">CDBs, LCIs, LCAs e Tesouro Direto</EnhancedListItem>
+            <EnhancedListItem href="/investimentos/renda-variavel" title="Renda Variável">Ações, ETFs e Fundos Imobiliários</EnhancedListItem>
+            <EnhancedListItem href="/investimentos/criptomoedas" title="Criptomoedas">Bitcoin, Ethereum e outras altcoins</EnhancedListItem>
           </motion.ul>
         </NavigationMenuContent>
       </NavigationMenuItem>
@@ -86,18 +69,9 @@ export function EnhancedMainNav() {
       {/* Serviços */}
       <NavigationMenuItem>
         <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
-          <motion.span
-            className="relative"
-            whileHover={{ color: "var(--primary)" }}
-            transition={{ duration: 0.2 }}
-          >
+          <motion.span className="relative" whileHover={{ color: "var(--primary)" }} transition={{ duration: 0.2 }}>
             Serviços
-            <motion.span
-              className="absolute -bottom-1 left-0 h-[2px] bg-primary"
-              initial={{ width: 0 }}
-              whileHover={{ width: "100%" }}
-              transition={{ duration: 0.2 }}
-            />
+            <motion.span className="absolute -bottom-1 left-0 h-[2px] bg-primary" initial={{ width: 0 }} whileHover={{ width: "100%" }} transition={{ duration: 0.2 }} />
           </motion.span>
         </NavigationMenuTrigger>
         <NavigationMenuContent>
@@ -107,37 +81,23 @@ export function EnhancedMainNav() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <EnhancedListItem href="/servicos/conta-digital" title="Conta Digital">
-              Conta sem taxas, cartão virtual e físico
-            </EnhancedListItem>
-            <EnhancedListItem href="/servicos/emprestimos" title="Empréstimos">
-              Crédito pessoal e financiamentos
-            </EnhancedListItem>
-            <EnhancedListItem href="/servicos/seguros" title="Seguros">
-              Vida, residencial e automóvel
-            </EnhancedListItem>
-            <EnhancedListItem href="/servicos/previdencia" title="Previdência">
-              Planos de previdência privada
-            </EnhancedListItem>
+            <EnhancedListItem href="/servicos/conta-digital" title="Conta Digital">Conta sem taxas, cartão virtual e físico</EnhancedListItem>
+            <EnhancedListItem href="/servicos/ia" title="Machine IA">treinada pra te auxiliar em finanças</EnhancedListItem>
+            <EnhancedListItem href="/servicos/seguros" title="Seguros">Vida, residencial e automóvel</EnhancedListItem>
+            <EnhancedListItem href="/servicos/previdencia" title="Previdência">Planos de previdência privada</EnhancedListItem>
           </motion.ul>
         </NavigationMenuContent>
       </NavigationMenuItem>
 
-      {/* Criptomoedas */}
       <NavigationMenuItem>
         <Link href="/criptomoedas" legacyBehavior passHref>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-sm sm:text-base md:text-lg px-3 py-2 h-auto")}>
-            Criptomoedas
-          </NavigationMenuLink>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-sm sm:text-base md:text-lg px-3 py-2 h-auto")}>Criptomoedas</NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
 
-      {/* Blog */}
       <NavigationMenuItem>
         <Link href="/blog" legacyBehavior passHref>
-          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-sm sm:text-base md:text-lg px-3 py-2 h-auto")}>
-            Blog
-          </NavigationMenuLink>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-sm sm:text-base md:text-lg px-3 py-2 h-auto")}>Blog</NavigationMenuLink>
         </Link>
       </NavigationMenuItem>
     </>
@@ -148,24 +108,22 @@ export function EnhancedMainNav() {
     <>
       <NavigationMenuItem>
         <NavigationMenuLink asChild>
-          <Link href="/" className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
-            Home
-          </Link>
+          <Link href="/" className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Home</Link>
         </NavigationMenuLink>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
         <NavigationMenuLink asChild>
-          <Link href={user?.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user?.id}`} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
-            Meu Perfil
-          </Link>
+          <Link href={getPerfilPath()} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Dashboard</Link>
         </NavigationMenuLink>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
         <NavigationMenuLink asChild>
-          <Link href="/configuracoes" className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
-            Configurações
-          </Link>
+          <Link href={getFinancasPath()} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Finanças</Link>
         </NavigationMenuLink>
-         <NavigationMenuLink asChild>
-          <Link href={user?.perfil ? `/perfil/${user.perfil.toLowerCase()}/financas` : `/perfil/${user?.id}/financas`} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
-            Finanças
-          </Link>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild>
+          <Link href={getFinancasPath()} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Ajustes</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </>
@@ -173,7 +131,7 @@ export function EnhancedMainNav() {
 
   return (
     <NavigationMenu className="max-w-full">
-      <NavigationMenuList className="flex-wrap gap-1 sm:gap-2">
+      <NavigationMenuList className="flex-wrap gap-2 sm:gap-3">
         {isAuthenticated ? privateLinks : publicLinks}
       </NavigationMenuList>
     </NavigationMenu>
@@ -186,23 +144,22 @@ const EnhancedListItem = React.forwardRef<React.ElementRef<"a">, React.Component
     return (
       <li>
         <NavigationMenuLink asChild>
-          <motion.a
-            ref={ref}
-            className={cn(
-              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
-              "bg-[var(--card)] text-[var(--foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]",
-              "dark:bg-[var(--card-dark)] dark:text-[var(--foreground-dark)] dark:hover:bg-[var(--accent-dark)] dark:hover:text-[var(--accent-foreground-dark)]",
-              className
-            )}
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            {...props}
-          >
-            <div className="text-sm sm:text-base font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-xs sm:text-sm leading-snug text-[var(--muted-foreground)] dark:text-[var(--muted-foreground-dark)]">
-              {children}
-            </p>
-          </motion.a>
+          <Link href={props.href!} passHref>
+            <motion.div
+              ref={ref as any} // evita conflito de tipos
+              className={cn(
+                "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
+                "bg-[var(--card)] text-[var(--foreground)] hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)]",
+                "dark:bg-[var(--card-dark)] dark:text-[var(--foreground-dark)] dark:hover:bg-[var(--accent-dark)] dark:hover:text-[var(--accent-foreground-dark)]",
+                className
+              )}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <div className="text-sm sm:text-base font-medium leading-none">{title}</div>
+              <p className="line-clamp-2 text-xs sm:text-sm leading-snug text-[var(--muted-foreground)] dark:text-[var(--muted-foreground-dark)]">{children}</p>
+            </motion.div>
+          </Link>
         </NavigationMenuLink>
       </li>
     )

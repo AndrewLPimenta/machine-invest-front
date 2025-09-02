@@ -53,8 +53,8 @@ export function MainNav() {
               <ListItem href="/servicos/conta-digital" title="Conta Digital">
                 Conta sem taxas, cartão virtual e físico
               </ListItem>
-              <ListItem href="/servicos/emprestimos" title="Empréstimos">
-                Crédito pessoal e financiamentos
+              <ListItem href="/servicos/ia" title="Machine IA">
+                Converse agora com a Machine IA, sua assistente inteligente que entende de finanças e mercado de investimentos.
               </ListItem>
               <ListItem href="/servicos/seguros" title="Seguros">
                 Vida, residencial e automóvel

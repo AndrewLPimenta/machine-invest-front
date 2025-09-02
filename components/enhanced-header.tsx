@@ -11,23 +11,8 @@ import { EnhancedMobileMenu } from "@/components/enhanced-mobile-menu"
 import { ResponsiveContainer } from "./responsive-container"
 import { useAuth } from "@/contexts/auth-context"
 
-import {
-  Menu,
-  User,
-  LogOut,
-  ArrowDownToLine,
-  Settings,
-  BarChart3,
-} from "lucide-react"
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { Menu, User, LogOut, ArrowDownToLine, Settings, BarChart3 } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function EnhancedHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -42,39 +27,24 @@ export function EnhancedHeader() {
 
   const handleLogout = async () => {
     await logout()
-    // Redireciona para a página inicial após logout
     window.location.href = "/"
   }
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-colors duration-300 ${isScrolled ? "shadow-md dark:border-slate-800" : ""
-        }`}
+      className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-colors duration-300 ${isScrolled ? "shadow-md dark:border-slate-800" : ""}`}
     >
       <ResponsiveContainer className="px-4">
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
             <Link href="/" className="mr-6 flex items-center space-x-2 text-primary transition-colors duration-300">
-              <Image
-                src="/machine-logo.png"
-                alt="Machine Invest Logo"
-                width={36}
-                height={36}
-                className="h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11"
-                priority
-              />
-              <span className="hidden font-bold text-base sm:text-lg md:text-xl sm:inline-block">
-                Machine Invest
-              </span>
+              <Image src="/machine-logo.png" alt="Machine Invest Logo" width={36} height={36} className="h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11" priority />
+              <span className="hidden font-bold text-base sm:text-lg md:text-xl sm:inline-block">Machine Invest</span>
             </Link>
-
-            
-
             {/* Navegação Principal */}
             <div className="hidden md:flex">
               <EnhancedMainNav isAuthenticated={isAuthenticated} user={user} />
-              {/*  */}
             </div>
           </div>
 
@@ -82,8 +52,6 @@ export function EnhancedHeader() {
           <div className="flex items-center gap-3 sm:gap-4">
             {isAuthenticated ? (
               <div className="flex items-center gap-2">
-
-
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <motion.button
@@ -109,14 +77,11 @@ export function EnhancedHeader() {
                     </DropdownMenuItem>
                     {user && (
                       <DropdownMenuItem className="text-sm sm:text-base">
-                        <Link
-                          href={user.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user.id}`}
-                          className="flex items-center w-full"
-                        >
-                          <span className="flex items-center">
+                        <Link href={user.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user.id}`} className="flex items-center w-full">
+                          <motion.span className="flex items-center" whileHover={{ scale: 1.05 }}>
                             <BarChart3 className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                             Meu Perfil
-                          </span>
+                          </motion.span>
                         </Link>
                       </DropdownMenuItem>
                     )}
@@ -127,10 +92,7 @@ export function EnhancedHeader() {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={handleLogout}
-                      className="text-sm sm:text-base text-red-600 focus:text-red-600"
-                    >
+                    <DropdownMenuItem onClick={handleLogout} className="text-sm sm:text-base text-red-600 focus:text-red-600">
                       <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                       Sair da Conta
                     </DropdownMenuItem>
@@ -155,15 +117,12 @@ export function EnhancedHeader() {
               <span className="sr-only">Toggle Menu</span>
             </motion.button>
 
-            <EnhancedMobileMenu
-              isOpen={isMobileMenuOpen}
-              setIsOpen={setIsMobileMenuOpen}
-              isAuthenticated={isAuthenticated}
-              user={user}
-            />
+            <EnhancedMobileMenu isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} isAuthenticated={isAuthenticated} user={user} />
           </div>
         </div>
       </ResponsiveContainer>
     </header>
   )
 }
+
+export default EnhancedHeader

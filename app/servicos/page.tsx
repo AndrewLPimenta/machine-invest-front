@@ -54,7 +54,7 @@ export default function ServicosPage() {
             <Tabs defaultValue="conta" className="w-full">
               <TabsList className="w-full max-w-md mx-auto grid grid-cols-4 mb-8">
                 <TabsTrigger value="conta">Conta Digital</TabsTrigger>
-                <TabsTrigger value="emprestimos">Empréstimos</TabsTrigger>
+                <TabsTrigger value="IA">Machine IA</TabsTrigger>
                 <TabsTrigger value="seguros">Seguros</TabsTrigger>
                 <TabsTrigger value="previdencia">Previdência</TabsTrigger>
               </TabsList>

@@ -36,7 +36,7 @@ export default function SitemapPage() {
       category: "Serviços",
       links: [
         { title: "Conta Digital", url: "/servicos/conta-digital" },
-        { title: "Empréstimos", url: "/servicos/emprestimos" },
+        { title: "Machine IA", url: "/servicos/ia" },
         { title: "Seguros", url: "/servicos/seguros" },
         { title: "Previdência", url: "/servicos/previdencia" },
       ],
