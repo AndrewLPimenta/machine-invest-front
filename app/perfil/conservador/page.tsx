@@ -1,248 +1,223 @@
 "use client"
-
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Shield, Target } from "lucide-react"
-import { AuthRedirect } from "@/components/auth-redirect"
 import { PageLayout } from "@/components/page-layout"
-import { InvestmentForm } from "@/components/investment-form"
-import { ExpenseForm } from "@/components/expense-form"
-import { ExpenseSummary } from "@/components/expense-summary"
-import { useFinanceService } from "@/service/investmentService"
-import { useInvestment } from "@/hooks/useInvestment"
-import { EnhancedPerformanceChart } from "@/components/enhanced-performance-chart"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Edit, Trash2 } from "lucide-react"
-import { useToast } from "@/components/ui/use-toast"
-
-export default function ConservadorPage() {
-  const financeService = useFinanceService()
-  const { fetchWithAuth, loading: authLoading, error: authError } = useInvestment()
-  const { toast } = useToast()
-
-  const [mounted, setMounted] = useState(false)
-  const [refreshKey, setRefreshKey] = useState(0)
-  const [summary, setSummary] = useState<any>({})
-  const [investments, setInvestments] = useState<any[]>([])
-  const [expenses, setExpenses] = useState<any[]>([])
-  const [expenseCategories, setExpenseCategories] = useState<any[]>([])
-  const [loadingId, setLoadingId] = useState<number | null>(null)
-
-  useEffect(() => setMounted(true), [])
-
-  const reloadData = async () => {
-    const data = await fetchWithAuth(async () => {
-      const [sum, inv, exp, categories] = await Promise.all([
-        financeService.getFinancialSummary(),
-        financeService.getInvestments(),
-        financeService.getExpenses(),
-        financeService.getExpenseCategories()
-      ])
-      return { sum: sum?.data, inv: inv?.data, exp: exp?.data, categories: categories?.data }
-    })
-    if (data) {
-      setSummary(data.sum ?? {})
-      setInvestments(data.inv ?? [])
-      setExpenses(data.exp ?? [])
-      setExpenseCategories(data.categories ?? [])
-    }
-  }
-
-  useEffect(() => { if (mounted) reloadData() }, [refreshKey, mounted])
-
-  const handleInvestmentAdded = () => setRefreshKey(prev => prev + 1)
-  const handleExpenseAdded = () => setRefreshKey(prev => prev + 1)
-
-  const handleDeleteExpense = async (id: number) => {
-    if (!confirm("Tem certeza que deseja deletar este gasto?")) return
-    try {
-      setLoadingId(id)
-      await fetchWithAuth(() => financeService.deleteExpense(id))
-      toast({ title: "Sucesso", description: "Gasto deletado." })
-      handleExpenseAdded()
-    } catch (error: any) {
-      toast({ title: "Erro", description: error.message || "Falha ao deletar gasto.", variant: "destructive" })
-    } finally {
-      setLoadingId(null)
-    }
-  }
-
-  const handleDeleteInvestment = async (id: number) => {
-    if (!confirm("Tem certeza que deseja deletar este investimento?")) return
-    try {
-      setLoadingId(id)
-      await fetchWithAuth(() => financeService.deleteInvestment(id))
-      toast({ title: "Sucesso", description: "Investimento deletado." })
-      handleInvestmentAdded()
-    } catch (error: any) {
-      toast({ title: "Erro", description: error.message || "Falha ao deletar investimento.", variant: "destructive" })
-    } finally {
-      setLoadingId(null)
-    }
-  }
-
-  const handleEditExpense = (expense: any) => {
-    toast({ title: "Funcionalidade", description: `Editar gasto: ${expense.descricao}` })
-  }
-
-  const handleEditInvestment = (investment: any) => {
-    toast({ title: "Funcionalidade", description: `Editar investimento: ${investment.descricao}` })
-  }
-
-  const total =
-    (summary?.totalInvestimentos ?? 0) +
-    (summary?.totalGastos ?? 0) +
-    (summary?.saldo ?? 0)
-
-  const chartData = total > 0 ? [
-    {
-      label: "Investimentos",
-      value: Math.round(((summary?.totalInvestimentos ?? 0) / total) * 100),
-      color: "#3b82f6",
-    },
-    {
-      label: "Gastos",
-      value: Math.round(((summary?.totalGastos ?? 0) / total) * 100),
-      color: "#ef4444",
-    },
-    {
-      label: "Liquidez",
-      value: Math.round(((summary?.saldo ?? 0) / total) * 100),
-      color: "#22c55e",
-    },
-  ] : []
-
-  if (!mounted) return (
-    <PageLayout>
-      <AuthRedirect>
-        <p className="text-center text-gray-500 mt-12">Carregando...</p>
-      </AuthRedirect>
-    </PageLayout>
-  )
-
+import { Badge } from "@/components/ui/badge"
+import {
+  Shield,
+  TrendingUp,
+  Target,
+  BookOpen,
+  Play,
+  FileText,
+  ArrowRight,
+  Lightbulb,
+  DollarSign,
+  PieChart,
+  Calculator,
+  Video,
+} from "lucide-react"
+import { AuthRedirect } from "@/components/auth-redirect"
+import { HeroSection } from "@/components/hero-section"
+import { Section } from "@/components/section"
+import Link from "next/link"
+import VideoSection from "@/components/ui/video-section"
+export default function ConservadorPageHome() {
   return (
-    <PageLayout>
-      <AuthRedirect>
-        {authLoading && <p className="text-center text-gray-500">Carregando...</p>}
-        {authError && <p className="text-center text-red-500">{authError}</p>}
+    <AuthRedirect>
+      <PageLayout>
+        <HeroSection />
+        <Section>
+          <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center text-2xl">
+                <Shield className="mr-2 h-6 w-6 text-primary" />
+                Bem-vindo, Investidor Conservador
+              </CardTitle>
+              <CardDescription className="text-lg">
+                Sua jornada de investimentos seguros começa aqui. Explore conteúdos educativos e acompanhe seu
+                progresso.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex items-center space-x-3 p-4 bg-background/50 rounded-lg">
+                  <DollarSign className="h-8 w-8 text-green-600" />
+                  <div>
+                    <p className="font-semibold">Perfil Seguro</p>
+                    <p className="text-sm text-muted-foreground">Investimentos de baixo risco</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3 p-4 bg-background/50 rounded-lg">
+                  <PieChart className="h-8 w-8 text-blue-600" />
+                  <div>
+                    <p className="font-semibold">Diversificação</p>
+                    <p className="text-sm text-muted-foreground">Portfolio equilibrado</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3 p-4 bg-background/50 rounded-lg">
+                  <Calculator className="h-8 w-8 text-purple-600" />
+                  <div>
+                    <p className="font-semibold">Planejamento</p>
+                    <p className="text-sm text-muted-foreground">Metas de longo prazo</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Section>
+        <Section>
+          <Card className="bg-background/50 backdrop-blur-lg shadow-lg border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center text-2xl">
+                <FileText className="mr-2 h-6 w-6 text-primary" />
+                Resumo das Suas Finanças
+              </CardTitle>
+              <CardDescription>Uma visão geral do seu perfil financeiro e próximos passos</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="text-center p-4 bg-primary/5 rounded-lg">
+                    <Target className="h-8 w-8 text-primary mx-auto mb-2" />
+                    <h3 className="font-semibold">Perfil Definido</h3>
+                    <p className="text-sm text-muted-foreground">Investidor Conservador</p>
+                  </div>
+                  <div className="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
+                    <Shield className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                    <h3 className="font-semibold">Foco em Segurança</h3>
+                    <p className="text-sm text-muted-foreground">Baixo risco, retorno estável</p>
+                  </div>
+                  <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
+                    <TrendingUp className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                    <h3 className="font-semibold">Crescimento Gradual</h3>
+                    <p className="text-sm text-muted-foreground">Construção de patrimônio</p>
+                  </div>
+                </div>
 
-        <div className="min-h-screen bg-background px-4 py-12">
+                <div className="bg-muted/50 p-6 rounded-lg">
+                  <h3 className="font-semibold mb-3">Próximos Passos Recomendados:</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span>Assista aos vídeos educativos sobre Tesouro Direto</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span>Defina suas metas financeiras de curto e longo prazo</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span>Considere diversificar com CDBs e fundos conservadores</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span>Estabeleça um valor mensal para investir</span>
+                    </li>
+                  </ul>
+                </div>
 
-          {/* Gráfico de Performance */}
-          <div className="mb-12">
-            <EnhancedPerformanceChart
-              title="Resumo da Carteira"
-              description="Distribuição entre investimentos, gastos e liquidez."
-              data={chartData}
-            />
-          </div>
+                <div className="flex justify-center">
+                  <Link href="/perfil/conservador/financas" passHref>
+                    <Button size="lg" className="group" asChild>
+                      <span>
+                        Ver Relatório Completo das Minhas Finanças
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Section>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center text-2xl">
+              <Video className="mr-2 h-6 w-6 text-primary" />
+              Vídeos Educativos, primeiros passos no mundo dos investimentos
+            </CardTitle>
+            <CardDescription>Conhecendo o Tesouro Direto</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div>
+              <VideoSection />
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Resumo Financeiro */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <Card className="bg-background border border-primary/30 backdrop-blur shadow-xl">
-              <CardContent className="text-center">
-                <Shield className="h-6 w-6 text-primary mx-auto mb-2" />
-                <p className="text-sm font-semibold text-primary/60 uppercase">INVESTIMENTOS</p>
-                <p className="text-2xl font-bold">
-                  {(summary?.totalInvestimentos ?? 0).toLocaleString("pt-BR")} R$
-                </p>
-              </CardContent>
-            </Card>
-
-            <ExpenseSummary
-              expenses={expenses}
-              totalExpenses={summary?.totalGastos ?? 0}
-              onExpenseDeleted={handleExpenseAdded}
-              onExpenseUpdated={() => {}}
-              financeService={financeService}
-              fetchWithAuth={fetchWithAuth}
-            />
-
-            <Card className="bg-background border border-primary/30 backdrop-blur shadow-xl">
-              <CardContent className="text-center">
-                <Target className="h-6 w-6 text-primary mx-auto mb-2" />
-                <p className="text-sm font-semibold text-primary/60 uppercase">LIQUIDEZ</p>
-                <p className="text-2xl font-bold">
-                  {(summary?.saldo ?? 0).toLocaleString("pt-BR")} R$
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Formulários */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            <InvestmentForm
-              onInvestmentAdded={handleInvestmentAdded}
-              fetchWithAuth={fetchWithAuth}
-              financeService={financeService}
-            />
-
-            <ExpenseForm
-              onExpenseAdded={handleExpenseAdded}
-              fetchWithAuth={fetchWithAuth}
-              financeService={financeService}
-              expenseCategories={expenseCategories}
-            />
-          </div>
-
-          {/* Listas com Edit/Delete */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Investimentos */}
-            <Card>
-              <CardHeader><CardTitle>Investimentos</CardTitle></CardHeader>
-              <CardContent className="space-y-2">
-                {investments.length === 0 ? (
-                  <p className="text-gray-500 text-center py-4">Nenhum investimento registrado</p>
-                ) : (
-                  investments.map(inv => (
-                    <div key={inv.id} className="flex justify-between items-center p-2 border-b border-white/20">
-                      <div className="flex-1">
-                        <p>{inv.tipoInvestimento?.nome} - {inv.descricao}</p>
-                      </div>
-                      <span>{inv.valor.toLocaleString("pt-BR")} R$</span>
-                      <div className="flex gap-2 ml-2">
-                        <Button size="sm" variant="outline" onClick={() => handleEditInvestment(inv)}>
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button size="sm" variant="destructive" onClick={() => handleDeleteInvestment(inv.id)} disabled={loadingId === inv.id}>
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
+        <Section>
+          <Card className="bg-background/50 backdrop-blur-lg shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center text-2xl">
+                <Lightbulb className="mr-2 h-6 w-6 text-primary" />
+                Dicas Rápidas para Investidores Conservadores
+              </CardTitle>
+              <CardDescription>Princípios fundamentais para investir com segurança</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3 p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-green-800 dark:text-green-200">Comece devagar</h4>
+                      <p className="text-sm text-green-700 dark:text-green-300">
+                        Inicie com pequenos valores até ganhar confiança
+                      </p>
                     </div>
-                  ))
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Gastos */}
-            <Card>
-              <CardHeader><CardTitle>Gastos</CardTitle></CardHeader>
-              <CardContent className="space-y-2">
-                {expenses.length === 0 ? (
-                  <p className="text-gray-500 text-center py-4">Nenhum gasto registrado</p>
-                ) : (
-                  expenses.map(exp => (
-                    <div key={exp.id} className="flex justify-between items-center p-2 border-b border-white/20">
-                      <div className="flex-1">
-                        <p>{exp.categoria?.nome || "Sem categoria"} - {exp.descricao}</p>
-                      </div>
-                      <span>{exp.valor.toLocaleString("pt-BR")} R$</span>
-                      <div className="flex gap-2 ml-2">
-                        <Button size="sm" variant="outline" onClick={() => handleEditExpense(exp)}>
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button size="sm" variant="destructive" onClick={() => handleDeleteExpense(exp.id)} disabled={loadingId === exp.id}>
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-blue-800 dark:text-blue-200">Diversifique sempre</h4>
+                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                        Não coloque todos os ovos na mesma cesta
+                      </p>
                     </div>
-                  ))
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </AuthRedirect>
-    </PageLayout>
+                  </div>
+                  <div className="flex items-start space-x-3 p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-purple-800 dark:text-purple-200">Pense no longo prazo</h4>
+                      <p className="text-sm text-purple-700 dark:text-purple-300">
+                        Investimentos conservadores rendem mais com tempo
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3 p-4 bg-orange-50 dark:bg-orange-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-orange-800 dark:text-orange-200">Estude antes de investir</h4>
+                      <p className="text-sm text-orange-700 dark:text-orange-300">
+                        Conhecimento é sua melhor ferramenta
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-4 bg-teal-50 dark:bg-teal-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-teal-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-teal-800 dark:text-teal-200">Tenha uma reserva</h4>
+                      <p className="text-sm text-teal-700 dark:text-teal-300">Mantenha dinheiro para emergências</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-4 bg-indigo-50 dark:bg-indigo-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-indigo-800 dark:text-indigo-200">Revise regularmente</h4>
+                      <p className="text-sm text-indigo-700 dark:text-indigo-300">Acompanhe e ajuste sua estratégia</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Section>
+
+
+      </PageLayout>
+    </AuthRedirect>
   )
 }

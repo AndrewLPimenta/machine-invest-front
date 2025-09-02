@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -29,7 +28,12 @@ import {
   Coins,
   TrendingDown,
 } from "lucide-react"
-
+import { HeroSection } from "@/components/hero-section"
+import { PageLayout } from "@/components/page-layout"
+import { Section } from "@/components/section"
+import  CryptoGraph  from "@/components/crypto-graph"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 export interface AnimatedCounterProps {
   end: number
   duration?: number
@@ -102,56 +106,56 @@ const cryptoData = [
   },
 ]
 
-const marketOpportunities = [
-  {
-    name: "NVDA34 (NVIDIA)",
-    sector: "Tecnologia",
-    potential: "+45%",
-    risk: "Alto",
-    timeframe: "6-12 meses",
-    reason: "Boom da IA e demanda por GPUs",
-    currentPrice: "R$ 89,50",
-    targetPrice: "R$ 130,00",
-    volume: "R$ 2.3B",
-    marketCap: "R$ 89.5B",
-  },
-  {
-    name: "BOVA11 (Ibovespa ETF)",
-    sector: "Diversificado",
-    potential: "+28%",
-    risk: "Médio-Alto",
-    timeframe: "12-18 meses",
-    reason: "Recuperação econômica brasileira",
-    currentPrice: "R$ 112,30",
-    targetPrice: "R$ 144,00",
-    volume: "R$ 890M",
-    marketCap: "R$ 12.1B",
-  },
-  {
-    name: "Bitcoin (BTC)",
-    sector: "Cripto",
-    potential: "+65%",
-    risk: "Muito Alto",
-    timeframe: "3-9 meses",
-    reason: "Aprovação de ETFs e halving",
-    currentPrice: "R$ 285.000",
-    targetPrice: "R$ 470.000",
-    volume: "R$ 127.9B",
-    marketCap: "R$ 4.7T",
-  },
-  {
-    name: "VALE3 (Vale)",
-    sector: "Mineração",
-    potential: "+35%",
-    risk: "Alto",
-    timeframe: "9-15 meses",
-    reason: "Demanda chinesa por minério",
-    currentPrice: "R$ 68,90",
-    targetPrice: "R$ 93,00",
-    volume: "R$ 1.2B",
-    marketCap: "R$ 287.6B",
-  },
-]
+// const marketOpportunities = [
+//   {
+//     name: "NVDA34 (NVIDIA)",
+//     sector: "Tecnologia",
+//     potential: "+45%",
+//     risk: "Alto",
+//     timeframe: "6-12 meses",
+//     reason: "Boom da IA e demanda por GPUs",
+//     currentPrice: "R$ 89,50",
+//     targetPrice: "R$ 130,00",
+//     volume: "R$ 2.3B",
+//     marketCap: "R$ 89.5B",
+//   },
+//   {
+//     name: "BOVA11 (Ibovespa ETF)",
+//     sector: "Diversificado",
+//     potential: "+28%",
+//     risk: "Médio-Alto",
+//     timeframe: "12-18 meses",
+//     reason: "Recuperação econômica brasileira",
+//     currentPrice: "R$ 112,30",
+//     targetPrice: "R$ 144,00",
+//     volume: "R$ 890M",
+//     marketCap: "R$ 12.1B",
+//   },
+//   {
+//     name: "Bitcoin (BTC)",
+//     sector: "Cripto",
+//     potential: "+65%",
+//     risk: "Muito Alto",
+//     timeframe: "3-9 meses",
+//     reason: "Aprovação de ETFs e halving",
+//     currentPrice: "R$ 285.000",
+//     targetPrice: "R$ 470.000",
+//     volume: "R$ 127.9B",
+//     marketCap: "R$ 4.7T",
+//   },
+//   {
+//     name: "VALE3 (Vale)",
+//     sector: "Mineração",
+//     potential: "+35%",
+//     risk: "Alto",
+//     timeframe: "9-15 meses",
+//     reason: "Demanda chinesa por minério",
+//     currentPrice: "R$ 68,90",
+//     targetPrice: "R$ 93,00",
+//     volume: "R$ 1.2B",
+//     marketCap: "R$ 287.6B",
+//   },
+// ]
 
 const portfolioAllocation = [
   { category: "Ações Growth Tech", percentage: 35, color: "bg-chart-1" },
@@ -172,67 +176,52 @@ const performanceMetrics = [
 export default function ArrojadoPage() {
   return (
     <AuthRedirect>
+      <PageLayout>
+        <HeroSection/>
+   
       <div className="min-h-screen bg-background">
-        <div className="relative overflow-hidden bg-gradient-to-r from-primary via-primary/95 to-secondary/20 text-primary-foreground">
-          <div className="absolute inset-0 bg-[url('/abstract-financial-pattern.png')] opacity-10"></div>
-          <div className="relative px-4 py-16 lg:py-24">
-            <div className="max-w-7xl mx-auto">
-              <div className="text-center space-y-8">
-                <div className="flex items-center justify-center gap-4">
-                  <div className="p-4 -secobgndary/20 rounded-2xl backdrop-blur-sm">
-                    <Flame className="h-10 w-10 text-secondary" />
-                  </div>
-                  <div className="text-left">
-                    <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">Perfil Arrojado</h1>
-                    <p className="text-xl text-primary-foreground/80 mt-2">Alto Risco, Alto Retorno</p>
-                  </div>
-                </div>
-
-                <p className="text-xl lg:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed">
-                  Maximize seus ganhos com estratégias agressivas e oportunidades de alto potencial no mercado atual
-                </p>
-
-                <div className="flex flex-wrap justify-center gap-4 pt-6">
-                  <Badge variant="secondary" className="px-6 py-3 text-base font-medium">
-                    <TrendingUp className="h-5 w-5 mr-2" />
-                    Alto Crescimento
-                  </Badge>
-                  <Badge variant="secondary" className="px-6 py-3 text-base font-medium">
-                    <Globe className="h-5 w-5 mr-2" />
-                    Diversificação Global
-                  </Badge>
-                  <Badge variant="secondary" className="px-6 py-3 text-base font-medium">
-                    <Activity className="h-5 w-5 mr-2" />
-                    Gestão Ativa
-                  </Badge>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-                {performanceMetrics.map((metric, index) => (
-                  <Card
-                    key={index}
-                    className="bg-card/95 backdrop-blur border-border/50 hover:shadow-lg transition-all duration-300"
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <p className="text-sm font-medium text-muted-foreground">{metric.label}</p>
-                        {metric.trend === "up" && <ArrowUpRight className="h-5 w-5 text-chart-2" />}
-                        {metric.trend === "down" && <ArrowDownRight className="h-5 w-5 text-destructive" />}
-                      </div>
-                      <p className="text-3xl lg:text-4xl font-bold text-foreground">
-                        <AnimatedCounter end={metric.value} prefix={metric.prefix} suffix={metric.suffix} />
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
+          <Section>
+  <Card className="bg-background/50 backdrop-blur-lg shadow-lg border-primary/20">
+    <CardHeader>
+      <CardTitle className="flex flex-col gap-2 text-3xl font-bold">
+        <span>Olá, Investidor Agressivo</span>
+        <span className="text-lg font-medium text-muted-foreground">
+          Seu perfil indica que você busca maior retorno assumindo mais riscos
+        </span>
+      </CardTitle>
+      <CardDescription className="mt-2 text-sm text-muted-foreground">
+        Aproveite nossas recomendações personalizadas e conteúdos educativos para maximizar seus investimentos.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div className="flex flex-col md:flex-row gap-4 mt-4">
+        <div className="flex-1 p-4 bg-red-50 dark:bg-red-950/20 rounded-lg">
+          <h4 className="font-semibold text-red-600 mb-2">Foco em Crescimento</h4>
+          <p className="text-sm text-muted-foreground">
+            Estratégias para potencializar seus ganhos no mercado financeiro.
+          </p>
         </div>
-
+        <div className="flex-1 p-4 bg-yellow-50 dark:bg-yellow-950/20 rounded-lg">
+          <h4 className="font-semibold text-yellow-600 mb-2">Diversificação</h4>
+          <p className="text-sm text-muted-foreground">
+            Distribua seus investimentos em diferentes ativos para equilibrar risco e retorno.
+          </p>
+        </div>
+        <div className="flex-1 p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
+          <h4 className="font-semibold text-green-600 mb-2">Planejamento</h4>
+          <p className="text-sm text-muted-foreground">
+            Acompanhe seus objetivos financeiros e ajuste sua estratégia regularmente.
+          </p>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+</Section>
+<Section>
+   <CryptoGraph />
+</Section>
         <div className="max-w-7xl mx-auto px-4 py-12 space-y-12">
-          <Card className="border-l-4 border-l-chart-1 shadow-lg">
+          {/* <Card className="border-l-4 border-l-chart-1 shadow-lg">
             <CardHeader className="pb-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -306,9 +295,9 @@ export default function ArrojadoPage() {
                 </TabsContent>
               </Tabs>
             </CardContent>
-          </Card>
+          </Card> */}
 
-          <Card className="border-l-4 border- shadow-lg">
+          {/* <Card className="border-l-4 border- shadow-lg">
             <CardHeader className="pb-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -328,7 +317,7 @@ export default function ArrojadoPage() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Investment Form */}
+              
                 <Card className="lg:col-span-1 bg-gradient-to-br from-card to-muted/50">
                   <CardHeader>
                     <CardTitle className="text-xl">Registrar Novo Aporte</CardTitle>
@@ -373,10 +362,10 @@ export default function ArrojadoPage() {
                       Registrar Investimento
                     </Button>
                   </CardContent>
-                </Card>
+                </Card> */}
 
                 {/* Recent Investments */}
-                <Card className="lg:col-span-2">
+                {/* <Card className="lg:col-span-2">
                   <CardHeader>
                     <CardTitle className="text-xl">Investimentos Recentes</CardTitle>
                     <CardDescription>Seus últimos aportes e performance</CardDescription>
@@ -440,9 +429,9 @@ export default function ArrojadoPage() {
                 </Card>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
-          <Card className="border-l-4 border-l-secondary shadow-lg">
+          {/* <Card className="border-l-4 border-l-secondary shadow-lg">
             <CardHeader className="pb-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -524,9 +513,9 @@ export default function ArrojadoPage() {
                 ))}
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div>
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
@@ -552,8 +541,7 @@ export default function ArrojadoPage() {
                 ))}
               </CardContent>
             </Card>
-
-            <Card className="bg-gradient-to-br from-card to-muted/50">
+            {/* <Card className="bg-gradient-to-br from-card to-muted/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-xl">
                   <BarChart3 className="h-6 w-6 text-secondary" />
@@ -610,7 +598,17 @@ export default function ArrojadoPage() {
                   Criar Estratégia Personalizada
                 </Button>
               </CardContent>
-            </Card>
+            </Card> */}
+             <div className="flex justify-center mt-6">
+                <Link href="/perfil/agressivo/financas" passHref>
+                  <Button size="lg" className="group" asChild>
+                    <span className="flex items-center">
+                      Ver Relatório Completo das Minhas Finanças
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </Button>
+                </Link>
+              </div>
           </div>
 
           <Card>
@@ -670,7 +668,7 @@ export default function ArrojadoPage() {
                           <p className="text-sm text-muted-foreground mt-1">{insight.description}</p>
                         </div>
                         {insight.urgency === "high" && (
-                          <Badge variant="destructive" className="text-xs">
+                          <Badge variant="destructive" className="bg-primary/90 text-primary-foreground">
                             Urgente
                           </Badge>
                         )}
@@ -679,7 +677,7 @@ export default function ArrojadoPage() {
                     <CardContent className="pt-0">
                       <Button
                         variant="outline"
-                        className="w-full group-hover:bg-secondary group-hover:text-secondary-foreground group-hover:border-secondary transition-colors bg-transparent"
+                        className="w-full group-hover:bg-primary/20 group-hover:text-secondary-foreground group-hover:border-secondary transition-colors bg-transparent"
                       >
                         {insight.action}
                         <ArrowUpRight className="h-4 w-4 ml-2" />
@@ -692,6 +690,7 @@ export default function ArrojadoPage() {
           </Card>
         </div>
       </div>
+      </PageLayout>
     </AuthRedirect>
   )
 }

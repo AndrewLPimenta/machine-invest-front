@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Heart, Home, Car, Briefcase, Umbrella, Shield } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
+import Link from "next/link" 
+import { ArrowRight } from "lucide-react"
 
 export default function SegurosPage() {
   return (
@@ -13,7 +15,8 @@ export default function SegurosPage() {
       <Section>
         <SectionHeading
           title="Seguros"
-          description="Proteção completa para você, sua família e seu patrimônio."
+          description="O Seguro de Vida é um gesto de amor, de cuidado e de responsabilidade.
+E o melhor: não é caro e pode ser totalmente adaptado à sua realidade."
           centered
         />
 
@@ -30,8 +33,8 @@ export default function SegurosPage() {
                 <div className="flex flex-col justify-center space-y-6">
                   <h2 className="text-3xl font-bold tracking-tight">Seguro de Vida</h2>
                   <p className="text-lg text-muted-foreground">
-                    Proteja o futuro da sua família com um seguro de vida completo e personalizado para suas
-                    necessidades.
+                    Já pensou como sua família ficaria se algo te acontecesse?
+                    Um Seguro de Vida não é só sobre você — é sobre quem fica. É garantir que, mesmo ausente, você continue protegendo quem ama.
                   </p>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
@@ -62,7 +65,10 @@ export default function SegurosPage() {
                       </div>
                     </div>
                   </div>
-                  <Button className="w-fit">Fazer cotação</Button>
+                  <Link href="/login">
+                  <Button className="w-fit">Receber Dicas
+                  <ArrowRight className="mr-2 h-4 w-4" /></Button>
+                  </Link>
                 </div>
                 <div className="flex items-center justify-center">
                   <Image
@@ -103,8 +109,14 @@ export default function SegurosPage() {
                       </div>
                     </div>
                   </div>
-                  <Button className="w-fit">Fazer cotação</Button>
+                  <Link href="/login">
+                  <Button className="w-fit">Receber Dicas</Button>
+                  </Link>
                 </div>
+
+
+
+
                 <div className="flex items-center justify-center">
                   <Image
                     src="https://www.tecsegcorretora.com.br/painel/img_noticias/b67a9088b1f29ecd6f5ec6253363b148.jpg"
@@ -143,7 +155,7 @@ export default function SegurosPage() {
                       </div>
                     </div>
                   </div>
-                  <Button className="w-fit">Fazer cotação</Button>
+                  <Button className="w-fit">Receber Dicas</Button>
                 </div>
                 <div className="flex items-center justify-center">
                   <Image
@@ -184,7 +196,7 @@ export default function SegurosPage() {
                       </div>
                     </div>
                   </div>
-                  <Button className="w-fit">Fazer cotação</Button>
+                  <Button className="w-fit">Receber Dicas</Button>
                 </div>
                 <div className="flex items-center justify-center">
                   <Image
@@ -211,8 +223,8 @@ export default function SegurosPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Nossos seguros oferecem coberturas abrangentes para garantir que você esteja protegido em qualquer
-                  situação, com opções personalizáveis para suas necessidades específicas.
+                  Cada pessoa tem uma necessidade diferente.
+                  Tenha proteção personalizada para o que realmente importa pra você — com opções flexíveis e cobertura em qualquer imprevisto.
                 </p>
               </CardContent>
             </Card>
@@ -224,8 +236,7 @@ export default function SegurosPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Trabalhamos com as melhores seguradoras do mercado para oferecer preços competitivos sem comprometer a
-                  qualidade da cobertura e do atendimento.
+                  Mesmo com um valor pequeno por mês, é possível garantir tranquilidade para o futuro da sua família.
                 </p>
               </CardContent>
             </Card>
@@ -237,8 +248,7 @@ export default function SegurosPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Nossa equipe está preparada para oferecer um atendimento humanizado e eficiente, especialmente nos
-                  momentos mais difíceis, quando você realmente precisa acionar seu seguro.
+                  Por isso, queremos ajudar você a refletir sobre a importância de estar preparado para garantir suporte e tranquilidade para quem você ama.
                 </p>
               </CardContent>
             </Card>

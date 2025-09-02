@@ -8,10 +8,10 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Machine Invest | Investimentos Inteligentes",
-  description: "Investimento, com foco em criptomoedas e ativos digitais",
+  title: "Machine Invest | Insights Financeiros",
+  description: "",
   icons: { icon: "/machine-logo.png" },
-  generator: "v0.dev",
+  generator: "@",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

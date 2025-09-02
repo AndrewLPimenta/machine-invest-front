@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Clock, CheckCircle, Percent } from "lucide-react"
 import Image from "next/image"
 import { useState, useMemo } from "react"
+import Link from "next/link" // aqui
+import { ArrowRight } from "lucide-react"
 
 type PlanType = 'PGBL' | 'VGBL'
 type TaxRegime = 'Progressivo' | 'Regressivo'
@@ -71,9 +73,12 @@ export default function PrevidenciaPage() {
           <div className="flex flex-col justify-center space-y-6">
             <h2 className="text-3xl font-bold tracking-tight">Invista no seu futuro hoje</h2>
             <p className="text-lg text-muted-foreground">
-              A Previdência Privada da Machine Invest oferece planos flexíveis e personalizados para garantir sua
-              segurança financeira no futuro, com benefícios fiscais e opções de investimento para todos os perfis.
+              Quer garantir seu futuro financeiro com previdência privada? Recomendamos explorar plataformas 
+              confiáveis que oferecem planos flexíveis e personalizados, com benefícios fiscais e diversas opções
+              de investimento para todos os perfis.
             </p>
+            <h2 className="text-3xl font-bold tracking-tight">Potenciais opções:</h2>
+            <p className="text-lg text-muted-foreground">PGBL, VGBL ou Plano empresarial</p>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <div className="rounded-full bg-primary/10 p-1">
@@ -103,7 +108,11 @@ export default function PrevidenciaPage() {
                 </div>
               </div>
             </div>
-            <Button className="w-fit">Conhecer planos</Button>
+            <Link href="/login">
+            <Button className="w-fit">
+              <ArrowRight className="mr-2 h-4 w-4" />
+              Receber Dicas</Button >
+            </Link>
           </div>
           <div className="flex items-center justify-center">
             <Image
@@ -117,7 +126,7 @@ export default function PrevidenciaPage() {
         </div>
 
         <div className="mt-24">
-          <h2 className="mb-12 text-center text-3xl font-bold">Nossos Planos</h2>
+          <h2 className="mb-12 text-center text-3xl font-bold">Planos previdenciários:</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
@@ -143,7 +152,7 @@ export default function PrevidenciaPage() {
                     <span className="text-sm">Diversas opções de investimento</span>
                   </li>
                 </ul>
-                <Button className="w-full">Simular PGBL</Button>
+                <Button className="w-full">Consultar</Button>
               </CardContent>
             </Card>
             <Card>
@@ -170,7 +179,7 @@ export default function PrevidenciaPage() {
                     <span className="text-sm">Ideal para planejamento sucessório</span>
                   </li>
                 </ul>
-                <Button className="w-full">Simular VGBL</Button>
+                <Button className="w-full">Consultar</Button>
               </CardContent>
             </Card>
             <Card>

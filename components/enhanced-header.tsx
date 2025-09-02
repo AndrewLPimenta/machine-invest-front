@@ -48,9 +48,8 @@ export function EnhancedHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-colors duration-300 ${
-        isScrolled ? "shadow-md dark:border-slate-800" : ""
-      }`}
+      className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-colors duration-300 ${isScrolled ? "shadow-md dark:border-slate-800" : ""
+        }`}
     >
       <ResponsiveContainer className="px-4">
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
@@ -70,9 +69,12 @@ export function EnhancedHeader() {
               </span>
             </Link>
 
+            
+
             {/* Navegação Principal */}
             <div className="hidden md:flex">
               <EnhancedMainNav isAuthenticated={isAuthenticated} user={user} />
+              {/*  */}
             </div>
           </div>
 
@@ -80,7 +82,7 @@ export function EnhancedHeader() {
           <div className="flex items-center gap-3 sm:gap-4">
             {isAuthenticated ? (
               <div className="flex items-center gap-2">
-                
+
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -105,12 +107,19 @@ export function EnhancedHeader() {
                         Download do App
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="text-sm sm:text-base">
-                      <Link href="/perfil" className="flex items-center w-full">
-                        <BarChart3 className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                        Meu Perfil
-                      </Link>
-                    </DropdownMenuItem>
+                    {user && (
+                      <DropdownMenuItem className="text-sm sm:text-base">
+                        <Link
+                          href={user.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user.id}`}
+                          className="flex items-center w-full"
+                        >
+                          <span className="flex items-center">
+                            <BarChart3 className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                            Meu Perfil
+                          </span>
+                        </Link>
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem className="text-sm sm:text-base">
                       <Link href="/configuracoes" className="flex items-center w-full">
                         <Settings className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />

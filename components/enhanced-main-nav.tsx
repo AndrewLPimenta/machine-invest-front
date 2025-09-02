@@ -13,173 +13,174 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { motion } from "framer-motion"
+import { useAuth } from "@/contexts/auth-context"
 
 export function EnhancedMainNav() {
+  const { user, isAuthenticated } = useAuth()
+
+  // Links públicos
+  const publicLinks = (
+    <>
+      {/* Investimentos */}
+      <NavigationMenuItem>
+        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+          <motion.span
+            className="relative"
+            whileHover={{ color: "var(--primary)" }}
+            transition={{ duration: 0.2 }}
+          >
+            Investimentos
+            <motion.span
+              className="absolute -bottom-1 left-0 h-[2px] bg-primary"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.2 }}
+            />
+          </motion.span>
+        </NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <motion.ul
+            className="grid gap-3 p-4 w-[240px] xs:w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <li className="row-span-3">
+              <NavigationMenuLink asChild>
+                <motion.a
+                  href="/simulacao"
+                  className={cn(
+                    "flex h-full w-full select-none flex-col justify-end rounded-md p-4 md:p-6 no-underline outline-none focus:shadow-md",
+                    "bg-[var(--card)] text-[var(--foreground)] dark:bg-[var(--card-dark)] dark:text-[var(--foreground-dark)]"
+                  )}
+                  whileHover={{
+                    scale: 1.02,
+                    backgroundColor: "var(--accent)",
+                    color: "var(--accent-foreground)",
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <div className="mb-2 mt-4 text-base md:text-lg lg:text-xl font-medium">
+                    Simulação Personalizada
+                  </div>
+                  <p className="text-sm md:text-base leading-tight text-[var(--muted-foreground)] dark:text-[var(--muted-foreground-dark)]">
+                    Calcule seus rendimentos e compare diferentes opções de investimento.
+                  </p>
+                </motion.a>
+              </NavigationMenuLink>
+            </li>
+
+            <EnhancedListItem href="/investimentos/renda-fixa" title="Renda Fixa">
+              CDBs, LCIs, LCAs e Tesouro Direto
+            </EnhancedListItem>
+            <EnhancedListItem href="/investimentos/renda-variavel" title="Renda Variável">
+              Ações, ETFs e Fundos Imobiliários
+            </EnhancedListItem>
+            <EnhancedListItem href="/investimentos/criptomoedas" title="Criptomoedas">
+              Bitcoin, Ethereum e outras altcoins
+            </EnhancedListItem>
+          </motion.ul>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+
+      {/* Serviços */}
+      <NavigationMenuItem>
+        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+          <motion.span
+            className="relative"
+            whileHover={{ color: "var(--primary)" }}
+            transition={{ duration: 0.2 }}
+          >
+            Serviços
+            <motion.span
+              className="absolute -bottom-1 left-0 h-[2px] bg-primary"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.2 }}
+            />
+          </motion.span>
+        </NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <motion.ul
+            className="grid gap-3 p-4 w-[240px] xs:w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <EnhancedListItem href="/servicos/conta-digital" title="Conta Digital">
+              Conta sem taxas, cartão virtual e físico
+            </EnhancedListItem>
+            <EnhancedListItem href="/servicos/emprestimos" title="Empréstimos">
+              Crédito pessoal e financiamentos
+            </EnhancedListItem>
+            <EnhancedListItem href="/servicos/seguros" title="Seguros">
+              Vida, residencial e automóvel
+            </EnhancedListItem>
+            <EnhancedListItem href="/servicos/previdencia" title="Previdência">
+              Planos de previdência privada
+            </EnhancedListItem>
+          </motion.ul>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+
+      {/* Criptomoedas */}
+      <NavigationMenuItem>
+        <Link href="/criptomoedas" legacyBehavior passHref>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-sm sm:text-base md:text-lg px-3 py-2 h-auto")}>
+            Criptomoedas
+          </NavigationMenuLink>
+        </Link>
+      </NavigationMenuItem>
+
+      {/* Blog */}
+      <NavigationMenuItem>
+        <Link href="/blog" legacyBehavior passHref>
+          <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "text-sm sm:text-base md:text-lg px-3 py-2 h-auto")}>
+            Blog
+          </NavigationMenuLink>
+        </Link>
+      </NavigationMenuItem>
+    </>
+  )
+
+  // Links privados
+  const privateLinks = (
+    <>
+      <NavigationMenuItem>
+        <NavigationMenuLink asChild>
+          <Link href="/" className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+            Home
+          </Link>
+        </NavigationMenuLink>
+        <NavigationMenuLink asChild>
+          <Link href={user?.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user?.id}`} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+            Meu Perfil
+          </Link>
+        </NavigationMenuLink>
+        <NavigationMenuLink asChild>
+          <Link href="/configuracoes" className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+            Configurações
+          </Link>
+        </NavigationMenuLink>
+         <NavigationMenuLink asChild>
+          <Link href={user?.perfil ? `/perfil/${user.perfil.toLowerCase()}/financas` : `/perfil/${user?.id}/financas`} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+            Finanças
+          </Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+    </>
+  )
+
   return (
     <NavigationMenu className="max-w-full">
       <NavigationMenuList className="flex-wrap gap-1 sm:gap-2">
-        {/* Investimentos */}
-        <NavigationMenuItem>
-          <NavigationMenuTrigger
-            className="bg-transparent hover:bg-transparent focus:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto"
-          >
-            <motion.span
-              className="relative"
-              whileHover={{ color: "var(--primary)" }}
-              transition={{ duration: 0.2 }}
-            >
-              Investimentos
-              <motion.span
-                className="absolute -bottom-1 left-0 h-[2px] bg-primary"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.2 }}
-              />
-            </motion.span>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <motion.ul
-              className="grid gap-3 p-4 w-[240px] xs:w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <motion.a
-                    href="/simulacao"
-                    className={cn(
-                      "flex h-full w-full select-none flex-col justify-end rounded-md p-4 md:p-6 no-underline outline-none focus:shadow-md",
-                      "bg-[var(--card)] text-[var(--foreground)] dark:bg-[var(--card-dark)] dark:text-[var(--foreground-dark)]"
-                    )}
-                    whileHover={{
-                      scale: 1.02,
-                      backgroundColor: "var(--accent)",
-                      color: "var(--accent-foreground)",
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <div className="mb-2 mt-4 text-base md:text-lg lg:text-xl font-medium">
-                      Simulação Personalizada
-                    </div>
-                    <p className="text-sm md:text-base leading-tight text-[var(--muted-foreground)] dark:text-[var(--muted-foreground-dark)]">
-                      Calcule seus rendimentos e compare diferentes opções de investimento.
-                    </p>
-                  </motion.a>
-                </NavigationMenuLink>
-              </li>
-
-              <EnhancedListItem href="/investimentos/renda-fixa" title="Renda Fixa">
-                CDBs, LCIs, LCAs e Tesouro Direto
-              </EnhancedListItem>
-              <EnhancedListItem href="/investimentos/renda-variavel" title="Renda Variável">
-                Ações, ETFs e Fundos Imobiliários
-              </EnhancedListItem>
-              <EnhancedListItem href="/investimentos/criptomoedas" title="Criptomoedas">
-                Bitcoin, Ethereum e outras altcoins
-              </EnhancedListItem>
-            </motion.ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        {/* Serviços */}
-        <NavigationMenuItem>
-          <NavigationMenuTrigger
-            className="bg-transparent hover:bg-transparent focus:bg-transparent text-sm sm:text-base md:text-lg px-3 py-2 h-auto"
-          >
-            <motion.span
-              className="relative"
-              whileHover={{ color: "var(--primary)" }}
-              transition={{ duration: 0.2 }}
-            >
-              Serviços
-              <motion.span
-                className="absolute -bottom-1 left-0 h-[2px] bg-primary"
-                initial={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.2 }}
-              />
-            </motion.span>
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <motion.ul
-              className="grid gap-3 p-4 w-[240px] xs:w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <EnhancedListItem href="/servicos/conta-digital" title="Conta Digital">
-                Conta sem taxas, cartão virtual e físico
-              </EnhancedListItem>
-              <EnhancedListItem href="/servicos/emprestimos" title="Empréstimos">
-                Crédito pessoal e financiamentos
-              </EnhancedListItem>
-              <EnhancedListItem href="/servicos/seguros" title="Seguros">
-                Vida, residencial e automóvel
-              </EnhancedListItem>
-              <EnhancedListItem href="/servicos/previdencia" title="Previdência">
-                Planos de previdência privada
-              </EnhancedListItem>
-            </motion.ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        {/* Criptomoedas */}
-        <NavigationMenuItem>
-          <Link href="/criptomoedas" legacyBehavior passHref>
-            <NavigationMenuLink
-              className={cn(
-                navigationMenuTriggerStyle(),
-                "text-sm sm:text-base md:text-lg px-3 py-2 h-auto"
-              )}
-            >
-              <motion.span
-                className="relative"
-                whileHover={{ color: "var(--primary)" }}
-                transition={{ duration: 0.2 }}
-              >
-                Criptomoedas
-                <motion.span
-                  className="absolute -bottom-1 left-0 h-[2px] bg-primary"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.2 }}
-                />
-              </motion.span>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-
-        {/* Blog */}
-        <NavigationMenuItem>
-          <Link href="/blog" legacyBehavior passHref>
-            <NavigationMenuLink
-              className={cn(
-                navigationMenuTriggerStyle(),
-                "text-sm sm:text-base md:text-lg px-3 py-2 h-auto"
-              )}
-            >
-              <motion.span
-                className="relative"
-                whileHover={{ color: "var(--primary)" }}
-                transition={{ duration: 0.2 }}
-              >
-                Blog
-                <motion.span
-                  className="absolute -bottom-1 left-0 h-[2px] bg-primary"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.2 }}
-                />
-              </motion.span>
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        {isAuthenticated ? privateLinks : publicLinks}
       </NavigationMenuList>
     </NavigationMenu>
   )
 }
 
+// -----------------------------
 const EnhancedListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
   ({ className, title, children, ...props }, ref) => {
     return (

@@ -389,7 +389,7 @@ export default function Home() {
               <EnhancedCryptoChart
                 symbol="BTC"
                 name="Bitcoin"
-                currentPrice={245876.32}
+                currentPrice={544833.85}
                 change={2.45}
                
               />
@@ -398,7 +398,7 @@ export default function Home() {
               <EnhancedCryptoChart
                 symbol="ETH"
                 name="Ethereum"
-                currentPrice={12543.87}
+                currentPrice={21522.80}
                 change={-1.23}
                
               />

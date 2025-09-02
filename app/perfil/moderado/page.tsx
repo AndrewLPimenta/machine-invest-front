@@ -18,7 +18,8 @@ import {
 } from "lucide-react"
 import { useState, useEffect } from "react"
 import { AuthRedirect } from "@/components/auth-redirect"
-
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 function AnimatedCounter({ end, prefix = "", suffix = "" }: { end: number; prefix?: string; suffix?: string }) {
   const [count, setCount] = useState(0)
 
@@ -537,94 +538,95 @@ export default function ModeradoPage() {
                   </div>
                 </div>
               </div>
-                 <Card className="backdrop-blur-sm border-0 shadow-xl">
-            <CardHeader className="pb-6">
-              <CardTitle className="flex items-center gap-3 text-2xl">
-                <Zap className="h-6 w-6 text-primary" />
-                Estratégias para Profissionalizar seus Investimentos
-              </CardTitle>
-              <CardDescription className="text-base">
-                Dicas práticas para evoluir de aplicador para investidor estratégico
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
-                  <BarChart3 className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-lg text-primary mb-2">1. Construa uma Base Sólida</h4>
-                    <p className="text-primary/80 mb-3">
-                      Comece com 40-50% em renda fixa (Tesouro IPCA+, CDBs) para ter estabilidade. Isso é sua âncora
-                      contra volatilidade.
-                    </p>
-                    <div className=" p-3 rounded-lg">
-                      <p className="text-sm text-primary">
-                        <strong>Ação prática:</strong> Invista primeiro em Tesouro IPCA+ 2035 para proteger contra inflação
-                      </p>
+              <Card className="backdrop-blur-sm border-0 shadow-xl">
+                <CardHeader className="pb-6">
+                  <CardTitle className="flex items-center gap-3 text-2xl">
+                    <Zap className="h-6 w-6 text-primary" />
+                    Estratégias para Profissionalizar seus Investimentos
+                  </CardTitle>
+                  <CardDescription className="text-base">
+                    Dicas práticas para evoluir de aplicador para investidor estratégico
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
+                      <BarChart3 className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold text-lg text-primary mb-2">1. Construa uma Base Sólida</h4>
+                        <p className="text-primary/80 mb-3">
+                          Comece com 40-50% em renda fixa (Tesouro IPCA+, CDBs) para ter estabilidade. Isso é sua âncora
+                          contra volatilidade.
+                        </p>
+                        <div className=" p-3 rounded-lg">
+                          <p className="text-sm text-primary">
+                            <strong>Ação prática:</strong> Invista primeiro em Tesouro IPCA+ 2035 para proteger contra inflação
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
 
-                <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
-                  <PieChart className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-lg text-primary mb-2">2. Diversifique com Inteligência</h4>
-                    <p className="text-primary/80 mb-3">
-                      Não coloque todos os ovos na mesma cesta. Combine diferentes classes: fundos multimercado, ETFs internacionais, FIIs e algumas ações.
-                    </p>
-                    <div className=" p-3 rounded-lg">
-                      <p className="text-sm text-primary">
-                        <strong>Ação prática:</strong> Use ETFs como IVVB11 para ter exposição internacional com baixo custo
-                      </p>
+                    <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
+                      <PieChart className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold text-lg text-primary mb-2">2. Diversifique com Inteligência</h4>
+                        <p className="text-primary/80 mb-3">
+                          Não coloque todos os ovos na mesma cesta. Combine diferentes classes: fundos multimercado, ETFs internacionais, FIIs e algumas ações.
+                        </p>
+                        <div className=" p-3 rounded-lg">
+                          <p className="text-sm text-primary">
+                            <strong>Ação prática:</strong> Use ETFs como IVVB11 para ter exposição internacional com baixo custo
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
 
-                <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
-                  <Calendar className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-lg text-primary mb-2">3. Rebalanceie Regularmente</h4>
-                    <p className="text-primary/80 mb-3">
-                      A cada 6-12 meses, ajuste sua carteira para manter as proporções ideais. Venda o que subiu muito e compre o que está em desconto.
-                    </p>
-                    <div className="p-3 rounded-lg">
-                      <p className="text-sm text-primary">
-                        <strong>Ação prática:</strong> Configure lembretes trimestrais para revisar sua alocação
-                      </p>
+                    <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
+                      <Calendar className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold text-lg text-primary mb-2">3. Rebalanceie Regularmente</h4>
+                        <p className="text-primary/80 mb-3">
+                          A cada 6-12 meses, ajuste sua carteira para manter as proporções ideais. Venda o que subiu muito e compre o que está em desconto.
+                        </p>
+                        <div className="p-3 rounded-lg">
+                          <p className="text-sm text-primary">
+                            <strong>Ação prática:</strong> Configure lembretes trimestrais para revisar sua alocação
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
 
-                <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
-                  <TrendingUp className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-lg text-primary mb-2">4. Pense no Longo Prazo</h4>
-                    <p className="text-primary/80 mb-3">
-                      Investimentos moderados brilham no médio e longo prazo (2-5 anos). Não se desespere com volatilidade de curto prazo.
-                    </p>
-                    <div className="p-3 rounded-lg">
-                      <p className="text-sm text-primary">
-                        <strong>Ação prática:</strong> Defina objetivos claros (casa, aposentadoria) com prazos específicos
-                      </p>
+                    <div className="flex gap-4 p-6 bg-primary/20 rounded-xl">
+                      <TrendingUp className="h-8 w-8 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold text-lg text-primary mb-2">4. Pense no Longo Prazo</h4>
+                        <p className="text-primary/80 mb-3">
+                          Investimentos moderados brilham no médio e longo prazo (2-5 anos). Não se desespere com volatilidade de curto prazo.
+                        </p>
+                        <div className="p-3 rounded-lg">
+                          <p className="text-sm text-primary">
+                            <strong>Ação prática:</strong> Defina objetivos claros (casa, aposentadoria) com prazos específicos
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </CardContent>
+              </Card>
+              <div className="flex justify-center mt-6">
+                <Link href="/perfil/moderado/financas" passHref>
+                  <Button size="lg" className="group" asChild>
+                    <span className="flex items-center">
+                      Ver Relatório Completo das Minhas Finanças
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
-              <div className="mt-8 p-6  rounded-xl text-white text-center">
-                <h4 className="text-xl font-bold mb-2">Começe a usar!</h4>
-                <p className="text-primary/70">
-                  Com uma carteira moderada bem estruturada, você pode ter <strong>mais liberdade</strong> em menos tempo.
-                </p>
-                <Button className="mt-4   hover:bg-primary/90">
-                  Próximos Passos
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
 
-         
+
 
         </div>
       </div>
