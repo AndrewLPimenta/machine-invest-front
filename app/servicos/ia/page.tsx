@@ -1,13 +1,6 @@
 "use client"
 
 import { PageLayout } from "@/components/page-layout"
-import { Section } from "@/components/section"
-import { SectionHeading } from "@/components/section-heading"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Calculator, Clock, CheckCircle, DollarSign, Percent, Shield } from "lucide-react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Slider } from "@/components/ui/slider"
 import { useState, useMemo } from "react"
 import { MachineIAChatbot } from "@/components/machine-ia-chatbot"
 
@@ -82,10 +75,6 @@ export default function IaPage() {
     }).format(value)
   }
 
-  const handleLoanRequest = () => {
-    // Aqui você pode adicionar a lógica para enviar a solicitação de empréstimo
-    alert(`Solicitação de empréstimo enviada:\nValor: ${formatCurrency(loanAmount)}\nParcelas: ${loanTerm}x de ${formatCurrency(monthlyPayment)}`)
-  }
 
   return (
     <PageLayout>

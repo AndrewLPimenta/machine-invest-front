@@ -12,7 +12,14 @@ import { ResponsiveContainer } from "./responsive-container"
 import { useAuth } from "@/contexts/auth-context"
 
 import { Menu, User, LogOut, ArrowDownToLine, Settings, BarChart3 } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
 
 export function EnhancedHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -27,6 +34,7 @@ export function EnhancedHeader() {
 
   const handleLogout = async () => {
     await logout()
+    setIsMobileMenuOpen(false)
     window.location.href = "/"
   }
 
@@ -36,69 +44,74 @@ export function EnhancedHeader() {
     >
       <ResponsiveContainer className="px-4">
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between">
-          {/* Logo */}
+          {/* Logo e Navegação */}
           <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
             <Link href="/" className="mr-6 flex items-center space-x-2 text-primary transition-colors duration-300">
-              <Image src="/machine-logo.png" alt="Machine Invest Logo" width={36} height={36} className="h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11" priority />
+              <Image
+                src="/machine-logo.png"
+                alt="Machine Invest Logo"
+                width={36}
+                height={36}
+                className="h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11"
+                priority
+              />
               <span className="hidden font-bold text-base sm:text-lg md:text-xl sm:inline-block">Machine Invest</span>
             </Link>
-            {/* Navegação Principal */}
+
             <div className="hidden md:flex">
-              <EnhancedMainNav isAuthenticated={isAuthenticated} user={user} />
+              <EnhancedMainNav />
             </div>
           </div>
 
-          {/* Ações do Usuário */}
+          {/* Ações do usuário */}
           <div className="flex items-center gap-3 sm:gap-4">
             {isAuthenticated ? (
-              <div className="flex items-center gap-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <motion.button
-                      className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <User className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                    </motion.button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56 sm:w-64">
-                    <DropdownMenuLabel className="text-sm sm:text-base">Minha Conta</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <motion.button
+                    className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <User className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+                  </motion.button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 sm:w-64">
+                  <DropdownMenuLabel className="text-sm sm:text-base">Minha Conta</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="text-sm sm:text-base">
+                    <User className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                    Olá, {user?.name || "Usuário"}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="text-sm sm:text-base">
+                    <Link href="/download" className="flex items-center w-full">
+                      <ArrowDownToLine className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      Download do App
+                    </Link>
+                  </DropdownMenuItem>
+                  {user && (
                     <DropdownMenuItem className="text-sm sm:text-base">
-                      <User className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                      Olá, {user?.name || "Usuário"}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="text-sm sm:text-base">
-                      <Link href="/download" className="flex items-center w-full">
-                        <ArrowDownToLine className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                        Download do App
+                      <Link href={user.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user.id}`} className="flex items-center w-full">
+                        <motion.span className="flex items-center" whileHover={{ scale: 1.05 }}>
+                          <BarChart3 className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                          Meu Perfil
+                        </motion.span>
                       </Link>
                     </DropdownMenuItem>
-                    {user && (
-                      <DropdownMenuItem className="text-sm sm:text-base">
-                        <Link href={user.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user.id}`} className="flex items-center w-full">
-                          <motion.span className="flex items-center" whileHover={{ scale: 1.05 }}>
-                            <BarChart3 className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                            Meu Perfil
-                          </motion.span>
-                        </Link>
-                      </DropdownMenuItem>
-                    )}
-                    <DropdownMenuItem className="text-sm sm:text-base">
-                      <Link href="/configuracoes" className="flex items-center w-full">
-                        <Settings className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                        Configurações
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleLogout} className="text-sm sm:text-base text-red-600 focus:text-red-600">
-                      <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                      Sair da Conta
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
+                  )}
+                  <DropdownMenuItem className="text-sm sm:text-base">
+                    <Link href="/configuracoes" className="flex items-center w-full">
+                      <Settings className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                      Configurações
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="text-sm sm:text-base text-red-600 focus:text-red-600">
+                    <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                    Sair da Conta
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <EnhancedButton variant="gradient" size="default" className="hidden sm:flex text-sm sm:text-base" href="/login">
                 Login
@@ -117,7 +130,10 @@ export function EnhancedHeader() {
               <span className="sr-only">Toggle Menu</span>
             </motion.button>
 
-            <EnhancedMobileMenu isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} isAuthenticated={isAuthenticated} user={user} />
+            <EnhancedMobileMenu
+              isOpen={isMobileMenuOpen}
+              setIsOpen={setIsMobileMenuOpen}
+            />
           </div>
         </div>
       </ResponsiveContainer>

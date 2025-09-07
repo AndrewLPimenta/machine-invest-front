@@ -70,7 +70,9 @@
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "tube": "^0.0.1",
     "vaul": "^0.9.6",
+    "you": "^0.1.5",
     "zod": "^3.24.1"
   },
   "devDependencies": {

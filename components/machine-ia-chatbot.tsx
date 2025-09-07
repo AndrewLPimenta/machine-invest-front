@@ -57,7 +57,7 @@ export function MachineIAChatbot() {
     setIsLoading(true)
 
     try {
-      const response = await fetch("/api/ai/chat", {
+      const response = await fetch("http://localhost:3001/api/ai/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: inputMessage }),

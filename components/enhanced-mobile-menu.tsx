@@ -10,7 +10,7 @@ import { EnhancedButton } from "./enhanced-button"
 
 interface MobileMenuProps {
   isOpen: boolean
-  setIsOpen: (open: boolean) => void
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
@@ -31,29 +31,31 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1 }
     },
     exit: {
       opacity: 0,
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      },
-    },
+      transition: { staggerChildren: 0.05, staggerDirection: -1 }
+    }
   }
 
   const item = {
     hidden: { opacity: 0, x: -20 },
     show: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -20 },
+    exit: { opacity: 0, x: -20 }
+  }
+
+  const handleLogout = async () => {
+    await logout()
+    setIsOpen(false)
+    window.location.href = "/"
   }
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetContent side="right" className="w-[85vw] max-w-[350px] p-0 overflow-y-auto z-[100]">
         <div className="flex flex-col h-full">
+          {/* Header do Menu */}
           <div className="p-4 sm:p-6 border-b">
             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
               <motion.div
@@ -62,7 +64,7 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <Image
-                src="/machine-logo.png"
+                  src="/machine-logo.png"
                   alt="Machine Invest Logo"
                   width={36}
                   height={36}
@@ -79,7 +81,7 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
               </motion.span>
             </div>
 
-            {isAuthenticated ? (
+            {isAuthenticated && (
               <motion.div
                 className="mb-3 sm:mb-4 p-3 sm:p-4 bg-primary/5 rounded-lg"
                 initial={{ opacity: 0, y: 20 }}
@@ -89,9 +91,10 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
                 <p className="text-sm sm:text-base font-medium">Olá, {user?.name}</p>
                 <p className="text-xs sm:text-sm text-muted-foreground">Bem-vindo de volta!</p>
               </motion.div>
-            ) : null}
+            )}
           </div>
 
+          {/* Menu de Links */}
           <div className="flex-1 overflow-auto py-4 sm:py-6 px-4 sm:px-6">
             <motion.nav
               className="flex flex-col space-y-4 sm:space-y-6"
@@ -100,7 +103,7 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
               animate="show"
             >
               {menuItems.map((menuItem, index) => (
-                <motion.div key={index} variants={item} custom={index}>
+                <motion.div key={index} variants={item}>
                   <Link
                     href={menuItem.href}
                     className="flex items-center text-base sm:text-lg font-medium text-foreground hover:text-primary transition-colors relative overflow-hidden group"
@@ -119,6 +122,7 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
             </motion.nav>
           </div>
 
+          {/* Ações do usuário */}
           <motion.div
             className="p-4 sm:p-6 border-t mt-auto"
             initial={{ opacity: 0, y: 20 }}
@@ -127,39 +131,20 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
           >
             {isAuthenticated ? (
               <div className="space-y-3 sm:space-y-4">
-                <EnhancedButton
-                  className="w-full text-sm sm:text-base"
-                  variant="gradient"
-                  href="/download"
-                >
+                <EnhancedButton className="w-full text-sm sm:text-base" variant="gradient" href="/download">
                   Download App <ArrowDownToLine className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </EnhancedButton>
-                <EnhancedButton
-                  variant="outline"
-                  className="w-full text-sm sm:text-base"
-                  onClick={async () => {
-                    await logout()
-                    setIsOpen(false)
-                  }}
-                >
+                <EnhancedButton variant="outline" className="w-full text-sm sm:text-base" onClick={handleLogout}>
                   <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Sair
                 </EnhancedButton>
               </div>
             ) : (
               <div className="space-y-3 sm:space-y-4">
-                <EnhancedButton
-                  className="w-full text-sm sm:text-base"
-                  variant="gradient"
-                  href="/login"
-                >
+                <EnhancedButton className="w-full text-sm sm:text-base" variant="gradient" href="/login">
                   Login
                 </EnhancedButton>
-                <EnhancedButton
-                  variant="outline"
-                  className="w-full text-sm sm:text-base"
-                  href="/cadastro"
-                >
+                <EnhancedButton variant="outline" className="w-full text-sm sm:text-base" href="/cadastro">
                   Cadastre-se
                 </EnhancedButton>
               </div>
@@ -171,3 +156,4 @@ export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
   )
 }
 
+export default EnhancedMobileMenu

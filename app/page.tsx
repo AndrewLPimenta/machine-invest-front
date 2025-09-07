@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, DollarSign, LineChart, Shield } from "lucide-react"
 import Link from "next/link"
-import { HeroSection } from "@/components/hero-section"
 import { FeatureSection } from "@/components/feature-section"
 import { EnhancedTestimonialSection } from "@/components/enhanced-testimonial-section"
 import { SimulationSection } from "@/components/simulation-section"
@@ -19,8 +18,7 @@ import { ResponsiveGrid } from "@/components/responsive-grid"
 import { Suspense } from "react"
 import { CardSkeleton, ChartSkeleton } from "@/components/loading-skeleton"
 import HeroGeometric from "@/components/hero-geometric"
-import { WorldMap } from "@/components/ui/world-map";
-import { motion } from "framer-motion";
+
 export default function Home() {
   const performanceData = [
     { label: "Renda Fixa", value: 40, color: "#10b981" },
@@ -31,11 +29,12 @@ export default function Home() {
 
   return (
     <PageLayout>
+      {/* Hero */}
       <HeroGeometric />
-      {/* <HeroSection />  */}
-    <FeatureSection />
+      <FeatureSection />
 
-     <Section>
+      {/* Benefícios principais */}
+      <Section>
         <SectionHeading
           title="Te ajudamos a crescer financeiramente"
           description="Receba dicas e insights que podem ser o diferencial que você precisa para prosperar."
@@ -45,6 +44,7 @@ export default function Home() {
 
         <div className="mt-16">
           <ResponsiveGrid cols={{ default: 1, sm: 2, lg: 3 }}>
+            {/* Card 1 */}
             <Card className="h-full">
               <CardHeader>
                 <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
@@ -79,6 +79,7 @@ export default function Home() {
               </CardFooter>
             </Card>
 
+            {/* Card 2 */}
             <Card className="h-full">
               <CardHeader>
                 <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
@@ -113,6 +114,7 @@ export default function Home() {
               </CardFooter>
             </Card>
 
+            {/* Card 3 */}
             <Card className="h-full">
               <CardHeader>
                 <div className="mb-4 rounded-full bg-primary/10 p-3 w-fit">
@@ -157,6 +159,8 @@ export default function Home() {
           </Button>
         </div>
       </Section>
+
+      {/* Perfil de Investidor */}
       <Section>
         <SectionHeading
           title="Descubra seu Perfil de Investidor"
@@ -188,8 +192,7 @@ export default function Home() {
                     <h4 className="font-medium">Conservador</h4>
                   </div>
                   <p className="text-sm text-muted-foreground ml-5">
-                    60% Renda Fixa, 25% Fundos, 15% Reserva de Emergência. Foco em preservar capital e crescimento
-                    estável.
+                    60% Renda Fixa, 25% Fundos, 15% Reserva de Emergência.
                   </p>
                 </div>
 
@@ -199,7 +202,7 @@ export default function Home() {
                     <h4 className="font-medium">Moderado</h4>
                   </div>
                   <p className="text-sm text-muted-foreground ml-5">
-                    40% Renda Fixa, 35% Ações, 20% Fundos, 5% Alternativos. Equilibrio entre segurança e crescimento.
+                    40% Renda Fixa, 35% Ações, 20% Fundos, 5% Alternativos.
                   </p>
                 </div>
 
@@ -209,8 +212,7 @@ export default function Home() {
                     <h4 className="font-medium">Arrojado</h4>
                   </div>
                   <p className="text-sm text-muted-foreground ml-5">
-                    20% Renda Fixa, 50% Ações, 20% Criptomoedas, 10% Investimentos Alternativos. Máximo potencial de
-                    crescimento.
+                    20% Renda Fixa, 50% Ações, 20% Criptomoedas, 10% Alternativos.
                   </p>
                 </div>
               </CardContent>
@@ -224,64 +226,64 @@ export default function Home() {
             </Card>
           </ResponsiveGrid>
         </div>
-        
       </Section>
-      <Section>
 
+      {/* Educação */}
+      <Section>
         <Card>
-        
-        <CardHeader className="text-center">
-          <CardTitle>O que posso aprender?</CardTitle>
-          <CardDescription>
-            Domine suas finanças em cada etapa da jornada: aprenda os fundamentos, descubra novas
-            estratégias e acompanhe onde estão seus investimentoss em um só lugar.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ResponsiveGrid cols={{ default: 1, md: 3 }}>
-            <div className="text-center space-y-2">
-              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                <LineChart className="h-6 w-6 text-primary" />
+          <CardHeader className="text-center">
+            <CardTitle>O que posso aprender?</CardTitle>
+            <CardDescription>
+              Domine suas finanças em cada etapa da jornada: aprenda os fundamentos, descubra novas estratégias e
+              acompanhe onde estão seus investimentos em um só lugar.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveGrid cols={{ default: 1, md: 3 }}>
+              <div className="text-center space-y-2">
+                <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <LineChart className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-medium">Cresça com Conhecimento</h4>
+                <p className="text-sm text-muted-foreground">
+                  Do básico ao avançado: conteúdo prático para investir com confiança.
+                </p>
               </div>
-              <h4 className="font-medium">Cresça com Conhecimento</h4>
-              <p className="text-sm text-muted-foreground">
-                        Do básico ao avançado: conteúdo prático para investir com confiança em qualquer nível.
-              </p>
-            </div>
-            <div className="text-center space-y-2">
-              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                <Shield className="h-6 w-6 text-primary" />
+              <div className="text-center space-y-2">
+                <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-medium">Segurança e Estratégia</h4>
+                <p className="text-sm text-muted-foreground">
+                  Aprenda a proteger seu patrimônio, reduzir riscos e aproveitar oportunidades.
+                </p>
               </div>
-              <h4 className="font-medium">Segurança e Estratégia</h4>
-              <p className="text-sm text-muted-foreground">
-                Aprenda a proteger seu patrimônio, reduzir ou amenizar riscos e aproveitar as melhores oportunidades.
-              </p>
-            </div>
-            <div className="text-center space-y-2">
-              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                <DollarSign className="h-6 w-6 text-primary" />
+              <div className="text-center space-y-2">
+                <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <DollarSign className="h-6 w-6 text-primary" />
+                </div>
+                <h4 className="font-medium">Controle em Suas Mãos</h4>
+                <p className="text-sm text-muted-foreground">
+                  Tenha uma visão clara e organizada de onde está o seu dinheiro.
+                </p>
               </div>
-              <h4 className="font-medium">Controle em Suas Mãos</h4>
-              <p className="text-sm text-muted-foreground">
-                 Tenha uma visão clara e organizada de onde está o seu dinheiro — tudo em um só lugar.
-              </p>
-            </div>
-          </ResponsiveGrid>
-        </CardContent>
-        <CardFooter className="justify-center">
-          <Button asChild>
-            <Link href="/login">
-              Começar Agora <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </CardFooter>
-      </Card>
+            </ResponsiveGrid>
+          </CardContent>
+          <CardFooter className="justify-center">
+            <Button asChild>
+              <Link href="/login">
+                Começar Agora <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </CardFooter>
+        </Card>
       </Section>
-      
+
+      {/* Notícias */}
       <Section>
         <SectionHeading
           title="Notícias que Impactam seus Investimentos"
-          description="Fique atualizado com as principais notícias do mercado financeiro e aprenda como aplicá-las em sua estratégia de investimentos."
+          description="Fique atualizado com as principais notícias do mercado financeiro."
           centered
         />
 
@@ -292,8 +294,7 @@ export default function Home() {
                 <CardHeader>
                   <CardTitle className="text-lg">Banco Central mantém a Selic em 10,5%</CardTitle>
                   <CardDescription>
-                    Entenda como essa decisão impacta diferentes investimentos e aprenda a ajustar sua estratégia para
-                    maximizar seus ganhos.
+                    Entenda como essa decisão impacta diferentes investimentos.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -312,8 +313,7 @@ export default function Home() {
                 <CardHeader>
                   <CardTitle className="text-lg">Mercado de ações reage a dados econômicos</CardTitle>
                   <CardDescription>
-                    Aprenda a interpretar movimentos do mercado e descubra oportunidades para acelerar seu crescimento
-                    financeiro.
+                    Aprenda a interpretar movimentos do mercado e descubra oportunidades.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -332,8 +332,7 @@ export default function Home() {
                 <CardHeader>
                   <CardTitle className="text-lg">Dólar em alta: como proteger seu patrimônio</CardTitle>
                   <CardDescription>
-                    Descubra estratégias inteligentes para proteger e fazer seu dinheiro crescer mesmo em cenários de
-                    volatilidade.
+                    Descubra estratégias inteligentes para proteger seu dinheiro.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -357,12 +356,14 @@ export default function Home() {
           </Button>
         </div>
       </Section>
+
+      {/* Análise Técnica */}
       <Section>
         <div className="mt-8">
           <Suspense fallback={<ChartSkeleton />}>
             <MarketVolumeChart
               title="Domine a Arte de Interpretar Gráficos"
-              description="Aprenda a ler tendências, volumes e movimentos do mercado para tomar decisões que podem transformar sua vida financeira."
+              description="Aprenda a ler tendências e movimentos do mercado."
             />
           </Suspense>
         </div>
@@ -375,10 +376,12 @@ export default function Home() {
           </Button>
         </div>
       </Section>
+
+      {/* Criptomoedas */}
       <Section>
         <SectionHeading
           title="Investimentos Modernos: O Futuro do Dinheiro"
-          description="Explore o mundo das criptomoedas e ativos digitais. Aprenda como diversificar sua carteira com investimentos do futuro."
+          description="Explore o mundo das criptomoedas e ativos digitais."
           centered
           highlightedWord="Futuro"
         />
@@ -386,38 +389,18 @@ export default function Home() {
         <div className="mt-16">
           <ResponsiveGrid cols={{ default: 1, lg: 2 }}>
             <Suspense fallback={<ChartSkeleton />}>
-              <EnhancedCryptoChart
-                symbol="BTC"
-                name="Bitcoin"
-                currentPrice={544833.85}
-                change={2.45}
-               
-              />
+              <EnhancedCryptoChart symbol="BTC" name="Bitcoin" currentPrice={245876.32} change={2.45} />
             </Suspense>
             <Suspense fallback={<ChartSkeleton />}>
-              <EnhancedCryptoChart
-                symbol="ETH"
-                name="Ethereum"
-                currentPrice={21522.80}
-                change={-1.23}
-               
-              />
+              <EnhancedCryptoChart symbol="ETH" name="Ethereum" currentPrice={12543.87} change={-1.23} />
             </Suspense>
           </ResponsiveGrid>
         </div>
-
-        <div className="mt-12">
-
-        </div>
       </Section>
 
-
-
+      {/* Sessões extras */}
       <EnhancedTestimonialSection />
       <SimulationSection />
-
-     
-
       <CtaSection />
     </PageLayout>
   )
