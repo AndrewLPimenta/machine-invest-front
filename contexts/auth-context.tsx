@@ -80,8 +80,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(userData)
 
       setIsLoading(false)
-      return { 
-        success: true, 
+      return {
+        success: true,
         message: data.message,
         user: userData,
         perfil: data.data.perfil,
@@ -142,7 +142,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (user?.token) {
         await fetch("http://localhost:3001/api/auth/logout", {
           method: "POST",
-          headers: { 
+          headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${user.token}`
           },

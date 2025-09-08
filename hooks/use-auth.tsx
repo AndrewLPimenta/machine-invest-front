@@ -46,13 +46,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  // Carrega usuário do localStorage ao iniciar
+  // 🔒 Carrega usuário do localStorage com validação de token
   useEffect(() => {
-    const storedUser = localStorage.getItem("user")
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
+    try {
+      const storedUser = localStorage.getItem("user")
+      if (storedUser) {
+        const parsedUser: User = JSON.parse(storedUser)
+
+        // se não tiver token válido, não mantém o usuário
+        if (parsedUser?.token) {
+          setUser(parsedUser)
+        } else {
+          localStorage.removeItem("user")
+        }
+      }
+    } catch (err) {
+      console.error("Erro ao recuperar usuário do localStorage:", err)
+      localStorage.removeItem("user")
+    } finally {
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }, [])
 
   const login = async (email: string, password: string) => {
@@ -67,7 +80,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const data = await response.json()
 
       if (!response.ok) {
-        setIsLoading(false)
         return { success: false, message: data.message || "Email ou senha incorretos." }
       }
 
@@ -82,7 +94,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem("user", JSON.stringify(userData))
       setUser(userData)
 
-      setIsLoading(false)
       return {
         success: true,
         message: data.message,
@@ -92,8 +103,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error)
-      setIsLoading(false)
       return { success: false, message: "Ocorreu um erro ao fazer login. Tente novamente." }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -114,7 +126,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const data = await response.json()
 
       if (!response.ok) {
-        setIsLoading(false)
         return { success: false, message: data.message || "Erro no cadastro" }
       }
 
@@ -128,18 +139,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       localStorage.setItem("user", JSON.stringify(userData))
       setUser(userData)
-      setIsLoading(false)
+
       return { success: true, message: data.message }
     } catch (error) {
       console.error("Erro ao fazer cadastro:", error)
-      setIsLoading(false)
       return { success: false, message: "Ocorreu um erro ao fazer cadastro. Tente novamente." }
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const logout = async () => {
     try {
-      // Se tiver token, tenta invalidar no backend
       if (user?.token) {
         await fetch("http://localhost:3001/api/auth/logout", {
           method: "POST",
@@ -148,21 +159,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             Authorization: `Bearer ${user.token}`,
           },
         }).catch(() => {
-          // Ignora erros de logout no backend
-          console.log("Erro ao fazer logout no backend, mas continuando...")
+          console.warn("Erro ao fazer logout no backend, mas continuando...")
         })
       }
     } catch (error) {
-      // Ignora erros de logout no backend
-      console.log("Erro ao fazer logout no backend, mas continuando...")
+      console.warn("Erro ao fazer logout no backend:", error)
     } finally {
-      // Sempre limpa o estado local
       localStorage.removeItem("user")
       setUser(null)
     }
   }
 
-  // Atualiza usuário completo, incluindo resultados e perfil
   const updateUser = (updatedUser: User) => {
     setUser(updatedUser)
     localStorage.setItem("user", JSON.stringify(updatedUser))
