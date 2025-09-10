@@ -1,5 +1,3 @@
-"use client"; // torna todo o wrapper client-side
-
 import type React from "react";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -7,6 +5,14 @@ import { AuthProvider } from "@/contexts/auth-context";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
+
+export const metadata = {
+  title: "Machine",
+  description: "Sua plataforma de investimentos",
+  icons: {
+    icon: "/machine-logo.png", // favicon
+  },
+};
 
 export default function RootLayoutClientWrapper({ children }: { children: React.ReactNode }) {
   return (

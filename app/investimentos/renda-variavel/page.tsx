@@ -7,8 +7,7 @@ import { Button } from "@/components/ui/button"
 import { TrendingUp, BarChart, PieChart, DollarSign, Clock, AlertTriangle } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-
-
+import Link from "next/link"
 
 export default function RendaVariavelPage() {
 
@@ -103,10 +102,10 @@ export default function RendaVariavelPage() {
                     <span className="text-sm">Acima de 5 anos</span>
                   </div>
                 </div>
-                
+                <Link href="/login">
                 <Button className="w-full">
-                  Investir em Ações
-                  </Button>
+                 Investir em Ações</Button>
+                </Link>
 
               </CardContent>
             </Card>
@@ -134,7 +133,9 @@ export default function RendaVariavelPage() {
                     <span className="text-sm">Acima de 3 anos</span>
                   </div>
                 </div>
+                <Link href="/Login">
                 <Button className="w-full">Investir em FIIs</Button>
+              </Link>
               </CardContent>
             </Card>
             <Card>
@@ -161,12 +162,13 @@ export default function RendaVariavelPage() {
                     <span className="text-sm">Acima de 3 anos</span>
                   </div>
                 </div>
+                <Link href="/Login">
                 <Button className="w-full">Investir em ETFs</Button>
+              </Link>
               </CardContent>
             </Card>
           </div>
         </div>
-
         <div className="mt-24">
           <Card>
             <CardHeader>
