@@ -1,114 +1,181 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Edit, Trash2 } from "lucide-react"
-import { useToast } from "@/components/ui/use-toast"
+import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog"
 import { useFinanceService } from "@/service/investmentService"
+import { useToast } from "@/components/ui/use-toast"
+import { Edit, Trash2, RefreshCw, AlertCircle } from "lucide-react"
+import { ExpenseForm } from "./expense-form"
 
 interface ExpenseSummaryProps {
-  expenses: any[]
-  totalExpenses: number
-  onExpenseUpdated: () => void
-  onExpenseDeleted: () => void
-  financeService: ReturnType<typeof useFinanceService>
   fetchWithAuth: <T>(fn: () => Promise<T>) => Promise<T | null>
+  financeService: ReturnType<typeof useFinanceService>
 }
 
-export function ExpenseSummary({
-  expenses,
-  totalExpenses,
-  onExpenseUpdated,
-  onExpenseDeleted,
-  financeService,
-  fetchWithAuth,
-}: ExpenseSummaryProps) {
+export function ExpenseSummary({ fetchWithAuth, financeService }: ExpenseSummaryProps) {
   const { toast } = useToast()
+
+  const [summary, setSummary] = useState<any>(null)
+  const [expenses, setExpenses] = useState<any[]>([])
+  const [categories, setCategories] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [editingExpense, setEditingExpense] = useState<any>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [loadingId, setLoadingId] = useState<number | null>(null)
 
-  const handleDelete = async (id: number) => {
+  const loadData = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      const [summaryResponse, expensesResponse, categoriesResponse] = await Promise.all([
+        financeService.getFinancialSummary(),
+        financeService.getExpenses({ limit: 5 }),
+        financeService.getExpenseCategories()
+      ])
+      setSummary(summaryResponse?.data ?? {})
+      setExpenses(expensesResponse?.data ?? [])
+      setCategories(Array.isArray(categoriesResponse?.data) ? categoriesResponse.data : [])
+    } catch (err: any) {
+      console.error("Erro ao carregar gastos:", err)
+      setError(err?.message ?? "Erro ao carregar gastos")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  const handleDeleteExpense = async (id: number) => {
     if (!confirm("Tem certeza que deseja deletar este gasto?")) return
     try {
       setLoadingId(id)
       await fetchWithAuth(() => financeService.deleteExpense(id))
       toast({ title: "Sucesso", description: "Gasto deletado." })
-      onExpenseDeleted()
-    } catch (error: any) {
-      toast({ title: "Erro", description: error.message || "Falha ao deletar gasto.", variant: "destructive" })
+      loadData()
+    } catch (err: any) {
+      toast({ title: "Erro", description: err.message || "Erro ao deletar gasto", variant: "destructive" })
     } finally {
       setLoadingId(null)
     }
   }
 
-  const handleEdit = (expense: any) => {
-    // Aqui você pode abrir um modal ou preencher o form com os dados do gasto para edição
-    toast({ title: "Funcionalidade", description: `Editar gasto: ${expense.descricao}` })
-    onExpenseUpdated()
+  const handleEditExpense = (expense: any) => {
+    setEditingExpense(expense)
+    setIsModalOpen(true)
   }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setEditingExpense(null)
+  }
+
+  if (error) {
+    return (
+      <Card>
+        <CardHeader><CardTitle>Resumo de Gastos</CardTitle></CardHeader>
+        <CardContent>
+          <div className="text-center p-6 border border-dashed border-red-300 rounded-lg bg-red-50">
+            <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+            <p className="text-red-700 font-medium mb-2">Erro ao carregar dados</p>
+            <p className="text-red-600 text-sm mb-4">{error}</p>
+            <Button onClick={loadData} variant="outline" size="sm">
+              <RefreshCw className="h-4 w-4 mr-2" /> Tentar Novamente
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  if (loading) {
+    return (
+      <Card>
+        <CardHeader><CardTitle>Resumo de Gastos</CardTitle></CardHeader>
+        <CardContent className="p-6 text-center">Carregando seus gastos...</CardContent>
+      </Card>
+    )
+  }
+
+  const totalGastos = summary?.totalGastos ?? 0
 
   return (
     <>
       {/* Card de Total de Gastos */}
-      <Card className="bg-background border border-primary/30 backdrop-blur shadow-xl">
-        <CardContent className="text-center">
-          <div className="h-6 w-6 text-primary mx-auto mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-            </svg>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <span>Resumo de Gastos</span>
+            <Button variant="outline" size="sm" onClick={loadData}>
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="p-4 bg-red-50 rounded-xl text-center">
+            <p className="text-sm text-red-600">Total de Gastos</p>
+            <p className="text-2xl font-bold text-red-600">
+              {totalGastos.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+            </p>
           </div>
-          <p className="text-sm font-semibold text-primary/60 uppercase">GASTOS</p>
-          <p className="text-2xl font-bold ">
-            {totalExpenses.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-          </p>
+
+          {/* Últimos Gastos */}
+          <div className="space-y-3">
+            <h4 className="font-semibold">Últimos Gastos</h4>
+            {expenses.length > 0 ? (
+              expenses.map(exp => {
+                const categoryName = categories.find(c => c.id === exp.idCategoria)?.nome || "Sem categoria"
+                return (
+                  <div key={exp.id} className="flex justify-between items-center p-3 border rounded-lg">
+                    <div className="flex-1">
+                      <p className="font-medium">{exp.descricao}</p>
+                      <p className="text-xs text-gray-400 mt-1">Categoria: {categoryName}</p>
+                      {/* Removida a data do resumo */}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <p className="font-bold text-red-600 w-24 text-right">
+                        {exp.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                      </p>
+                      <Button size="sm" onClick={() => handleEditExpense(exp)} variant="outline">
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button size="sm" onClick={() => handleDeleteExpense(exp.id)} variant="destructive" disabled={loadingId === exp.id}>
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                )
+              })
+            ) : (
+              <p className="text-center text-gray-500 py-4">Nenhum gasto registrado ainda.</p>
+            )}
+          </div>
         </CardContent>
       </Card>
 
-      {/* Lista de Gastos */}
-      {/* <Card className="shadow-lg">
-        <CardHeader>
-          <CardTitle>Gastos Recentes</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          {expenses.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">Nenhum gasto registrado</p>
-          ) : (
-            expenses.map((exp) => (
-              <div
-                key={exp.id}
-                className="flex justify-between items-center p-3 border rounded-lg hover:bg-gray-50"
-              >
-                <div className="flex-1">
-                  <p className="font-medium">{exp.categoria?.nome} - {exp.descricao}</p>
-                  <p className="text-sm text-gray-500">
-                    {new Date(exp.dataGasto).toLocaleDateString("pt-BR")}
-                  </p>
-                </div>
-                <span className="text-red-600 font-semibold mr-4">
-                  {exp.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-                </span>
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleEdit(exp)}
-                  >
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    onClick={() => handleDelete(exp.id)}
-                    disabled={loadingId === exp.id}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            ))
-          )}
-        </CardContent>
-      </Card> */}
+      {/* Modal de edição */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          <ExpenseForm
+            financeService={financeService}
+            fetchWithAuth={fetchWithAuth}
+            expenseCategories={categories}
+            editingExpense={editingExpense}
+            onExpenseUpdated={() => {
+              loadData()
+              setIsModalOpen(false)
+              setEditingExpense(null)
+            }}
+          />
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={handleCloseModal}>Cancelar</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

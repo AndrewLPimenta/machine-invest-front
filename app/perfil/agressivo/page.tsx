@@ -156,7 +156,7 @@ const cryptoData = [
 //     marketCap: "R$ 287.6B",
 //   },
 // ]
-
+3
 const portfolioAllocation = [
   { category: "Ações Growth Tech", percentage: 35, color: "bg-chart-1" },
   { category: "Ações Value Brasil", percentage: 25, color: "bg-chart-2" },
