@@ -28,6 +28,20 @@ export default function ConservadorPageHome() {
       <PageLayout>
         <HeroSection />
         <Section>
+          <div className="mb-6 space-y-4 md:space-y-0 md:justify-between">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center text-2xl">
+                <BookOpen className="mr-2 h-6 w-6 text-primary" />  Dicas e Investimento para o Perfil Conservador
+              </CardTitle>
+              <CardDescription>Dicas:</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p>essas dicas precisam vir de Api!</p>
+              <Badge className="bg-primary/10 text-primary whitespace-nowrap border-0">Dica: Mesmo sendo conservador, é importante diversificar seus investimentos para equilibrar segurança e rentabilidade.</Badge>
+            </CardContent>
+          </Card>
+          </div>
           <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
             <CardHeader>
               <CardTitle className="flex items-center text-2xl">

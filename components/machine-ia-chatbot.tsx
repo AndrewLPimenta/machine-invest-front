@@ -14,7 +14,7 @@ interface Message {
   content: string
   sender: "user" | "ai"
   timestamp: Date
-}
+}22222
 
 export function MachineIAChatbot() {
   const [messages, setMessages] = useState<Message[]>([
