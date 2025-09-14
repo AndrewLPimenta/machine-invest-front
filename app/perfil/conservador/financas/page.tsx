@@ -16,11 +16,10 @@ import { ExpenseSummary } from "@/components/expense-summary"
 import { InvestmentSummary } from "@/components/investment-summary"
 import Link from "next/link"
 
-export default function ConservadorPage() {
+export default function FinancePage() {
   const financeService = useFinanceService()
   const { fetchWithAuth, loading: authLoading, error: authError } = useInvestment()
   const { toast } = useToast()
-
   const [mounted, setMounted] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
   const [summary, setSummary] = useState<any>({})
@@ -130,20 +129,13 @@ export default function ConservadorPage() {
           {/* Listas com Edit/Delete */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <Card>
-              <CardHeader><CardTitle>Investimentos</CardTitle></CardHeader>
-              <CardContent>
                 <InvestmentSummary />
-              </CardContent>
             </Card>
-
             <Card>
-              <CardHeader><CardTitle>Gastos</CardTitle></CardHeader>
-              <CardContent>
                 <ExpenseSummary
                   financeService={financeService}
                   fetchWithAuth={fetchWithAuth}
                 />
-              </CardContent>
             </Card>
           </div>
 

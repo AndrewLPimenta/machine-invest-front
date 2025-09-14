@@ -39,8 +39,8 @@ const videos = [
 
 export default function VideoSection() {
   const opts = {
-    height: '400px',
-    width: '800px',
+    height: '250px',
+    width: '350px',
     gap: '2rem',
     playerVars: {
       autoplay: 0,

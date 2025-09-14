@@ -21,7 +21,8 @@ import { AuthRedirect } from "@/components/auth-redirect"
 import { HeroSection } from "@/components/hero-section"
 import { Section } from "@/components/section"
 import Link from "next/link"
-import VideoSection from "@/components/ui/video-section"
+import VideoSection from "@/components/ui/video-section" 
+import { FinanceDicas } from "@/components/ui/finance-dicas"
 export default function ConservadorPageHome() {
   return (
     <AuthRedirect>
@@ -36,8 +37,9 @@ export default function ConservadorPageHome() {
               </CardTitle>
               <CardDescription>Dicas:</CardDescription>
             </CardHeader>
+            <FinanceDicas/>
             <CardContent className="space-y-4">
-              <p>essas dicas precisam vir de Api!</p>
+              <FinanceDicas/>
               <Badge className="bg-primary/10 text-primary whitespace-nowrap border-0">Dica: Mesmo sendo conservador, é importante diversificar seus investimentos para equilibrar segurança e rentabilidade.</Badge>
             </CardContent>
           </Card>
