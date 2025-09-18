@@ -42,7 +42,7 @@ export default function Home() {
           highlightedWord="Machine Invest"
         />
 
-        <div className="mt-16">
+        <div className="mt-16" >
           <ResponsiveGrid cols={{ default: 1, sm: 2, lg: 3 }}>
             {/* Card 1 */}
             <Card className="h-full">
@@ -218,7 +218,7 @@ export default function Home() {
               </CardContent>
               <CardFooter>
                 <Button className="w-full" asChild>
-                  <Link href="/formulario">
+                  <Link href="/login">
                     Descobrir Meu Perfil <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -400,7 +400,7 @@ export default function Home() {
 
       {/* Sessões extras */}
       <EnhancedTestimonialSection />
-      <SimulationSection />
+      {/* <SimulationSection /> */}
       <CtaSection />
     </PageLayout>
   )

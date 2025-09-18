@@ -26,16 +26,12 @@ interface Pergunta {
   opcoes: Opcao[]
 }
 
-interface Resultado {
-  idPerfil: 1 | 2 | 3
-}
-
 interface User {
-  id: number // obrigatório
+  id: number
   name?: string
   email?: string
-  resultados?: Resultado[]
-  perfil?: "conservador" | "moderado" | "arrojado"
+  resultado?: { idPerfil: 1 | 2 | 3 }
+  perfil?: 'conservador' | 'moderado' | 'arrojado'
   token?: string
 }
 
@@ -48,24 +44,23 @@ export default function FormularioPage() {
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [perguntaAtual, setPerguntaAtual] = useState(0)
+  const [showPopup, setShowPopup] = useState(false)
 
+  // Carregar formulário e redirecionar se usuário já tiver perfil
   useEffect(() => {
     if (!user) return
 
     const carregarFormulario = async () => {
       try {
-        if (user.resultados?.length) {
-          const perfilId = user.resultados[0]?.idPerfil
-          if (perfilId) {
-            const rota =
-              perfilId === 1
-                ? '/perfil/conservador'
-                : perfilId === 2
-                ? '/perfil/moderado'
-                : '/perfil/agressivo'
-            router.push(rota)
-            return
-          }
+        if (user.resultado) {
+          const rota =
+            user.resultado.idPerfil === 1
+              ? '/perfil/conservador'
+              : user.resultado.idPerfil === 2
+              ? '/perfil/moderado'
+              : '/perfil/arrojado'
+          router.push(rota)
+          return
         }
 
         const res = await axios.get('http://localhost:3001/api/formulario/1')
@@ -81,9 +76,26 @@ export default function FormularioPage() {
     carregarFormulario()
   }, [user, router])
 
+  // Avançar automaticamente quando pergunta é respondida
+  useEffect(() => {
+    if (
+      perguntaAtual < perguntas.length - 1 &&
+      respostas[perguntas[perguntaAtual]?.id] !== undefined
+    ) {
+      const timer = setTimeout(() => setPerguntaAtual((prev) => prev + 1), 300)
+      return () => clearTimeout(timer)
+    }
+
+    // Mostrar pop-up quando todas perguntas forem respondidas
+    if (Object.keys(respostas).length === perguntas.length && perguntas.length > 0) {
+      setShowPopup(true)
+    } else {
+      setShowPopup(false)
+    }
+  }, [respostas, perguntaAtual, perguntas.length])
+
   const handleChange = (perguntaId: number, opcaoId: number) => {
     setRespostas((prev) => ({ ...prev, [perguntaId]: opcaoId }))
-    if (perguntaAtual < perguntas.length - 1) setTimeout(() => setPerguntaAtual((prev) => prev + 1), 300)
   }
 
   const proximaPergunta = () => {
@@ -99,23 +111,20 @@ export default function FormularioPage() {
 
   const progresso = perguntas.length > 0 ? ((perguntaAtual + 1) / perguntas.length) * 100 : 0
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting(true)
-
+  const handleSubmit = async () => {
     if (!user?.id) {
       alert('Usuário não autenticado.')
-      setSubmitting(false)
       return
     }
 
     if (Object.keys(respostas).length !== perguntas.length) {
       alert('Você precisa responder todas as perguntas antes de enviar.')
-      setSubmitting(false)
       return
     }
 
+    setSubmitting(true)
     try {
+      // Salvar respostas
       await axios.post('http://localhost:3001/api/respostas', {
         idUsuario: user.id,
         respostas: Object.entries(respostas).map(([idPergunta, idOpcao]) => ({
@@ -124,22 +133,25 @@ export default function FormularioPage() {
         })),
       })
 
+      // Calcular perfil
       const resCalculo = await axios.post('http://localhost:3001/api/resultado/calcular', {
         idUsuario: user.id,
       })
-      const perfilId: 1 | 2 | 3 | null = resCalculo.data?.perfilId ?? null
+      const perfilId: 1 | 2 | 3 = resCalculo.data?.perfilId
       if (!perfilId) throw new Error('Não foi possível determinar o perfil.')
 
-      // ✅ Garantindo que id existe
+      // Atualizar usuário local
       const usuarioAtualizado: User = {
         ...user,
-        id: user.id,
-        resultados: [{ idPerfil: perfilId }],
+        resultado: { idPerfil: perfilId },
+        perfil:
+          perfilId === 1 ? 'conservador' : perfilId === 2 ? 'moderado' : 'arrojado',
       }
       updateUser(usuarioAtualizado)
 
+      // Redirecionar para a página do perfil
       const rota =
-        perfilId === 1 ? '/perfil/conservador' : perfilId === 2 ? '/perfil/moderado' : '/perfil/agressivo'
+        perfilId === 1 ? '/perfil/conservador' : perfilId === 2 ? '/perfil/moderado' : '/perfil/arrojado'
       router.push(rota)
     } catch (err: any) {
       console.error('Erro ao enviar respostas ou calcular perfil:', err)
@@ -149,7 +161,13 @@ export default function FormularioPage() {
     }
   }
 
-  if (!user) return null // evita renderizar antes do auth
+  if (loading || !user) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader2 className="h-10 w-10 animate-spin" />
+      </div>
+    )
+  }
 
   return (
     <AuthRedirect>
@@ -196,17 +214,12 @@ export default function FormularioPage() {
                 </CardHeader>
 
                 <CardContent className="p-4 sm:p-8">
-                  {loading ? (
-                    <div className="flex flex-col items-center justify-center py-12 space-y-4">
-                      <Loader2 className="h-10 w-10 animate-spin" />
-                      <span className="text-base font-medium">Carregando questionário...</span>
-                    </div>
-                  ) : !perguntas.length ? (
+                  {!perguntas.length ? (
                     <div className="text-center py-12">
                       <p className="text-base">Não há perguntas disponíveis no momento.</p>
                     </div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                       <AnimatePresence mode="wait">
                         <motion.div
                           key={perguntaAtual}
@@ -216,49 +229,48 @@ export default function FormularioPage() {
                           transition={{ duration: 0.4, ease: 'easeOut' }}
                           className="space-y-6"
                         >
-                          {perguntas[perguntaAtual] && (
-                            <div className="space-y-4">
-                              <div className="bg-muted p-4 rounded-xl border">
-                                <Label className="text-lg sm:text-xl font-semibold leading-relaxed block">
-                                  {perguntaAtual + 1}. {perguntas[perguntaAtual].texto}
-                                </Label>
-                              </div>
-                              <RadioGroup
-                                value={respostas[perguntas[perguntaAtual].id]?.toString() || ''}
-                                onValueChange={(value) =>
-                                  handleChange(perguntas[perguntaAtual].id, Number(value))
-                                }
-                                className="space-y-3"
-                              >
-                                {perguntas[perguntaAtual].opcoes.map((opcao, index) => (
-                                  <motion.div
-                                    key={opcao.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.1, duration: 0.3 }}
-                                    className="group"
-                                  >
-                                    <div className="flex items-start space-x-3 p-3 rounded-lg border-2 hover:bg-muted/50 transition-all duration-200 cursor-pointer">
-                                      <RadioGroupItem
-                                        value={opcao.id.toString()}
-                                        id={`opcao-${opcao.id}`}
-                                        className="mt-1"
-                                      />
-                                      <Label
-                                        htmlFor={`opcao-${opcao.id}`}
-                                        className="text-sm sm:text-base cursor-pointer leading-relaxed flex-1 transition-colors"
-                                      >
-                                        {opcao.texto}
-                                      </Label>
-                                    </div>
-                                  </motion.div>
-                                ))}
-                              </RadioGroup>
+                          <div className="space-y-4">
+                            <div className="bg-muted p-4 rounded-xl border">
+                              <Label className="text-lg sm:text-xl font-semibold leading-relaxed block">
+                                {perguntaAtual + 1}. {perguntas[perguntaAtual].texto}
+                              </Label>
                             </div>
-                          )}
+                            <RadioGroup
+                              value={respostas[perguntas[perguntaAtual].id]?.toString() || ''}
+                              onValueChange={(value) =>
+                                handleChange(perguntas[perguntaAtual].id, Number(value))
+                              }
+                              className="space-y-3"
+                            >
+                              {perguntas[perguntaAtual].opcoes.map((opcao, index) => (
+                                <motion.div
+                                  key={opcao.id}
+                                  initial={{ opacity: 0, y: 20 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                                  className="group"
+                                >
+                                  <div className="flex items-start space-x-3 p-3 rounded-lg border-2 hover:bg-muted/50 transition-all duration-200 cursor-pointer">
+                                    <RadioGroupItem
+                                      value={opcao.id.toString()}
+                                      id={`opcao-${opcao.id}`}
+                                      className="mt-1"
+                                    />
+                                    <Label
+                                      htmlFor={`opcao-${opcao.id}`}
+                                      className="text-sm sm:text-base cursor-pointer leading-relaxed flex-1 transition-colors"
+                                    >
+                                      {opcao.texto}
+                                    </Label>
+                                  </div>
+                                </motion.div>
+                              ))}
+                            </RadioGroup>
+                          </div>
                         </motion.div>
                       </AnimatePresence>
 
+                      {/* Navegação */}
                       <div className="flex flex-col sm:flex-row justify-between items-center pt-6 space-y-4 sm:space-y-0">
                         <Button
                           type="button"
@@ -298,37 +310,41 @@ export default function FormularioPage() {
                             Próxima Pergunta
                             <ChevronRight className="h-4 w-4" />
                           </Button>
-                        ) : (
-                          <Button
-                            type="submit"
-                            disabled={submitting || Object.keys(respostas).length !== perguntas.length}
-                            className="flex items-center gap-2 px-6 py-2 text-sm font-semibold order-3"
-                          >
-                            {submitting ? (
-                              <>
-                                <Loader2 className="h-4 w-4 animate-spin" />
-                                Processando...
-                              </>
-                            ) : (
-                              <>
-                                <CheckCircle className="h-4 w-4" />
-                                Finalizar
-                              </>
-                            )}
-                          </Button>
-                        )}
+                        ) : null}
                       </div>
-
-                      {!perguntaRespondida && (
-                        <motion.p
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          className="text-xs text-center bg-muted p-3 rounded-lg border"
-                        >
-                          💡 Selecione uma opção para avançar automaticamente ou clique em "Próxima Pergunta"
-                        </motion.p>
-                      )}
                     </form>
+                  )}
+
+                  {/* Pop-up de finalização */}
+                  {showPopup && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
+                    >
+                      <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center space-y-4">
+                        <CheckCircle className="h-10 w-10 mx-auto text-green-500" />
+                        <h3 className="text-xl font-semibold">Parabéns!</h3>
+                        <p className="text-sm text-muted-foreground">
+                          Você respondeu todas as perguntas do questionário.
+                        </p>
+                        <Button
+                          onClick={handleSubmit}
+                          disabled={submitting}
+                          className="flex items-center gap-2 justify-center w-full"
+                        >
+                          {submitting ? (
+                            <>
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              Processando...
+                            </>
+                          ) : (
+                            <>Finalizar</>
+                          )}
+                        </Button>
+                      </div>
+                    </motion.div>
                   )}
                 </CardContent>
               </Card>
