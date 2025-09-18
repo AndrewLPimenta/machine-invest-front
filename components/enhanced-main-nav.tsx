@@ -29,9 +29,10 @@ export function EnhancedMainNav() {
   if (!mounted) return null // evita hydration mismatch
 
   // Funções para criar caminhos seguros
-  const getPerfilPath = () => (user ? (user.perfil ? `/perfil/${user.perfil.toLowerCase()}` : `/perfil/${user.id}`) : "/")
-  const getFinancasPath = () => (user ? (user.perfil ? `/perfil/${user.perfil.toLowerCase()}/financas` : `/perfil/${user.id}/financas`) : "/")
-
+    const getPerfilPath = () => user ? `/perfil/${user.perfil?.toLowerCase() || user.id}` : "/"
+  const getFinancasPath = () => user ? `/perfil/${user.perfil?.toLowerCase() || user.id}/financas` : "/"
+  const getChatIAPage = () => user ? `/perfil/${user.perfil?.toLowerCase() || user.id}/chatbot` : "/chatbot"
+  const getConteudosPath = () => user ? `/perfil/${user.perfil?.toLowerCase() || user.id}/conteudos` : "/conteudos"
   // Links públicos
   const publicLinks = (
     <>
@@ -116,21 +117,44 @@ export function EnhancedMainNav() {
   // Links privados
   const privateLinks = (
     <>
+            {/* Início */}
       <NavigationMenuItem>
         <NavigationMenuLink asChild>
-          <Link href="/" className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Home</Link>
+          <Link href="/" className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Início</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
+
+      {/* Dashboard */}
       <NavigationMenuItem>
         <NavigationMenuLink asChild>
           <Link href={getPerfilPath()} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Dashboard</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
+
+      {/* Menu Dropdown */}
       <NavigationMenuItem>
-        <NavigationMenuLink asChild>
-          <Link href={getFinancasPath()} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Finanças</Link>
-        </NavigationMenuLink>
+        <NavigationMenuTrigger className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">
+          <motion.span className="relative" whileHover={{ color: "var(--primary)" }} transition={{ duration: 0.2 }}>
+            Menu
+            <motion.span className="absolute -bottom-1 left-0 h-[2px] bg-primary" initial={{ width: 0 }} whileHover={{ width: "100%" }} transition={{ duration: 0.2 }} />
+          </motion.span>
+        </NavigationMenuTrigger>
+
+        <NavigationMenuContent>
+          <motion.ul
+            className="grid gap-3 p-4 w-[240px] xs:w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] md:grid-cols-2"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <EnhancedListItem href={getFinancasPath()} title="Finanças" />
+            <EnhancedListItem href={getChatIAPage()} title="Chatbot" />
+            <EnhancedListItem href={getConteudosPath()} title="Conteúdos" />
+          </motion.ul>
+        </NavigationMenuContent>
       </NavigationMenuItem>
+
+      {/* Ajustes */}
       <NavigationMenuItem>
         <NavigationMenuLink asChild>
           <Link href={getFinancasPath()} className="text-sm sm:text-base md:text-lg px-3 py-2 h-auto">Ajustes</Link>

@@ -3,7 +3,7 @@
 import { CadastroForm } from "@/components/ui/cadastro-form"
 import { PageLayout } from "@/components/page-layout"
 import { motion } from "framer-motion"
-export default function LoginPage() {
+export default function CadastroPage() {
   return (
     <PageLayout>
        <div className="flex min-h-svh flex-col items-center justify-center bg-background p-6 md:p-10">

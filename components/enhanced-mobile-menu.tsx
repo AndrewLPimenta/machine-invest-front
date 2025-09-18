@@ -1,7 +1,7 @@
 "use client"
 
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { ArrowDownToLine, LogOut } from "lucide-react"
+import { ArrowDownToLine, LogOut, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -16,163 +16,135 @@ interface MobileMenuProps {
 export function EnhancedMobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
   const { isAuthenticated, user, logout } = useAuth()
 
-  const menuItems = [
-    { title: "Home", href: "/" },
-    { title: "Criptomoedas", href: "/criptomoedas" },
-    { title: "Machine IA", href: "/servicos/ia" },
-    { title: "Serviços", href: "/servicos" },
-    { title: "Investimentos", href: "/investimentos" },
-    { title: "Sobre", href: "/sobre" },
-  ]
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-    exit: {
-      opacity: 0,
-      transition: { staggerChildren: 0.05, staggerDirection: -1 },
-    },
-  }
-
-  const item = {
-    hidden: { opacity: 0, x: -20 },
-    show: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -20 },
-  }
-
   const handleLogout = async () => {
     await logout()
     setIsOpen(false)
     window.location.href = "/"
   }
 
+  const getPerfilPath = () => user ? `/perfil/${user.perfil?.toLowerCase() || user.id}` : "/"
+  const getFinancasPath = () => user ? `/perfil/${user.perfil?.toLowerCase() || user.id}/financas` : "/financas"
+  const getChatIAPage = () => user ? `/perfil/${user.perfil?.toLowerCase() || user.id}/chatbot` : "/chatbot"
+  const getConteudosPath = () => user ? `/perfil/${user.perfil?.toLowerCase() || user.id}/conteudos` : "/conteudos"
+
+  const menuItems = isAuthenticated ? [
+    { title: "Dashboard", href: getPerfilPath() },
+    { title: "Finanças", href: getFinancasPath() },
+    { title: "Chatbot", href: getChatIAPage() },
+    { title: "Conteúdos", href: getConteudosPath() },
+    {
+      title: "Investimentos",
+      subItems: [
+        { title: "Simulação Personalizada", href: "/simulacao" },
+        { title: "Renda Fixa", href: "/investimentos/renda-fixa" },
+        { title: "Renda Variável", href: "/investimentos/renda-variavel" },
+        { title: "Criptomoedas", href: "/investimentos/criptomoedas" },
+      ]
+    },
+    {
+      title: "Serviços",
+      subItems: [
+        { title: "Conta Digital", href: "/servicos/conta-digital" },
+        { title: "Machine IA", href: "/servicos/ia" },
+        { title: "Seguros", href: "/servicos/seguros" },
+        { title: "Previdência", href: "/servicos/previdencia" },
+      ]
+    }
+  ] : [
+    { title: "Home", href: "/" },
+    { title: "Criptomoedas", href: "/criptomoedas" },
+    {
+      title: "Investimentos",
+      subItems: [
+        { title: "Simulação Personalizada", href: "/simulacao" },
+        { title: "Renda Fixa", href: "/investimentos/renda-fixa" },
+        { title: "Renda Variável", href: "/investimentos/renda-variavel" },
+        { title: "Criptomoedas", href: "/investimentos/criptomoedas" },
+      ]
+    },
+    {
+      title: "Serviços",
+      subItems: [
+        { title: "Conta Digital", href: "/servicos/conta-digital" },
+        { title: "Machine IA", href: "/servicos/ia" },
+        { title: "Seguros", href: "/servicos/seguros" },
+        { title: "Previdência", href: "/servicos/previdencia" },
+      ]
+    },
+    { title: "Blog", href: "/blog" },
+  ]
+
+  const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } }, exit: { opacity: 0 } }
+  const item = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 }, exit: { opacity: 0, x: -20 } }
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetContent side="right" className="w-[85vw] max-w-[350px] p-0 overflow-y-auto z-[100]">
-        <motion.div
-          className="flex flex-col h-full"
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: 50, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
-          {/* Header do Menu */}
-          <SheetHeader className="p-4 sm:p-6 border-b">
-            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Image
-                  src="/machine-logo.png"
-                  alt="Machine Invest Logo"
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 sm:h-11 sm:w-11"
-                />
-              </motion.div>
-              <motion.span
-                className="font-bold text-lg sm:text-xl"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                Machine Invest
-              </motion.span>
-            </div>
+        <motion.div className="flex flex-col h-full" initial={{ x: 50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: 50, opacity: 0 }} transition={{ duration: 0.3, ease: "easeOut" }}>
+          
+          {/* Header */}
+           <SheetHeader className="relative p-4 sm:p-6 border-b flex flex-col justify-center items-center h-32">
+      {/* X único */}
+    
 
-            <SheetTitle className="sr-only">Menu de navegação</SheetTitle>
+      {/* Logo centralizado verticalmente */}
+      <div className="flex items-center justify-center gap-2">
+        <Image
+          src="/machine-logo.png"
+          alt="Machine Invest Logo"
+          width={50}
+          height={50}
+          className="h-12 w-12 sm:h-14 sm:w-14"
+        />
+        <span className="font-bold text-lg sm:text-xl">Machine Invest</span>
+      </div>
+    </SheetHeader>
 
-            {isAuthenticated && (
-              <motion.div
-                className="mb-3 sm:mb-4 p-3 sm:p-4 bg-primary/5 rounded-xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                <p className="text-sm sm:text-base font-medium">
-                  Olá, <span className="font-semibold">{user?.name}</span>
-                </p>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  Bem-vindo de volta!
-                </p>
-              </motion.div>
-            )}
-          </SheetHeader>
-
-          {/* Menu de Links */}
+          {/* Menu */}
           <div className="flex-1 overflow-auto py-4 sm:py-6 px-4 sm:px-6">
-            <motion.nav
-              className="flex flex-col space-y-4 sm:space-y-6"
-              variants={container}
-              initial="hidden"
-              animate="show"
-            >
-              {menuItems.map((menuItem, index) => (
-                <motion.div key={index} variants={item}>
-                  <Link
-                    href={menuItem.href}
-                    aria-label={`Ir para ${menuItem.title}`}
-                    className="relative flex items-center text-base sm:text-lg font-medium text-foreground transition-colors group"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <span>{menuItem.title}</span>
-                  </Link>
+            <motion.nav className="flex flex-col space-y-2" variants={container} initial="hidden" animate="show">
+              {menuItems.map((link, idx) => (
+                <motion.div key={idx} variants={item}>
+                  {!link.subItems ? (
+                    <Link href={link.href} onClick={() => setIsOpen(false)} className="text-base sm:text-lg font-medium text-foreground">
+                      {link.title}
+                    </Link>
+                  ) : (
+                    <div className="flex flex-col">
+                      <span className="text-base sm:text-lg font-medium text-foreground mb-1">{link.title}</span>
+                      <div className="ml-4 flex flex-col space-y-1">
+                        {link.subItems.map((sub, subIdx) => (
+                          <Link key={subIdx} href={sub.href} onClick={() => setIsOpen(false)} className="text-sm sm:text-base text-muted-foreground hover:text-foreground">
+                            {sub.title}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </motion.nav>
           </div>
 
           {/* Ações do usuário */}
-          <motion.div
-            className="p-4 sm:p-6 border-t mt-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
+          <div className="p-4 sm:p-6 border-t mt-auto space-y-3 sm:space-y-4">
             {isAuthenticated ? (
-              <div className="space-y-3 sm:space-y-4">
-                <EnhancedButton
-                  className="w-full text-sm sm:text-base"
-                  variant="gradient"
-                  href="/download"
-                >
-                  Download App{" "}
-                  <ArrowDownToLine className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+              <>
+                <EnhancedButton className="w-full text-base sm:text-lg" variant="gradient" href="/download">
+                  Download App <ArrowDownToLine className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </EnhancedButton>
-                <EnhancedButton
-                  variant="outline"
-                  className="w-full text-sm sm:text-base"
-                  onClick={handleLogout}
-                  aria-label="Sair da conta"
-                >
-                  <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  Sair
+                <EnhancedButton variant="outline" className="w-full text-base sm:text-lg" onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4 sm:h-5 sm:w-5" /> Sair
                 </EnhancedButton>
-              </div>
+              </>
             ) : (
-              <div className="space-y-3 sm:space-y-4">
-                <EnhancedButton
-                  className="w-full text-sm sm:text-base"
-                  variant="gradient"
-                  href="/login"
-                >
-                  Login
-                </EnhancedButton>
-                <EnhancedButton
-                  variant="outline"
-                  className="w-full text-sm sm:text-base"
-                  href="/cadastro"
-                >
-                  Cadastre-se
-                </EnhancedButton>
-              </div>
+              <>
+                <EnhancedButton className="w-full text-base sm:text-lg" variant="gradient" href="/login">Login</EnhancedButton>
+                <EnhancedButton className="w-full text-base sm:text-lg" variant="outline" href="/cadastro">Cadastre-se</EnhancedButton>
+              </>
             )}
-          </motion.div>
+          </div>
+
         </motion.div>
       </SheetContent>
     </Sheet>

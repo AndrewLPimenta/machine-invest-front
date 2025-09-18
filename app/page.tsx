@@ -159,7 +159,6 @@ export default function Home() {
           </Button>
         </div>
       </Section>
-
       {/* Perfil de Investidor */}
       <Section>
         <SectionHeading

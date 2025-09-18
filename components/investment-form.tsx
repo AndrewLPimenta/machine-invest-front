@@ -4,14 +4,44 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Plus, DollarSign } from "lucide-react"
-import { useFinanceService } from "@/service/investmentService"
 import { useToast } from "@/components/ui/use-toast"
 
+interface InvestmentType {
+  id: string
+  nome: string
+  descricao?: string
+}
+
+interface Investment {
+  id: string
+  valor: number
+  descricao: string
+  idTipoInvestimento?: string
+  dataInvestimento: string
+}
+
 interface InvestmentFormProps {
-  onInvestmentUpdated: () => void
+  onInvestmentUpdated: (newInvestment?: Investment) => void
   fetchWithAuth: <T>(fn: () => Promise<T>) => Promise<T | null>
-  financeService: ReturnType<typeof useFinanceService>
-  editingInvestment?: any
+  financeService: {
+    getInvestmentTypes: () => Promise<{ data: InvestmentType[] }>
+    createInvestmentType: (payload: { nome: string; descricao?: string }) => Promise<{ data: InvestmentType }>
+    createInvestment: (payload: Omit<Investment, "id">) => Promise<{ data: Investment }>
+    updateInvestment: (id: string, payload: Partial<Investment>) => Promise<{ data: Investment }>
+  }
+  editingInvestment?: Investment
+}
+
+interface InvestmentFormProps {
+  onInvestmentUpdated: (newInvestment?: Investment) => void
+  fetchWithAuth: <T>(fn: () => Promise<T>) => Promise<T | null>
+  financeService: {
+    getInvestmentTypes: () => Promise<{ data: InvestmentType[] }>
+    createInvestmentType: (payload: { nome: string; descricao?: string }) => Promise<{ data: InvestmentType }>
+    createInvestment: (payload: Omit<Investment, "id">) => Promise<{ data: Investment }>
+    updateInvestment: (id: string, payload: Partial<Investment>) => Promise<{ data: Investment }>
+  }
+  editingInvestment?: Investment
 }
 
 export function InvestmentForm({
@@ -25,26 +55,21 @@ export function InvestmentForm({
   const [formData, setFormData] = useState({
     valor: "",
     descricao: "",
-    dataInvestimento: new Date().toISOString().split("T")[0],
-    idTipoInvestimento: ""
+    idTipoInvestimento: "",
+    dataInvestimento: new Date().toISOString().split("T")[0]
   })
-  const [investmentTypes, setInvestmentTypes] = useState<any[]>([])
+  const [investmentTypes, setInvestmentTypes] = useState<InvestmentType[]>([])
   const [showCustomType, setShowCustomType] = useState(false)
   const [customTypeName, setCustomTypeName] = useState("")
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    loadInvestmentTypes()
-  }, [])
-
+  useEffect(() => { loadInvestmentTypes() }, [])
   useEffect(() => {
     if (editingInvestment) {
       setFormData({
         valor: editingInvestment.valor?.toString() || "",
         descricao: editingInvestment.descricao || "",
-        dataInvestimento: editingInvestment.dataInvestimento
-          ? new Date(editingInvestment.dataInvestimento).toISOString().split("T")[0]
-          : new Date().toISOString().split("T")[0],
+        dataInvestimento: editingInvestment.dataInvestimento || new Date().toISOString().split("T")[0],
         idTipoInvestimento: editingInvestment.idTipoInvestimento || ""
       })
     }
@@ -53,22 +78,24 @@ export function InvestmentForm({
   const loadInvestmentTypes = async () => {
     try {
       const res = await financeService.getInvestmentTypes()
-      setInvestmentTypes(Array.isArray(res.data) ? res.data : [])
+      setInvestmentTypes(res?.data ?? [])
     } catch (err: any) {
-      toast({ title: "Erro", description: err.message || "Não foi possível carregar tipos.", variant: "destructive" })
+      toast({ title: "Erro", description: err?.message || "Não foi possível carregar tipos.", variant: "destructive" })
     }
   }
 
   const handleAddCustomType = async () => {
     if (!customTypeName.trim()) return
     try {
-      await fetchWithAuth(() => financeService.createInvestmentType({ nome: customTypeName, descricao: "Tipo personalizado" }))
-      toast({ title: "Sucesso", description: "Tipo de investimento criado." })
+      const newType = await fetchWithAuth(() =>
+        financeService.createInvestmentType({ nome: customTypeName, descricao: "Tipo personalizado" })
+      )
+      toast({ title: "Sucesso", description: "Tipo de investimento criado.", variant: "default" })
       setCustomTypeName("")
       setShowCustomType(false)
       loadInvestmentTypes()
     } catch (err: any) {
-      toast({ title: "Erro", description: err.message || "Não foi possível criar tipo.", variant: "destructive" })
+      toast({ title: "Erro", description: err?.message || "Não foi possível criar tipo.", variant: "destructive" })
     }
   }
 
@@ -76,25 +103,35 @@ export function InvestmentForm({
     if (!formData.valor || !formData.descricao) return
     setLoading(true)
     try {
-      if (editingInvestment) {
-        await fetchWithAuth(() => financeService.updateInvestment(editingInvestment.id, {
-          valor: parseFloat(formData.valor),
-          descricao: formData.descricao,
-          dataInvestimento: formData.dataInvestimento,
-          idTipoInvestimento: formData.idTipoInvestimento || null
-        }))
-      } else {
-        await fetchWithAuth(() => financeService.createInvestment({
-          valor: parseFloat(formData.valor),
-          descricao: formData.descricao,
-          dataInvestimento: formData.dataInvestimento,
-          idTipoInvestimento: formData.idTipoInvestimento || null
-        }))
+      let savedInvestment
+      const payload = {
+        valor: parseFloat(formData.valor),
+        descricao: formData.descricao,
+        dataInvestimento: formData.dataInvestimento,
+        idTipoInvestimento: formData.idTipoInvestimento || undefined
       }
-      setFormData({ valor: "", descricao: "", dataInvestimento: new Date().toISOString().split("T")[0], idTipoInvestimento: "" })
-      onInvestmentUpdated()
+
+      if (editingInvestment) {
+        savedInvestment = await fetchWithAuth(() =>
+          financeService.updateInvestment(editingInvestment.id, payload)
+        )
+      } else {
+        savedInvestment = await fetchWithAuth(() =>
+          financeService.createInvestment(payload)
+        )
+      }
+
+      if (savedInvestment?.data) {
+        setFormData({ valor: "", descricao: "", idTipoInvestimento: "", dataInvestimento: new Date().toISOString().split("T")[0] })
+        onInvestmentUpdated(savedInvestment.data)
+        toast({ 
+          title: "Sucesso", 
+          description: `Investimento ${editingInvestment ? "atualizado" : "adicionado"} com sucesso.`, 
+          variant: "default" 
+        })
+      }
     } catch (err: any) {
-      toast({ title: "Erro", description: err.message || "Falha ao salvar investimento.", variant: "destructive" })
+      toast({ title: "Erro", description: err?.message || "Falha ao salvar investimento.", variant: "destructive" })
     } finally {
       setLoading(false)
     }
@@ -107,26 +144,15 @@ export function InvestmentForm({
         <CardDescription>Registre seus aportes</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Valor (R$)</label>
-            <input
-              type="number"
-              step="0.01"
-              value={formData.valor}
-              onChange={e => setFormData(prev => ({ ...prev, valor: e.target.value }))}
-              className="w-full p-3 border rounded-lg"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Data</label>
-            <input
-              type="date"
-              value={formData.dataInvestimento}
-              onChange={e => setFormData(prev => ({ ...prev, dataInvestimento: e.target.value }))}
-              className="w-full p-3 border rounded-lg"
-            />
-          </div>
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Valor (R$)</label>
+          <input
+            type="number"
+            step="0.01"
+            value={formData.valor}
+            onChange={e => setFormData(prev => ({ ...prev, valor: e.target.value }))}
+            className="w-full p-3 border rounded-lg"
+          />
         </div>
 
         <div className="space-y-2">
@@ -149,21 +175,35 @@ export function InvestmentForm({
 
           {showCustomType ? (
             <div className="flex gap-2">
-              <input type="text" value={customTypeName} onChange={e => setCustomTypeName(e.target.value)} placeholder="Nome do tipo" className="flex-1 p-3 border rounded-lg" />
+              <input
+                type="text"
+                value={customTypeName}
+                onChange={e => setCustomTypeName(e.target.value)}
+                placeholder="Nome do tipo"
+                className="flex-1 p-3 border rounded-lg"
+              />
               <button type="button" onClick={handleAddCustomType} className="px-4 py-3 bg-primary/50 rounded-lg">Adicionar</button>
-              <button type="button" onClick={() => setShowCustomType(false)} className="px-4 py-3 bg-300 border border-primary rounded-lg">Cancelar</button>
+              <button type="button" onClick={() => setShowCustomType(false)} className="px-4 py-3 bg-gray-300 border border-primary rounded-lg">Cancelar</button>
             </div>
           ) : (
-            <select value={formData.idTipoInvestimento} onChange={e => setFormData(prev => ({ ...prev, idTipoInvestimento: e.target.value }))} className="w-full p-3 border rounded-lg">
+            <select
+              value={formData.idTipoInvestimento}
+              onChange={e => setFormData(prev => ({ ...prev, idTipoInvestimento: e.target.value }))}
+              className="w-full p-3 border rounded-lg"
+            >
               <option value="">Selecione um tipo</option>
               {investmentTypes.map(type => <option key={type.id} value={type.id}>{type.nome}</option>)}
             </select>
           )}
         </div>
 
-        <Button onClick={handleSaveInvestment} className="w-full bg-primary hover:bg-primary/30 active:bg-primary-700">
+        <Button 
+          onClick={handleSaveInvestment} 
+          disabled={loading}
+          className="w-full bg-primary hover:bg-primary/30 active:bg-primary-700"
+        >
           <DollarSign className="h-4 w-4 mr-2" />
-          {editingInvestment ? "Atualizar Investimento" : "Adicionar Investimento"}
+          {loading ? "Salvando..." : editingInvestment ? "Atualizar Investimento" : "Adicionar Investimento"}
         </Button>
       </CardContent>
     </Card>

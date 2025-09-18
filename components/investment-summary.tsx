@@ -10,23 +10,59 @@ import { RefreshCw, AlertCircle, Edit, Trash2 } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
 import { InvestmentForm } from "./investment-form"
 
+interface Investment {
+  id: number
+  descricao: string
+  valor: number
+  idTipoInvestimento: number
+}
+
+interface InvestmentType {
+  id: number
+  nome: string
+  descricao?: string
+}
+
+interface Summary {
+  totalInvestimentos: number
+  saldo: number
+  [key: string]: any
+}
+
 export function InvestmentSummary() {
   const { user } = useAuth()
-  const financeService = useFinanceService() // ✅ use hook no topo
+  const financeService = useFinanceService()
   const { toast } = useToast()
 
-  const [summary, setSummary] = useState<any>(null)
-  const [investments, setInvestments] = useState<any[]>([])
-  const [investmentTypes, setInvestmentTypes] = useState<any[]>([])
+  const [summary, setSummary] = useState<Summary>({ totalInvestimentos: 0, saldo: 0 })
+  const [investments, setInvestments] = useState<Investment[]>([])
+  const [investmentTypes, setInvestmentTypes] = useState<InvestmentType[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [editingInvestment, setEditingInvestment] = useState<any>(null)
+  const [editingInvestment, setEditingInvestment] = useState<Investment | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isUpdating, setIsUpdating] = useState(false)
 
-  // =============================
-  // Carregar dados e tipos
-  // =============================
+  // Adapter para compatibilidade com InvestmentForm
+  const investmentFormService = {
+    getInvestmentTypes: async () => {
+      const result = await financeService.getInvestmentTypes()
+      return { data: result.data || [] }
+    },
+    createInvestmentType: async (payload: { nome: string; descricao?: string }) => {
+      const result = await financeService.createInvestmentType(payload)
+      return { data: result.data }
+    },
+    createInvestment: async (payload: any) => {
+      const result = await financeService.createInvestment(payload)
+      return { data: result.data }
+    },
+    updateInvestment: async (id: string, payload: any) => {
+      const numericId = parseInt(id, 10)
+      const result = await financeService.updateInvestment(numericId, payload)
+      return { data: result.data }
+    }
+  }
+
   const loadData = async () => {
     if (!user?.token) return
     try {
@@ -37,12 +73,13 @@ export function InvestmentSummary() {
         financeService.getInvestments({ limit: 5 }),
         financeService.getInvestmentTypes()
       ])
-      setSummary(summaryResponse?.data ?? {})
+      setSummary(summaryResponse?.data ?? { totalInvestimentos: 0, saldo: 0 })
       setInvestments(investmentsResponse?.data ?? [])
       setInvestmentTypes(Array.isArray(typesResponse.data) ? typesResponse.data : [])
     } catch (err: any) {
       console.error("Erro ao carregar dados:", err)
       setError(err?.message ?? "Erro ao carregar dados")
+      toast({ title: "Erro", description: err?.message ?? "Erro ao carregar dados", variant: "destructive" })
     } finally {
       setLoading(false)
     }
@@ -53,20 +90,18 @@ export function InvestmentSummary() {
     else setLoading(false)
   }, [user])
 
-  // =============================
-  // Funções de ação
-  // =============================
-  const handleDeleteInvestment = async (id: any) => {
+  const handleDeleteInvestment = async (id: number) => {
     try {
       await financeService.deleteInvestment(id)
       toast({ title: "Sucesso!", description: "Investimento deletado com sucesso!" })
+      setInvestments(prev => prev.filter(inv => inv.id !== id))
       loadData()
     } catch (err: any) {
       toast({ title: "Erro", description: err.message || "Erro ao deletar investimento", variant: "destructive" })
     }
   }
 
-  const handleEditInvestment = (investment: any) => {
+  const handleEditInvestment = (investment: Investment) => {
     setEditingInvestment(investment)
     setIsModalOpen(true)
   }
@@ -76,9 +111,34 @@ export function InvestmentSummary() {
     setEditingInvestment(null)
   }
 
-  // =============================
-  // Renderização
-  // =============================
+  const handleInvestmentUpdated = async (newInvestment?: Investment) => {
+    if (!newInvestment) return
+
+    if (editingInvestment) {
+      setInvestments(prev => prev.map(inv => inv.id === editingInvestment.id ? newInvestment : inv))
+      setSummary(prev => ({
+        ...prev,
+        totalInvestimentos: (prev.totalInvestimentos - editingInvestment.valor) + newInvestment.valor
+      }))
+    } else {
+      setInvestments(prev => [newInvestment, ...prev])
+      setSummary(prev => ({
+        ...prev,
+        totalInvestimentos: (prev.totalInvestimentos ?? 0) + newInvestment.valor
+      }))
+    }
+
+    try {
+      const summaryResponse = await financeService.getFinancialSummary()
+      setSummary(summaryResponse?.data ?? { totalInvestimentos: 0, saldo: 0 })
+    } catch (err) {
+      console.error("Erro ao atualizar resumo", err)
+    }
+
+    setIsModalOpen(false)
+    setEditingInvestment(null)
+  }
+
   if (!user) {
     return (
       <Card>
@@ -122,9 +182,6 @@ export function InvestmentSummary() {
     )
   }
 
-  const totalInvestimentos = summary?.totalInvestimentos ?? 0
-  const saldo = summary?.saldo ?? 0
-
   return (
     <>
       <Card>
@@ -141,13 +198,13 @@ export function InvestmentSummary() {
             <div className="p-4 bg-blue-50 rounded-xl text-center">
               <p className="text-sm text-blue-600">Total Investido</p>
               <p className="text-2xl font-bold text-blue-600">
-                R$ {totalInvestimentos.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                R$ {summary.totalInvestimentos.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
             <div className="p-4 bg-green-50 rounded-xl text-center">
               <p className="text-sm text-green-600">Saldo Atual</p>
               <p className="text-2xl font-bold text-green-600">
-                R$ {saldo.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                R$ {summary.saldo.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
           </div>
@@ -190,17 +247,13 @@ export function InvestmentSummary() {
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-md">
           <InvestmentForm
-            financeService={financeService} // ✅ variável do topo
+            financeService={investmentFormService} // Adapter
             fetchWithAuth={(fn) => fn().catch(() => null)}
             editingInvestment={editingInvestment}
-            onInvestmentUpdated={() => {
-              loadData()
-              setIsModalOpen(false)
-              setEditingInvestment(null)
-            }}
+            onInvestmentUpdated={handleInvestmentUpdated}
           />
           <DialogFooter className="gap-2">
-            <Button variant="outline" onClick={handleCloseModal} disabled={isUpdating}>
+            <Button variant="outline" onClick={handleCloseModal}>
               Cancelar
             </Button>
           </DialogFooter>
