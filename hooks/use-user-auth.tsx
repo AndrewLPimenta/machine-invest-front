@@ -58,7 +58,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string) => {
     setIsLoading(true)
     try {
-      const response = await fetch("http://localhost:3001/api/auth/login", {
+      const response = await fetch("https://machine-back-server.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha: password }),
@@ -100,7 +100,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (name: string, email: string, password: string) => {
     setIsLoading(true)
     try {
-      const response = await fetch("http://localhost:3001/api/auth/register", {
+      const response = await fetch("https://machine-back-server.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -141,7 +141,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       // Se tiver token, tenta invalidar no backend
       if (user?.token) {
-        await fetch("http://localhost:3001/api/auth/logout", {
+        await fetch("https://machine-back-server.onrender.com/api/auth/logout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

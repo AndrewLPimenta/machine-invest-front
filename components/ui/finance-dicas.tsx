@@ -27,7 +27,7 @@ export function FinanceDicas() {
       }
 
       try {
-        const response = await fetch("http://localhost:3001/api/dicas/dica", {
+        const response = await fetch("https://machine-back-server.onrender.com/api/dicas/dica", {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${user.token}`

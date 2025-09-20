@@ -1,7 +1,7 @@
 // service/investmentService.ts
 import { useAuth } from "@/contexts/auth-context";
 
-const API_BASE_URL = 'http://localhost:3001/api/finance';
+const API_BASE_URL = 'https://machine-back-server.onrender.com/api/finance';
 
 export const useFinanceService = () => {
   const { user } = useAuth();

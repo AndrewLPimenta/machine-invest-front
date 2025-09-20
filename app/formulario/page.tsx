@@ -63,7 +63,7 @@ export default function FormularioPage() {
           return
         }
 
-        const res = await axios.get('http://localhost:3001/api/formulario/1')
+        const res = await axios.get('https://machine-back-server.onrender.com/api/formulario/1')
         setPerguntas(res.data.perguntas || [])
       } catch (err) {
         console.error('Erro ao carregar formulário:', err)
@@ -125,7 +125,7 @@ export default function FormularioPage() {
     setSubmitting(true)
     try {
       // Salvar respostas
-      await axios.post('http://localhost:3001/api/respostas', {
+      await axios.post('https://machine-back-server.onrender.com/api/respostas', {
         idUsuario: user.id,
         respostas: Object.entries(respostas).map(([idPergunta, idOpcao]) => ({
           idPergunta: Number(idPergunta),
@@ -134,7 +134,7 @@ export default function FormularioPage() {
       })
 
       // Calcular perfil
-      const resCalculo = await axios.post('http://localhost:3001/api/resultado/calcular', {
+      const resCalculo = await axios.post('https://machine-back-server.onrender.com/api/resultado/calcular', {
         idUsuario: user.id,
       })
       const perfilId: 1 | 2 | 3 = resCalculo.data?.perfilId

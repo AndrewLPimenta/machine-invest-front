@@ -63,7 +63,7 @@ export default function CriptoPage() {
 
   // Socket.IO para atualizações de preço
  useEffect(() => {
-  const socket = io("http://localhost:3001")
+  const socket = io("https://machine-back-server.onrender.com/")
 
   socket.on("precoAtualizado", (data: Partial<CryptoData>) => {
     setCryptos((prev) => {

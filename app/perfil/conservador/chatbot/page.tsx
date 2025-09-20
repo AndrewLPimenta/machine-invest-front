@@ -11,6 +11,7 @@ import { Loader2, ArrowLeft, Shield } from "lucide-react"
 import Link from "next/link"
 import { AuthRedirect } from "@/components/auth-redirect"
 import { PageLayout } from "@/components/page-layout"
+import { BeamsBackground } from "@/components/ui/beams-background";
 export default function ChatIAPage() {
   const { isAuthenticated, isLoading: authLoading } = useAuth()
   const router = useRouter()
@@ -49,16 +50,17 @@ export default function ChatIAPage() {
     
     <AuthRedirect>
     <PageLayout>
-    <div className="container max-w-6xl py-6">
-      <div className="flex flex-col gap-6">      
+
+        <BeamsBackground>    
             <MachineIAChatbot />
-        <Button variant="outline" size="icon" asChild>
+             {/* <Button variant="outline" size="icon" asChild>
             <Link href="/perfil/conservador">
               <ArrowLeft className="h-4 w-4" />
             </Link>
-          </Button>
-      </div>
-    </div>
+          </Button> */}
+            </BeamsBackground>  
+       
+
     </PageLayout>
     </AuthRedirect>
   )

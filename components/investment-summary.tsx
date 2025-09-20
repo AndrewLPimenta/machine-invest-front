@@ -198,13 +198,13 @@ export function InvestmentSummary() {
             <div className="p-4 bg-blue-50 rounded-xl text-center">
               <p className="text-sm text-blue-600">Total Investido</p>
               <p className="text-2xl font-bold text-blue-600">
-                R$ {summary.totalInvestimentos.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                R$ {(summary.totalInvestimentos ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
             <div className="p-4 bg-green-50 rounded-xl text-center">
               <p className="text-sm text-green-600">Saldo Atual</p>
               <p className="text-2xl font-bold text-green-600">
-                R$ {summary.saldo.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                R$ {(summary.saldo ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
           </div>
