@@ -161,14 +161,14 @@ export function MachineIAChatbot() {
     <>
       <Card
         className="
-          w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl
-          h-[calc(100dvh-2rem)] sm:h-[85vh]
-          flex flex-col overflow-hidden
-          rounded-2xl sm:rounded-3xl
-          border border-white/20 dark:border-slate-500/20
-          bg-white/10 dark:bg-slate-900/20
-          backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.25)]
-        "
+    w-full max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl
+    h-[80vh] sm:h-[85vh] md:h-[calc(100dvh-2rem)]
+    flex flex-col overflow-hidden
+    rounded-xl sm:rounded-2xl md:rounded-3xl
+    border border-white/20 dark:border-slate-500/20
+    bg-white/10 dark:bg-slate-900/20
+    backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.25)]
+  "
       >
         <CardHeader
           className="
@@ -180,7 +180,7 @@ export function MachineIAChatbot() {
           <CardTitle className="flex items-center gap-4">
             <div className="relative">
               <Avatar className="h-10 w-10 border-2 border-border/20 dark:border-slate-600/30">
-                <AvatarImage src="/machine-logo.png" alt="Machine IA" />
+                <AvatarImage src="/ia-logo.png" alt="Machine IA" />
                 <AvatarFallback className="bg-muted text-muted-foreground dark:bg-slate-600 dark:text-slate-300">
                   <Bot className="h-5 w-5" />
                 </AvatarFallback>
@@ -254,7 +254,7 @@ export function MachineIAChatbot() {
               {isLoading && (
                 <div className="flex gap-4 justify-start animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
                   <Avatar className="h-8 w-8 mt-1 shrink-0">
-                    <AvatarImage src="/machine-logo.png" alt="Machine IA" />
+                    <AvatarImage src="/ia-logo.png" alt="Machine IA" />
                     <AvatarFallback className="bg-muted text-muted-foreground text-xs dark:bg-slate-600 dark:text-slate-300">
                       <Bot className="h-4 w-4" />
                     </AvatarFallback>
@@ -307,14 +307,16 @@ export function MachineIAChatbot() {
                     }
                     disabled={isLoading || (!isAuthenticated && !isPrivatePage && questionCount >= 3)}
                     className="
-    min-h-[48px] pr-12 rounded-2xl
+    min-h-[40px] sm:min-h-[48px]
+    pr-10 sm:pr-12 rounded-xl sm:rounded-2xl
     border-border/50 bg-background/50 backdrop-blur-sm
-    text-base sm:text-sm resize-none
+    text-sm sm:text-base resize-none
     focus:ring-1 focus:ring-ring/20 focus:border-ring/30
     transition-all duration-200
     dark:bg-slate-800/60
   "
                   />
+
 
                 </div>
                 <Button
