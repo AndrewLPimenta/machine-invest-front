@@ -116,8 +116,8 @@ export function ExpenseSummary({ fetchWithAuth, financeService }: ExpenseSummary
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="p-4 bg-red-50 rounded-xl text-center">
-            <p className="text-sm text-red-600">Total de Gastos</p>
+          <div className="p-4 bg-primary-50 border border rounded-xl text-center">
+            <p className="text-sm text-primary-600">Total de Gastos</p>
             <p className="text-2xl font-bold text-red-600">
               {totalGastos.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
             </p>

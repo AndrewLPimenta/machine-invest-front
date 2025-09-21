@@ -18,7 +18,7 @@ import {
 import { Send, Bot, User, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useAuth } from "@/contexts/auth-context" // Ajuste o caminho conforme necessário
+import { useAuth } from "@/contexts/auth-context"
 
 interface Message {
   id: string
@@ -46,12 +46,9 @@ export function MachineIAChatbot() {
   const inputRef = useRef<HTMLInputElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  // Verifica se está em uma página privada (dentro de /perfil)
   const isPrivatePage = pathname?.startsWith("/perfil")
 
-  // Contador de perguntas para usuários não autenticados
   const [questionCount, setQuestionCount] = useState(() => {
-    // Recupera o contador do localStorage se existir
     if (typeof window !== 'undefined') {
       const savedCount = localStorage.getItem('aiQuestionCount')
       return savedCount ? parseInt(savedCount) : 0
@@ -59,7 +56,6 @@ export function MachineIAChatbot() {
     return 0
   })
 
-  // Salva o contador no localStorage sempre que mudar
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('aiQuestionCount', questionCount.toString())
@@ -75,7 +71,6 @@ export function MachineIAChatbot() {
   }, [messages])
 
   const sendMessage = async () => {
-    // Se não estiver autenticado e não estiver em página privada, verifica o limite
     if (!isAuthenticated && !isPrivatePage && questionCount >= 3) {
       setShowLoginDialog(true)
       return
@@ -93,7 +88,6 @@ export function MachineIAChatbot() {
     setMessages((prev) => [...prev, userMessage])
     setInputMessage("")
 
-    // Incrementa o contador de perguntas para usuários não autenticados fora de páginas privadas
     if (!isAuthenticated && !isPrivatePage) {
       setQuestionCount(prev => prev + 1)
     }
@@ -143,11 +137,10 @@ export function MachineIAChatbot() {
   }
 
   const handleFocus = () => {
-    // Garante que o campo fique visível ao abrir o teclado
     setTimeout(() => {
       inputRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" })
       scrollToBottom()
-    }, 100)
+    }, 50)
   }
 
   const formatTime = (date: Date) => {
@@ -161,20 +154,20 @@ export function MachineIAChatbot() {
     <>
       <Card
         className="
-    w-full max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl
-    h-[80vh] sm:h-[75vh] md:h-[calc(90dvh-2rem)]
-    flex flex-col overflow-hidden
-    rounded-xl sm:rounded-2xl md:rounded-3xl
-    border border-white/20 dark:border-slate-500/20
-    bg-white/10 dark:bg-slate-900/20
-    backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.25)]
-  "
+          w-full max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl
+          h-[80vh] sm:h-[75vh] md:h-[calc(90dvh-2rem)]
+          flex flex-col overflow-hidden
+          rounded-xl sm:rounded-2xl md:rounded-3xl
+          border border-white/20 dark:border-slate-500/20
+          bg-white/10 dark:bg-slate-900/20
+          backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.25)]
+        "
       >
         <CardHeader
           className="
             shrink-0 px-4 sm:px-6 py-3 sm:py-4
             border-b border-white/20 dark:border-slate-500/20
-           bg-background/50 dark:bg-slate-800/50
+            bg-background/50 dark:bg-slate-800/50
           "
         >
           <CardTitle className="flex items-center gap-4">
@@ -207,10 +200,7 @@ export function MachineIAChatbot() {
               {messages.map((message, index) => (
                 <div
                   key={message.id}
-                  className={`flex gap-4 ${message.sender === "user"
-                    ? "justify-end"
-                    : "justify-start"
-                    } animate-in fade-in-0 slide-in-from-bottom-2 duration-500`}
+                  className={`flex gap-4 ${message.sender === "user" ? "justify-end" : "justify-start"} animate-in fade-in-0 slide-in-from-bottom-2 duration-500`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {message.sender === "ai" && (
@@ -226,7 +216,7 @@ export function MachineIAChatbot() {
                     className={`max-w-[80%] ${message.sender === "user"
                       ? "bg-primary text-primary-foreground rounded-3xl rounded-br-lg dark:bg-primary-600"
                       : "bg-muted/50 text-foreground rounded-3xl rounded-bl-lg border border-border/30 dark:bg-slate-700/60 dark:text-slate-100 dark:border-slate-600/40"
-                      } px-4 sm:px-5 py-3 shadow-sm dark:shadow-lg`}
+                    } px-4 sm:px-5 py-3 shadow-sm dark:shadow-lg`}
                   >
                     <p className="text-sm leading-relaxed whitespace-pre-wrap text-pretty">
                       {message.content}
@@ -235,7 +225,7 @@ export function MachineIAChatbot() {
                       className={`text-xs mt-2 block opacity-60 ${message.sender === "user"
                         ? "text-primary-foreground dark:text-blue-100"
                         : "text-muted-foreground dark:text-slate-400"
-                        }`}
+                      }`}
                     >
                       {formatTime(message.timestamp)}
                     </span>
@@ -262,18 +252,9 @@ export function MachineIAChatbot() {
                   <div className="bg-muted/50 border border-border/30 rounded-3xl rounded-bl-lg px-5 py-3 shadow-sm dark:bg-slate-700/60 dark:border-slate-600/40 dark:shadow-lg">
                     <div className="flex items-center gap-2">
                       <div className="flex gap-1">
-                        <div
-                          className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce dark:bg-slate-400"
-                          style={{ animationDelay: "0ms" }}
-                        />
-                        <div
-                          className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce dark:bg-slate-400"
-                          style={{ animationDelay: "150ms" }}
-                        />
-                        <div
-                          className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce dark:bg-slate-400"
-                          style={{ animationDelay: "300ms" }}
-                        />
+                        <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce dark:bg-slate-400" style={{ animationDelay: "0ms" }} />
+                        <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce dark:bg-slate-400" style={{ animationDelay: "150ms" }} />
+                        <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce dark:bg-slate-400" style={{ animationDelay: "300ms" }} />
                       </div>
                     </div>
                   </div>
@@ -287,13 +268,13 @@ export function MachineIAChatbot() {
           <div
             className="
               shrink-0 border-t border-white/20 dark:border-slate-500/20
-              bg-white/5 dark:bg-slate-800/10 backdrop-blur-xl
+              bg-white/5 dark:bg-slate-800/10 backdrop-blur-none
               p-3 sm:p-6
             "
           >
             <div className="max-w-3xl mx-auto">
               <div className="flex gap-3 items-end">
-                <div className="flex-1 relative">
+                <div className="flex-1 relative" style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}>
                   <Input
                     ref={inputRef}
                     value={inputMessage}
@@ -307,17 +288,15 @@ export function MachineIAChatbot() {
                     }
                     disabled={isLoading || (!isAuthenticated && !isPrivatePage && questionCount >= 3)}
                     className="
-    min-h-[40px] sm:min-h-[48px]
-    pr-10 sm:pr-12 rounded-xl sm:rounded-2xl
-    border-border/50 bg-background/50 backdrop-blur-sm
-    text-sm sm:text-base resize-none
-    focus:ring-1 focus:ring-ring/20 focus:border-ring/30
-    transition-all duration-200
-    dark:bg-slate-800/60
-  "
+                      min-h-[40px] sm:min-h-[48px]
+                      pr-10 sm:pr-12 rounded-xl sm:rounded-2xl
+                      border-border/50 bg-background/50
+                      text-sm sm:text-base resize-none
+                      focus:ring-1 focus:ring-ring/20 focus:border-ring/30
+                      transition-all duration-200
+                      dark:bg-slate-800/60
+                    "
                   />
-
-
                 </div>
                 <Button
                   onClick={sendMessage}

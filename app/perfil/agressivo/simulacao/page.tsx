@@ -38,7 +38,7 @@ export default function SimulacaoConservadorPage() {
   return (
     <AuthRedirect>
       <PageLayout>
-        <h1 className="text-3xl font-bold mb-6 text-center">Área de Simulação - Perfil Conservador</h1>
+        <h1 className="text-3xl font-bold mb-6">Área de Simulação - Perfil Conservador</h1>
         <InvestmentSimulator
           isLoggedIn={isLoggedIn}
           simulationsCount={simulationsCount}

@@ -23,6 +23,8 @@ import { HeroSection } from "@/components/hero-section"
 import { Section } from "@/components/section"
 import Link from "next/link"
 import { FinanceDicas } from "@/components/ui/finance-dicas"
+import { FinancialStatus } from "@/components/financial-status"
+
 export default function ConservadorPageHome() {
   return (
     <AuthRedirect>
@@ -109,44 +111,26 @@ export default function ConservadorPageHome() {
               <div className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-primary/5 rounded-lg">
-                    <Target className="h-8 w-8 text-primary mx-auto mb-2" />
+                    <Target className="h-8 w-8 text-primary/1 mx-auto mb-2" />
                     <h3 className="font-semibold">Perfil Definido</h3>
                     <p className="text-sm text-muted-foreground">Investidor Conservador</p>
                   </div>
-                  <div className="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                    <Shield className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                  <div className="text-center p-4 bg-primary/5 rounded-lg">
+                    <Shield className="h-8 w-8 text-primary/1 mx-auto mb-2" />
                     <h3 className="font-semibold">Foco em Segurança</h3>
                     <p className="text-sm text-muted-foreground">Baixo risco, retorno estável</p>
                   </div>
-                  <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
-                    <TrendingUp className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                  <div className="text-center p-4 bg-primary/5 rounded-lg">
+                    <TrendingUp className="h-8 w-8 text-primary/1 mx-auto mb-2" />
                     <h3 className="font-semibold">Crescimento Gradual</h3>
                     <p className="text-sm text-muted-foreground">Construção de patrimônio</p>
                   </div>
                 </div>
 
-                <div className="bg-muted/50 p-6 rounded-lg">
-                  <h3 className="font-semibold mb-3">Próximos Passos Recomendados:</h3>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span>Assista aos vídeos educativos sobre Tesouro Direto</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span>Defina suas metas financeiras de curto e longo prazo</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span>Considere diversificar com CDBs e fundos conservadores</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-primary rounded-full"></div>
-                      <span>Estabeleça um valor mensal para investir</span>
-                    </li>
-                  </ul>
+                
+                <div>
+                  <FinancialStatus />
                 </div>
-
                 <div className="flex justify-center">
                   <Link href="/perfil/conservador/financas" passHref>
                     <Button size="lg" className="group" asChild>
@@ -274,16 +258,16 @@ export default function ConservadorPageHome() {
                       </p>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
               <div className="flex items-center justify-center mt-4">
-                    <Button size="lg" asChild>
-                      <Link href="/perfil/conservador/simulacao">
-                        Acessar Simulações <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </div>
+                <Button size="lg" asChild>
+                  <Link href="/perfil/conservador/simulacao">
+                    Acessar Simulações <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </Section>

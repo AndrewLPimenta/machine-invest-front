@@ -193,15 +193,13 @@ export function InvestmentSummary() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-4 bg-blue-50 rounded-xl text-center">
-              <p className="text-sm text-blue-600">Total Investido</p>
-              <p className="text-2xl font-bold text-blue-600">
-                R$ {(summary.totalInvestimentos ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </p>
-            </div>
-            
+             <div className="p-4 bg-primary-50 border border rounded-xl text-center">
+            <p className="text-sm text-primary-600">Total Investido</p>
+            <p className="text-2xl font-bold text-primary">
+              R$ {(summary.totalInvestimentos ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </p>
           </div>
+         
 
           <div className="space-y-3">
             <h4 className="font-semibold">Últimos Investimentos</h4>
@@ -218,13 +216,13 @@ export function InvestmentSummary() {
                       <p className="text-xs text-gray-400 mt-1">Tipo: {typeName}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <p className="font-bold text-green-600 w-24 text-right">
+                      <p className="font-bold text-primary w-24 text-right">
                         R$ {investment.valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                       <Button size="sm" onClick={() => handleEditInvestment(investment)} variant="outline">
                         <Edit className="h-4 w-4" />
                       </Button>
-                      <Button size="sm" onClick={() => handleDeleteInvestment(investment.id)} variant="destructive">
+                      <Button size="sm" onClick={() => handleDeleteInvestment(investment.id)} variant="destructive" className="bg-primary/40">
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>

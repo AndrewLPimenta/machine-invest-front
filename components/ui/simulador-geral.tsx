@@ -10,7 +10,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Section } from "@/components/section"
-import { motion, AnimatePresence } from "framer-motion" // import do framer-motion
+import { motion, AnimatePresence } from "framer-motion"
 
 export interface SimulationItem {
   name: string
@@ -32,6 +32,73 @@ export interface InvestmentSimulatorProps {
   }) => SimulationItem[]
 }
 
+// Card de Resumo separado
+interface InvestmentSummaryCardProps {
+  investmentAmount: number
+  monthlyContribution: number
+  investmentPeriod: number
+  riskProfile: number
+  simulatedData: SimulationItem[]
+  isLoggedIn: boolean
+}
+
+function InvestmentSummaryCard({
+  investmentAmount,
+  monthlyContribution,
+  investmentPeriod,
+  riskProfile,
+  simulatedData,
+  isLoggedIn,
+}: InvestmentSummaryCardProps) {
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle>Resumo do Investimento</CardTitle>
+        <CardDescription>Visão geral do seu plano de investimento</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        <div className="flex justify-between">
+          <span>Valor Inicial</span>
+          <span>R$ {investmentAmount.toLocaleString("pt-BR")}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Aporte Mensal</span>
+          <span>R$ {monthlyContribution.toLocaleString("pt-BR")}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Período</span>
+          <span>{investmentPeriod} meses</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Perfil de Risco</span>
+          <span>{["Muito Baixo", "Baixo", "Moderado", "Alto", "Muito Alto"][riskProfile - 1]}</span>
+        </div>
+
+        <div className="border-t pt-4 mt-4 space-y-2">
+          {simulatedData.map((item) => (
+            <div key={item.name} className="flex justify-between">
+              <span>{item.name} (Taxa {item.rate}%)</span>
+              <span className="text-green-500">
+                R$ {item.final.toLocaleString("pt-BR")} (+{item.profitPct.toFixed(2)}%)
+              </span>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+      {!isLoggedIn && (
+        <CardFooter>
+          <Button variant="outline" className="w-full" asChild>
+            <Link href="/login">
+              Ter acesso completo às dicas <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </CardFooter>
+      )}
+    </Card>
+  )
+}
+
+// Componente Principal
 export function InvestmentSimulator({
   isLoggedIn,
   simulationsCount,
@@ -59,9 +126,9 @@ export function InvestmentSimulator({
   return (
     <Section>
       <h1 className="text-4xl font-bold text-center mb-6">Simulador de Investimentos</h1>
-      <div className="grid gap-8 lg:grid-cols-3">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Configurações */}
-        <div className="lg:col-span-2 ">
+        <div className="flex-1">
           <Card>
             <CardHeader>
               <CardTitle>Configurações</CardTitle>
@@ -139,62 +206,28 @@ export function InvestmentSimulator({
           </Card>
         </div>
 
-        {/* Resumo do Investimento com animação */}
-        <AnimatePresence>
-          {simulatedData && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.4 }}
-            >
-              <Card className="h-full">
-                <CardHeader>
-                  <CardTitle>Resumo do Investimento</CardTitle>
-                  <CardDescription>Visão geral do seu plano de investimento</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <div className="flex justify-between">
-                    <span>Valor Inicial</span>
-                    <span>R$ {investmentAmount.toLocaleString("pt-BR")}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Aporte Mensal</span>
-                    <span>R$ {monthlyContribution.toLocaleString("pt-BR")}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Período</span>
-                    <span>{investmentPeriod} meses</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Perfil de Risco</span>
-                    <span>{["Muito Baixo", "Baixo", "Moderado", "Alto", "Muito Alto"][riskProfile - 1]}</span>
-                  </div>
-
-                  <div className="border-t pt-4 mt-4 space-y-2">
-                    {simulatedData.map((item) => (
-                      <div key={item.name} className="flex justify-between">
-                        <span>{item.name} (Taxa {item.rate}%)</span>
-                        <span className="text-green-500">
-                          R$ {item.final.toLocaleString("pt-BR")} (+{item.profitPct.toFixed(2)}%)
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-                {!isLoggedIn && (
-                  <CardFooter>
-                    <Button variant="outline" className="w-full" asChild>
-                      <Link href="/login">
-                        Ter acesso completo às dicas <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </CardFooter>
-                )}
-              </Card>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Card de Resumo */}
+        <div className="flex-1">
+          <AnimatePresence>
+            {simulatedData && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.4 }}
+              >
+                <InvestmentSummaryCard
+                  investmentAmount={investmentAmount}
+                  monthlyContribution={monthlyContribution}
+                  investmentPeriod={investmentPeriod}
+                  riskProfile={riskProfile}
+                  simulatedData={simulatedData}
+                  isLoggedIn={isLoggedIn}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </Section>
   )

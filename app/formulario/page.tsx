@@ -321,10 +321,10 @@ export default function FormularioPage() {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
-                      className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
+                      className="fixed inset-0 flex items-center justify-center z-50"
                     >
-                      <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center space-y-4">
-                        <CheckCircle className="h-10 w-10 mx-auto text-green-500" />
+                      <div className=" rounded-2xl p-8 max-w-md w-full text-center space-y-4">
+                        <CheckCircle className="h-10 w-10 mx-auto text-primary" />
                         <h3 className="text-xl font-semibold">Parabéns!</h3>
                         <p className="text-sm text-muted-foreground">
                           Você respondeu todas as perguntas do questionário.

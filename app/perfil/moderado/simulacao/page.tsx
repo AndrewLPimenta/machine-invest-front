@@ -5,10 +5,9 @@ import { AuthRedirect } from "@/components/auth-redirect"
 import { InvestmentSimulator, SimulationItem } from "@/components/ui/simulador-geral"
 
 export default function SimulacaoModeradoPage() {
-  const isLoggedIn = true 
+  const isLoggedIn = true
   const simulationsCount = 0
   const MAX_FREE_SIMULATIONS = 3
-
 
   const handleSimulate = ({
     investmentAmount,
@@ -23,7 +22,6 @@ export default function SimulacaoModeradoPage() {
     riskProfile: number
     selectedTab: string
   }): SimulationItem[] => {
-
     return [
       {
         name: selectedTab === "renda-fixa" ? "CDB" : "Ação",
@@ -37,13 +35,20 @@ export default function SimulacaoModeradoPage() {
   return (
     <AuthRedirect>
       <PageLayout>
-        <h1 className="text-3xl font-bold mb-6 text-center">Área de Simulação - Perfil Moderado</h1>
-        <InvestmentSimulator
-          isLoggedIn={isLoggedIn}
-          simulationsCount={simulationsCount}
-          MAX_FREE_SIMULATIONS={MAX_FREE_SIMULATIONS}
-          handleSimulate={handleSimulate}
-        />
+        <div className="flex flex-col items-center justify-center py-12 px-4 md:px-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+            Área de Simulação - Perfil Moderado
+          </h1>
+
+          <div className="w-full max-w-5xl">
+            <InvestmentSimulator
+              isLoggedIn={isLoggedIn}
+              simulationsCount={simulationsCount}
+              MAX_FREE_SIMULATIONS={MAX_FREE_SIMULATIONS}
+              handleSimulate={handleSimulate}
+            />
+          </div>
+        </div>
       </PageLayout>
     </AuthRedirect>
   )
