@@ -48,7 +48,7 @@ export function MachineIAChatbot() {
 
   // Verifica se está em uma página privada (dentro de /perfil)
   const isPrivatePage = pathname?.startsWith("/perfil")
-  
+
   // Contador de perguntas para usuários não autenticados
   const [questionCount, setQuestionCount] = useState(() => {
     // Recupera o contador do localStorage se existir
@@ -92,12 +92,12 @@ export function MachineIAChatbot() {
 
     setMessages((prev) => [...prev, userMessage])
     setInputMessage("")
-    
+
     // Incrementa o contador de perguntas para usuários não autenticados fora de páginas privadas
     if (!isAuthenticated && !isPrivatePage) {
       setQuestionCount(prev => prev + 1)
     }
-    
+
     setIsLoading(true)
 
     try {
@@ -207,11 +207,10 @@ export function MachineIAChatbot() {
               {messages.map((message, index) => (
                 <div
                   key={message.id}
-                  className={`flex gap-4 ${
-                    message.sender === "user"
-                      ? "justify-end"
-                      : "justify-start"
-                  } animate-in fade-in-0 slide-in-from-bottom-2 duration-500`}
+                  className={`flex gap-4 ${message.sender === "user"
+                    ? "justify-end"
+                    : "justify-start"
+                    } animate-in fade-in-0 slide-in-from-bottom-2 duration-500`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {message.sender === "ai" && (
@@ -224,21 +223,19 @@ export function MachineIAChatbot() {
                   )}
 
                   <div
-                    className={`max-w-[80%] ${
-                      message.sender === "user"
-                        ? "bg-primary text-primary-foreground rounded-3xl rounded-br-lg dark:bg-primary-600"
-                        : "bg-muted/50 text-foreground rounded-3xl rounded-bl-lg border border-border/30 dark:bg-slate-700/60 dark:text-slate-100 dark:border-slate-600/40"
-                    } px-4 sm:px-5 py-3 shadow-sm dark:shadow-lg`}
+                    className={`max-w-[80%] ${message.sender === "user"
+                      ? "bg-primary text-primary-foreground rounded-3xl rounded-br-lg dark:bg-primary-600"
+                      : "bg-muted/50 text-foreground rounded-3xl rounded-bl-lg border border-border/30 dark:bg-slate-700/60 dark:text-slate-100 dark:border-slate-600/40"
+                      } px-4 sm:px-5 py-3 shadow-sm dark:shadow-lg`}
                   >
                     <p className="text-sm leading-relaxed whitespace-pre-wrap text-pretty">
                       {message.content}
                     </p>
                     <span
-                      className={`text-xs mt-2 block opacity-60 ${
-                        message.sender === "user"
-                          ? "text-primary-foreground dark:text-blue-100"
-                          : "text-muted-foreground dark:text-slate-400"
-                      }`}
+                      className={`text-xs mt-2 block opacity-60 ${message.sender === "user"
+                        ? "text-primary-foreground dark:text-blue-100"
+                        : "text-muted-foreground dark:text-slate-400"
+                        }`}
                     >
                       {formatTime(message.timestamp)}
                     </span>
@@ -310,14 +307,15 @@ export function MachineIAChatbot() {
                     }
                     disabled={isLoading || (!isAuthenticated && !isPrivatePage && questionCount >= 3)}
                     className="
-                      min-h-[48px] pr-12 rounded-2xl
-                      border-border/50 bg-background/50 backdrop-blur-sm
-                      text-sm resize-none
-                      focus:ring-1 focus:ring-ring/20 focus:border-ring/30
-                      transition-all duration-200
-                      dark:bg-slate-800/60
-                    "
+    min-h-[48px] pr-12 rounded-2xl
+    border-border/50 bg-background/50 backdrop-blur-sm
+    text-base sm:text-sm resize-none
+    focus:ring-1 focus:ring-ring/20 focus:border-ring/30
+    transition-all duration-200
+    dark:bg-slate-800/60
+  "
                   />
+
                 </div>
                 <Button
                   onClick={sendMessage}
@@ -339,7 +337,7 @@ export function MachineIAChatbot() {
               </div>
               {!isAuthenticated && !isPrivatePage && questionCount > 0 && (
                 <p className="text-xs text-muted-foreground mt-2 text-center">
-                  {questionCount >= 3 
+                  {questionCount >= 3
                     ? "Limite de perguntas atingido. Faça login para continuar."
                     : `Perguntas restantes: ${3 - questionCount}`}
                 </p>

@@ -21,29 +21,14 @@ import { AuthRedirect } from "@/components/auth-redirect"
 import { HeroSection } from "@/components/hero-section"
 import { Section } from "@/components/section"
 import Link from "next/link"
-import VideoSection from "@/components/ui/video-section" 
 import { FinanceDicas } from "@/components/ui/finance-dicas"
 export default function ConservadorPageHome() {
   return (
     <AuthRedirect>
       <PageLayout>
         <HeroSection />
+
         <Section>
-          <div className="mb-6 space-y-4 md:space-y-0 md:justify-between">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center text-2xl">
-                <BookOpen className="mr-2 h-6 w-6 text-primary" />  Dicas e Investimento para o Perfil Conservador
-              </CardTitle>
-              <CardDescription>Dicas:</CardDescription>
-            </CardHeader>
-            <FinanceDicas/>
-            <CardContent className="space-y-4">
-              <FinanceDicas/>
-              <Badge className="bg-primary/10 text-primary whitespace-nowrap border-0">Dica: Mesmo sendo conservador, é importante diversificar seus investimentos para equilibrar segurança e rentabilidade.</Badge>
-            </CardContent>
-          </Card>
-          </div>
           <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
             <CardHeader>
               <CardTitle className="flex items-center text-2xl">
@@ -81,6 +66,35 @@ export default function ConservadorPageHome() {
               </div>
             </CardContent>
           </Card>
+        </Section>
+        <Section>
+          <div className="mb-6 space-y-4 md:space-y-0 md:justify-between">
+            <Card className="bg-background/50 backdrop-blur-sm shadow-md border border-primary/10">
+              <CardHeader>
+                <CardTitle className="flex items-center text-2xl">
+                  <BookOpen className="mr-2 h-6 w-6 text-primary" />
+                  Dicas e Investimento para o Perfil Conservador
+                </CardTitle>
+                <CardDescription>
+                  Dicas personalizadas para melhorar sua jornada financeira:
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-4">
+                {/* Dica vinda do backend */}
+                <div className="p-3 rounded-md bg-muted">
+                  <FinanceDicas />
+                </div>
+
+                {/* Espaço reservado para dicas futuras */}
+                <Badge className="bg-primary/10 text-primary whitespace-nowrap border-0">
+                  Em breve
+                </Badge>
+              </CardContent>
+            </Card>
+          </div>
+
+
         </Section>
         <Section>
           <Card className="bg-background/50 backdrop-blur-lg shadow-lg border-primary/20">
@@ -137,7 +151,7 @@ export default function ConservadorPageHome() {
                   <Link href="/perfil/conservador/financas" passHref>
                     <Button size="lg" className="group" asChild>
                       <span>
-                        Ver Relatório Completo das Minhas Finanças
+                        Minhas Finanças
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </span>
                     </Button>
@@ -147,27 +161,64 @@ export default function ConservadorPageHome() {
             </CardContent>
           </Card>
         </Section>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center text-2xl">
-              <Video className="mr-2 h-6 w-6 text-primary" />
-              Vídeos Educativos, primeiros passos no mundo dos investimentos
-            </CardTitle>
-            <CardDescription>Conhecendo o Tesouro Direto</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div>
-              <VideoSection />
-            </div>
-          </CardContent>
-        </Card>
+        <Section>
+          <Card className="bg-background/50 backdrop-blur-lg shadow-lg border border-primary/20 rounded-2xl overflow-hidden">
+            <CardHeader>
+              <CardTitle className="flex items-center text-2xl font-bold">
+                <Video className="mr-2 h-6 w-6 text-primary" />
+                Vídeos Educativos 
+              </CardTitle>
+              <CardDescription>
+                Descubra como começar a investir com segurança. Siga as aulas abaixo e
+                evolua no seu aprendizado de forma prática.
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent className="space-y-4">
+              {/* Próximos passos */}
+              <div className="bg-muted/40 p-4 rounded-lg">
+                <h3 className="font-semibold mb-3 text-lg">O que você vai aprender:</h3>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Conceitos básicos do Tesouro Direto</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Como comparar CDB, poupança e fundos conservadores</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Definir metas financeiras de curto e longo prazo</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Montar sua estratégia de investimento inicial</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Botão CTA */}
+              <div className="flex justify-center">
+                <Link href="/perfil/conservador/conteudo" passHref>
+                  <Button size="lg" className="group" asChild>
+                    <span>
+                      Primeiros Passos
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </Section>
 
         <Section>
           <Card className="bg-background/50 backdrop-blur-lg shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center text-2xl">
                 <Lightbulb className="mr-2 h-6 w-6 text-primary" />
-                Dicas Rápidas para Investidores Conservadores
+                Para Investidores Conservadores
               </CardTitle>
               <CardDescription>Princípios fundamentais para investir com segurança</CardDescription>
             </CardHeader>

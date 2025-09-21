@@ -8,7 +8,7 @@ interface Dica {
 }
 
 interface DicaResponse {
-  data: Dica
+  data?: Dica
   message?: string
 }
 
@@ -21,7 +21,7 @@ export function FinanceDicas() {
   useEffect(() => {
     const fetchDica = async () => {
       if (!user?.token) {
-        setError("Usuário não autenticado")
+        setError("Usuário não autenticado. Faça login novamente.")
         setLoading(false)
         return
       }
@@ -30,21 +30,36 @@ export function FinanceDicas() {
         const response = await fetch("https://machine-back-server.onrender.com/api/dicas/dica", {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${user.token}`
+            "Authorization": `Bearer ${user.token}`,
           },
         })
 
-        const data: DicaResponse = await response.json()
-        console.log("Resposta do backend:", data)
+        let data: DicaResponse = {}
+        try {
+          data = await response.json()
+        } catch {
+          // Caso o backend retorne vazio ou HTML em erro
+          data = {}
+        }
+
+        if (response.status === 401) {
+          setError("Sessão expirada. Faça login novamente.")
+          return
+        }
 
         if (!response.ok) {
           setError(data.message || "Erro ao buscar dica")
+          return
+        }
+
+        if (data.data) {
+          setDica(data.data)
         } else {
-          setDica(data.data || null)
+          setError("Nenhuma dica disponível no momento.")
         }
       } catch (err) {
         console.error("Erro ao buscar dica:", err)
-        setError("Erro ao buscar dica")
+        setError("Erro de conexão com o servidor.")
       } finally {
         setLoading(false)
       }
@@ -54,8 +69,12 @@ export function FinanceDicas() {
   }, [user?.token])
 
   if (loading) return <p>Carregando dica...</p>
-  if (error) return <p>Erro: {error}</p>
+  if (error) return <p className="text-red-500">{error}</p>
   if (!dica) return <p>Nenhuma dica disponível</p>
 
-  return <div>{dica.texto}</div>
+  return (
+    <div className="p-3 rounded-md bg-muted">
+      <p className="text-sm">{dica.texto}</p>
+    </div>
+  )
 }

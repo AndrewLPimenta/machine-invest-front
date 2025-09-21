@@ -1,22 +1,29 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+"use client"
+
 import { Section } from "@/components/section";
-import { PageLayout } from "@/components/page-layout"
-import { ArrowRight, ArrowLeft } from "lucide-react"
-import Link from "next/link"
-import { AuthRedirect } from "@/components/auth-redirect"
-import VideoSection from "@/components/ui/video-section"
+import { PageLayout } from "@/components/page-layout";
+import { AuthRedirect } from "@/components/auth-redirect";
+import VideoSection from "@/components/ui/video-section";
 
 export default function ConteudoPage() {
-    return (
-        <AuthRedirect>
-            <PageLayout>
-                <Section>
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-2xl font-bold">Conteúdo</h2>
-                        {/* Videos */}
-                    </div>
-                </Section>
-            </PageLayout>
-        </AuthRedirect>
-    )
+  return (
+    <AuthRedirect>
+      <PageLayout>
+        <Section>
+          {/* Header da página */}
+          <div className="mb-6 text-center md:text-left">
+            <h2 className="text-3xl font-bold mb-2">Conteúdos Introdutórios</h2>
+            <p className="text-muted-foreground text-base md:text-lg">
+              Assista às aulas abaixo e avance no seu aprendizado sobre investimentos conservadores.
+            </p>
+          </div>
+
+          {/* Grade de vídeos responsiva */}
+          <div className="w-full">
+            <VideoSection />
+          </div>
+        </Section>
+      </PageLayout>
+    </AuthRedirect>
+  )
 }
