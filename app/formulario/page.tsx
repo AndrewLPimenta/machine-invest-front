@@ -323,11 +323,12 @@ export default function FormularioPage() {
                       exit={{ opacity: 0, scale: 0.8 }}
                       className="fixed inset-0 flex items-center justify-center z-50"
                     >
-                      <div className=" bg-background rounded-2xl p-8 max-w-md w-full text-center space-y-4">
+                      <div className=" bg-background border border-primary/50 rounded-2xl p-8 max-w-md w-full text-center space-y-4">
                         <CheckCircle className="h-10 w-10 mx-auto text-primary" />
-                        <h3 className="text-xl font-semibold">Parabéns!</h3>
+                        <h3 className="text-xl font-semibold text-primary/80">Parabéns!</h3>
                         <p className="text-sm text-muted-foreground">
                           Você respondeu todas as perguntas do questionário.
+                          Agora, clique em "Finalizar" para descobrir seu perfil de investidor.
                         </p>
                         <Button
                           onClick={handleSubmit}
