@@ -1,10 +1,19 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import {Área de Simulação} from "@/app/perfil/simulacao/page"
+import { AuthRedirect } from "@/components/auth-redirect"
+import {
   BarChart3,
   TrendingUp,
   DollarSign,
@@ -15,11 +24,9 @@ import {Área de Simulação} from "@/app/perfil/simulacao/page"
   Shield,
   Zap,
   TrendingDown,
+  ArrowRight,
 } from "lucide-react"
-import { useState, useEffect } from "react"
-import { AuthRedirect } from "@/components/auth-redirect"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+
 function AnimatedCounter({ end, prefix = "", suffix = "" }: { end: number; prefix?: string; suffix?: string }) {
   const [count, setCount] = useState(0)
 
