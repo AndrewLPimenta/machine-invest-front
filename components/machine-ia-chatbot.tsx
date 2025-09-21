@@ -162,7 +162,7 @@ export function MachineIAChatbot() {
       <Card
         className="
     w-full max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl
-    h-[80vh] sm:h-[85vh] md:h-[calc(100dvh-2rem)]
+    h-[80vh] sm:h-[75vh] md:h-[calc(90dvh-2rem)]
     flex flex-col overflow-hidden
     rounded-xl sm:rounded-2xl md:rounded-3xl
     border border-white/20 dark:border-slate-500/20
