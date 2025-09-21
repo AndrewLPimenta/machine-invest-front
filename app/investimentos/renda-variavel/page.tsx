@@ -11,7 +11,7 @@ import Link from "next/link"
 
 export default function RendaVariavelPage() {
 
-  const router = useRouter(); 
+  const router = useRouter();
 
   return (
     <PageLayout>
@@ -20,7 +20,7 @@ export default function RendaVariavelPage() {
           title="Renda Variável"
           description="Potencialize seus ganhos com investimentos de maior retorno."
           centered
-            
+
         />
 
         <div className="mt-12 grid gap-8 md:grid-cols-2">
@@ -61,12 +61,12 @@ export default function RendaVariavelPage() {
 
             </div>
             <Button className="w-fit" onClick={() => router.push("/login")}>
-             Começar a investir
+             Saiba mais
             </Button>
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="https://traderevolution.com.br/wp-content/uploads/2020/10/como-comecar-a-investir.jpg"
+              src="https://files.sunoresearch.com.br/n/uploads/2024/08/iStock-1402430796-800x450.jpg"
               alt="Renda Variável"
               width={500}
               height={400}
@@ -76,7 +76,7 @@ export default function RendaVariavelPage() {
         </div>
 
         <div className="mt-24">
-          <h2 className="mb-12 text-center text-3xl font-bold">Opções de Investimentos</h2>
+          <h2 className="mb-12 text-center text-3xl font-bold">Opções de Investimentos moderados</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
@@ -103,8 +103,8 @@ export default function RendaVariavelPage() {
                   </div>
                 </div>
                 <Link href="/login">
-                <Button className="w-full">
-                 Investir em Ações</Button>
+                  <Button className="w-full">
+                    Investir em Ações</Button>
                 </Link>
 
               </CardContent>
@@ -134,8 +134,8 @@ export default function RendaVariavelPage() {
                   </div>
                 </div>
                 <Link href="/Login">
-                <Button className="w-full">Investir em FIIs</Button>
-              </Link>
+                  <Button className="w-full">Investir em FIIs</Button>
+                </Link>
               </CardContent>
             </Card>
             <Card>
@@ -163,8 +163,8 @@ export default function RendaVariavelPage() {
                   </div>
                 </div>
                 <Link href="/Login">
-                <Button className="w-full">Investir em ETFs</Button>
-              </Link>
+                  <Button className="w-full">Investir em ETFs</Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -228,6 +228,12 @@ export default function RendaVariavelPage() {
               </CardContent>
             </Card>
           </div>
+        </div>
+        <div className="mt-24 text-center">
+        <Link href="/login">
+          <Button className="w-full md:w-auto px-8 py-4">
+            Começar agora</Button>
+        </Link>
         </div>
       </Section>
     </PageLayout>

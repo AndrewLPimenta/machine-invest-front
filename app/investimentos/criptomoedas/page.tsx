@@ -59,7 +59,7 @@ export default function CriptomoedasInvestPage() {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="https://media.seudinheiro.com/uploads/2022/10/investimento-do-futuro-lucro-dinheiro-CAPA-SD.jpg"
+              src="https://neofeed.com.br/wp-content/uploads/2022/08/Criptomoedas2.jpg"
               alt="Criptomoedas"
               width={500}
               height={400}
@@ -68,126 +68,7 @@ export default function CriptomoedasInvestPage() {
           </div>
         </div>
 
-        <div className="mt-24">
-          <h2 className="mb-12 text-center text-3xl font-bold">Principais Criptomoedas</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-orange-100 p-2">
-                    <Bitcoin className="h-6 w-6 text-orange-500" />
-                  </div>
-                  <div>
-                    <CardTitle>Bitcoin (BTC)</CardTitle>
-                    <CardDescription>A primeira e mais conhecida criptomoeda</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Criado em 2009, o Bitcoin é considerado o ouro digital e a principal referência no mercado de
-                  criptomoedas. Com oferta limitada a 21 milhões de unidades, é visto como reserva de valor.
-                </p>
-                <div className="space-y-2 mb-6">
-                  <div className="flex justify-between">
-                    <span className="text-sm">Preço atual:</span>
-                    <span className="text-sm font-medium">$65,432.10</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Variação 24h:</span>
-                    <span className="text-sm font-medium text-green-500">+2.5%</span>
-                  </div>
-                </div>
-                <Button className="w-full" asChild>
-                  <Link href="/criptomoedas/btc">Ver detalhes</Link>
-                </Button>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-blue-100 p-2">
-                    <svg
-                      className="h-6 w-6 text-blue-500"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png"
-                    >
-                      <path d="M12 4L4 12L12 20L20 12L12 4Z" fill="currentColor" />
-                    </svg>
-                  </div>
-                  <div>
-                    <CardTitle>Ethereum (ETH)</CardTitle>
-                    <CardDescription>Plataforma de contratos inteligentes</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  O Ethereum vai além de uma simples moeda digital, oferecendo uma plataforma para aplicações
-                  descentralizadas e contratos inteligentes que estão revolucionando diversos setores.
-                </p>
-                <div className="space-y-2 mb-6">
-                  <div className="flex justify-between">
-                    <span className="text-sm">Preço atual:</span>
-                    <span className="text-sm font-medium">$3,245.67</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Variação 24h:</span>
-                    <span className="text-sm font-medium text-green-500">+1.8%</span>
-                  </div>
-                </div>
-                <Button className="w-full" asChild>
-                  <Link href="/criptomoedas/eth">Ver detalhes</Link>
-                </Button>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="rounded-full bg-green-100 p-2">
-                    <svg
-                      className="h-6 w-6 text-green-500"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/120px-Ethereum_logo_2014.svg.png"
-                    >
-                      <circle cx="12" cy="12" r="8" fill="currentColor" />
-                    </svg>
-                  </div>
-                  <div>
-                    <CardTitle>Solana (SOL)</CardTitle>
-                    <CardDescription>Alta performance e baixas taxas</CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">
-                  Solana é uma blockchain de alta performance capaz de processar milhares de transações por segundo com
-                  taxas extremamente baixas, ideal para aplicações financeiras descentralizadas.
-                </p>
-                <div className="space-y-2 mb-6">
-                  <div className="flex justify-between">
-                    <span className="text-sm">Preço atual:</span>
-                    <span className="text-sm font-medium">$142.89</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm">Variação 24h:</span>
-                    <span className="text-sm font-medium text-red-500">-0.7%</span>
-                  </div>
-                </div>
-                <Button className="w-full" asChild>
-                  <Link href="/criptomoedas/sol">Ver detalhes</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="mt-6 text-center">
-            <Button variant="outline" asChild>
-              <Link href="/criptomoedas">Ver todas as criptomoedas</Link>
-            </Button>
-          </div>
-        </div>
+        
 
         <div className="mt-24">
           <Card>
@@ -205,54 +86,7 @@ export default function CriptomoedasInvestPage() {
               </p>
             </CardContent>
           </Card>
-        </div>
-
-        <div className="mt-24">
-          <h2 className="mb-12 text-center text-3xl font-bold">Como Começar a Investir</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <div className="rounded-full bg-primary/10 p-2 w-10 h-10 flex items-center justify-center mb-2">
-                  <span className="font-bold">1</span>
-                </div>
-                <CardTitle>Crie sua conta</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Cadastre-se na Machine Invest e complete seu processo de verificação para garantir a segurança da sua
-                  conta e cumprir as regulamentações.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <div className="rounded-full bg-primary/10 p-2 w-10 h-10 flex items-center justify-center mb-2">
-                  <span className="font-bold">2</span>
-                </div>
-                <CardTitle>Deposite fundos</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Transfira dinheiro para sua conta usando Pix, TED ou outras formas de pagamento disponíveis na
-                  plataforma.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <div className="rounded-full bg-primary/10 p-2 w-10 h-10 flex items-center justify-center mb-2">
-                  <span className="font-bold">3</span>
-                </div>
-                <CardTitle>Comece a investir</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Escolha as criptomoedas que deseja comprar, defina o valor e confirme sua operação. Você pode
-                  acompanhar seu portfólio em tempo real.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+        
           <div className="mt-8 text-center">
             <Button asChild>
               <Link href="/cadastro">Criar minha conta</Link>

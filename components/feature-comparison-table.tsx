@@ -42,6 +42,20 @@ export function FeatureComparisonTable({ categories }: FeatureComparisonTablePro
     show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   }
 
+  const renderIcon = (value: boolean) => (
+    <div
+      className={`flex justify-center ${
+        value ? "bg-green-100 dark:bg-green-900/30" : "bg-red-100 dark:bg-red-900/30"
+      } p-1 rounded-full`}
+    >
+      {value ? (
+        <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
+      ) : (
+        <X className="h-4 w-4 text-red-600 dark:text-red-400" />
+      )}
+    </div>
+  )
+
   return (
     <motion.div
       ref={ref}
@@ -62,43 +76,15 @@ export function FeatureComparisonTable({ categories }: FeatureComparisonTablePro
                 <TableRow className="bg-muted/50">
                   <TableHead className="w-[50%]">Recurso</TableHead>
                   <TableHead className="text-center">Machine Invest</TableHead>
-                  <TableHead className="text-center">Bancos Tradicionais</TableHead>
+                  <TableHead className="text-center">Outros Softwares</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {category.features.map((feature, featureIndex) => (
                   <TableRow key={featureIndex} className={feature.highlight ? "bg-primary/5" : ""}>
                     <TableCell className="font-medium">{feature.name}</TableCell>
-                    <TableCell className="text-center">
-                      {feature.machineInvest ? (
-                        <div className="flex justify-center">
-                          <div className="bg-green-100 dark:bg-green-900/30 p-1 rounded-full">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex justify-center">
-                          <div className="bg-red-100 dark:bg-red-900/30 p-1 rounded-full">
-                            <X className="h-4 w-4 text-red-600 dark:text-red-400" />
-                          </div>
-                        </div>
-                      )}
-                    </TableCell>
-                    <TableCell className="text-center">
-                      {feature.traditional ? (
-                        <div className="flex justify-center">
-                          <div className="bg-green-100 dark:bg-green-900/30 p-1 rounded-full">
-                            <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex justify-center">
-                          <div className="bg-red-100 dark:bg-red-900/30 p-1 rounded-full">
-                            <X className="h-4 w-4 text-red-600 dark:text-red-400" />
-                          </div>
-                        </div>
-                      )}
-                    </TableCell>
+                    <TableCell className="text-center">{renderIcon(feature.machineInvest)}</TableCell>
+                    <TableCell className="text-center">{renderIcon(feature.traditional)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -109,4 +95,3 @@ export function FeatureComparisonTable({ categories }: FeatureComparisonTablePro
     </motion.div>
   )
 }
-

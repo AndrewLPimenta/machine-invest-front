@@ -1,4 +1,5 @@
 "use client"
+//conservador.jsx
 import { PageLayout } from "@/components/page-layout"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -27,7 +28,6 @@ export default function ConservadorPageHome() {
     <AuthRedirect>
       <PageLayout>
         <HeroSection />
-
         <Section>
           <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
             <CardHeader>
@@ -166,7 +166,7 @@ export default function ConservadorPageHome() {
             <CardHeader>
               <CardTitle className="flex items-center text-2xl font-bold">
                 <Video className="mr-2 h-6 w-6 text-primary" />
-                Vídeos Educativos 
+                Vídeos Educativos
               </CardTitle>
               <CardDescription>
                 Descubra como começar a investir com segurança. Siga as aulas abaixo e
@@ -212,6 +212,82 @@ export default function ConservadorPageHome() {
             </CardContent>
           </Card>
         </Section>
+
+        <Section>
+          <Card className="bg-background/50 backdrop-blur-lg shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center text-2xl">
+                <PieChart className="mr-2 h-6 w-6 text-primary" />
+                Simulações para Investidores Conservadores
+              </CardTitle>
+              <CardDescription>
+                Teste diferentes cenários de investimento e planeje seu futuro financeiro com segurança
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3 p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-green-800 dark:text-green-200">Simule diferentes aportes</h4>
+                      <p className="text-sm text-green-700 dark:text-green-300">
+                        Teste valores iniciais e aportes mensais para ver seu crescimento
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-blue-800 dark:text-blue-200">Escolha o período ideal</h4>
+                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                        Veja como seus investimentos se comportam no curto e longo prazo
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-purple-800 dark:text-purple-200">Compare tipos de investimentos</h4>
+                      <p className="text-sm text-purple-700 dark:text-purple-300">
+                        Renda fixa, fundos e mais para encontrar a melhor opção
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3 p-4 bg-orange-50 dark:bg-orange-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-orange-800 dark:text-orange-200">Visualize resultados</h4>
+                      <p className="text-sm text-orange-700 dark:text-orange-300">
+                        Confira montante final, rendimento e rentabilidade estimada
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-4 bg-teal-50 dark:bg-teal-950/20 rounded-lg">
+                    <div className="w-2 h-2 bg-teal-500 rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-teal-800 dark:text-teal-200">Acesse com facilidade</h4>
+                      <p className="text-sm text-teal-700 dark:text-teal-300">
+                        Use nossa plataforma para simular investimentos sempre que quiser
+                      </p>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div className="flex items-center justify-center mt-4">
+                    <Button size="lg" asChild>
+                      <Link href="/perfil/conservador/simulacao">
+                        Acessar Simulações <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+            </CardContent>
+          </Card>
+        </Section>
+
 
         <Section>
           <Card className="bg-background/50 backdrop-blur-lg shadow-lg">
@@ -282,8 +358,6 @@ export default function ConservadorPageHome() {
             </CardContent>
           </Card>
         </Section>
-
-
       </PageLayout>
     </AuthRedirect>
   )

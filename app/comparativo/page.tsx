@@ -21,55 +21,36 @@ export default function ComparativoPage() {
     threshold: 0.1,
   })
 
-  const feeComparisonData = [
-    { label: "Taxa de Manutenção", machineInvest: 0, traditional: 30, color: "#10b981" },
-    { label: "Taxa de Transferência", machineInvest: 0, traditional: 15, color: "#10b981" },
-    { label: "Taxa de Administração", machineInvest: 0.5, traditional: 2, color: "#10b981" },
-    { label: "Taxa de Custódia", machineInvest: 0, traditional: 0.3, color: "#10b981" },
-  ]
-
-  const returnComparisonData = [
-    { label: "Renda Fixa", machineInvest: 12, traditional: 9, color: "#06b6d4" },
-    { label: "Renda Variável", machineInvest: 18, traditional: 14, color: "#06b6d4" },
-    { label: "Criptomoedas", machineInvest: 25, traditional: 0, color: "#06b6d4" },
-    { label: "Tesouro Direto", machineInvest: 11, traditional: 10, color: "#06b6d4" },
+  // Dados de comparação fictícios
+  const featureComparisonData = [
+    { label: "Gestão de Finanças", machineInvest: true, otherPlatform: false },
+    { label: "Simulação de Investimentos", machineInvest: true, otherPlatform: false },
+    { label: "Agente de IA para recomendações", machineInvest: true, otherPlatform: false },
+    { label: "Dicas personalizadas", machineInvest: true, otherPlatform: false },
   ]
 
   const comparisonFeatures = [
     {
-      category: "Conta Digital",
+      category: "Gestão Financeira",
       features: [
-        { name: "Conta sem taxas de manutenção", machineInvest: true, traditional: false, highlight: true },
-        { name: "Transferências gratuitas e ilimitadas", machineInvest: true, traditional: false, highlight: true },
-        { name: "Cartão de débito e crédito sem anuidade", machineInvest: true, traditional: false },
-        { name: "Rendimento automático do saldo", machineInvest: true, traditional: true },
-        { name: "Atendimento 24h via chat", machineInvest: true, traditional: false },
-        { name: "Aplicativo intuitivo e moderno", machineInvest: true, traditional: false },
-        { name: "Pagamentos por aproximação e QR Code", machineInvest: true, traditional: true },
+        { name: "Painel completo de finanças", machineInvest: true, otherPlatform: false, highlight: true },
+        { name: "Gráficos de receitas e despesas", machineInvest: true, otherPlatform: false },
+        { name: "Planejamento financeiro personalizado", machineInvest: true, otherPlatform: false },
       ],
     },
     {
       category: "Investimentos",
       features: [
-        { name: "Renda Fixa", machineInvest: true, traditional: true },
-        { name: "Renda Variável", machineInvest: true, traditional: true },
-        { name: "Criptomoedas", machineInvest: true, traditional: false, highlight: true },
-        { name: "Simulador de investimentos", machineInvest: true, traditional: false },
-        { name: "Recomendações personalizadas por IA", machineInvest: true, traditional: false, highlight: true },
-        { name: "Taxa de administração reduzida", machineInvest: true, traditional: false, highlight: true },
-        { name: "Investimentos internacionais", machineInvest: true, traditional: false },
+        { name: "Simulador de investimentos", machineInvest: true, otherPlatform: false, highlight: true },
+        { name: "Acompanhamento do rendimento histórico", machineInvest: true, otherPlatform: false },
       ],
     },
     {
-      category: "Serviços",
+      category: "Inteligência e Dicas",
       features: [
-        { name: "Empréstimos com taxas reduzidas", machineInvest: true, traditional: false, highlight: true },
-        { name: "Financiamento imobiliário", machineInvest: true, traditional: true },
-        { name: "Seguros", machineInvest: true, traditional: true },
-        { name: "Previdência privada", machineInvest: true, traditional: true },
-        { name: "Educação financeira gratuita", machineInvest: true, traditional: false },
-        { name: "Cashback em compras", machineInvest: true, traditional: false },
-        { name: "Programa de fidelidade", machineInvest: true, traditional: true },
+        { name: "Agente de IA com recomendações inteligentes", machineInvest: true, otherPlatform: false, highlight: true },
+        { name: "Alertas e dicas personalizadas", machineInvest: true, otherPlatform: false },
+        { name: "Conteúdos educativos sobre finanças", machineInvest: true, otherPlatform: false },
       ],
     },
   ]
@@ -77,27 +58,21 @@ export default function ComparativoPage() {
   const testimonials = [
     {
       quote:
-        "Depois de migrar para a Machine Invest, economizo mais de R$ 2.000 por ano em taxas e ainda tenho rendimentos superiores nos meus investimentos.",
-      author: "Ricardo Almeida",
-      role: "Ex-cliente de banco tradicional",
+        "A Machine Invest me ajudou a organizar minhas finanças e entender onde posso investir de forma inteligente.",
+      author: "Ana Rodrigues",
+      role: "Usuária da plataforma",
     },
     {
       quote:
-        "A diferença na experiência do usuário é impressionante. Tudo é mais simples, rápido e transparente na Machine Invest.",
-      author: "Mariana Santos",
-      role: "Investidora há 2 anos",
+        "O simulador de investimentos é incrível. Posso planejar meus objetivos sem depender de bancos.",
+      author: "Carlos Silva",
+      role: "Investidor iniciante",
     },
     {
       quote:
-        "A possibilidade de investir em criptomoedas de forma segura e integrada com meus outros investimentos foi o que me fez escolher a Machine Invest.",
-      author: "Paulo Mendes",
-      role: "Entusiasta de tecnologia",
-    },
-    {
-      quote:
-        "O atendimento é excepcional. Sempre que tenho dúvidas, recebo respostas rápidas e claras, algo que nunca tive no meu banco anterior.",
+        "As recomendações da IA realmente fazem diferença no meu dia a dia financeiro. Mais controle e segurança.",
       author: "Fernanda Lima",
-      role: "Empreendedora",
+      role: "Investidora experiente",
     },
   ]
 
@@ -107,50 +82,15 @@ export default function ComparativoPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <SectionHeading
             title="Machine Invest"
-            description="Compare e descubra por que a Machine Invest é a escolha inteligente para seus investimentos e serviços financeiros."
+            description="Nossa plataforma ajuda você a gerenciar suas finanças, simular investimentos, receber dicas e contar com um agente de IA que te orienta de forma personalizada."
             centered
           />
         </motion.div>
 
-        <div className="mt-10">
-          <Tabs defaultValue="fees" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="fees" className="text-sm sm:text-base">
-                <BarChart3 className="h-4 w-4 mr-2" />
-                Comparativo de Taxas
-              </TabsTrigger>
-              <TabsTrigger value="returns" className="text-sm sm:text-base">
-                <TrendingUp className="h-4 w-4 mr-2" />
-                Comparativo de Rendimentos
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="fees" className="mt-0">
-              <EnhancedComparisonChart
-                title="Comparativo de Taxas"
-                description="Taxas cobradas pela Machine Invest vs Bancos Tradicionais"
-                data={feeComparisonData}
-                valuePrefix=""
-                valueSuffix="%"
-              />
-            </TabsContent>
-            <TabsContent value="returns" className="mt-0">
-              <EnhancedComparisonChart
-                title="Comparativo de Rendimentos"
-                description="Rendimento médio anual por tipo de investimento"
-                data={returnComparisonData}
-                valuePrefix=""
-                valueSuffix="% a.a."
-              />
-            </TabsContent>
-          </Tabs>
-        </div>
 
+        {/* Comparativo detalhado */}
         <div className="mt-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center gap-2">
@@ -158,7 +98,7 @@ export default function ComparativoPage() {
                   Comparativo Detalhado
                 </CardTitle>
                 <CardDescription>
-                  Veja as principais diferenças entre a Machine Invest e os bancos tradicionais.
+                  Descubra todas as funcionalidades que tornam a Machine Invest única no mercado.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -168,65 +108,21 @@ export default function ComparativoPage() {
           </motion.div>
         </div>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-2">
-          <SavingsCalculator />
+       
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <PieChart className="h-5 w-5 text-primary" />
-                  Depoimentos de Clientes
-                </CardTitle>
-                <CardDescription>O que nossos clientes dizem sobre a mudança para a Machine Invest.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {testimonials.map((testimonial, index) => (
-                    <TestimonialCard
-                      key={index}
-                      quote={testimonial.quote}
-                      author={testimonial.author}
-                      role={testimonial.role}
-                      delay={0.1 * index}
-                    />
-                  ))}
-                </div>
-                <div className="mt-6 text-center">
-                  <Button variant="outline" asChild>
-                    <Link href="/depoimentos">
-                      Ver Mais Depoimentos <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
+        {/* Call to Action final */}
+        <motion.div className="mt-16 text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.6 }}>
           <div className="max-w-2xl mx-auto bg-primary/5 p-8 rounded-lg">
-            <h3 className="text-2xl font-bold mb-4">Pronto para fazer a mudança?</h3>
+            <h3 className="text-2xl font-bold mb-4">Comece a gerenciar suas finanças de forma inteligente</h3>
             <p className="mb-6 text-muted-foreground">
-              Junte-se a milhares de clientes satisfeitos que já economizam dinheiro e maximizam seus investimentos com
-              a Machine Invest.
+              Junte-se a milhares de usuários que já simulam investimentos, recebem dicas personalizadas e organizam suas finanças com a Machine Invest.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
-                <Link href="/cadastro">Abra sua conta grátis</Link>
+                <Link href="/cadastro">Comece agora gratuitamente</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/download"
-                id="download">
+                <Link href="/download">
                   <ArrowDownToLine className="mr-2 h-4 w-4" />
                   Baixar Aplicativo
                 </Link>
@@ -238,4 +134,3 @@ export default function ComparativoPage() {
     </PageLayout>
   )
 }
-

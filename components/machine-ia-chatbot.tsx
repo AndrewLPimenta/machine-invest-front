@@ -215,7 +215,7 @@ export function MachineIAChatbot() {
                 >
                   {message.sender === "ai" && (
                     <Avatar className="h-8 w-8 mt-1 shrink-0">
-                      <AvatarImage src="/machine-logo.png" alt="Machine IA" />
+                      <AvatarImage src="/ia-logo.png" alt="Machine IA" />
                       <AvatarFallback className="bg-muted text-muted-foreground text-xs dark:bg-slate-600 dark:text-slate-300">
                         <Bot className="h-4 w-4" />
                       </AvatarFallback>

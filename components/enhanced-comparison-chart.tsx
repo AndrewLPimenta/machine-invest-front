@@ -40,13 +40,13 @@ export function EnhancedComparisonChart({
   valuePrefix = "",
   valueSuffix = "%",
   machineInvestLabel = "Machine Invest",
-  traditionalLabel = "Bancos Tradicionais",
+  traditionalLabel = "Outros Softwares",
 }: EnhancedComparisonChartProps) {
   const { theme } = useTheme()
   const isDark = theme === "dark"
 
-  const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
-    if (active && payload && payload.length) {
+  const CustomTooltip = ({ active, payload, label }: TooltipProps<any, string>) => {
+    if (active && payload && payload.length >= 2) {
       return (
         <div className="bg-background border rounded-md shadow-md p-3">
           <p className="font-medium">{label}</p>
@@ -55,7 +55,7 @@ export function EnhancedComparisonChart({
               <div className="w-3 h-3 rounded-full bg-primary" />
               <p className="text-sm">
                 {machineInvestLabel}: {valuePrefix}
-                {payload[0].value}
+                {payload[0]?.value ?? 0}
                 {valueSuffix}
               </p>
             </div>
@@ -63,7 +63,7 @@ export function EnhancedComparisonChart({
               <div className="w-3 h-3 rounded-full bg-muted" />
               <p className="text-sm">
                 {traditionalLabel}: {valuePrefix}
-                {payload[1].value}
+                {payload[1]?.value ?? 0}
                 {valueSuffix}
               </p>
             </div>
@@ -76,7 +76,7 @@ export function EnhancedComparisonChart({
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-      <Card className="overflow-hidden">
+      <Card>
         <CardHeader className="pb-2">
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -109,4 +109,3 @@ export function EnhancedComparisonChart({
     </motion.div>
   )
 }
-

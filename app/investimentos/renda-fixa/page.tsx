@@ -1,39 +1,40 @@
 "use client"
 
 import { useState } from "react"
+import { motion } from "framer-motion"
 import { PageLayout } from "@/components/page-layout"
 import { Section } from "@/components/section"
 import { SectionHeading } from "@/components/section-heading"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Shield, TrendingUp, Clock, DollarSign } from "lucide-react"
-
+import { Shield, TrendingUp, Clock, DollarSign, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function RendaFixaPage() {
   const [valorInicial, setValorInicial] = useState<number>(0)
   const [prazo, setPrazo] = useState<number>(0)
-  const [tipo, setTipo] = useState("cdb") // valor inicial = "cdb"
-  const [resultado, setResultado] = useState<{
-    bruto: number
-    rendimento: number
-    liquido: number
-  } | null>(null)
+  const [tipo, setTipo] = useState("cdb")
+  const [resultado, setResultado] = useState<{ bruto: number; rendimento: number; liquido: number } | null>(null)
+  const [simulated, setSimulated] = useState(false)
+  const [simulationsCount, setSimulationsCount] = useState(0)
+  const MAX_FREE_SIMULATIONS = 3
+  const isLoggedIn = false // Substituir pela lógica real de autenticação
 
   const calcular = () => {
-    const taxa = tipo === "cdb" ? 0.011 :
-                 tipo === "selic" ? 0.010 :
-                 tipo === "lci" ? 0.009 : 0.01
-  
+    if (!isLoggedIn && simulationsCount >= MAX_FREE_SIMULATIONS) return
+    const taxa = tipo === "cdb" ? 0.011 : tipo === "selic" ? 0.01 : tipo === "lci" ? 0.009 : 0.01
+
     const bruto = valorInicial * Math.pow(1 + taxa, prazo)
     const rendimento = bruto - valorInicial
-    const isentoIR = tipo === "lci"
-    const ir = isentoIR ? 0 : rendimento * 0.15
+    const ir = tipo === "lci" ? 0 : rendimento * 0.15
     const liquido = bruto - ir
-  
+
     setResultado({ bruto, rendimento, liquido })
+    setSimulated(true)
+
+    if (!isLoggedIn) setSimulationsCount(prev => prev + 1)
   }
-  
 
   return (
     <PageLayout>
@@ -45,6 +46,7 @@ export default function RendaFixaPage() {
         />
 
         <div className="mt-12 grid gap-8 md:grid-cols-2">
+          {/* Texto e benefícios */}
           <div className="flex flex-col justify-center space-y-6">
             <h2 className="text-3xl font-bold tracking-tight">Segurança e previsibilidade para seu dinheiro</h2>
             <p className="text-lg text-muted-foreground">
@@ -80,72 +82,84 @@ export default function RendaFixaPage() {
                 </div>
               </div>
             </div>
-            <Button className="w-fit">Começar a investir</Button>
+            <Button className="w-fit">Começar a simular</Button>
           </div>
 
+          {/* Simulador */}
           <Card>
             <CardHeader>
               <CardTitle>Simulador de Renda Fixa</CardTitle>
               <CardDescription>Calcule o rendimento do seu investimento</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium">Valor inicial (R$)</label>
-                  <input
-                    type="number"
-                    className="w-full mt-1 p-2 border rounded-md"
-                    placeholder="1000"
-                    onChange={(e) => setValorInicial(parseFloat(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Prazo (meses)</label>
-                  <input
-                    type="number"
-                    className="w-full mt-1 p-2 border rounded-md"
-                    placeholder="12"
-                    onChange={(e) => setPrazo(parseInt(e.target.value))}
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Tipo de investimento</label>
-                  <select
-                        value={tipo}
-                        onChange={(e) => setTipo(e.target.value)}
-                        className="w-full mt-1 p-2 border rounded-md">
-                        <option value="cdb">CDB (110% CDI)</option>
-                        <option value="selic">Tesouro Selic</option>
-                       <option value="lci">LCI/LCA (90% CDI)</option>
-                  </select>
-                  </div>
-
-                <Button className="w-full" onClick={calcular}>Calcular</Button>
-
-                {resultado && (
-                  <div className="p-4 bg-muted rounded-lg">
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm">Valor bruto:</span>
-                      <span className="font-medium">R$ {resultado.bruto.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm">Rendimento:</span>
-                      <span className="font-medium">
-                        R$ {resultado.rendimento.toFixed(2)} (
-                        {((resultado.rendimento / valorInicial) * 100).toFixed(1)}%)
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm">Valor líquido:</span>
-                      <span className="font-medium">R$ {resultado.liquido.toFixed(2)}</span>
-                    </div>
-                  </div>
-                )}
+            <CardContent className="space-y-4">
+              <div>
+                <label className="text-sm font-medium">Valor inicial (R$)</label>
+                <input
+                  type="number"
+                  className="w-full mt-1 p-2 border rounded-md"
+                  placeholder="1000"
+                  onChange={(e) => setValorInicial(parseFloat(e.target.value))}
+                />
               </div>
+              <div>
+                <label className="text-sm font-medium">Prazo (meses)</label>
+                <input
+                  type="number"
+                  className="w-full mt-1 p-2 border rounded-md"
+                  placeholder="12"
+                  onChange={(e) => setPrazo(parseInt(e.target.value))}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium">Tipo de investimento</label>
+                <select
+                  value={tipo}
+                  onChange={(e) => setTipo(e.target.value)}
+                  className="w-full mt-1 p-2 border rounded-md"
+                >
+                  <option value="cdb">CDB (110% CDI)</option>
+                  <option value="selic">Tesouro Selic</option>
+                  <option value="lci">LCI/LCA (90% CDI)</option>
+                </select>
+              </div>
+
+              {!isLoggedIn && simulationsCount >= MAX_FREE_SIMULATIONS ? (
+                <Button variant="outline" className="w-full" asChild>
+                  <Link href="/login">Faça login para simular mais <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                </Button>
+              ) : (
+                <Button className="w-full" onClick={calcular}>Calcular</Button>
+              )}
             </CardContent>
+
+            {/* Resultado com animação */}
+            {simulated && resultado && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="p-4 bg-muted rounded-b-lg"
+              >
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm">Valor bruto:</span>
+                  <span className="font-medium">R$ {resultado.bruto.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm">Rendimento:</span>
+                  <span className="font-medium">
+                    R$ {resultado.rendimento.toFixed(2)} ({((resultado.rendimento / valorInicial) * 100).toFixed(1)}%)
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm">Valor líquido:</span>
+                  <span className="font-medium">R$ {resultado.liquido.toFixed(2)}</span>
+                </div>
+              </motion.div>
+            )}
           </Card>
         </div>
 
+        {/* Tabela e cards informativos */}
         <div className="mt-24">
           <h2 className="mb-12 text-center text-3xl font-bold">Opções de Investimentos</h2>
           <Table>
@@ -215,8 +229,7 @@ export default function RendaFixaPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Os investimentos em renda fixa são considerados de baixo risco, especialmente aqueles com garantia do
-                  FGC ou do Governo Federal, oferecendo maior segurança para seu patrimônio.
+                  Investimentos de baixo risco com garantia do FGC ou Governo Federal.
                 </p>
               </CardContent>
             </Card>
@@ -228,8 +241,7 @@ export default function RendaFixaPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Na renda fixa, você sabe exatamente quanto vai receber ao final do período de investimento, o que
-                  facilita o planejamento financeiro e o estabelecimento de metas.
+                  Você sabe exatamente quanto receberá ao final do período.
                 </p>
               </CardContent>
             </Card>
@@ -241,8 +253,7 @@ export default function RendaFixaPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  A renda fixa é essencial para uma carteira de investimentos bem diversificada, ajudando a equilibrar o
-                  risco de investimentos mais voláteis como ações e criptomoedas.
+                  Essencial para equilibrar riscos de ativos mais voláteis.
                 </p>
               </CardContent>
             </Card>

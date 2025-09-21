@@ -42,7 +42,6 @@ export function InvestmentSummary() {
   const [editingInvestment, setEditingInvestment] = useState<Investment | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Adapter para compatibilidade com InvestmentForm
   const investmentFormService = {
     getInvestmentTypes: async () => {
       const result = await financeService.getInvestmentTypes()
@@ -194,19 +193,14 @@ export function InvestmentSummary() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="p-4 bg-blue-50 rounded-xl text-center">
               <p className="text-sm text-blue-600">Total Investido</p>
               <p className="text-2xl font-bold text-blue-600">
                 R$ {(summary.totalInvestimentos ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
-            <div className="p-4 bg-green-50 rounded-xl text-center">
-              <p className="text-sm text-green-600">Saldo Atual</p>
-              <p className="text-2xl font-bold text-green-600">
-                R$ {(summary.saldo ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </p>
-            </div>
+            
           </div>
 
           <div className="space-y-3">

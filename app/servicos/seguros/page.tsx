@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Heart, Home, Car, Briefcase, Umbrella, Shield } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
-import Link from "next/link" 
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 export default function SegurosPage() {
@@ -66,8 +66,8 @@ E o melhor: não é caro e pode ser totalmente adaptado à sua realidade."
                     </div>
                   </div>
                   <Link href="/login">
-                  <Button className="w-fit">Receber Dicas
-                  <ArrowRight className="mr-2 h-4 w-4" /></Button>
+                    <Button className="w-fit">Receber Dicas
+                      <ArrowRight className="mr-2 h-4 w-4" /></Button>
                   </Link>
                 </div>
                 <div className="flex items-center justify-center">
@@ -110,7 +110,7 @@ E o melhor: não é caro e pode ser totalmente adaptado à sua realidade."
                     </div>
                   </div>
                   <Link href="/login">
-                  <Button className="w-fit">Receber Dicas</Button>
+                    <Button className="w-fit">Receber Dicas</Button>
                   </Link>
                 </div>
 
@@ -213,47 +213,47 @@ E o melhor: não é caro e pode ser totalmente adaptado à sua realidade."
         </div>
 
         <div className="mt-24">
-          <h2 className="mb-12 text-center text-3xl font-bold">Por que escolher nossos seguros?</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <Shield className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Coberturas completas</CardTitle>
-                <CardDescription>Proteção para todas as situações</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Cada pessoa tem uma necessidade diferente.
-                  Tenha proteção personalizada para o que realmente importa pra você — com opções flexíveis e cobertura em qualquer imprevisto.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Umbrella className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Preços competitivos</CardTitle>
-                <CardDescription>Proteção que cabe no seu bolso</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Mesmo com um valor pequeno por mês, é possível garantir tranquilidade para o futuro da sua família.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Heart className="h-10 w-10 text-primary mb-2" />
-                <CardTitle>Atendimento humanizado</CardTitle>
-                <CardDescription>Suporte quando você mais precisa</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Por isso, queremos ajudar você a refletir sobre a importância de estar preparado para garantir suporte e tranquilidade para quem você ama.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+  <h2 className="mb-12 text-center text-3xl font-bold">Por que investir em seguros?</h2>
+  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <Card>
+      <CardHeader>
+        <Shield className="h-10 w-10 text-primary mb-2" />
+        <CardTitle>Coberturas completas</CardTitle>
+        <CardDescription>Proteção para todas as situações</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-muted-foreground">
+          Cada pessoa tem necessidades únicas. Com um seguro, você garante proteção personalizada para o que realmente importa — esteja preparado para qualquer imprevisto e durma tranquilo sabendo que está protegido.
+        </p>
+      </CardContent>
+    </Card>
+    <Card>
+      <CardHeader>
+        <Umbrella className="h-10 w-10 text-primary mb-2" />
+        <CardTitle>Investimento acessível</CardTitle>
+        <CardDescription>Proteção que cabe no seu bolso</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-muted-foreground">
+          Com um pequeno investimento mensal, você protege seu futuro e o da sua família. Segurança financeira é um ato de cuidado — comece hoje e evite grandes surpresas amanhã.
+        </p>
+      </CardContent>
+    </Card>
+    <Card>
+      <CardHeader>
+        <Heart className="h-10 w-10 text-primary mb-2" />
+        <CardTitle>Atendimento dedicado</CardTitle>
+        <CardDescription>Suporte quando você mais precisa</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-muted-foreground">
+          Estamos aqui para ajudar você a proteger o que mais ama. Com nosso suporte especializado, você recebe atenção personalizada em todos os momentos, garantindo paz de espírito para você e sua família.
+        </p>
+      </CardContent>
+    </Card>
+  </div>
+</div>
+
       </Section>
     </PageLayout>
   )
