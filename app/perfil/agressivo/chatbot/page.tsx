@@ -1,9 +1,14 @@
+// app/perfil/chat-ia/page.tsx
 "use client"
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { MachineIAChatbot } from "@/components/machine-ia-chatbot"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Loader2, ArrowLeft, Shield } from "lucide-react"
+import Link from "next/link"
 import { AuthRedirect } from "@/components/auth-redirect"
 import { PageLayout } from "@/components/page-layout"
 import { BeamsBackground } from "@/components/ui/beams-background";
@@ -29,6 +34,7 @@ export default function ChatIAPage() {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-12 w-12 animate-spin text-primary" />
           <p className="text-lg text-muted-foreground">Verificando autenticação...</p>
         </div>
       </div>

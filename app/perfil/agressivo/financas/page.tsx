@@ -85,9 +85,8 @@ export default function FinancePage() {
 
   const total = (summary?.totalInvestimentos ?? 0) + (summary?.totalGastos ?? 0) + (summary?.saldo ?? 0)
   const chartData = total > 0 ? [
-    { label: "Investimentos", value: Math.round(((summary?.totalInvestimentos ?? 0) / total) * 100), color: "#3b82f6" },
-    { label: "Gastos", value: Math.round(((summary?.totalGastos ?? 0) / total) * 100), color: "#ef4444" },
-    { label: "Liquidez", value: Math.round(((summary?.saldo ?? 0) / total) * 100), color: "#22c55e" },
+    { label: "Investimentos", value: Math.round(((summary?.totalInvestimentos ?? 0) / total) * 100), color: "#00FFFF" },
+    { label: "Gastos", value: Math.round(((summary?.totalGastos ?? 0) / total) * 100), color: "#DC2626" },
   ] : []
 
   if (!mounted || authLoading) return (
